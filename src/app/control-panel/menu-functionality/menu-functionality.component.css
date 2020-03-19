@@ -1,0 +1,15 @@
+ul,li{
+  border-radius: 0px;
+  background-color: white;
+}
+.menu-box{
+  min-height: 100%;
+}
+
+.card span{
+  display: block;
+  margin: 0;
+  padding: 1em;
+  padding-top: 1.5em;
+  min-height: 5em;
+}

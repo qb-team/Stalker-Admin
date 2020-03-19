@@ -1,0 +1,13 @@
+export * from './access.service';
+import { AccessService } from './access.service';
+export * from './adminAuthentication.service';
+import { AdminAuthenticationService } from './adminAuthentication.service';
+export * from './organization.service';
+import { OrganizationService } from './organization.service';
+export * from './presence.service';
+import { PresenceService } from './presence.service';
+export * from './tracking.service';
+import { TrackingService } from './tracking.service';
+export * from './userAuthentication.service';
+import { UserAuthenticationService } from './userAuthentication.service';
+export const APIS = [AccessService, AdminAuthenticationService, OrganizationService, PresenceService, TrackingService, UserAuthenticationService];

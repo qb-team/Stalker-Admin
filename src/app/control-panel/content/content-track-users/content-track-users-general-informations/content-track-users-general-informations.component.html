@@ -1,0 +1,33 @@
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th colspan="8">Informazione generali dell'organizzazione</th>
+    </tr>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Descrizione</th>
+      <th scope="col">Via</th>
+      <th scope="col">Numero civico</th>
+      <th scope="col">Codice Postale</th>
+      <th scope="col">Città</th>
+      <th scope="col">Stato</th>
+      <th scope="col">Data di creazione</th>
+      <th scope="col">Data ultima modifica</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{ org.name }}</td>
+      <td>{{ org.description }}</td>
+      <td>{{ org.street }}</td>
+      <td>{{ org.number }}</td>
+      <td>{{ org.postCode }}</td>
+      <td>{{ org.city }}</td>
+      <td>{{ org.country }}</td>
+      <td>{{ org.creationDate }}</td>
+      <td>{{ org.lastChangeDate }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

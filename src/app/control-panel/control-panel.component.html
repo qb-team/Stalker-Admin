@@ -1,0 +1,10 @@
+<div class="container-fluid" *ngIf="getAuth().userData | async" >
+  <div class="row" >
+    <app-menubar class="col-md-12 col-xs-12"></app-menubar>
+  </div>
+
+  <div class="row">
+    <app-menu-functionality class="col-md-3"></app-menu-functionality>
+    <app-content class="col-md-9"></app-content>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+#img{
+  float: left;
+  background-image: url('../../../assets/icons/58329404.png');
+  width: 50px;
+  height: 50px;
+  text-indent: 100%;
+  display: block;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 2.7em;
+  margin-left: 9%;
+}
+
+.position{
+  margin-left:25%;
+}
