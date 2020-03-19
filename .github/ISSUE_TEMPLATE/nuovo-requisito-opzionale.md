@@ -3,7 +3,7 @@ name: Nuovo requisito opzionale
 about: Nuovo requisito opzionale da implementare
 title: Codice requisito
 labels: opzionale
-assignees: pheasant98, Cis8
+assignees: Cis8, pheasant98
 
 ---
 
