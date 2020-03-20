@@ -1,8 +1,8 @@
 ---
-name: Nuovo requisito facoltativo
-about: Nuovo requisito facoltativo da implementare
+name: Nuovo requisito desiderabile
+about: Nuovo requisito desiderabile da implementare
 title: Codice requisito
-labels: Facoltativi
+labels: desiderabile
 assignees: Cis8, pheasant98
 
 ---
