@@ -2,7 +2,7 @@
  * Parent component
  */
 import { Component } from '@angular/core';
-import { AuthenticationService } from './services/authentication.service';
+
 
 
 @Component({

@@ -22,7 +22,7 @@ export class MenubarComponent implements OnInit {
    */
   ngOnInit() {
     this.os.getOrganizationList().subscribe((obs: Array<Organization>) => {
-      this.orgArr = obs, this.organization = this.orgArr[0];
+      this.orgArr = obs; this.organization = this.orgArr[0];
       this.ds.org.emit(this.organization);
     });
   }
