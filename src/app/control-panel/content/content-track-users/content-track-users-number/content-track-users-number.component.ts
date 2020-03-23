@@ -1,7 +1,7 @@
 /*
 * Shows the number of users actually inside the organization's perimeter
 */
-import { Component, OnInit, Input, DoCheck } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Organization, OrganizationPresenceCounter } from 'src/model/models';
 import { PresenceService } from 'src/api/api';
