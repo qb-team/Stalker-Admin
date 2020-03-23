@@ -36,7 +36,6 @@ export class ResetPasswordComponent implements OnInit {
   */
   resetPassword(click: any) {
     this.authenticationService.ResetPassword(this.email);
-    console.log(this.authenticationService.mx);
   }
 
   createForm() {
