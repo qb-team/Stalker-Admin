@@ -11,19 +11,19 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent, HttpParameterCodec }       from '@angular/common/http';
-import { CustomHttpParameterCodec }                          from '../encoder';
-import { Observable }                                        from 'rxjs';
+         HttpResponse, HttpEvent, HttpParameterCodec } from '@angular/common/http';
+import { CustomHttpParameterCodec } from '../encoder';
+import { Observable } from 'rxjs';
 
 import { OrganizationAnonymousMovement } from '../model/models';
 import { OrganizationAuthenticatedMovement } from '../model/models';
 import { PlaceAnonymousMovement } from '../model/models';
 import { PlaceAuthenticatedMovement } from '../model/models';
 
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
+import { Configuration } from '../configuration';
 
 
 
@@ -53,7 +53,7 @@ export class TrackingService {
 
 
     private addToHttpParams(httpParams: HttpParams, value: any, key?: string): HttpParams {
-        if (typeof value === "object") {
+        if (typeof value === 'object') {
             httpParams = this.addToHttpParamsRecursive(httpParams, value);
         } else {
             httpParams = this.addToHttpParamsRecursive(httpParams, value, key);
@@ -62,7 +62,7 @@ export class TrackingService {
     }
 
     private addToHttpParamsRecursive(httpParams: HttpParams, value: any, key?: string): HttpParams {
-        if (typeof value === "object") {
+        if (typeof value === 'object') {
             if (Array.isArray(value)) {
                 (value as any[]).forEach( elem => httpParams = this.addToHttpParamsRecursive(httpParams, elem, key));
             } else if (value instanceof Date) {
@@ -70,7 +70,7 @@ export class TrackingService {
                     httpParams = httpParams.append(key,
                         (value as Date).toISOString().substr(0, 10));
                 } else {
-                   throw Error("key may not be null if value is Date");
+                   throw Error('key may not be null if value is Date');
                 }
             } else {
                 Object.keys(value).forEach( k => httpParams = this.addToHttpParamsRecursive(
@@ -79,7 +79,7 @@ export class TrackingService {
         } else if (key != null) {
             httpParams = httpParams.append(key, value);
         } else {
-            throw Error("key may not be null if value is not object or array");
+            throw Error('key may not be null if value is not object or array');
         }
         return httpParams;
     }
@@ -87,7 +87,7 @@ export class TrackingService {
     /**
      * Tracks the user movement inside the trackingArea of an organization with the anonymous trackingMode.
      * Tracks the user movement inside the trackingArea of an organization with the anonymous trackingMode.
-     * @param organizationAnonymousMovement 
+     * @param organizationAnonymousMovement
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -123,18 +123,18 @@ export class TrackingService {
         }
 
         let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/movement/track/organization/anonymous`,
             organizationAnonymousMovement,
             {
-                responseType: <any>responseType,
+                responseType: responseType as any,
                 withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                headers,
+                observe,
+                reportProgress
             }
         );
     }
@@ -142,7 +142,7 @@ export class TrackingService {
     /**
      * Tracks the user movement inside the trackingArea of a place of an organization with the anonymous trackingMode.
      * Tracks the user movement inside the trackingArea of a place of an organization with the anonymous trackingMode.
-     * @param placeAnonymousMovement 
+     * @param placeAnonymousMovement
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -178,18 +178,18 @@ export class TrackingService {
         }
 
         let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/movement/track/place/anonymous`,
             placeAnonymousMovement,
             {
-                responseType: <any>responseType,
+                responseType: responseType as any,
                 withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                headers,
+                observe,
+                reportProgress
             }
         );
     }
@@ -197,7 +197,7 @@ export class TrackingService {
     /**
      * Tracks the user movement inside the trackingArea of an organization with the authenticated trackingMode.
      * Tracks the user movement inside the trackingArea of an organization with the authenticated trackingMode.
-     * @param organizationAuthenticatedMovement 
+     * @param organizationAuthenticatedMovement
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -233,18 +233,18 @@ export class TrackingService {
         }
 
         let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/movement/track/organization/authenticated`,
             organizationAuthenticatedMovement,
             {
-                responseType: <any>responseType,
+                responseType: responseType as any,
                 withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                headers,
+                observe,
+                reportProgress
             }
         );
     }
@@ -252,7 +252,7 @@ export class TrackingService {
     /**
      * Tracks the user movement inside the trackingArea of a place of an organization with the authenticated trackingMode.
      * Tracks the user movement inside the trackingArea of a place of an organization with the authenticated trackingMode.
-     * @param placeAuthenticatedMovement 
+     * @param placeAuthenticatedMovement
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -288,18 +288,18 @@ export class TrackingService {
         }
 
         let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/movement/track/place/authenticated`,
             placeAuthenticatedMovement,
             {
-                responseType: <any>responseType,
+                responseType: responseType as any,
                 withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                headers,
+                observe,
+                reportProgress
             }
         );
     }

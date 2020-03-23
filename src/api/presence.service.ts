@@ -11,17 +11,17 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent, HttpParameterCodec }       from '@angular/common/http';
-import { CustomHttpParameterCodec }                          from '../encoder';
-import { Observable }                                        from 'rxjs';
+         HttpResponse, HttpEvent, HttpParameterCodec } from '@angular/common/http';
+import { CustomHttpParameterCodec } from '../encoder';
+import { Observable } from 'rxjs';
 
 import { OrganizationPresenceCounter } from '../model/models';
 import { PlacePresenceCounter } from '../model/models';
 
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
+import { Configuration } from '../configuration';
 
 
 
@@ -51,7 +51,7 @@ export class PresenceService {
 
 
     private addToHttpParams(httpParams: HttpParams, value: any, key?: string): HttpParams {
-        if (typeof value === "object") {
+        if (typeof value === 'object') {
             httpParams = this.addToHttpParamsRecursive(httpParams, value);
         } else {
             httpParams = this.addToHttpParamsRecursive(httpParams, value, key);
@@ -60,7 +60,7 @@ export class PresenceService {
     }
 
     private addToHttpParamsRecursive(httpParams: HttpParams, value: any, key?: string): HttpParams {
-        if (typeof value === "object") {
+        if (typeof value === 'object') {
             if (Array.isArray(value)) {
                 (value as any[]).forEach( elem => httpParams = this.addToHttpParamsRecursive(httpParams, elem, key));
             } else if (value instanceof Date) {
@@ -68,7 +68,7 @@ export class PresenceService {
                     httpParams = httpParams.append(key,
                         (value as Date).toISOString().substr(0, 10));
                 } else {
-                   throw Error("key may not be null if value is Date");
+                   throw Error('key may not be null if value is Date');
                 }
             } else {
                 Object.keys(value).forEach( k => httpParams = this.addToHttpParamsRecursive(
@@ -77,7 +77,7 @@ export class PresenceService {
         } else if (key != null) {
             httpParams = httpParams.append(key, value);
         } else {
-            throw Error("key may not be null if value is not object or array");
+            throw Error('key may not be null if value is not object or array');
         }
         return httpParams;
     }
@@ -113,17 +113,17 @@ export class PresenceService {
 
 
         let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
         return this.httpClient.get<OrganizationPresenceCounter>(`${this.configuration.basePath}/presence/organization/${encodeURIComponent(String(organizationId))}`,
             {
-                responseType: <any>responseType,
+                responseType: responseType as any,
                 withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                headers,
+                observe,
+                reportProgress
             }
         );
     }
@@ -159,17 +159,17 @@ export class PresenceService {
 
 
         let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
         return this.httpClient.get<PlacePresenceCounter>(`${this.configuration.basePath}/presence/place/${encodeURIComponent(String(placeId))}`,
             {
-                responseType: <any>responseType,
+                responseType: responseType as any,
                 withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                headers,
+                observe,
+                reportProgress
             }
         );
     }
