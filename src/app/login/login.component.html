@@ -2,15 +2,16 @@
   <div id="img" class="row" *ngIf="!(getAuth().userData | async )"></div>
   <div id="login" class="row" *ngIf="!(getAuth().userData | async ) && !getVisible()">
     <div class="col-md-6 offset-md-3">
-      <div class="form-group">
+      <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
+        <fieldset>
         <label for="email">Email:</label>
-        <input type="email" id="email" class="form-control" required="required" [(ngModel)]="email" placeholder="email">
+        <input type="email" name="email" id="email" class="form-control" required="required" [(ngModel)]="email" placeholder="email" formControlName="email">
         <label for="pwd">Password:</label>
-        <input type="password" class="form-control" [(ngModel)]="password" required="required" id="pwd" placeholder="password">
-      </div>
+        <input type="password" name="password" class="form-control" [(ngModel)]="password" required="required" id="pwd" placeholder="password"formControlName="password" >
+        </fieldset>
+      </form>
       <p *ngIf="!getAuth().signOk"> Credenziali errate </p>
-      <p *ngIf="!validate"> Email o/e password mancanti</p>
-      <button (click)="signIn()" class="btn btn-danger">Login</button>
+      <button (click)="signIn()" [disabled]="!contactForm.valid" class="btn btn-danger">Login</button>
       <button (click)="CallResetPassword()" class="btn btn-danger"> Password dimenticata</button>
     </div>
   </div>

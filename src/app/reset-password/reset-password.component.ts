@@ -4,6 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
 import {DataService} from '../services/data.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-reset-password',
@@ -12,10 +13,13 @@ import {DataService} from '../services/data.service';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private data: DataService) { }
+  constructor(private authenticationService: AuthenticationService, private data: DataService) {
+    this.createForm();
+  }
+  submitted = false;
   reset = false; // for show page of reset password
   email: string; // email for reset
-
+  contactForm: FormGroup;
   ngOnInit(): void {
   }
 
@@ -32,13 +36,20 @@ export class ResetPasswordComponent implements OnInit {
   */
   resetPassword(click: any) {
     this.authenticationService.ResetPassword(this.email);
-    this.email = '';
-    if (click.target.innerHTML === '') {
-      this.reset = false;
-    } else {
-      this.reset = true;
-    }
-    this.authenticationService.signOk = true;
+    console.log(this.authenticationService.mx);
+  }
+
+  createForm() {
+    this.contactForm = new FormGroup({
+      email: new FormControl(this.email, [
+        Validators.required,
+        Validators.email
+      ]),
+    });
+  }
+
+  onSubmit(): void {
+    this.submitted = true;
   }
 
   /*
