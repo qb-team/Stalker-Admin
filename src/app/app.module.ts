@@ -29,6 +29,7 @@ import { ContentHomeComponent } from './control-panel/content/content-home/conte
 import { ContentTrackUsersNumberComponent } from './control-panel/content/content-track-users/content-track-users-number/content-track-users-number.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ContentTrackUsersGeneralInformationsComponent } from './control-panel/content/content-track-users/content-track-users-general-informations/content-track-users-general-informations.component';
+import { AuthenticationServiceMockReturnsTrueService } from './Mock/authentication-service-mock-returns-true.service';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { ContentTrackUsersGeneralInformationsComponent } from './control-panel/c
     ContentHomeComponent,
     ContentTrackUsersNumberComponent,
     ControlPanelComponent,
-    ContentTrackUsersGeneralInformationsComponent
+    ContentTrackUsersGeneralInformationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +55,7 @@ import { ContentTrackUsersGeneralInformationsComponent } from './control-panel/c
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AuthenticationService, DataService, OrganizationService],
+  providers: [AuthenticationService, AuthenticationServiceMockReturnsTrueService, DataService, OrganizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
