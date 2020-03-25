@@ -14,7 +14,7 @@
 /**
  * Subject interested in tracking people\'s presence inside its own places, in either an anonymous or authenticated way.
  */
-export interface Organization { 
+export interface Organization {
     /**
      * Unique identifier for an organization.
      */

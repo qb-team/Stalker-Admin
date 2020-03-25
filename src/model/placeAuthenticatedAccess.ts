@@ -15,7 +15,7 @@ import { Access } from './access';
 /**
  * Access to a place of an organization made with the authenticated trackingMode.
  */
-export interface PlaceAuthenticatedAccess extends Access { 
+export interface PlaceAuthenticatedAccess extends Access {
     /**
      * Unique identifier of the place in which the user had access.
      */

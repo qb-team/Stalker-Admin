@@ -15,7 +15,7 @@ import { Movement } from './movement';
 /**
  * Movement to a place of an organization made with the anonymous trackingMode.
  */
-export interface PlaceAnonymousMovement extends Movement { 
+export interface PlaceAnonymousMovement extends Movement {
     /**
      * Unique identifier of the place in which the user had access.
      */

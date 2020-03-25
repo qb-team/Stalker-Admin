@@ -14,7 +14,7 @@
 /**
  * Data requested to the admin when authenticating to the system.
  */
-export interface AuthenticationDataAdmin { 
+export interface AuthenticationDataAdmin {
     mail: string;
     password: string;
 }

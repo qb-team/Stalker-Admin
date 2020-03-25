@@ -14,7 +14,7 @@
 /**
  * Data given to the user when authenticated.
  */
-export interface AuthResponseUser { 
+export interface AuthResponseUser {
     token: string;
     expirationDate: Date;
 }

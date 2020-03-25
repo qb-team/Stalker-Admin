@@ -14,7 +14,7 @@
 /**
  * Generic access to an organization or a place of it.
  */
-export interface Access { 
+export interface Access {
     id: number;
     accessDiscriminator: string;
     /**

@@ -14,7 +14,7 @@
 /**
  * Data given to the admin when authenticated.
  */
-export interface AuthResponseAdmin { 
+export interface AuthResponseAdmin {
     token: string;
     expirationDate: Date;
 }

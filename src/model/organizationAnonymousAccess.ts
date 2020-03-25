@@ -15,7 +15,7 @@ import { Access } from './access';
 /**
  * Access to an organization made with the authenticated trackingMode.
  */
-export interface OrganizationAnonymousAccess extends Access { 
+export interface OrganizationAnonymousAccess extends Access {
     /**
      * Unique identifier of the organization in which the user had access.
      */

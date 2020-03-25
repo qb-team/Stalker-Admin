@@ -14,7 +14,7 @@
 /**
  * Generic movement in an organization or in a place of it.
  */
-export interface Movement { 
+export interface Movement {
     id: number;
     movementDiscriminator: string;
     /**

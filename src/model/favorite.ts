@@ -14,7 +14,7 @@
 /**
  * Link between the user and the organization: only the organization which users sets to be their favorite can track their movements.
  */
-export interface Favorite { 
+export interface Favorite {
     /**
      * Authentication service\'s user unique identifier.
      */

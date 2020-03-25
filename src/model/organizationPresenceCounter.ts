@@ -14,7 +14,7 @@
 /**
  * Number of people currently inside the organization\'s trackingArea.
  */
-export interface OrganizationPresenceCounter { 
+export interface OrganizationPresenceCounter {
     /**
      * Unique identifier of the organization.
      */

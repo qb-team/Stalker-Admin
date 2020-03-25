@@ -15,7 +15,7 @@ import { Access } from './access';
 /**
  * Access to a place of an organization made with the anonymous trackingMode.
  */
-export interface PlaceAnonymousAccess extends Access { 
+export interface PlaceAnonymousAccess extends Access {
     /**
      * Unique identifier of the place in which the user had access.
      */

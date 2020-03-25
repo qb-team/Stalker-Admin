@@ -15,7 +15,7 @@ import { Movement } from './movement';
 /**
  * Movement to an organization made with the authenticated trackingMode.
  */
-export interface OrganizationAnonymousMovement extends Movement { 
+export interface OrganizationAnonymousMovement extends Movement {
     /**
      * Unique identifier of the organization in which the user had access.
      */

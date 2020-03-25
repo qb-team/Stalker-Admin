@@ -14,7 +14,7 @@
 /**
  * What can or cannot do an organization\'s administrator.
  */
-export interface Permission { 
+export interface Permission {
     /**
      * Authentication service\'s administrator unique identifier.
      */

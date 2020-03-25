@@ -14,7 +14,7 @@
 /**
  * Number of people currently inside a place of an organization.
  */
-export interface PlacePresenceCounter { 
+export interface PlacePresenceCounter {
     /**
      * Unique identifier of the place.
      */

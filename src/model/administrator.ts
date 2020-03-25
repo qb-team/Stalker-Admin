@@ -11,7 +11,7 @@
  */
 
 
-export interface Administrator { 
+export interface Administrator {
     /**
      * Authentication service\'s administrator unique identifier.
      */

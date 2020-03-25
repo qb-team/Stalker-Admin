@@ -14,7 +14,7 @@
 /**
  * Data requested to the user when authenticating or registering to the system.
  */
-export interface AuthenticationDataUser { 
+export interface AuthenticationDataUser {
     mail: string;
     password: string;
 }
