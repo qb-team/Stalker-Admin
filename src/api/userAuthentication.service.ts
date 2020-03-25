@@ -11,17 +11,17 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent, HttpParameterCodec }       from '@angular/common/http';
-import { CustomHttpParameterCodec }                          from '../encoder';
-import { Observable }                                        from 'rxjs';
+         HttpResponse, HttpEvent, HttpParameterCodec } from '@angular/common/http';
+import { CustomHttpParameterCodec } from '../encoder';
+import { Observable } from 'rxjs';
 
 import { AuthResponseUser } from '../model/models';
 import { AuthenticationDataUser } from '../model/models';
 
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
+import { Configuration } from '../configuration';
 
 
 
@@ -51,7 +51,7 @@ export class UserAuthenticationService {
 
 
     private addToHttpParams(httpParams: HttpParams, value: any, key?: string): HttpParams {
-        if (typeof value === "object") {
+        if (typeof value === 'object') {
             httpParams = this.addToHttpParamsRecursive(httpParams, value);
         } else {
             httpParams = this.addToHttpParamsRecursive(httpParams, value, key);
@@ -60,7 +60,7 @@ export class UserAuthenticationService {
     }
 
     private addToHttpParamsRecursive(httpParams: HttpParams, value: any, key?: string): HttpParams {
-        if (typeof value === "object") {
+        if (typeof value === 'object') {
             if (Array.isArray(value)) {
                 (value as any[]).forEach( elem => httpParams = this.addToHttpParamsRecursive(httpParams, elem, key));
             } else if (value instanceof Date) {
@@ -68,7 +68,7 @@ export class UserAuthenticationService {
                     httpParams = httpParams.append(key,
                         (value as Date).toISOString().substr(0, 10));
                 } else {
-                   throw Error("key may not be null if value is Date");
+                   throw Error('key may not be null if value is Date');
                 }
             } else {
                 Object.keys(value).forEach( k => httpParams = this.addToHttpParamsRecursive(
@@ -77,7 +77,7 @@ export class UserAuthenticationService {
         } else if (key != null) {
             httpParams = httpParams.append(key, value);
         } else {
-            throw Error("key may not be null if value is not object or array");
+            throw Error('key may not be null if value is not object or array');
         }
         return httpParams;
     }
@@ -85,7 +85,7 @@ export class UserAuthenticationService {
     /**
      * Lets the user login via the authentication service.
      * Lets the user login via the authentication service.
-     * @param authenticationDataUser 
+     * @param authenticationDataUser
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -122,18 +122,18 @@ export class UserAuthenticationService {
         }
 
         let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
         return this.httpClient.post<AuthResponseUser>(`${this.configuration.basePath}/authentication/userLogin`,
             authenticationDataUser,
             {
-                responseType: <any>responseType,
+                responseType: responseType as any,
                 withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                headers,
+                observe,
+                reportProgress
             }
         );
     }
@@ -164,18 +164,18 @@ export class UserAuthenticationService {
 
 
         let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
         return this.httpClient.post<any>(`${this.configuration.basePath}/authentication/userLogout`,
             null,
             {
-                responseType: <any>responseType,
+                responseType: responseType as any,
                 withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                headers,
+                observe,
+                reportProgress
             }
         );
     }
@@ -183,7 +183,7 @@ export class UserAuthenticationService {
     /**
      * Lets the user registrate into the system.
      * Lets the user registrate into the system.
-     * @param authenticationDataUser 
+     * @param authenticationDataUser
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -220,18 +220,18 @@ export class UserAuthenticationService {
         }
 
         let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
         return this.httpClient.post<AuthResponseUser>(`${this.configuration.basePath}/authentication/userRegistration`,
             authenticationDataUser,
             {
-                responseType: <any>responseType,
+                responseType: responseType as any,
                 withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                headers,
+                observe,
+                reportProgress
             }
         );
     }

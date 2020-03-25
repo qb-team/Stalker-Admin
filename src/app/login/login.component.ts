@@ -5,6 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
 import {DataService} from '../services/data.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,12 @@ import {DataService} from '../services/data.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private data: DataService) { }
+
+  constructor(private authenticationService: AuthenticationService, private data: DataService) {
+    this.createForm();
+  }
+
+  submitted = false;
   /*
   * The e-mail of the user that is logging in
   */
@@ -27,29 +33,33 @@ export class LoginComponent implements OnInit {
   /*
   * Used to validate the form when trying to log in. Used to prevent exceptional log in cases, such as an empty form
   */
-  validate = true;
+  contactForm: FormGroup;
 
   ngOnInit(): void {
   }
 
+  createForm() {
+    this.contactForm = new FormGroup({
+      email: new FormControl(this.email, [
+        Validators.required,
+        Validators.email
+      ]),
+      password: new FormControl(this.password, [
+        Validators.required,
+        Validators.minLength(8)
+      ]),
+    });
+  }
+
+  onSubmit(): void {
+    this.submitted = true;
+  }
 
   /*
   * The function that validates the form and tries to log in
   */
   signIn() {
-    try {
-
-      if (this.email === '' || this.password === '') {
-        this.validate = false;
-      } else {
         this.authenticationService.SignIn(this.email, this.password);
-        this.validate = true;
-      }
-      this.email = '';
-      this.password = '';
-    } catch (e) {
-       this.validate = false;
-    }
   }
 
   /*

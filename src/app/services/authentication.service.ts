@@ -13,6 +13,7 @@ export class AuthenticationService {
   userData: Observable<firebase.User>; // user data
   signOk = true; // Indicates whether the login was successful
 
+
   constructor(private angularFireAuth: AngularFireAuth) {
     this.userData = angularFireAuth.authState;
   }
