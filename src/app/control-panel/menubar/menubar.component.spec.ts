@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MenubarComponent } from './menubar.component';
+import {DataService} from '../../services/data.service';
+import {AuthenticationService} from '../../services/authentication.service';
+import {OrganizationService} from '../../..';
+import {AuthenticationServiceMockReturnsTrueService} from '../../Mock/authentication-service-mock-returns-true.service';
 
 describe('MenubarComponent', () => {
   let component: MenubarComponent;

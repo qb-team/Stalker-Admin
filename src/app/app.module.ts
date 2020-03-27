@@ -28,7 +28,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ContentHomeComponent } from './control-panel/content/content-home/content-home.component';
 import { ContentTrackUsersNumberComponent } from './control-panel/content/content-track-users/content-track-users-number/content-track-users-number.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
-import { ContentTrackUsersGeneralInformationsComponent } from './control-panel/content/content-track-users/content-track-users-general-informations/content-track-users-general-informations.component';
+import { ContentTrackUsersGeneralInformationComponent } from './control-panel/content/content-track-users/content-track-users-general-informations/content-track-users-general-information.component';
 import { AuthenticationServiceMockReturnsTrueService } from './Mock/authentication-service-mock-returns-true.service';
 
 
@@ -45,7 +45,7 @@ import { AuthenticationServiceMockReturnsTrueService } from './Mock/authenticati
     ContentHomeComponent,
     ContentTrackUsersNumberComponent,
     ControlPanelComponent,
-    ContentTrackUsersGeneralInformationsComponent,
+    ContentTrackUsersGeneralInformationComponent,
   ],
   imports: [
     BrowserModule,

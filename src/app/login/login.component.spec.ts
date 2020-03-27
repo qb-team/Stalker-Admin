@@ -16,18 +16,12 @@ import {AuthenticationServiceMockReturnsTrueService} from '../Mock/authenticatio
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let authService: AuthenticationService;
-  let dataService: DataService;
-  let afAuth: AngularFireAuth;
-  let spy: jasmine.Spy;
-  let de: DebugElement;
   let el: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireDatabaseModule
+        AngularFireModule.initializeApp(environment.firebase)
       ],
       declarations: [ LoginComponent ],
       providers: [ { provide: AuthenticationService, useClass: AuthenticationServiceMockReturnsTrueService },
@@ -40,8 +34,6 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-    de = fixture.debugElement;
-    // DataService = de.injector.get();
     fixture.detectChanges();
   });
 
@@ -63,8 +55,16 @@ describe('LoginComponent', () => {
   }));
 
   it(`form should be valid`, async(() => {
-    component.contactForm.controls.email.setValue('asd@asd.com');
-    component.contactForm.controls.password.setValue('textpoiu');
+    component.contactForm.controls.email.setValue('sample@mail.com');
+    component.contactForm.controls.password.setValue('samplepsw');
     expect(component.contactForm.valid).toBeTruthy();
+  }));
+
+  it('should call callResetPassword', async(() => {
+    spyOn(component, 'CallResetPassword');
+    const createPasteButton = fixture.debugElement.query(By.css('#resetPswBtn'));
+    createPasteButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(component.CallResetPassword).toHaveBeenCalled();
   }));
 });
