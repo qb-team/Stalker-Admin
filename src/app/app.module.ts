@@ -30,6 +30,8 @@ import { ContentTrackUsersNumberComponent } from './control-panel/content/conten
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ContentTrackUsersGeneralInformationComponent } from './control-panel/content/content-track-users/content-track-users-general-informations/content-track-users-general-information.component';
 import { AuthenticationServiceMockReturnsTrueService } from './Mock/authentication-service-mock-returns-true.service';
+import {RouterModule} from '@angular/router';
+import {LoginRoutes} from './login/login.routes';
 
 
 @NgModule({
@@ -53,6 +55,7 @@ import { AuthenticationServiceMockReturnsTrueService } from './Mock/authenticati
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
+    RouterModule.forRoot(LoginRoutes),
     ReactiveFormsModule
   ],
   providers: [AuthenticationService, AuthenticationServiceMockReturnsTrueService, DataService, OrganizationService],
