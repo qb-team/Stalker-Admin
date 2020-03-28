@@ -9,4 +9,5 @@ export class DataService {
     users_number = new EventEmitter<number>();
     active_content = new EventEmitter<string>(); // content selected
     visible = false; // visibility login
+    visibleR = false;
 }

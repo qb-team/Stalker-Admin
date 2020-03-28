@@ -55,6 +55,6 @@ export class ResetPasswordComponent implements OnInit {
    * It sets visibility of login page
    */
   getVisible() {
-    return this.data.visible;
+    return this.data.visibleR;
   }
 }
