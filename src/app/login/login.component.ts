@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
   * Shows the password reset page and hides the login page
   */
   CallResetPassword() {
-    this.data.visible = true;
+    this.router.navigateByUrl('/Reset');
   }
 
   /*
@@ -83,9 +83,6 @@ export class LoginComponent implements OnInit {
   /*
   * Return the visible field of DataService
   */
-  getVisible() {
-    return this.data.visible;
-  }
 
   navigateToContentPanel() {
     this.router.navigateByUrl('/Content-panel');

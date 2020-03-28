@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
 import {DataService} from '../services/data.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -13,7 +14,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private data: DataService) {
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
     this.createForm();
   }
   submitted = false;
@@ -27,7 +28,7 @@ export class ResetPasswordComponent implements OnInit {
   * Back in login page
    */
   back() {
-   // this.data.visible = false;
+    this.router.navigateByUrl('/Login');
     this.reset = false;
   }
 
@@ -36,6 +37,7 @@ export class ResetPasswordComponent implements OnInit {
   */
   resetPassword(click: any) {
     this.authenticationService.ResetPassword(this.email);
+    this.reset = true;
   }
 
   createForm() {
@@ -49,12 +51,5 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-  }
-
-  /*
-   * It sets visibility of login page
-   */
-  getVisible() {
-    return this.data.visibleR;
   }
 }

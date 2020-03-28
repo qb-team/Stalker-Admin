@@ -6,6 +6,7 @@ import { DataService } from '../../services/data.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { OrganizationService } from 'src/api/api';
 import { Organization } from 'src/model/models';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-menubar',
@@ -15,7 +16,7 @@ import { Organization } from 'src/model/models';
 export class MenubarComponent implements OnInit {
   organization: Organization;
   orgArr: Array<Organization>;
-  constructor(private ds: DataService, private authenticationService: AuthenticationService, private os: OrganizationService) {  }
+  constructor(private ds: DataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router) {  }
 
   /*
    * Initialization and refresh the list of organization
@@ -40,6 +41,7 @@ export class MenubarComponent implements OnInit {
    */
   SignOut() {
     this.authenticationService.SignOut();
+    this.navigateToLogin();
   }
 
   /*
@@ -47,5 +49,9 @@ export class MenubarComponent implements OnInit {
    */
   homePage() {
     this.ds.active_content.emit('Home page');
+  }
+
+  navigateToLogin() {
+    this.router.navigateByUrl('/Login');
   }
 }
