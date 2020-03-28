@@ -13,6 +13,7 @@ import {Router} from '@angular/router';
 describe('ResetPasswordComponent', () => {
   let component: ResetPasswordComponent;
   let fixture: ComponentFixture<ResetPasswordComponent>;
+  let el: HTMLElement;
   let mockRouter: any;
   class MockRouter {
     //noinspection TypeScriptUnresolvedFunction
@@ -50,5 +51,32 @@ describe('ResetPasswordComponent', () => {
     createPasteButton.triggerEventHandler('click', null);
     fixture.detectChanges();
     expect(component.back).toHaveBeenCalled();
+  }));
+
+  it('should create label contain "email"', () => {
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('#labelE')).nativeElement.innerText).toEqual('Email:');
+  });
+
+  it('should create input-email empty', () => {
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('#email')).nativeElement.innerText).toEqual('');
+  });
+
+  it('shouldn\'t call reset password function' , () => {
+    spyOn(component, 'onSubmit');
+    el = fixture.debugElement.query(By.css('#resetBtn')).nativeElement;
+    el.click();
+    expect(component.onSubmit).toHaveBeenCalledTimes(0);
+  });
+
+  it(`form should be invalid`, async(() => {
+    component.contactForm.controls.email.setValue('');
+    expect(component.contactForm.valid).toBeFalsy();
+  }));
+
+  it(`form should be valid`, async(() => {
+    component.contactForm.controls.email.setValue('sample@mail.com');
+    expect(component.contactForm.valid).toBeTruthy();
   }));
 });

@@ -7,10 +7,12 @@ import {DataService} from '../services/data.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../environments/environment';
+import {By} from '@angular/platform-browser';
 
 describe('ControlPanelComponent', () => {
   let component: ControlPanelComponent;
   let fixture: ComponentFixture<ControlPanelComponent>;
+  let el: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -32,5 +34,17 @@ describe('ControlPanelComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should create tag app-menubar', () => {
+    expect(fixture.debugElement.query(By.css('.container-fluid')).nativeElement.innerHTML).toContain('app-menubar');
+  });
+
+  it('should create tag app-content', () => {
+    expect(fixture.debugElement.query(By.css('.container-fluid')).nativeElement.innerHTML).toContain('app-content');
+  });
+
+  it('should create tag app-menu-functionality', () => {
+    expect(fixture.debugElement.query(By.css('.container-fluid')).nativeElement.innerHTML).toContain('app-menu-functionality');
   });
 });

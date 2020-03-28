@@ -67,9 +67,30 @@ describe('LoginComponent', () => {
 
   it('should call callResetPassword', async(() => {
     spyOn(component, 'CallResetPassword');
-    const createPasteButton = fixture.debugElement.query(By.css('#resetPswBtn'));
-    createPasteButton.triggerEventHandler('click', null);
+    const createButton = fixture.debugElement.query(By.css('#resetPswBtn'));
+    createButton.triggerEventHandler('click', null);
     fixture.detectChanges();
     expect(component.CallResetPassword).toHaveBeenCalled();
   }));
+
+  it('should create label contain "email"', () => {
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('#labelE')).nativeElement.innerText).toEqual('Email:');
+  });
+
+  it('should create label contain "password', () => {
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('#labelPSW')).nativeElement.innerText).toEqual('Password:');
+  });
+
+  it('should create input-email empty', () => {
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('#email')).nativeElement.innerText).toEqual('');
+  });
+
+  it('should create input-psw empty', () => {
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('#pwd')).nativeElement.innerText).toEqual('');
+  });
+
 });
