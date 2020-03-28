@@ -5,6 +5,9 @@ import {DataService} from '../../services/data.service';
 import {AuthenticationService} from '../../services/authentication.service';
 import {OrganizationService} from '../../..';
 import {AuthenticationServiceMockReturnsTrueService} from '../../Mock/authentication-service-mock-returns-true.service';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../../../environments/environment';
 
 describe('MenubarComponent', () => {
   let component: MenubarComponent;
@@ -12,7 +15,13 @@ describe('MenubarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MenubarComponent ]
+      imports: [
+        AngularFireModule.initializeApp(environment.firebase)
+      ],
+      declarations: [ MenubarComponent ],
+      providers: [ { provide: AuthenticationService, useClass: AuthenticationServiceMockReturnsTrueService },
+        DataService,
+        AngularFireAuth ]
     })
     .compileComponents();
   }));

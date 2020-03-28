@@ -9,19 +9,27 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {By} from '@angular/platform-browser';
 import {environment} from '../../environments/environment';
 import {AuthenticationServiceMockReturnsTrueService} from '../Mock/authentication-service-mock-returns-true.service';
+import {Router} from '@angular/router';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let el: HTMLElement;
+  let mockRouter: any;
+  class MockRouter {
+    //noinspection TypeScriptUnresolvedFunction
+    navigate = jasmine.createSpy('navigate');
+  }
 
   beforeEach(async(() => {
+    mockRouter = new MockRouter();
     TestBed.configureTestingModule({
       imports: [
         AngularFireModule.initializeApp(environment.firebase)
       ],
       declarations: [ LoginComponent ],
       providers: [ { provide: AuthenticationService, useClass: AuthenticationServiceMockReturnsTrueService },
+        { provide: Router, useValue: mockRouter },
         DataService,
         AngularFireAuth ]
     })

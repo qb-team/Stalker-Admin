@@ -8,18 +8,26 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../environments/environment';
 import {DataService} from '../services/data.service';
 import {By} from '@angular/platform-browser';
+import {Router} from '@angular/router';
 
 describe('ResetPasswordComponent', () => {
   let component: ResetPasswordComponent;
   let fixture: ComponentFixture<ResetPasswordComponent>;
+  let mockRouter: any;
+  class MockRouter {
+    //noinspection TypeScriptUnresolvedFunction
+    navigate = jasmine.createSpy('navigate');
+  }
 
   beforeEach(async(() => {
+    mockRouter = new MockRouter();
     TestBed.configureTestingModule({
       imports: [
         AngularFireModule.initializeApp(environment.firebase)
       ],
       declarations: [ ResetPasswordComponent ],
       providers: [ { provide: AuthenticationService, useClass: AuthenticationServiceMockReturnsTrueService },
+        { provide: Router, useValue: mockRouter },
         DataService,
         AngularFireAuth ]
     })

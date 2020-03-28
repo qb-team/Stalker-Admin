@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { DataService} from '../../../../services/data.service';
 
 import { ContentTrackUsersNumberComponent } from './content-track-users-number.component';
 
@@ -8,7 +9,8 @@ describe('ContentTrackUsersNumberComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContentTrackUsersNumberComponent ]
+      declarations: [ ContentTrackUsersNumberComponent ],
+      providers: [DataService]
     })
     .compileComponents();
   }));
