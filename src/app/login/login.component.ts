@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
 import {DataService} from '../services/data.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class LoginComponent implements OnInit {
 
 
-  constructor(private authenticationService: AuthenticationService, private data: DataService) {
+  constructor(private authenticationService: AuthenticationService, private data: DataService, private router: Router) {
     this.createForm();
   }
 
@@ -60,6 +61,9 @@ export class LoginComponent implements OnInit {
   */
   signIn() {
         this.authenticationService.SignIn(this.email, this.password);
+        if (this.getAuth().userData) {
+          this.navigateToContentPanel();
+        }
   }
 
   /*
@@ -81,5 +85,9 @@ export class LoginComponent implements OnInit {
   */
   getVisible() {
     return this.data.visible;
+  }
+
+  navigateToContentPanel() {
+    this.router.navigateByUrl('/Content-panel');
   }
 }

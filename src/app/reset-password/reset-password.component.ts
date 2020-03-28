@@ -27,7 +27,7 @@ export class ResetPasswordComponent implements OnInit {
   * Back in login page
    */
   back() {
-    this.data.visible = false;
+   // this.data.visible = false;
     this.reset = false;
   }
 

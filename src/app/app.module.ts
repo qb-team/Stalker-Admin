@@ -30,9 +30,7 @@ import { ContentTrackUsersNumberComponent } from './control-panel/content/conten
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ContentTrackUsersGeneralInformationComponent } from './control-panel/content/content-track-users/content-track-users-general-informations/content-track-users-general-information.component';
 import { AuthenticationServiceMockReturnsTrueService } from './Mock/authentication-service-mock-returns-true.service';
-import {RouterModule} from '@angular/router';
-import {LoginRoutes} from './login/login.routes';
-import {ResetRoutes} from './reset-password/reset-password.routes';
+import {AppRoutingModule} from './app-routing.module';
 
 
 @NgModule({
@@ -56,8 +54,7 @@ import {ResetRoutes} from './reset-password/reset-password.routes';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
-    RouterModule.forRoot(LoginRoutes),
-    RouterModule.forRoot(ResetRoutes),
+    AppRoutingModule,
     ReactiveFormsModule
   ],
   providers: [AuthenticationService, AuthenticationServiceMockReturnsTrueService, DataService, OrganizationService],
