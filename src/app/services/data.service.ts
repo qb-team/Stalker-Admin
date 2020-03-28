@@ -8,5 +8,4 @@ export class DataService {
     org = new EventEmitter<Organization>(); // name of a organization selected
     users_number = new EventEmitter<number>();
     active_content = new EventEmitter<string>(); // content selected
-
 }

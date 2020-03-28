@@ -3,7 +3,6 @@
  */
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
-import {DataService} from '../services/data.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
