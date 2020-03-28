@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div id="img" class="row"></div>
-  <div id="login" class="row" *ngIf="!(getAuth().userData | async )">
+  <div id="login" class="row" >
     <div class="col-md-6 offset-md-3">
       <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
         <fieldset>
