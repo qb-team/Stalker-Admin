@@ -32,9 +32,9 @@ describe('ResetPasswordComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', async(() => {
+  it('should create', () => {
     expect(component).toBeTruthy();
-  }));
+  });
 
   it('should call back', async(() => {
     spyOn(component, 'back');

@@ -1,14 +1,11 @@
-import {async, ComponentFixture, TestBed, tick} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 
 import { AuthenticationService} from '../services/authentication.service';
 import {AngularFireModule} from '@angular/fire';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {DataService} from '../services/data.service';
-import {DebugElement} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {of} from 'rxjs';
 import {By} from '@angular/platform-browser';
 import {environment} from '../../environments/environment';
 import {AuthenticationServiceMockReturnsTrueService} from '../Mock/authentication-service-mock-returns-true.service';
