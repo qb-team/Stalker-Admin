@@ -1,12 +1,12 @@
 # Qbteam Admin Interface Stalker
-### Stalker-Admin
+### Stalker-Admin 
 
 <img src='./src/assets/icons/58329404.png' alt=""/>
 
 Project's qbteam for software engineering course. This is Admin Inteface for project Stalker.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3, and the login is managed by Firebase :fire:
-
+[![Build Status](https://travis-ci.org/qb-team/Stalker-Admin.svg?branch=develop)](https://travis-ci.org/qb-team/Stalker-Admin)
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
