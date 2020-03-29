@@ -85,6 +85,6 @@ export class LoginComponent implements OnInit {
   */
 
   navigateToContentPanel() {
-    this.router.navigateByUrl('/Content-panel/Panel/Home page');
+    this.router.navigateByUrl('/Content-panel');
   }
 }

@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'Reset', component: ResetPasswordComponent},
   { path: 'Content-panel', component: ControlPanelComponent, /*, canActivate: [AuthGuardService]*/
     children: [
+      { path: '', redirectTo: 'Panel', pathMatch: 'full' },
       { path: 'Panel', component: ContentComponent,
         children : [
           { path: '', redirectTo: 'Home page', pathMatch: 'full' },
