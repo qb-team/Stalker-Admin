@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'Login', pathMatch: 'full' },
   { path: 'Login', component: LoginComponent},
   { path: 'Reset', component: ResetPasswordComponent},
-  { path: 'Content-panel', component: ControlPanelComponent, canActivate: [AuthGuardService]}
+  { path: 'Content-panel', component: ControlPanelComponent/*, canActivate: [AuthGuardService]*/}
 ];
 
 @NgModule({
