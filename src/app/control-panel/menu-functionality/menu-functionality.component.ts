@@ -3,6 +3,7 @@
 */
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu-functionality',
@@ -11,7 +12,7 @@ import { DataService } from '../../services/data.service';
 })
 export class MenuFunctionalityComponent implements OnInit {
 
-  constructor(private ds: DataService) { }
+  constructor(private ds: DataService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +21,8 @@ export class MenuFunctionalityComponent implements OnInit {
   * Subscribes to the service 'DataService' to retrive the actual specific-component to be showed
   */
   updateContent(click: any) {
+    console.log('/Content-panel/Panel/' + click.target.innerHTML);
+    this.router.navigateByUrl('/Content-panel/Panel/' + click.target.innerHTML);
     this.ds.active_content.emit(click.target.innerHTML);
   }
 }

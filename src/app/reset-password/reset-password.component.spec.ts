@@ -16,7 +16,6 @@ describe('ResetPasswordComponent', () => {
   let el: HTMLElement;
   let mockRouter: any;
   class MockRouter {
-    //noinspection TypeScriptUnresolvedFunction
     navigate = jasmine.createSpy('navigate');
   }
 

@@ -3,15 +3,22 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MenuFunctionalityComponent } from './menu-functionality.component';
 import {DataService} from '../../services/data.service';
 import {By} from '@angular/platform-browser';
+import {Router} from '@angular/router';
 
 describe('MenuFunctionalityComponent', () => {
   let component: MenuFunctionalityComponent;
   let fixture: ComponentFixture<MenuFunctionalityComponent>;
+  let mockRouter: any;
+  class MockRouter {
+    navigate = jasmine.createSpy('navigate');
+  }
 
   beforeEach(async(() => {
+    mockRouter = new MockRouter();
     TestBed.configureTestingModule({
       declarations: [ MenuFunctionalityComponent ],
-      providers: [ DataService ]
+      providers: [ { provide: Router, useValue: mockRouter },
+        DataService ]
     })
     .compileComponents();
   }));

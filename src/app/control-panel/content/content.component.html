@@ -1,6 +1,7 @@
 <div id="wrapper" [ngSwitch]="ac">
-    <app-content-home *ngSwitchCase="'Home page'" [org]="organization"></app-content-home>
-    <app-content-track-users *ngSwitchCase="'Tracciamento'" [org]="organization"></app-content-track-users>
-    <app-content-track-users-number *ngSwitchCase="'Monitoraggio utenti'" [org]="organization"></app-content-track-users-number>
-    <app-content-track-users-general-information *ngSwitchCase="'Informazioni sull\'organizzazione'" [org]="organization"></app-content-track-users-general-information>
+    <!--<app-content-home *ngSwitchCase="'Home page'" [org]="organization"></app-content-home>
+  <app-content-track-users *ngSwitchCase="'Tracciamento'" [org]="organization"></app-content-track-users>
+  <app-content-track-users-number *ngSwitchCase="'Monitoraggio utenti'" [org]="organization"></app-content-track-users-number>
+  <app-content-track-users-general-information *ngSwitchCase="'Informazioni sull\'organizzazione'" [org]="organization"></app-content-track-users-general-information>-->
+    <router-outlet></router-outlet>
 </div>

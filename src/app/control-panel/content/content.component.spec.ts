@@ -31,7 +31,7 @@ describe('ContentComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should tag div to contain tag "app-content-home"', () => {
-    expect(fixture.debugElement.query(By.css('#wrapper')).nativeElement.innerHTML).toContain('app-content-home');
+  it('should tag div to contain tag "router-outlet"', () => {
+    expect(fixture.debugElement.query(By.css('#wrapper')).nativeElement.innerHTML).toContain('router-outlet');
   });
 });
