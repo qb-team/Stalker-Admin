@@ -6,6 +6,7 @@
 Project's qbteam for software engineering course. This is Admin Inteface for project Stalker.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3, and the login is managed by Firebase :fire:
+
 [![Build Status](https://travis-ci.org/qb-team/Stalker-Admin.svg?branch=develop)](https://travis-ci.org/qb-team/Stalker-Admin)
 ## Development server
 
