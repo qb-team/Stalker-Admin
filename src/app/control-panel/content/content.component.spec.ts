@@ -7,6 +7,7 @@ import {DataService} from '../../services/data.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../../environments/environment';
+import {By} from '@angular/platform-browser';
 
 describe('ContentComponent', () => {
   let component: ContentComponent;
@@ -28,5 +29,9 @@ describe('ContentComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should tag div to contain tag "app-content-home"', () => {
+    expect(fixture.debugElement.query(By.css('#wrapper')).nativeElement.innerHTML).toContain('app-content-home');
   });
 });
