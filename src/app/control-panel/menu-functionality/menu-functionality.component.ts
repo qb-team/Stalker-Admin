@@ -19,8 +19,7 @@ export class MenuFunctionalityComponent implements OnInit {
   /*
   * Subscribes to the service 'DataService' to retrive the actual specific-component to be showed
   */
-  updateContent(click: any)
-  {
+  updateContent(click: any) {
     this.ds.active_content.emit(click.target.innerHTML);
   }
 }

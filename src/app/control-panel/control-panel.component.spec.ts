@@ -12,7 +12,6 @@ import {By} from '@angular/platform-browser';
 describe('ControlPanelComponent', () => {
   let component: ControlPanelComponent;
   let fixture: ComponentFixture<ControlPanelComponent>;
-  let el: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
