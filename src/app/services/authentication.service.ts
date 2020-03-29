@@ -39,13 +39,6 @@ export class AuthenticationService {
       .auth
       .signOut().then(res => {console.log('Good bye'); });
   }
-
-  /*
-   * Returns signOk's value
-  */
-  getSignInState() {
-    return this.signOk;
-  }
   /*
    * The function allows to reset password to user
    */
