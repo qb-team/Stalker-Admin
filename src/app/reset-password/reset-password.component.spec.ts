@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResetPasswordComponent } from './reset-password.component';
 import {AuthenticationService} from '../services/authentication.service';
-import {AuthenticationServiceMockReturnsTrueService} from '../Mock/authentication-service-mock-returns-true.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../environments/environment';
@@ -26,8 +25,7 @@ describe('ResetPasswordComponent', () => {
         AngularFireModule.initializeApp(environment.firebase)
       ],
       declarations: [ ResetPasswordComponent ],
-      providers: [ { provide: AuthenticationService, useClass: AuthenticationServiceMockReturnsTrueService },
-        { provide: Router, useValue: mockRouter },
+      providers: [ { provide: Router, useValue: mockRouter },
         DataService,
         AngularFireAuth ]
     })

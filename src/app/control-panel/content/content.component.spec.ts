@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContentComponent } from './content.component';
 import {AuthenticationService} from '../../services/authentication.service';
-import {AuthenticationServiceMockReturnsTrueService} from '../../Mock/authentication-service-mock-returns-true.service';
 import {DataService} from '../../services/data.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
