@@ -6,6 +6,7 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
+	  require('karma-coverage'),
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
@@ -27,6 +28,14 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
+	preprocessors: { 'dist/app/**/!(*spec).js': ['coverage'] },
+	coverageReporter: {
+  dir : 'coverage/',
+    reporters: [
+      { type: 'html' },
+      { type: 'lcov' }
+    ]
+},
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
