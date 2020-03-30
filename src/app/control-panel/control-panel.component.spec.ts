@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ControlPanelComponent } from './control-panel.component';
 import {AuthenticationService} from '../services/authentication.service';
-import {AuthenticationServiceMockReturnsTrueService} from '../Mock/authentication-service-mock-returns-true.service';
 import {DataService} from '../services/data.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
@@ -12,7 +11,6 @@ import {By} from '@angular/platform-browser';
 describe('ControlPanelComponent', () => {
   let component: ControlPanelComponent;
   let fixture: ComponentFixture<ControlPanelComponent>;
-  let el: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -20,8 +18,7 @@ describe('ControlPanelComponent', () => {
         AngularFireModule.initializeApp(environment.firebase)
       ],
       declarations: [ ControlPanelComponent ],
-      providers: [ { provide: AuthenticationService, useClass: AuthenticationServiceMockReturnsTrueService },
-        AngularFireAuth ]
+      providers: [ AngularFireAuth ]
     })
     .compileComponents();
   }));

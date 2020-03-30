@@ -2,9 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MenubarComponent } from './menubar.component';
 import {DataService} from '../../services/data.service';
-import {AuthenticationService} from '../../services/authentication.service';
-import {OrganizationService} from '../../..';
-import {AuthenticationServiceMockReturnsTrueService} from '../../Mock/authentication-service-mock-returns-true.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../../environments/environment';
@@ -19,8 +16,7 @@ describe('MenubarComponent', () => {
         AngularFireModule.initializeApp(environment.firebase)
       ],
       declarations: [ MenubarComponent ],
-      providers: [ { provide: AuthenticationService, useClass: AuthenticationServiceMockReturnsTrueService },
-        DataService,
+      providers: [ DataService,
         AngularFireAuth ]
     })
     .compileComponents();
@@ -32,7 +28,7 @@ describe('MenubarComponent', () => {
     fixture.detectChanges();
   });
 
- /* it('should create', () => {
+  /*it('should create', () => {
     expect(component).toBeTruthy();
   });*/
 });

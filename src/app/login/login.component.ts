@@ -4,7 +4,6 @@
 */
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
-import {DataService} from '../services/data.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
@@ -16,8 +15,7 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
 
-  constructor(private authenticationService: AuthenticationService, private data: DataService, private router: Router) {
-    this.createForm();
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
   }
 
   submitted = false;
@@ -37,6 +35,7 @@ export class LoginComponent implements OnInit {
   contactForm: FormGroup;
 
   ngOnInit(): void {
+    this.createForm();
   }
 
   createForm() {
