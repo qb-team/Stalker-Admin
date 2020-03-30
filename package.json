@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "test-ci": "ng test --watch=false --code-coverage && cat ./coverage/lcov.info | coveralls"
+    "test-ci": "ng test --watch=false --code-coverage && cat ./coverage/lcov.info | coveralls",
 	"test:cover": "rm -rf ./coverage && ng test --no-watch --code-coverage",
 	"coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/converalls.js"
   },
