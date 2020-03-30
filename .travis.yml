@@ -13,7 +13,10 @@ install:
   - npm install
 
 script:
+  - xvfb-run -a npm run test:cover -- --single-run --no-progress --browser=ChromeNoSandbox
+  - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
   - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
   
 after_script:
+  - npm run coveralls
   - cat ./coverage/*/lcov.info | ./node_modules/coveralls/bin/coveralls.js
