@@ -68,6 +68,12 @@ describe('LoginComponent', () => {
     expect(component.onSubmit).toHaveBeenCalledTimes(0);
   });
 
+  it('should call onSubmit', () => {
+    spyOn(component, 'onSubmit');
+    component.onSubmit();
+    expect(component.onSubmit).toHaveBeenCalled();
+  });
+
   it('shouldn\'t call signIn function as long it is disabled and should call it otherwise' , () => {
     spyOn(component, 'signIn');
     el = fixture.debugElement.query(By.css('#signInBtn')).nativeElement;
