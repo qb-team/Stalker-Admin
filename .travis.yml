@@ -1,5 +1,5 @@
 dist: trusty
-sudo: false
+os: linux
 
 language: node_js
 node_js:
