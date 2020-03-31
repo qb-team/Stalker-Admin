@@ -68,10 +68,8 @@ describe('LoginComponent', () => {
     expect(component.onSubmit).toHaveBeenCalledTimes(0);
   });
 
-  it('should\'t call onSubmit', () => {
-    spyOn(component, 'onSubmit');
-    component.onSubmit();
-    expect(component.submitted).toEqual(false);
+  it('should call onSubmit', () => {
+    expect(component.onSubmit).toBeTruthy();
   });
 
   it('shouldn\'t call signIn function as long it is disabled and should call it otherwise' , () => {
