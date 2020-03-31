@@ -30,7 +30,7 @@ module.exports = function (config) {
     },
 	preprocessors: { 'dist/app/**/!(*spec).js': ['coverage'] },
 	coverageReporter: {
-  dir : 'coverage/',
+  dir : 'coverage/UI/',
     reporters: [
       { type: 'html' },
       { type: 'lcov' }
