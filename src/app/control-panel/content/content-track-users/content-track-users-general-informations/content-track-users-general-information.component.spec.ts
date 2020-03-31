@@ -7,12 +7,14 @@ import {Organization} from '../../../../..';
 describe('ContentTrackUsersGeneralInformationComponent', () => {
   let component: ContentTrackUsersGeneralInformationComponent;
   let fixture: ComponentFixture<ContentTrackUsersGeneralInformationComponent>;
+  let ds: DataService;
 
 
   beforeEach(() => {
+    ds = new DataService();
     TestBed.configureTestingModule({
       declarations: [ ContentTrackUsersGeneralInformationComponent],
-      providers: [ DataService ]
+      providers: [ { provide: DataService, useValue: ds } ]
     });
   });
 
@@ -23,5 +25,11 @@ describe('ContentTrackUsersGeneralInformationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should subscribe when ngOnInit is invoked', () => {
+    spyOn(ds.org, 'subscribe');
+    component.ngOnInit();
+    expect(ds.org.subscribe).toHaveBeenCalled();
   });
 });
