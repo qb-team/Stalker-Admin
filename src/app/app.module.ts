@@ -29,7 +29,6 @@ import { ContentHomeComponent } from './control-panel/content/content-home/conte
 import { ContentTrackUsersNumberComponent } from './control-panel/content/content-track-users/content-track-users-number/content-track-users-number.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ContentTrackUsersGeneralInformationComponent } from './control-panel/content/content-track-users/content-track-users-general-informations/content-track-users-general-information.component';
-import { AuthenticationServiceMockReturnsTrueService } from './Mock/authentication-service-mock-returns-true.service';
 import {AppRoutingModule} from './app-routing.module';
 
 
@@ -57,7 +56,7 @@ import {AppRoutingModule} from './app-routing.module';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [AuthenticationService, AuthenticationServiceMockReturnsTrueService, DataService, OrganizationService],
+  providers: [AuthenticationService, DataService, OrganizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
