@@ -148,6 +148,13 @@ describe('LoginComponent', () => {
     expect(navArgs).toBe('/Content-panel');
   }));
 
+  it('Should navigate to reset password', inject([Router], (router: Router) => {
+    const spy = spyOn(router, 'navigateByUrl');
+    component.CallResetPassword();
+    const navArgs = spy.calls.first().args[0];
+    expect(navArgs).toBe('/Reset');
+  }));
+
   it('should submitted', () => {
     expect(component.submitted).toEqual(true);
   });
