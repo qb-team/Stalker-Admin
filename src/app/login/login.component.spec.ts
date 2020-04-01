@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 
@@ -24,6 +24,7 @@ describe('LoginComponent', () => {
   class MockRouter {
     //noinspection TypeScriptUnresolvedFunction
     navigate = jasmine.createSpy('navigate');
+    navigateByUrl(url: string) { return url; }
   }
   beforeEach(async(() => {
     mockAuthenticationService = new MockAuthenticationService();
@@ -138,5 +139,11 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('#pwd')).nativeElement.innerText).toEqual('');
   });
-
+  describe('#displayForm', () => {
+  it('Should log in and navigate to dashboard', inject([Router], (router: Router) => {
+    const spy = spyOn(router, 'navigateByUrl');
+    component.navigateToContentPanel();
+    const navArgs = spy.calls.first().args[0];
+    expect(navArgs).toBe('/Content-panel'); }));
+  });
 });
