@@ -45,6 +45,7 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.onSubmit();
   });
 
   afterEach(() => {
@@ -146,5 +147,9 @@ describe('LoginComponent', () => {
     const navArgs = spy.calls.first().args[0];
     expect(navArgs).toBe('/Content-panel');
   }));
+
+  it('should submitted', () => {
+    expect(component.submitted).toEqual(true);
+  });
 });
 

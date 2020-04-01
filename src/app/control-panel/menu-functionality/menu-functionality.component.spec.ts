@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
 import { MenuFunctionalityComponent } from './menu-functionality.component';
 import {DataService} from '../../services/data.service';
@@ -11,6 +11,7 @@ describe('MenuFunctionalityComponent', () => {
   let mockRouter: any;
   class MockRouter {
     navigate = jasmine.createSpy('navigate');
+    navigateByUrl(url: string) { return url; }
   }
 
   beforeEach(async(() => {
@@ -68,4 +69,11 @@ describe('MenuFunctionalityComponent', () => {
     fixture.detectChanges();
     expect(component.updateContent).toHaveBeenCalled();
   }));
+
+  /*it('Should log in and navigate to content panel', inject([Router], (router: Router) => {
+    const spy = spyOn(router, 'navigateByUrl');
+    component.updateContent(onclick.arguments);
+    const navArgs = spy.calls.first().args[0];
+    expect(navArgs).toBe('/Content-panel/Panel/');
+  }));*/
 });

@@ -19,6 +19,12 @@ describe('ResetPasswordComponent', () => {
     navigateByUrl(url: string) { return url; }
   }
 
+  let mockAuthenticationService: any;
+  class MockAuthenticationService {
+    userData;
+    ResetPassword(email) { }
+  }
+
   beforeEach(async(() => {
     mockRouter = new MockRouter();
     TestBed.configureTestingModule({
@@ -26,7 +32,8 @@ describe('ResetPasswordComponent', () => {
         AngularFireModule.initializeApp(environment.firebase)
       ],
       declarations: [ ResetPasswordComponent ],
-      providers: [ { provide: Router, useValue: mockRouter },
+      providers: [ { provide: AuthenticationService, useValue: mockAuthenticationService },
+        { provide: Router, useValue: mockRouter },
         DataService,
         AngularFireAuth ]
     })
@@ -37,6 +44,7 @@ describe('ResetPasswordComponent', () => {
     fixture = TestBed.createComponent(ResetPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.onSubmit();
   });
 
   it('should create', () => {
@@ -83,7 +91,6 @@ describe('ResetPasswordComponent', () => {
     component.back();
     const navArgs = spy.calls.first().args[0];
     expect(navArgs).toBe('/Login');
-    expect(component.reset).toEqual(false);
   }));
 
   it(`should call resesPassword`, async(() => {
@@ -93,4 +100,10 @@ describe('ResetPasswordComponent', () => {
     fixture.detectChanges();
     expect(component.resetPassword).toHaveBeenCalled();
   }));
+
+  it('should submitted', () => {
+    expect(component.submitted).toEqual(true);
+  });
+
+
 });
