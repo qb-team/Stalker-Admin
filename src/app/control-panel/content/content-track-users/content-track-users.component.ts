@@ -2,7 +2,6 @@
 * Specific-content component to show data about user-tracking
 */
 import { Component, OnInit, Input } from '@angular/core';
-import { OrganizationService } from '../../../../api/api';
 import { Organization } from 'src/model/models';
 import { DataService } from 'src/app/services/data.service';
 
@@ -38,7 +37,7 @@ export class ContentTrackUsersComponent implements OnInit {
   */
   coordinates;
 
-  constructor( private os: OrganizationService, private ds: DataService ) {
+  constructor( private ds: DataService ) {
   //  this.presentUsersOrg = this.getUsers();
   }
 
