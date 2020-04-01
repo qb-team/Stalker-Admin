@@ -139,11 +139,12 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('#pwd')).nativeElement.innerText).toEqual('');
   });
-  describe('#displayForm', () => {
+
   it('Should log in and navigate to dashboard', inject([Router], (router: Router) => {
     const spy = spyOn(router, 'navigateByUrl');
     component.navigateToContentPanel();
     const navArgs = spy.calls.first().args[0];
-    expect(navArgs).toBe('/Content-panel'); }));
-  });
+    expect(navArgs).toBe('/Content-panel');
+  }));
 });
+
