@@ -1,12 +1,8 @@
 // tslint:disable
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Pipe, PipeTransform, Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, Directive, Input, Output } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import {async, inject, TestBed} from '@angular/core/testing';
+import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
-import { Observable, of as observableOf, throwError } from 'rxjs';
-
-import { Component } from '@angular/core';
+import { Observable, of as observableOf} from 'rxjs';
 import { MenubarComponent } from './menubar.component';
 import { DataService } from '../../services/data.service';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -32,10 +28,6 @@ class MockRouter {
   navigateByUrl(url: string) { return url; }
 }
 
-@Directive({ selector: '[oneviewPermitted]' })
-class OneviewPermittedDirective {
-  @Input() oneviewPermitted;
-}
 
 describe('MenubarComponent', () => {
   let fixture;
@@ -46,7 +38,6 @@ describe('MenubarComponent', () => {
       imports: [ FormsModule, ReactiveFormsModule ],
       declarations: [
         MenubarComponent,
-        OneviewPermittedDirective
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
       providers: [
@@ -84,14 +75,16 @@ describe('MenubarComponent', () => {
      expect(component.os.getOrganizationList).toHaveBeenCalled();
   });
 
-  /*it('should run #setOrg()', async () => {
+  it('should run #setOrg()', async () => {
+    spyOn(component, 'setOrg')
     component.ds = component.ds || {};
     component.ds.org = {
       emit: function() {}
     };
     component.setOrg({});
+    expect(component.setOrg).toHaveBeenCalled();
 
-  });*/
+  });
 
   it('should run #SignOut()', async () => {
     component.authenticationService = component.authenticationService || {};
@@ -103,12 +96,13 @@ describe('MenubarComponent', () => {
   });
 
   it('should run #homePage()', async () => {
+    spyOn(component, 'homePage');
     component.ds = component.ds || {};
     component.ds.active_content = {
       emit: function() {}
     };
     component.homePage();
-
+    expect(component.homePage).toHaveBeenCalled();
   });
 
   it('should run #navigateToLogin()', async () => {
@@ -117,5 +111,12 @@ describe('MenubarComponent', () => {
     component.navigateToLogin();
     expect(component.router.navigateByUrl).toHaveBeenCalled();
   });
+
+  it('Should navigate to login after logout', inject([Router], (router: Router) => {
+    const spy = spyOn(router, 'navigateByUrl');
+    component.navigateToLogin();
+    const navArgs = spy.calls.first().args[0];
+    expect(navArgs).toBe('/Login');
+  }));
 
 });

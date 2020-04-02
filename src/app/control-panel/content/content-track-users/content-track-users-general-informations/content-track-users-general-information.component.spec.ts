@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContentTrackUsersGeneralInformationComponent } from './content-track-users-general-information.component';
 import {DataService} from '../../../../services/data.service';
-import {Organization} from '../../../../..';
 
 describe('ContentTrackUsersGeneralInformationComponent', () => {
   let component: ContentTrackUsersGeneralInformationComponent;

@@ -1,54 +1,86 @@
-import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
-
+// tslint:disable
+import {async, inject, TestBed} from '@angular/core/testing';
+import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { ResetPasswordComponent } from './reset-password.component';
-import {AuthenticationService} from '../services/authentication.service';
-import {AngularFireAuth} from '@angular/fire/auth';
-import {AngularFireModule} from '@angular/fire';
+import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 import {environment} from '../../environments/environment';
-import {DataService} from '../services/data.service';
-import {By} from '@angular/platform-browser';
-import {Router} from '@angular/router';
+import {AngularFireModule} from '@angular/fire';
+
+@Injectable()
+class MockAuthenticationService {
+  userData;
+  ResetPassword(email) { }
+}
+
+@Injectable()
+class MockRouter {
+  navigate = jasmine.createSpy('navigate');
+  navigateByUrl(url: string) { return url; }
+}
 
 describe('ResetPasswordComponent', () => {
-  let component: ResetPasswordComponent;
-  let fixture: ComponentFixture<ResetPasswordComponent>;
+  let fixture;
+  let component;
   let el: HTMLElement;
-  let mockRouter: any;
-  class MockRouter {
-    navigate = jasmine.createSpy('navigate');
-    navigateByUrl(url: string) { return url; }
-  }
-
-  let mockAuthenticationService: any;
-  class MockAuthenticationService {
-    userData;
-    ResetPassword(email) { }
-  }
-
-  beforeEach(async(() => {
-    mockRouter = new MockRouter();
-    TestBed.configureTestingModule({
-      imports: [
-        AngularFireModule.initializeApp(environment.firebase)
-      ],
-      declarations: [ ResetPasswordComponent ],
-      providers: [ { provide: AuthenticationService, useValue: mockAuthenticationService },
-        { provide: Router, useValue: mockRouter },
-        DataService,
-        AngularFireAuth ]
-    })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [ AngularFireModule.initializeApp(environment.firebase), FormsModule, ReactiveFormsModule ],
+      declarations: [
+        ResetPasswordComponent,
+      ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
+      providers: [
+        { provide: AuthenticationService, useClass: MockAuthenticationService },
+        { provide: Router, useClass: MockRouter }
+      ]
+    }).overrideComponent(ResetPasswordComponent, {
+
+    }).compileComponents();
     fixture = TestBed.createComponent(ResetPasswordComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    component.onSubmit();
+    component = fixture.debugElement.componentInstance;
   });
 
-  it('should create', () => {
+  afterEach(() => {
+    component.ngOnDestroy = function() {};
+    fixture.destroy();
+  });
+
+  it('should run #constructor()', async () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should run #ngOnInit()', async () => {
+
+    component.ngOnInit();
+
+  });
+
+  it('should run #back()', async () => {
+    component.router = component.router || {};
+    spyOn(component.router, 'navigateByUrl');
+    component.back();
+     expect(component.router.navigateByUrl).toHaveBeenCalled();
+  });
+
+  it('should run #resetPassword()', async () => {
+    component.authenticationService = component.authenticationService || {};
+    spyOn(component.authenticationService, 'ResetPassword');
+    component.resetPassword();
+    expect(component.authenticationService.ResetPassword).toHaveBeenCalled();
+  });
+
+  it('should run #createForm()', async () => {
+    component.createForm();
+    expect(component.contactForm).toBeTruthy();
+  });
+
+  it('should run #onSubmit()', async () => {
+    component.onSubmit();
+    expect(component.submitted).toBe(true);
   });
 
   it('should call back', async(() => {
@@ -100,10 +132,4 @@ describe('ResetPasswordComponent', () => {
     fixture.detectChanges();
     expect(component.resetPassword).toHaveBeenCalled();
   }));
-
-  it('should submitted', () => {
-    expect(component.submitted).toEqual(true);
-  });
-
-
 });

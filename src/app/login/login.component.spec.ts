@@ -45,7 +45,6 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    component.onSubmit();
   });
 
   afterEach(() => {
@@ -155,8 +154,9 @@ describe('LoginComponent', () => {
     expect(navArgs).toBe('/Reset');
   }));
 
-  it('should submitted', () => {
-    expect(component.submitted).toEqual(true);
+  it('should run #onSubmit()', async () => {
+    component.onSubmit();
+    expect(component.submitted).toBe(true);
   });
 });
 

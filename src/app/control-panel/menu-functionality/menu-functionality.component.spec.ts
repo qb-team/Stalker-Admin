@@ -1,37 +1,73 @@
-import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
-
+// tslint:disable
+import { async, TestBed } from '@angular/core/testing';
+import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { MenuFunctionalityComponent } from './menu-functionality.component';
-import {DataService} from '../../services/data.service';
-import {By} from '@angular/platform-browser';
-import {Router} from '@angular/router';
+import { DataService } from '../../services/data.service';
+import { Router } from '@angular/router';
+
+@Injectable()
+class MockDataService {}
+
+@Injectable()
+class MockRouter {
+  navigate() {};
+  navigateByUrl(url: string) { return url; }
+}
 
 describe('MenuFunctionalityComponent', () => {
-  let component: MenuFunctionalityComponent;
-  let fixture: ComponentFixture<MenuFunctionalityComponent>;
-  let mockRouter: any;
-  class MockRouter {
-    navigate = jasmine.createSpy('navigate');
-    navigateByUrl(url: string) { return url; }
-  }
-
-  beforeEach(async(() => {
-    mockRouter = new MockRouter();
-    TestBed.configureTestingModule({
-      declarations: [ MenuFunctionalityComponent ],
-      providers: [ { provide: Router, useValue: mockRouter },
-        DataService ]
-    })
-    .compileComponents();
-  }));
+  let fixture;
+  let component;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [ FormsModule, ReactiveFormsModule ],
+      declarations: [
+        MenuFunctionalityComponent,
+      ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
+      providers: [
+        { provide: DataService, useClass: MockDataService },
+        { provide: Router, useClass: MockRouter }
+      ]
+    }).overrideComponent(MenuFunctionalityComponent, {
+
+    }).compileComponents();
     fixture = TestBed.createComponent(MenuFunctionalityComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = fixture.debugElement.componentInstance;
   });
 
-  it('should create', () => {
+  afterEach(() => {
+    component.ngOnDestroy = function() {};
+    fixture.destroy();
+  });
+
+  it('should run #constructor()', async () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should run #ngOnInit()', async () => {
+
+    component.ngOnInit();
+
+  });
+
+  it('should run #updateContent()', async () => {
+    component.router = component.router || {};
+    const spy = spyOn(component.router, 'navigateByUrl');
+    component.ds = component.ds || {};
+    component.ds.active_content = {
+      emit: function() {}
+    };
+    component.updateContent({
+      target: {
+        innerHTML: {}
+      }
+    });
+    expect(component.router.navigateByUrl).toHaveBeenCalled();
+    const navArgs = spy.calls.first().args[0];
+    expect(navArgs).toBe('/Content-panel/Panel/[object Object]'  );
   });
 
   it('should tag span to contain "Tracciamento"', () => {
@@ -70,10 +106,4 @@ describe('MenuFunctionalityComponent', () => {
     expect(component.updateContent).toHaveBeenCalled();
   }));
 
-  /*it('Should log in and navigate to content panel', inject([Router], (router: Router) => {
-    const spy = spyOn(router, 'navigateByUrl');
-    component.updateContent(onclick.arguments);
-    const navArgs = spy.calls.first().args[0];
-    expect(navArgs).toBe('/Content-panel/Panel/');
-  }));*/
 });
