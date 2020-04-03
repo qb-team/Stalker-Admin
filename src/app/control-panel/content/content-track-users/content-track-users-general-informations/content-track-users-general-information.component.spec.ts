@@ -27,8 +27,8 @@ describe('ContentTrackUsersGeneralInformationComponent', () => {
   });
 
   it('should subscribe when ngOnInit is invoked', () => {
-    spyOn(ds.org, 'subscribe');
+    spyOn(ds.organization, 'subscribe');
     component.ngOnInit();
-    expect(ds.org.subscribe).toHaveBeenCalled();
+    expect(ds.organization.subscribe).toHaveBeenCalled();
   });
 });
