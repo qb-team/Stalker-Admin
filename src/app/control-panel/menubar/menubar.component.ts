@@ -24,7 +24,7 @@ export class MenubarComponent implements OnInit {
   ngOnInit() {
     this.os.getOrganizationList().subscribe((obs: Array<Organization>) => {
       this.orgArr = obs; this.organization = this.orgArr[0];
-      this.ds.org.emit(this.organization);
+      this.ds.organization.emit(this.organization);
     });
   }
 
@@ -33,7 +33,7 @@ export class MenubarComponent implements OnInit {
    */
   setOrg(click: any) {
     this.organization = this.orgArr[click.target.attributes.id.value];
-    this.ds.org.emit(this.organization);
+    this.ds.organization.emit(this.organization);
   }
 
   /*

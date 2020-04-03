@@ -17,7 +17,7 @@ export class ContentTrackUsersGeneralInformationComponent implements OnInit {
   constructor(private ds: DataService) { }
 
   ngOnInit(): void {
-    this.ds.org.subscribe((org: Organization) => { this.org = org; });
+    this.ds.organization.subscribe((org: Organization) => { this.org = org; });
   }
 
 }
