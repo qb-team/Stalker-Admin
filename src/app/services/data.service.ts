@@ -5,16 +5,29 @@ import { EventEmitter } from '@angular/core';
 import { Organization } from 'src/model/models';
 
 export class DataService {
-  get active_content(): EventEmitter<string> {
+
+  private org: EventEmitter<Organization>; // name of a organization selected
+  private usersNumber: EventEmitter<number>;
+  private activeContent: EventEmitter<string>; // content selected
+
+  set setOrg(value: EventEmitter<Organization>) {
+    this.setOrg = value;
+  }
+
+  set setUsersNumber(value: EventEmitter<number>) {
+    this.setUsersNumber = value;
+  }
+
+  set setActiveContent(value: EventEmitter<string>) {
+    this.setActiveContent = value;
+  }
+  get getActiveContent(): EventEmitter<string> {
     return this.activeContent;
   }
-  get users_number(): EventEmitter<number> {
+  get getUsersNumber(): EventEmitter<number> {
     return this.usersNumber;
   }
-  get organization(): EventEmitter<Organization> {
+  get getOrganization(): EventEmitter<Organization> {
     return this.org;
   }
-    private org = new EventEmitter<Organization>(); // name of a organization selected
-    private usersNumber = new EventEmitter<number>();
-    private activeContent = new EventEmitter<string>(); // content selected
 }

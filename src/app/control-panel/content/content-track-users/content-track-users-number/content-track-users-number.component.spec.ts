@@ -49,7 +49,7 @@ describe('ContentTrackUsersNumberComponent', () => {
 
   it('should run #ngOnInit()', async () => {
     component.ds = component.ds || {};
-    component.ds.organization = observableOf({});
+    component.ds.getOrganization = observableOf({});
     component.ps = component.ps || {};
     spyOn(component.ps, 'getOrganizationPresenceCounterById').and.returnValue(observableOf({}));
     component.ngOnInit();

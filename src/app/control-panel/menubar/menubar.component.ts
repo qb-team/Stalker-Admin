@@ -24,16 +24,16 @@ export class MenubarComponent implements OnInit {
   ngOnInit() {
     this.os.getOrganizationList().subscribe((obs: Array<Organization>) => {
       this.orgArr = obs; this.organization = this.orgArr[0];
-      this.ds.organization.emit(this.organization);
+      this.ds.getOrganization.emit(this.organization);
     });
   }
 
   /*
    * It updates the name of organization selected
    */
-  setOrg(click: any) {
+  setOrganization(click: any) {
     this.organization = this.orgArr[click.target.attributes.id.value];
-    this.ds.organization.emit(this.organization);
+    this.ds.getOrganization.emit(this.organization);
   }
 
   /*
@@ -48,7 +48,7 @@ export class MenubarComponent implements OnInit {
    * It updates value of active_content for show Home page
    */
   homePage() {
-    this.ds.active_content.emit('Home page');
+    this.ds.getActiveContent.emit('Home page');
   }
 
   navigateToLogin() {

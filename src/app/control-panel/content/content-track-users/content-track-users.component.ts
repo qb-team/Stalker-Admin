@@ -51,7 +51,7 @@ export class ContentTrackUsersComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
-    this.ds.organization.subscribe((org: Organization) => { this.json_coordinates = org.trackingArea; this.coordinates = JSON.parse(this.json_coordinates).Organizzazioni; });
+    this.ds.getOrganization.subscribe((org: Organization) => { this.json_coordinates = org.trackingArea; this.coordinates = JSON.parse(this.json_coordinates).Organizzazioni; });
     this.json_coordinates = this.org.trackingArea;
     this.coordinates = JSON.parse(this.json_coordinates).Organizzazioni;
    // this.ds.org.subscribe((org: Organization) => { this.organization = org, this.ds.users_number.emit(this.presentUsersOrg);  });

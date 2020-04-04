@@ -57,7 +57,7 @@ describe('MenuFunctionalityComponent', () => {
     component.router = component.router || {};
     const spy = spyOn(component.router, 'navigateByUrl');
     component.ds = component.ds || {};
-    component.ds.active_content = {
+    component.ds.getActiveContent = {
       emit: function() {}
     };
     component.updateContent({

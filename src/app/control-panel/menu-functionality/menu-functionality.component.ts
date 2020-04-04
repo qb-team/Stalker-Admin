@@ -22,6 +22,6 @@ export class MenuFunctionalityComponent implements OnInit {
   */
   updateContent(click: any) {
     this.router.navigateByUrl('/Content-panel/Panel/' + click.target.innerHTML);
-    this.ds.active_content.emit(click.target.innerHTML);
+    this.ds.getActiveContent.emit(click.target.innerHTML);
   }
 }

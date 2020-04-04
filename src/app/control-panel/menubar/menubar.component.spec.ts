@@ -75,14 +75,14 @@ describe('MenubarComponent', () => {
      expect(component.os.getOrganizationList).toHaveBeenCalled();
   });
 
-  it('should run #setOrg()', async () => {
-    spyOn(component, 'setOrg')
+  it('should run #setOrganization()', async () => {
+    spyOn(component, 'setOrganization')
     component.ds = component.ds || {};
     component.ds.org = {
       emit: function() {}
     };
-    component.setOrg({});
-    expect(component.setOrg).toHaveBeenCalled();
+    component.setOrganization({});
+    expect(component.setOrganization).toHaveBeenCalled();
 
   });
 

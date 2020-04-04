@@ -17,7 +17,7 @@ export class ContentTrackUsersNumberComponent implements OnInit {
   constructor(private ds: DataService, private ps: PresenceService) { }
 
   ngOnInit(): void {
-     this.ds.organization.subscribe((org: Organization) => { this.org = org; });
+     this.ds.getOrganization.subscribe((org: Organization) => { this.org = org; });
      this.ps.getOrganizationPresenceCounterById(this.org.id).subscribe((counter: OrganizationPresenceCounter) => {
        this.UserNumber = counter;
      });
