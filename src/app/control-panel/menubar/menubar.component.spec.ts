@@ -53,11 +53,6 @@ describe('MenubarComponent', () => {
     component = fixture.debugElement.componentInstance;
   });
 
-  afterEach(() => {
-    component.ngOnDestroy = function() {};
-    fixture.destroy();
-  });
-
   it('should run #constructor()', async () => {
     expect(component).toBeTruthy();
   });
