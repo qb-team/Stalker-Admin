@@ -33,9 +33,7 @@ describe('AuthenticationService', () => {
         };
       }
     };
-    spyOn(service, 'SignIn');
     service.SignIn({}, {});
-    expect(service.SignIn).toHaveBeenCalled();
   });
 
   it('should run #SignOut()', async () => {
@@ -51,9 +49,8 @@ describe('AuthenticationService', () => {
         };
       }
     };
-    spyOn(service, 'SignOut');
     service.SignOut();
-    expect(service.SignOut).toHaveBeenCalled();
+
   });
 
   it('should run #ResetPassword()', async () => {
@@ -69,17 +66,14 @@ describe('AuthenticationService', () => {
         };
       }
     };
-    spyOn(service, 'ResetPassword');
     service.ResetPassword({});
-    expect(service.ResetPassword).toHaveBeenCalled();
+
   });
 
   it('should run #getState()', async () => {
     service.angularFireAuth = service.angularFireAuth || {};
     service.angularFireAuth.authState = 'authState';
-    spyOn(service, 'getState');
     service.getState();
-    expect(service.getState).toHaveBeenCalled();
   });
 
 });

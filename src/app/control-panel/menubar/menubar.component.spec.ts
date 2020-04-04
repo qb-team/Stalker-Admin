@@ -76,7 +76,7 @@ describe('MenubarComponent', () => {
   });
 
   it('should run #setOrganization()', async () => {
-    spyOn(component, 'setOrganization')
+    spyOn(component, 'setOrganization');
     component.ds = component.ds || {};
     component.ds.org = {
       emit: function() {}
