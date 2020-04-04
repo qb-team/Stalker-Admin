@@ -11,15 +11,15 @@ export class DataService {
   private activeContent: EventEmitter<string>; // content selected
 
   set setOrg(value: EventEmitter<Organization>) {
-    this.setOrg = value;
+    this.org = value;
   }
 
   set setUsersNumber(value: EventEmitter<number>) {
-    this.setUsersNumber = value;
+    this.usersNumber = value;
   }
 
   set setActiveContent(value: EventEmitter<string>) {
-    this.setActiveContent = value;
+    this.activeContent = value;
   }
   get getActiveContent(): EventEmitter<string> {
     return this.activeContent;
