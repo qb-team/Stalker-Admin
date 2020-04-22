@@ -43,7 +43,7 @@ describe('MenuFunctionalityComponent', () => {
     fixture.destroy();
   });
 
-  it('should run #constructor()', async () => {
+  it('should run #constructor()', () => {
     expect(component).toBeTruthy();
   });
 
