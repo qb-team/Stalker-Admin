@@ -11,20 +11,22 @@ describe('DataService', () => {
 
  /* it('should run SetterDeclaration #setOrg', () => {
 
-    obj.setOrg = 'prova';
-    expect(obj.getOrganization).toEqual('prova');
+    obj.setOrg = {};
+    expect(obj.getOrganization).toEqual({});
 
   });
 
   it('should run SetterDeclaration #setUsersNumber', async () => {
 
     obj.setUsersNumber = {};
+    expect(obj.getUserNumber).toEqual({});
 
   });
 
   it('should run SetterDeclaration #setActiveContent', async () => {
 
     obj.setActiveContent = {};
+    expect(obj.getActiveContent).toEqual({});
 
   });*/
 
