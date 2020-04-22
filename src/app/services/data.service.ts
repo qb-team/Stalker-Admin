@@ -6,7 +6,7 @@ import { Organization } from 'src/model/models';
 
 export class DataService {
 
-  private org: EventEmitter<Organization>; // name of a organization selected
+  org: EventEmitter<Organization>; // name of a organization selected
   private usersNumber: EventEmitter<number>;
   private activeContent: EventEmitter<string>; // content selected
 
