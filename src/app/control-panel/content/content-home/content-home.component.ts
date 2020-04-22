@@ -10,9 +10,16 @@ import { Organization } from 'src/model/models';
   styleUrls: ['./content-home.component.css']
 })
 export class ContentHomeComponent implements OnInit {
-
-  @Input() org: Organization;
+  @Input() private actualOrganization: Organization;
   constructor() { }
+
+  get getAcutalOrganization(): Organization {
+    return this.actualOrganization;
+  }
+
+  set setAcutalOrganization(value: Organization) {
+    this.actualOrganization = value;
+  }
 
   ngOnInit(): void {
   }

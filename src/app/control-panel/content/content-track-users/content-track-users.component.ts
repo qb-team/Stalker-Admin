@@ -15,32 +15,71 @@ export class ContentTrackUsersComponent implements OnInit {
   /*
   * The actual organization selected
   */
-  @Input() org: Organization;
+  @Input() private actualOrganization: Organization;
 
   /*
   * The number of users actually inside the organization's perimeter
   */
-  presentUsersOrg;
+  private presentUsersOrg;
 
   /*
   * An observable of an organization
   */
-  organization: Organization;
+  private organization: Organization;
 
   /*
   * A string to store the coordinates of the organization's perimeter in json format
   */
-  json_coordinates: string;
+  private jsonCoordinates: string;
 
   /*
   * The coordinates of the organization's perimeter
   */
-  coordinates;
+  private perimeterCoordinates;
 
   constructor( private ds: DataService ) {
   //  this.presentUsersOrg = this.getUsers();
   }
 
+  get getActualOrg(): Organization {
+    return this.actualOrganization;
+  }
+
+  set setActualOrg(value: Organization) {
+    this.actualOrganization = value;
+  }
+
+  get getPresentUsersOrg() {
+    return this.presentUsersOrg;
+  }
+
+  set setPresentUsersOrg(value) {
+    this.presentUsersOrg = value;
+  }
+
+  get geOrganization(): Organization {
+    return this.organization;
+  }
+
+  set setOrganization(value: Organization) {
+    this.organization = value;
+  }
+
+  get getJsonCoordinates(): string {
+    return this.jsonCoordinates;
+  }
+
+  set setJsonCoordinates(value: string) {
+    this.jsonCoordinates = value;
+  }
+
+  get getPerimeterCoordinates() {
+    return this.perimeterCoordinates;
+  }
+
+  set setPerimeterCoordinates(value) {
+    this.perimeterCoordinates = value;
+  }
   /*
   * Set presentUsersOrg at the number of the users actually inside the organization's perimeter
   */
@@ -51,9 +90,9 @@ export class ContentTrackUsersComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
-    this.ds.getOrganization.subscribe((org: Organization) => { this.json_coordinates = org.trackingArea; this.coordinates = JSON.parse(this.json_coordinates).Organizzazioni; });
-    this.json_coordinates = this.org.trackingArea;
-    this.coordinates = JSON.parse(this.json_coordinates).Organizzazioni;
+    this.ds.getOrganization.subscribe((org: Organization) => { this.jsonCoordinates = org.trackingArea; this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni; });
+    this.jsonCoordinates = this.actualOrganization.trackingArea;
+    this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni;
    // this.ds.org.subscribe((org: Organization) => { this.organization = org, this.ds.users_number.emit(this.presentUsersOrg);  });
   }
 

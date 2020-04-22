@@ -1,5 +1,5 @@
 <div>
-    <h1>Nome dell'organizzazione: {{org.name}} </h1>
+    <h1>Nome dell'organizzazione: {{_actualOrg.name}} </h1>
     <table class="table">
       <caption>Lista delle coordinate dell'organizzazione</caption>
         <thead>
@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let coord of coordinates; index as i">
+          <tr *ngFor="let coord of _perimeterCoordinates; index as i">
             <th scope="row">{{ i+1 }}</th>
             <td>{{ coord.lat }}</td>
             <td>{{ coord.long }}</td>

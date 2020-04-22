@@ -12,13 +12,22 @@ import { PresenceService } from 'src/api/api';
   styleUrls: ['./content-track-users-number.component.css']
 })
 export class ContentTrackUsersNumberComponent implements OnInit {
-  @Input() org: Organization;
+  @Input() private actualOrganization: Organization;
   UserNumber: OrganizationPresenceCounter;
   constructor(private ds: DataService, private ps: PresenceService) { }
 
+
+  get getAcutalOrganization(): Organization {
+    return this.actualOrganization;
+  }
+
+  set setAcutalOrganization(value: Organization) {
+    this.actualOrganization = value;
+  }
+
   ngOnInit(): void {
-     this.ds.getOrganization.subscribe((org: Organization) => { this.org = org; });
-     this.ps.getOrganizationPresenceCounterById(this.org.id).subscribe((counter: OrganizationPresenceCounter) => {
+     this.ds.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
+     this.ps.getOrganizationPresenceCounterById(this.actualOrganization.id).subscribe((counter: OrganizationPresenceCounter) => {
        this.UserNumber = counter;
      });
   }

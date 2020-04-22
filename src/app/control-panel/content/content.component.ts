@@ -14,25 +14,41 @@ export class ContentComponent implements OnInit {
   /*
   * The actually selected organization
   */
-  organization: Organization;
+  private actualOrganization: Organization;
 
   /*
   * The string used to decide witch specific-component has to be showed
   */
-  ac: string;
+  private activeComponent: string;
 
   constructor( private ds: DataService ) { }
 
+
+  get getOganization(): Organization {
+    return this.actualOrganization;
+  }
+
+  set setOrganization(value: Organization) {
+    this.actualOrganization = value;
+  }
+
+  get getAtiveComponent(): string {
+    return this.activeComponent;
+  }
+
+  set setActiveComponent(value: string) {
+    this.activeComponent = value;
+  }
   /*
   * Subscribes to the organization service and to active_content, in order to retrive informations about the selected organization and dinamically update the specific-content component
   * Finally, it sets the active specific-component to the home page content component (content-home)
   */
   ngOnInit() {
-    let dsOrg = this.ds.getOrganization;
-    let dsAc = this.ds.getActiveContent;
-    dsOrg.subscribe((org: Organization) => { this.organization = org; });
-    dsAc.subscribe((activeContent: string) => { this.ac = activeContent; });
-    this.ac = 'Home page';
+    const dsOrg = this.ds.getOrganization;
+    const dsAc = this.ds.getActiveContent;
+    dsOrg.subscribe((org: Organization) => { this.actualOrganization = org; });
+    dsAc.subscribe((activeContent: string) => { this.activeComponent = activeContent; });
+    this.activeComponent = 'Home page';
   }
 
 }

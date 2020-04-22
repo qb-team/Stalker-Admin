@@ -12,12 +12,20 @@ export class ContentTrackUsersGeneralInformationComponent implements OnInit {
   /*
   * The organization currently active
   */
- @Input() org: Organization;
+ @Input() private actualOrganization: Organization;
 
   constructor(private ds: DataService) { }
 
+  get getActualOrg(): Organization {
+    return this.actualOrganization;
+  }
+
+  set setActualOrg(value: Organization) {
+    this.actualOrganization = value;
+  }
+
   ngOnInit(): void {
-    this.ds.getOrganization.subscribe((org: Organization) => { this.org = org; });
+    this.ds.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
   }
 
 }
