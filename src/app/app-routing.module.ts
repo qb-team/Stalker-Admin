@@ -23,8 +23,8 @@ const routes: Routes = [
           { path: '', redirectTo: 'Home page', pathMatch: 'full' },
           { path: 'Home page', component: ContentHomeComponent},
           { path: 'Tracciamento', component: ContentTrackUsersComponent},
-          { path: 'Monitoraggio utenti', component: ContentTrackUsersGeneralInformationComponent},
-          { path: 'Informazioni sull\'organizzazione', component: ContentTrackUsersNumberComponent},
+          { path: 'Monitoraggio utenti', component:  ContentTrackUsersNumberComponent},
+          { path: 'Informazioni sull\'organizzazione', component: ContentTrackUsersGeneralInformationComponent },
         ]
       }
     ]
