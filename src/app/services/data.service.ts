@@ -8,9 +8,9 @@ export class DataService {
 
   org: EventEmitter<Organization>; // name of a organization selected
   private usersNumber: EventEmitter<number>;
-  private activeContent: EventEmitter<string>; // content selected
+  activeContent: EventEmitter<string>; // content selected
 
-  set setOrg(value: EventEmitter<Organization>) {
+  set setOrganization(value: EventEmitter<Organization>) {
     this.org = value;
   }
 

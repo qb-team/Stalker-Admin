@@ -30,6 +30,7 @@ import { ContentTrackUsersNumberComponent } from './control-panel/content/conten
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ContentTrackUsersGeneralInformationComponent } from './control-panel/content/content-track-users/content-track-users-general-informations/content-track-users-general-information.component';
 import {AppRoutingModule} from './app-routing.module';
+import {OrganizationResolverService} from './services/organization-resolver.service';
 
 
 @NgModule({
@@ -38,7 +39,6 @@ import {AppRoutingModule} from './app-routing.module';
     MenuFunctionalityComponent,
     ContentComponent,
     ContentTrackUsersComponent,
-    MenubarComponent,
     LoginComponent,
     ResetPasswordComponent,
     FooterComponent,
@@ -46,6 +46,7 @@ import {AppRoutingModule} from './app-routing.module';
     ContentTrackUsersNumberComponent,
     ControlPanelComponent,
     ContentTrackUsersGeneralInformationComponent,
+    MenubarComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,7 @@ import {AppRoutingModule} from './app-routing.module';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [AuthenticationService, DataService, OrganizationService],
+  providers: [AuthenticationService, DataService, OrganizationService, OrganizationResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

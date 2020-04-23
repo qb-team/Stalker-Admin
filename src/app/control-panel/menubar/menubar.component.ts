@@ -1,31 +1,38 @@
 /*
  * Vertical menu in the panel control
  */
-import { Component, OnInit } from '@angular/core';
+import {AfterContentInit, Component, EventEmitter, OnInit} from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { OrganizationService } from 'src/api/api';
 import { Organization } from 'src/model/models';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-menubar',
   templateUrl: './menubar.component.html',
   styleUrls: ['./menubar.component.css']
 })
-export class MenubarComponent implements OnInit {
+export class MenubarComponent implements OnInit, AfterContentInit {
   organization: Organization;
-  orgArr: Array<Organization>;
-  constructor(private ds: DataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router) {  }
+  orgArr: Organization[];
+  constructor(private ds: DataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router, private activatedRoute: ActivatedRoute ) { }
 
   /*
    * Initialization and refresh the list of organization
    */
   ngOnInit() {
-    this.os.getOrganizationList().subscribe((obs: Array<Organization>) => {
-      this.orgArr = obs; this.organization = this.orgArr[0];
-      this.ds.getOrganization.emit(this.organization);
+    this.ds.org = new EventEmitter<Organization>();
+    this.activatedRoute.data.subscribe((data: {orgs: Array<Organization> }) => {
+      this.orgArr = data.orgs;
+      console.log('data.orgs: ' + data.orgs);
+      this.organization = this.orgArr[0];
     });
+  }
+
+  ngAfterContentInit() {
+    console.log('EMIT SIGNAL');
+    this.ds.org.emit(this.organization);
   }
 
   /*

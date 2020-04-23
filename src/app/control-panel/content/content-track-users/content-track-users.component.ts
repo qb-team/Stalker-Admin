@@ -4,6 +4,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Organization } from 'src/model/models';
 import { DataService } from 'src/app/services/data.service';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class ContentTrackUsersComponent implements OnInit {
   /*
   * The actual organization selected
   */
-  @Input() private actualOrganization: Organization;
+  private actualOrganization: Organization;
 
   /*
   * The number of users actually inside the organization's perimeter
@@ -37,7 +38,7 @@ export class ContentTrackUsersComponent implements OnInit {
   */
   private perimeterCoordinates;
 
-  constructor( private ds: DataService ) {
+  constructor( private ds: DataService, private activatedRoute: ActivatedRoute ) {
   //  this.presentUsersOrg = this.getUsers();
   }
 
@@ -90,9 +91,18 @@ export class ContentTrackUsersComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
-    this.ds.getOrganization.subscribe((org: Organization) => { this.jsonCoordinates = org.trackingArea; this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni; });
-    this.jsonCoordinates = this.actualOrganization.trackingArea;
-    this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni;
+    // this.activatedRoute.data.subscribe((data: {org: Organization}) => { this.actualOrganization = org.subs; } );
+    this.activatedRoute.data.subscribe((data: {orgs: Array<Organization>}) => {
+      /*this.ds.org.emit(data.org);*/
+      console.log('Loading first org\'s coordinates');
+      this.actualOrganization = data.orgs[0];
+      this.jsonCoordinates = this.actualOrganization.trackingArea;
+      this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni;
+      console.log('orgs loaded!');
+    });
+    console.log('onInit end');
+    // this.ds.getOrganization.subscribe((org: Organization) => {  });
+
    // this.ds.org.subscribe((org: Organization) => { this.organization = org, this.ds.users_number.emit(this.presentUsersOrg);  });
   }
 

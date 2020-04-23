@@ -3,6 +3,8 @@
 */
 import { Component, OnInit, Input } from '@angular/core';
 import { Organization } from 'src/model/models';
+import {DataService} from '../../../services/data.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-content-home',
@@ -10,8 +12,8 @@ import { Organization } from 'src/model/models';
   styleUrls: ['./content-home.component.css']
 })
 export class ContentHomeComponent implements OnInit {
-  @Input() private actualOrganization: Organization;
-  constructor() { }
+  private actualOrganization: Organization;
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   get getAcutalOrganization(): Organization {
     return this.actualOrganization;
@@ -22,6 +24,7 @@ export class ContentHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.data.subscribe((org: Organization) => { this.actualOrganization = org; } );
   }
 
 }

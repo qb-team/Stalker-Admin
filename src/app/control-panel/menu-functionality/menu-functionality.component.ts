@@ -1,7 +1,7 @@
 /*
 * A side-menu that offers all the functionalities available for the administrator on the current organization
 */
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import { DataService } from '../../services/data.service';
 import {Router} from '@angular/router';
 
@@ -12,9 +12,10 @@ import {Router} from '@angular/router';
 })
 export class MenuFunctionalityComponent implements OnInit {
 
-  constructor(private ds: DataService, private router: Router) { }
+  constructor(private ds: DataService, private router: Router ) { }
 
   ngOnInit(): void {
+    this.ds.activeContent = new EventEmitter<string>();
   }
 
   /*
@@ -22,6 +23,6 @@ export class MenuFunctionalityComponent implements OnInit {
   */
   updateContent(click: any) {
     this.router.navigateByUrl('/Content-panel/Panel/' + click.target.innerHTML);
-    this.ds.getActiveContent.emit(click.target.innerHTML);
+    this.ds.activeContent.emit(click.target.innerHTML);
   }
 }

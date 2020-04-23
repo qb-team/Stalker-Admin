@@ -157,7 +157,6 @@ export class OrganizationService {
         if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
-
         return this.httpClient.get<Array<Organization>>(`${this.configuration.basePath}/organization`,
             {
                 responseType: responseType as any,

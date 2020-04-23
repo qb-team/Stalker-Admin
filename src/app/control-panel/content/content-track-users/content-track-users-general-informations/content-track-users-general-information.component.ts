@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Organization } from 'src/model/models';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-content-track-users-general-information',
@@ -12,9 +13,9 @@ export class ContentTrackUsersGeneralInformationComponent implements OnInit {
   /*
   * The organization currently active
   */
- @Input() private actualOrganization: Organization;
+ private actualOrganization: Organization;
 
-  constructor(private ds: DataService) { }
+  constructor(private ds: DataService, private activatedRoute: ActivatedRoute) { }
 
   get getActualOrg(): Organization {
     return this.actualOrganization;
@@ -25,7 +26,8 @@ export class ContentTrackUsersGeneralInformationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ds.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
+    console.log('SUBSCRIBE');
+    this.ds.org.subscribe((org: Organization) => { this.actualOrganization = org; });
   }
 
 }

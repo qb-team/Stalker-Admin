@@ -4,6 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Organization } from 'src/model/models';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-content',
@@ -21,7 +22,7 @@ export class ContentComponent implements OnInit {
   */
   private activeComponent: string;
 
-  constructor( private ds: DataService ) { }
+  constructor( private ds: DataService, private activatedRoute: ActivatedRoute ) { console.log('Constructor content component'); }
 
 
   get getOganization(): Organization {
@@ -44,10 +45,15 @@ export class ContentComponent implements OnInit {
   * Finally, it sets the active specific-component to the home page content component (content-home)
   */
   ngOnInit() {
-    const dsOrg = this.ds.getOrganization;
+    this.activatedRoute.data.subscribe((data: {orgs: Array<Organization> }) => {
+      console.log('Content component data.orgs: ' + data.orgs);
+      this.ds.org.emit(data.orgs[0]);
+    });
+    // this.activatedRoute.data.subscribe((org: Organization) => { this.actualOrganization = org; } );
+    /*const dsOrg = this.ds.getOrganization;
     const dsAc = this.ds.getActiveContent;
     dsOrg.subscribe((org: Organization) => { this.actualOrganization = org; });
-    dsAc.subscribe((activeContent: string) => { this.activeComponent = activeContent; });
+    dsAc.subscribe((activeContent: string) => { this.activeComponent = activeContent; });*/
     this.activeComponent = 'Home page';
   }
 

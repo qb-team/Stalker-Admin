@@ -9,22 +9,23 @@ import {ContentTrackUsersComponent} from './control-panel/content/content-track-
 import {ContentHomeComponent} from './control-panel/content/content-home/content-home.component';
 import {ContentComponent} from './control-panel/content/content.component';
 import {ContentTrackUsersNumberComponent} from './control-panel/content/content-track-users/content-track-users-number/content-track-users-number.component';
+import {OrganizationResolverService} from './services/organization-resolver.service';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'Login', pathMatch: 'full' },
   { path: 'Login', component: LoginComponent},
   { path: 'Reset', component: ResetPasswordComponent},
-  { path: 'Content-panel', component: ControlPanelComponent, /*, canActivate: [AuthGuardService]*/
+  { path: 'Content-panel', component: ControlPanelComponent, resolve: { orgs: OrganizationResolverService }, /*, canActivate: [AuthGuardService]*/
     children: [
       { path: '', redirectTo: 'Panel', pathMatch: 'full' },
-      { path: 'Panel', component: ContentComponent,
+      { path: 'Panel', component: ContentComponent, resolve: { orgs: OrganizationResolverService },
         children : [
-          { path: '', redirectTo: 'Home page', pathMatch: 'full' },
-          { path: 'Home page', component: ContentHomeComponent},
-          { path: 'Tracciamento', component: ContentTrackUsersComponent},
-          { path: 'Monitoraggio utenti', component: ContentTrackUsersGeneralInformationComponent},
-          { path: 'Informazioni sull\'organizzazione', component: ContentTrackUsersNumberComponent},
+          { path: '', redirectTo: 'Home page', resolve: { orgs: OrganizationResolverService }, pathMatch: 'full' },
+          { path: 'Home page', component: ContentHomeComponent, resolve: { orgs: OrganizationResolverService }},
+          { path: 'Tracciamento', component: ContentTrackUsersComponent, resolve: { orgs: OrganizationResolverService }},
+          { path: 'Monitoraggio utenti', component: ContentTrackUsersNumberComponent},
+          { path: 'Informazioni sull\'organizzazione', component: ContentTrackUsersGeneralInformationComponent},
         ]
       }
     ]
