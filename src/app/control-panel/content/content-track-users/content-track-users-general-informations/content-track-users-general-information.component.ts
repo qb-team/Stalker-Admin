@@ -15,7 +15,7 @@ export class ContentTrackUsersGeneralInformationComponent implements OnInit {
   */
  private actualOrganization: Organization;
 
-  constructor(private ds: DataService, private activatedRoute: ActivatedRoute) { }
+  constructor(private ds: DataService, private activatedRoute: ActivatedRoute) { console.log('Costruttore general info'); }
 
   get getActualOrg(): Organization {
     return this.actualOrganization;
@@ -27,7 +27,7 @@ export class ContentTrackUsersGeneralInformationComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('SUBSCRIBE');
-    this.ds.org.subscribe((org: Organization) => { this.actualOrganization = org; });
+    this.ds.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
   }
 
 }

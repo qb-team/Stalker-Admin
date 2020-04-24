@@ -15,7 +15,6 @@ export class MenuFunctionalityComponent implements OnInit {
   constructor(private ds: DataService, private router: Router ) { }
 
   ngOnInit(): void {
-    this.ds.activeContent = new EventEmitter<string>();
   }
 
   /*
@@ -23,6 +22,5 @@ export class MenuFunctionalityComponent implements OnInit {
   */
   updateContent(click: any) {
     this.router.navigateByUrl('/Content-panel/Panel/' + click.target.innerHTML);
-    this.ds.activeContent.emit(click.target.innerHTML);
   }
 }

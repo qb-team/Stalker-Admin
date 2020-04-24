@@ -21,11 +21,11 @@ const routes: Routes = [
       { path: '', redirectTo: 'Panel', pathMatch: 'full' },
       { path: 'Panel', component: ContentComponent, resolve: { orgs: OrganizationResolverService },
         children : [
-          { path: '', redirectTo: 'Home page', resolve: { orgs: OrganizationResolverService }, pathMatch: 'full' },
-          { path: 'Home page', component: ContentHomeComponent, resolve: { orgs: OrganizationResolverService }},
-          { path: 'Tracciamento', component: ContentTrackUsersComponent, resolve: { orgs: OrganizationResolverService }},
+          { path: '', redirectTo: 'Homepage', resolve: { orgs: OrganizationResolverService }, pathMatch: 'full' },
+          { path: 'Homepage', component: ContentHomeComponent, resolve: { orgs: OrganizationResolverService }},
+          { path: 'Tracciamento', component: ContentTrackUsersComponent},
           { path: 'Monitoraggio utenti', component: ContentTrackUsersNumberComponent},
-          { path: 'Informazioni sull\'organizzazione', component: ContentTrackUsersGeneralInformationComponent},
+          { path: 'Informazioni sull\'organizzazione', component: ContentTrackUsersGeneralInformationComponent, data: { reuse: true}},
         ]
       }
     ]

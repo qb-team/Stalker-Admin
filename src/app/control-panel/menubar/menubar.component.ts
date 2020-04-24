@@ -22,17 +22,16 @@ export class MenubarComponent implements OnInit, AfterContentInit {
    * Initialization and refresh the list of organization
    */
   ngOnInit() {
-    this.ds.org = new EventEmitter<Organization>();
+    // this.ds.org = new ReplaySubject<Organization>()<Organization>();
     this.activatedRoute.data.subscribe((data: {orgs: Array<Organization> }) => {
       this.orgArr = data.orgs;
-      console.log('data.orgs: ' + data.orgs);
       this.organization = this.orgArr[0];
     });
   }
 
   ngAfterContentInit() {
     console.log('EMIT SIGNAL');
-    this.ds.org.emit(this.organization);
+    this.ds.getOrganization.next(this.organization);
   }
 
   /*
@@ -40,7 +39,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
    */
   setOrganization(click: any) {
     this.organization = this.orgArr[click.target.attributes.id.value];
-    this.ds.getOrganization.emit(this.organization);
+    this.ds.getOrganization.next(this.organization);
   }
 
   /*
@@ -55,7 +54,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
    * It updates value of active_content for show Home page
    */
   homePage() {
-    this.ds.getActiveContent.emit('Home page');
+    this.router.navigateByUrl('/Content-panel/Panel/Homepage');
   }
 
   navigateToLogin() {

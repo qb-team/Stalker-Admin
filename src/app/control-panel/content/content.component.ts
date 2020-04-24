@@ -22,7 +22,7 @@ export class ContentComponent implements OnInit {
   */
   private activeComponent: string;
 
-  constructor( private ds: DataService, private activatedRoute: ActivatedRoute ) { console.log('Constructor content component'); }
+  constructor( private ds: DataService, private activatedRoute: ActivatedRoute ) { /*console.log('Constructor content component');*/ }
 
 
   get getOganization(): Organization {
@@ -46,15 +46,8 @@ export class ContentComponent implements OnInit {
   */
   ngOnInit() {
     this.activatedRoute.data.subscribe((data: {orgs: Array<Organization> }) => {
-      console.log('Content component data.orgs: ' + data.orgs);
-      this.ds.org.emit(data.orgs[0]);
+      this.ds.getOrganization.next(data.orgs[0]);
     });
-    // this.activatedRoute.data.subscribe((org: Organization) => { this.actualOrganization = org; } );
-    /*const dsOrg = this.ds.getOrganization;
-    const dsAc = this.ds.getActiveContent;
-    dsOrg.subscribe((org: Organization) => { this.actualOrganization = org; });
-    dsAc.subscribe((activeContent: string) => { this.activeComponent = activeContent; });*/
-    this.activeComponent = 'Home page';
   }
 
 }

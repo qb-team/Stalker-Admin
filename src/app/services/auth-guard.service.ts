@@ -11,11 +11,11 @@ export class AuthGuardService implements CanActivate {
   canActivate(): Observable<boolean> | boolean {
     this.auth.userData.subscribe((authenticated) => {
       if (authenticated) {
-        console.log('loggato');
+        // console.log('loggato');
         return true;
       }
       this.router.navigateByUrl('/Login');
-      console.log('non loggato');
+      // console.log('non loggato');
       return false;
     });
     return ;

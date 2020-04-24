@@ -31,6 +31,8 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ContentTrackUsersGeneralInformationComponent } from './control-panel/content/content-track-users/content-track-users-general-informations/content-track-users-general-information.component';
 import {AppRoutingModule} from './app-routing.module';
 import {OrganizationResolverService} from './services/organization-resolver.service';
+import {RouteReuseStrategy} from '@angular/router';
+import {RouteReuseService} from './services/route-reuse.service';
 
 
 @NgModule({
@@ -57,7 +59,7 @@ import {OrganizationResolverService} from './services/organization-resolver.serv
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [AuthenticationService, DataService, OrganizationService, OrganizationResolverService],
+  providers: [AuthenticationService, DataService, OrganizationService, OrganizationResolverService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

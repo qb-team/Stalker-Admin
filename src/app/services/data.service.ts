@@ -3,14 +3,15 @@
 */
 import { EventEmitter } from '@angular/core';
 import { Organization } from 'src/model/models';
+import {ReplaySubject} from 'rxjs';
 
 export class DataService {
 
-  org: EventEmitter<Organization>; // name of a organization selected
+  // org: EventEmitter<Organization>; // name of a organization selected
+  private org: ReplaySubject<Organization> = new ReplaySubject<Organization>(1);
   private usersNumber: EventEmitter<number>;
-  activeContent: EventEmitter<string>; // content selected
 
-  set setOrganization(value: EventEmitter<Organization>) {
+  set setOrganization(value: ReplaySubject<Organization>) {
     this.org = value;
   }
 
@@ -18,16 +19,10 @@ export class DataService {
     this.usersNumber = value;
   }
 
-  set setActiveContent(value: EventEmitter<string>) {
-    this.activeContent = value;
-  }
-  get getActiveContent(): EventEmitter<string> {
-    return this.activeContent;
-  }
   get getUsersNumber(): EventEmitter<number> {
     return this.usersNumber;
   }
-  get getOrganization(): EventEmitter<Organization> {
+  get getOrganization(): ReplaySubject<Organization> {
     return this.org;
   }
 }

@@ -39,7 +39,7 @@ export class ContentTrackUsersComponent implements OnInit {
   private perimeterCoordinates;
 
   constructor( private ds: DataService, private activatedRoute: ActivatedRoute ) {
-  //  this.presentUsersOrg = this.getUsers();
+  console.log('Costruttore numero utenti');
   }
 
   get getActualOrg(): Organization {
@@ -91,19 +91,11 @@ export class ContentTrackUsersComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
-    // this.activatedRoute.data.subscribe((data: {org: Organization}) => { this.actualOrganization = org.subs; } );
-    this.activatedRoute.data.subscribe((data: {orgs: Array<Organization>}) => {
-      /*this.ds.org.emit(data.org);*/
-      console.log('Loading first org\'s coordinates');
-      this.actualOrganization = data.orgs[0];
+    this.ds.getOrganization.subscribe((org: Organization) => {
+      this.actualOrganization = org;
       this.jsonCoordinates = this.actualOrganization.trackingArea;
       this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni;
-      console.log('orgs loaded!');
     });
-    console.log('onInit end');
-    // this.ds.getOrganization.subscribe((org: Organization) => {  });
-
-   // this.ds.org.subscribe((org: Organization) => { this.organization = org, this.ds.users_number.emit(this.presentUsersOrg);  });
   }
 
 

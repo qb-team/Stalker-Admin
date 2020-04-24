@@ -13,7 +13,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ContentHomeComponent implements OnInit {
   private actualOrganization: Organization;
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private ds: DataService) { }
 
   get getAcutalOrganization(): Organization {
     return this.actualOrganization;
@@ -24,7 +24,7 @@ export class ContentHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe((org: Organization) => { this.actualOrganization = org; } );
+    this.ds.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
   }
 
 }
