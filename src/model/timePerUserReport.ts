@@ -12,24 +12,20 @@
 
 
 /**
- * Link between the user and the organization: only the organization which users set to be their favorite can track their movements.
+ * Represents a row in the report generated for an user by the viewer administrator.
  */
-export interface Favorite { 
+export interface TimePerUserReport { 
     /**
-     * Authentication service\'s user unique identifier.
-     */
-    userId: string;
-    /**
-     * Unique identifier of the organization the user sets as favorite.
+     * Unique identifier of the organization in which the user had access.
      */
     organizationId: number;
     /**
      * User unique identifier from the authentication server of the organization.
      */
-    orgAuthServerId?: string;
+    orgAuthServerId: string;
     /**
-     * When the favorite was added by the user.
+     * Total amount of time spent inside the organization by the user.
      */
-    creationDate: Date;
+    totalTime: Date;
 }
 

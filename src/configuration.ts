@@ -48,6 +48,10 @@ export class Configuration {
         return type;
     }
 
+    public setAccessToken(token: string) {
+      this.accessToken = token;
+    }
+
     /**
      * Select the correct accept content-type to use for a request.
      * Uses {@link Configuration#isJsonMime} to determine the correct accept content-type.

@@ -14,27 +14,26 @@
 /**
  * What can or cannot do an organization\'s administrator.
  */
-export interface Permission {
+export interface Permission { 
     /**
      * Authentication service\'s administrator unique identifier.
      */
-    administratorId?: string;
+    administratorId: string;
     /**
      * Unique identifier of the organization the administrator is part of.
      */
     organizationId: number;
     /**
-     * What can or cannot do an organization\'s administrator. Owner is the highest level of permissions while viewer is the lowest.
+     * Administrator unique identifier from the authentication server of the organization.
      */
-    permission: Permission.PermissionEnum;
+    orgAuthServerId?: string;
+    /**
+     * What can or cannot do an organization\'s administrator. The permission levels are: - Owner: 3 (higher level) - Manager: 2 - Viewer: 1 (lowest level)
+     */
+    permission: number;
+    /**
+     * administratorId of the owner administrator who nominated the current administrator.
+     */
+    nominatedBy?: string;
 }
-export namespace Permission {
-    export type PermissionEnum = 'owner' | 'manager' | 'viewer';
-    export const PermissionEnum = {
-        Owner: 'owner' as PermissionEnum,
-        Manager: 'manager' as PermissionEnum,
-        Viewer: 'viewer' as PermissionEnum
-    };
-}
-
 

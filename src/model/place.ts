@@ -14,7 +14,7 @@
 /**
  * Area of an organization subjected to tracking.
  */
-export interface Place {
+export interface Place { 
     /**
      * Unique identifier for a place of an organization.
      */
@@ -28,7 +28,7 @@ export interface Place {
      */
     organizationId: number;
     /**
-     * rea subjected to movement tracking of people. It is a collection of (longitude, latitude) pairs consisting in a polygon. The string is expressed in JSON format.
+     * Area subjected to movement tracking of people. It is a collection of (longitude, latitude) pairs consisting in a polygon. The string is expressed in JSON format.
      */
     trackingArea: string;
 }

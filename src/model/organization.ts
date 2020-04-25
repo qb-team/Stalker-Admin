@@ -14,7 +14,7 @@
 /**
  * Subject interested in tracking people\'s presence inside its own places, in either an anonymous or authenticated way.
  */
-export interface Organization {
+export interface Organization { 
     /**
      * Unique identifier for an organization.
      */
@@ -42,7 +42,7 @@ export interface Organization {
     /**
      * The postcode where the organization is located.
      */
-    postCode?: number;
+    postCode: number;
     /**
      * The city where the organization is located.
      */
@@ -52,9 +52,9 @@ export interface Organization {
      */
     country: string;
     /**
-     * URL or IP address of the LDAP server of the organization. If it\'s required a specific TCP port (different from LDAP\'s default) it must be specified. Needed only if trackingMethod is set to authenticated.
+     * URL or IP address of the authentication server of the organization. If it\'s required a specific port or protocol it must be specified. Needed only if trackingMethod is set to authenticated.
      */
-    serverLDAP?: string;
+    authenticationServerURL?: string;
     /**
      * When the organization was added to the system.
      */
@@ -62,7 +62,7 @@ export interface Organization {
     /**
      * When the organization parameters were last changed.
      */
-    lastChangeDate?: Date;
+    lastChangeDate: Date;
     /**
      * Area subjected to movement tracking of people. It is a collection of (longitude, latitude) pairs consisting in a polygon. The string is expressed in JSON format.
      */

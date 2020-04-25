@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
   * The function that validates the form and tries to log in
   */
   signIn() {
-        this.authenticationService.SignIn(this.email, this.password);
+        this.authenticationService.signIn(this.email, this.password);
         if (this.getAuth().userData) {
           this.navigateToContentPanel();
         }

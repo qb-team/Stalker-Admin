@@ -18,6 +18,11 @@ export class OrganizationResolverService implements Resolve<Array<Organization>>
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Array<Organization>> | Promise<Array<Organization>> | Array<Organization> {
+    /*const observable: Observable<Array<Organization>> = new Observable(observer => {
+      observer.next(this.ds.getUserOrganizations());
+      observer.complete();
+    });
+    return observable;*/
     return this.os.getOrganizationList();
   }
 }

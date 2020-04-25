@@ -29,7 +29,7 @@ export class ContentTrackUsersNumberComponent implements OnInit {
   ngOnInit(): void {
      this.activatedRoute.data.subscribe((org: Organization) => { this.actualOrganization = org; } );
      this.ds.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
-     this.ps.getOrganizationPresenceCounterById(this.actualOrganization.id).subscribe((counter: OrganizationPresenceCounter) => {
+     this.ps.getOrganizationPresenceCounter(this.actualOrganization.id).subscribe((counter: OrganizationPresenceCounter) => {
        this.UserNumber = counter;
      });
   }

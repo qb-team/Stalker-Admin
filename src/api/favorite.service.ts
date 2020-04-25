@@ -17,10 +17,8 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-import { OrganizationAccess } from '../model/models';
-import { OrganizationPresenceCounter } from '../model/models';
-import { PlaceAccess } from '../model/models';
-import { PlacePresenceCounter } from '../model/models';
+import { Favorite } from '../model/models';
+import { Organization } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -30,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class PresenceService {
+export class FavoriteService {
 
     protected basePath = 'http://localhost:8080';
     public defaultHeaders = new HttpHeaders();
@@ -85,18 +83,18 @@ export class PresenceService {
     }
 
     /**
-     * Gets the number of people currently inside the organization\&#39;s trackingArea.
-     * Gets the number of people currently inside the organization\&#39;s trackingArea. Only web-app administrators can access this end-point.
-     * @param organizationId ID of an organization.
+     * Adds a new organization to the user\&#39;s favorite organization list.
+     * Adds a new organization to the user\&#39;s favorite organization list. If the organization has trackingMode: authenticated, then the user account of the organization must be linked to Stalker\&#39;s account. Only app users can access this end-point.
+     * @param favorite 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOrganizationPresenceCounter(organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<OrganizationPresenceCounter>;
-    public getOrganizationPresenceCounter(organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<OrganizationPresenceCounter>>;
-    public getOrganizationPresenceCounter(organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<OrganizationPresenceCounter>>;
-    public getOrganizationPresenceCounter(organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
-        if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling getOrganizationPresenceCounter.');
+    public addFavoriteOrganization(favorite: Favorite, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Favorite>;
+    public addFavoriteOrganization(favorite: Favorite, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Favorite>>;
+    public addFavoriteOrganization(favorite: Favorite, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Favorite>>;
+    public addFavoriteOrganization(favorite: Favorite, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+        if (favorite === null || favorite === undefined) {
+            throw new Error('Required parameter favorite was null or undefined when calling addFavoriteOrganization.');
         }
 
         let headers = this.defaultHeaders;
@@ -121,12 +119,22 @@ export class PresenceService {
         }
 
 
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
         let responseType: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
-        return this.httpClient.get<OrganizationPresenceCounter>(`${this.configuration.basePath}/presence/organization/${encodeURIComponent(String(organizationId))}/counter`,
+        return this.httpClient.post<Favorite>(`${this.configuration.basePath}/favorite/addfavorite`,
+            favorite,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -138,18 +146,18 @@ export class PresenceService {
     }
 
     /**
-     * Gets the list of people currently inside the organization\&#39;s trackingArea.
-     * Gets the list of people currently inside the organization\&#39;s trackingArea. The organization is required to track people with trackingMode: authenticated. Only web-app administrators can access this end-point.
-     * @param organizationId ID of an organization.
+     * Gets the list of favorite organizations of a user.
+     * Gets the list of favorite organizations of a user.  Only app users can access this end-point.
+     * @param userId ID of the user. It must be the same of the userId of the authenticated user.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOrganizationPresenceList(organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<OrganizationAccess>>;
-    public getOrganizationPresenceList(organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<OrganizationAccess>>>;
-    public getOrganizationPresenceList(organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<OrganizationAccess>>>;
-    public getOrganizationPresenceList(organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
-        if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling getOrganizationPresenceList.');
+    public getFavoriteOrganizationList(userId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<Organization>>;
+    public getFavoriteOrganizationList(userId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<Organization>>>;
+    public getFavoriteOrganizationList(userId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<Organization>>>;
+    public getFavoriteOrganizationList(userId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getFavoriteOrganizationList.');
         }
 
         let headers = this.defaultHeaders;
@@ -179,7 +187,7 @@ export class PresenceService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<Array<OrganizationAccess>>(`${this.configuration.basePath}/presence/organization/${encodeURIComponent(String(organizationId))}`,
+        return this.httpClient.get<Array<Organization>>(`${this.configuration.basePath}/favorite/${encodeURIComponent(String(userId))}`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -191,18 +199,18 @@ export class PresenceService {
     }
 
     /**
-     * Gets the number of people currently inside the place\&#39;s trackingArea.
-     * Gets the number of people currently inside the place\&#39;s trackingArea. Only web-app administrators can access this end-point.
-     * @param placeId ID of a place.
+     * Removes the organization from the user\&#39;s favorite organization list.
+     * Removes the organization from the user\&#39;s favorite organization list. Only app users can access this end-point.
+     * @param favorite 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getPlacePresenceCounter(placeId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<PlacePresenceCounter>;
-    public getPlacePresenceCounter(placeId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<PlacePresenceCounter>>;
-    public getPlacePresenceCounter(placeId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<PlacePresenceCounter>>;
-    public getPlacePresenceCounter(placeId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
-        if (placeId === null || placeId === undefined) {
-            throw new Error('Required parameter placeId was null or undefined when calling getPlacePresenceCounter.');
+    public removeFavoriteOrganization(favorite: Favorite, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
+    public removeFavoriteOrganization(favorite: Favorite, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
+    public removeFavoriteOrganization(favorite: Favorite, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
+    public removeFavoriteOrganization(favorite: Favorite, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
+        if (favorite === null || favorite === undefined) {
+            throw new Error('Required parameter favorite was null or undefined when calling removeFavoriteOrganization.');
         }
 
         let headers = this.defaultHeaders;
@@ -218,7 +226,6 @@ export class PresenceService {
         if (httpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -227,65 +234,22 @@ export class PresenceService {
         }
 
 
-        let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
         }
-
-        return this.httpClient.get<PlacePresenceCounter>(`${this.configuration.basePath}/presence/place/${encodeURIComponent(String(placeId))}/counter`,
-            {
-                responseType: <any>responseType,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Gets the list of people currently inside the place\&#39;s trackingArea.
-     * Gets the list of people currently inside the place\&#39;s trackingArea. The place is required to track people with trackingMode: authenticated. Only web-app administrators can access this end-point.
-     * @param placeId ID of a place.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getPlacePresenceList(placeId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<PlaceAccess>>;
-    public getPlacePresenceList(placeId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<PlaceAccess>>>;
-    public getPlacePresenceList(placeId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<PlaceAccess>>>;
-    public getPlacePresenceList(placeId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
-        if (placeId === null || placeId === undefined) {
-            throw new Error('Required parameter placeId was null or undefined when calling getPlacePresenceList.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (bearerAuth) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        let httpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (httpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (httpHeaderAcceptSelected !== undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
 
         let responseType: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
-        return this.httpClient.get<Array<PlaceAccess>>(`${this.configuration.basePath}/presence/place/${encodeURIComponent(String(placeId))}`,
+        return this.httpClient.post<any>(`${this.configuration.basePath}/favorite/removefavorite`,
+            favorite,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

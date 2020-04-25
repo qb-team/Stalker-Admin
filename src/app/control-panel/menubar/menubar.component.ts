@@ -45,8 +45,8 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   /*
    * It calls function SignOut of the service
    */
-  SignOut() {
-    this.authenticationService.SignOut();
+  signOut() {
+    this.authenticationService.signOut();
     this.navigateToLogin();
   }
 

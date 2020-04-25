@@ -59,7 +59,7 @@ export class ResetPasswordComponent implements OnInit {
   * It calls function ResetPassword of the service and updates status
   */
   resetPassword() {
-    this.authenticationService.ResetPassword(this._email);
+    this.authenticationService.resetPassword(this._email);
     this._reset = true;
   }
 
