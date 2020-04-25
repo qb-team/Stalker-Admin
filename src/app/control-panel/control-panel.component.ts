@@ -14,16 +14,9 @@ export class ControlPanelComponent implements OnInit {
   /*
    * Create the object authenticationService to use the service AuthenticationService
    */
-  constructor(private authenticationService: AuthenticationService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-  }
-
-  /*
-   * Return the object authenticationService that is, the authenticated user
-   */
-  getAuth() {
-    return this.authenticationService;
   }
 }
