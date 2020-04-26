@@ -7,7 +7,7 @@
         <label id="labelE" for="email">Email:</label>
         <input type="email" name="email" id="email" class="form-control" required="required" [(ngModel)]="email" placeholder="email" formControlName="email">
         <label id="labelPSW" for="pwd">Password:</label>
-        <input type="password" name="password" class="form-control" [(ngModel)]="password" required="required" id="pwd" placeholder="password"formControlName="password" >
+        <input type="password" name="password" class="form-control" [(ngModel)]="password" required="required" id="pwd" placeholder="password" formControlName="password" >
         </fieldset>
       </form>
       <p *ngIf="!getAuth().signOk"> Credenziali errate </p>

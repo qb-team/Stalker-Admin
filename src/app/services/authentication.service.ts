@@ -12,14 +12,15 @@ import {DataService} from './data.service';
 })
 
 export class AuthenticationService {
-  userPermissions: Permission[];
-  userData: Observable<firebase.User>; // user data
-  token: Promise<string>;
-  signOk = true; // Indicates whether the login was successful
+
+  private UserPermissions: Permission[];
+  private UserData: Observable<firebase.User>; // user data
+  private Token: Promise<string>;
+  private SignOk = true; // Indicates whether the login was successful
 
 
   constructor(private angularFireAuth: AngularFireAuth, private as: AdministratorService, private os: OrganizationService, private ds: DataService) {
-    this.userData = angularFireAuth.authState;
+    this.UserData = angularFireAuth.authState;
   }
 
   /*
@@ -28,16 +29,16 @@ export class AuthenticationService {
   signIn(email: string, password: string) {
     this.angularFireAuth.auth
       .signInWithEmailAndPassword(email, password)
-      .then(res => { this.signOk = true;
-                     this.token = this.angularFireAuth.auth.currentUser.getIdToken();
-                     this.token.then( (s: string) => {
+      .then(res => { this.SignOk = true;
+                     this.Token = this.angularFireAuth.auth.currentUser.getIdToken();
+                     this.Token.then( (s: string) => {
                        this.as.configuration.setAccessToken(s);
                        this.angularFireAuth.auth.onAuthStateChanged((user) => {
                          if (user) {
                            // User is signed in.
                            this.as.getPermissionList(user.uid).subscribe((p: Permission[]) => {
-                             this.userPermissions = p;
-                             console.log('Permission 1: ' + this.userPermissions[0].organizationId);
+                             this.UserPermissions = p;
+                             console.log('Permission 1: ' + this.UserPermissions[0].organizationId);
                              for (const permission of p) {
                                this.os.getOrganization(permission.organizationId).subscribe((o: Organization) => { this.ds.addOrganization(o); });
                              }
@@ -46,11 +47,10 @@ export class AuthenticationService {
                        });
                      });
                      console.log('You are Successfully logged in!'); })
-      .catch(err => { this.signOk = false;
+      .catch(err => { this.SignOk = false;
                       console.log('Something is wrong:', err.message);
       });
   }
-
   /*
    * Sign out. It allows the user to exit
   */
@@ -68,5 +68,37 @@ export class AuthenticationService {
 
   getState() {
     return this.angularFireAuth.authState;
+  }
+
+  get userPermissions(): Permission[] {
+    return this.UserPermissions;
+  }
+
+  set userPermissions(value: Permission[]) {
+    this.UserPermissions = value;
+  }
+
+  get userData(): Observable<firebase.User> {
+    return this.UserData;
+  }
+
+  set userData(value: Observable<firebase.User>) {
+    this.UserData = value;
+  }
+
+  get token(): Promise<string> {
+    return this.Token;
+  }
+
+  set token(value: Promise<string>) {
+    this.Token = value;
+  }
+
+  get signOk(): boolean {
+    return this.SignOk;
+  }
+
+  set signOk(value: boolean) {
+    this.SignOk = value;
   }
 }

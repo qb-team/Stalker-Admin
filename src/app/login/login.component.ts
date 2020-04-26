@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {async} from 'rxjs/internal/scheduler/async';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,20 +16,20 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-
   constructor(private authenticationService: AuthenticationService, private router: Router) {
   }
 
-  submitted = false;
+  private Submitted = false;
   /*
   * The e-mail of the user that is logging in
   */
-  email: string;
+  private Email: string;
 
   /*
   * The password of the user that is logging in
   */
-  password: string;
+  private Password: string;
+
 
   /*
   * Used to validate the form when trying to log in. Used to prevent exceptional log in cases, such as an empty form
@@ -40,11 +42,11 @@ export class LoginComponent implements OnInit {
 
   createForm() {
     this.contactForm = new FormGroup({
-      email: new FormControl(this.email, [
+      email: new FormControl(this.Email, [
         Validators.required,
         Validators.email
       ]),
-      password: new FormControl(this.password, [
+      password: new FormControl(this.Password, [
         Validators.required,
         Validators.minLength(8)
       ]),
@@ -52,17 +54,20 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.submitted = true;
+    this.Submitted = true;
   }
 
   /*
   * The function that validates the form and tries to log in
   */
-  signIn() {
-        this.authenticationService.signIn(this.email, this.password);
-        if (this.getAuth().userData) {
-          this.navigateToContentPanel();
-        }
+ signIn() {
+   this.authenticationService.signIn(this.Email, this.Password);
+   this.authenticationService.userData.subscribe(
+     (user) => {
+       if (user) {
+         this.navigateToContentPanel();
+       } else {
+       }});
   }
 
   /*
@@ -86,4 +91,29 @@ export class LoginComponent implements OnInit {
   navigateToContentPanel() {
     this.router.navigateByUrl('/Content-panel');
   }
+
+  get submitted(): boolean {
+    return this.Submitted;
+  }
+
+  set submitted(value: boolean) {
+    this.Submitted = value;
+  }
+
+  get email(): string {
+    return this.Email;
+  }
+
+  set email(value: string) {
+    this.Email = value;
+  }
+
+  get password(): string {
+    return this.Password;
+  }
+
+  set password(value: string) {
+    this.Password = value;
+  }
+
 }

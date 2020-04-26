@@ -17,11 +17,6 @@ export class ContentComponent implements OnInit {
   */
   private actualOrganization: Organization;
 
-  /*
-  * The string used to decide witch specific-component has to be showed
-  */
-  private activeComponent: string;
-
   constructor( private ds: DataService, private activatedRoute: ActivatedRoute ) { /*console.log('Constructor content component');*/ }
 
 
@@ -31,14 +26,6 @@ export class ContentComponent implements OnInit {
 
   set setOrganization(value: Organization) {
     this.actualOrganization = value;
-  }
-
-  get getAtiveComponent(): string {
-    return this.activeComponent;
-  }
-
-  set setActiveComponent(value: string) {
-    this.activeComponent = value;
   }
   /*
   * Subscribes to the organization service and to active_content, in order to retrive informations about the selected organization and dinamically update the specific-content component

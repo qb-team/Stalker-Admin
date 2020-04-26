@@ -4,17 +4,29 @@ import { Observable, of as observableOf, throwError } from 'rxjs';
 
 import { AuthenticationService } from './authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AdministratorService, OrganizationService } from '../..';
+import { DataService } from './data.service';
+
+@Injectable()
+class MockAdministratorService {}
+
+@Injectable()
+class MockOrganizationService {}
+
+@Injectable()
+class MockDataService {}
 
 describe('AuthenticationService', () => {
   let service;
 
+
   beforeEach(() => {
     service = new AuthenticationService({
-      authState: {}
-    } as AngularFireAuth);
+        authState: {}
+      }, {}, {}, {});
   });
 
-  it('should run #SignIn()', async () => {
+  it('should run #signIn()', async () => {
     service.angularFireAuth = service.angularFireAuth || {};
     service.angularFireAuth.auth = {
       signInWithEmailAndPassword() {
@@ -31,12 +43,46 @@ describe('AuthenticationService', () => {
             };
           }
         };
+      },
+      currentUser: {
+        getIdToken() {
+          return {
+            then() {
+              return [
+                null
+              ];
+            }
+          };
+        }
+      },
+      onAuthStateChanged() {
+        return [
+          {
+            uid: {}
+          }
+        ];
       }
     };
-    service.SignIn({}, {});
+    service.as = service.as || {};
+    service.as.configuration = {
+      setAccessToken() {}
+    };
+    spyOn(service.as, 'getPermissionList').and.returnValue(observableOf({}));
+    service.UserPermissions = service.UserPermissions || {};
+    service.UserPermissions = {
+      organizationId: {}
+    };
+    service.os = service.os || {};
+    spyOn(service.os, 'getOrganization').and.returnValue(observableOf({}));
+    service.ds = service.ds || {};
+    spyOn(service.ds, 'addOrganization');
+    service.signIn({}, {});
+    // expect(service.as.getPermissionList).toHaveBeenCalled();
+    // expect(service.os.getOrganization).toHaveBeenCalled();
+    // expect(service.ds.addOrganization).toHaveBeenCalled();
   });
 
-  it('should run #SignOut()', async () => {
+  it('should run #signOut()', async () => {
     service.angularFireAuth = service.angularFireAuth || {};
     service.angularFireAuth.auth = {
       signOut() {
@@ -49,11 +95,11 @@ describe('AuthenticationService', () => {
         };
       }
     };
-    service.SignOut();
+    service.signOut();
 
   });
 
-  it('should run #ResetPassword()', async () => {
+  it('should run #resetPassword()', async () => {
     service.angularFireAuth = service.angularFireAuth || {};
     service.angularFireAuth.auth = {
       sendPasswordResetEmail() {
@@ -66,7 +112,7 @@ describe('AuthenticationService', () => {
         };
       }
     };
-    service.ResetPassword({});
+    service.resetPassword({});
 
   });
 
@@ -74,6 +120,7 @@ describe('AuthenticationService', () => {
     service.angularFireAuth = service.angularFireAuth || {};
     service.angularFireAuth.authState = 'authState';
     service.getState();
+
   });
 
 });

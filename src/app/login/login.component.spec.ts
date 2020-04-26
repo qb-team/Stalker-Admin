@@ -156,7 +156,7 @@ describe('LoginComponent', () => {
 
   it('should run #onSubmit()', async () => {
     component.onSubmit();
-    expect(component.submitted).toBe(true);
+    expect(component.Submitted).toBe(true);
   });
 });
 

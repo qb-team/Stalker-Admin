@@ -14,8 +14,9 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./menubar.component.css']
 })
 export class MenubarComponent implements OnInit, AfterContentInit {
-  organization: Organization;
-  orgArr: Organization[];
+
+  private Organization: Organization;
+  private OrgArr: Organization[];
   constructor(private ds: DataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router, private activatedRoute: ActivatedRoute ) { }
 
   /*
@@ -24,22 +25,22 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   ngOnInit() {
     // this.ds.org = new ReplaySubject<Organization>()<Organization>();
     this.activatedRoute.data.subscribe((data: {orgs: Array<Organization> }) => {
-      this.orgArr = data.orgs;
-      this.organization = this.orgArr[0];
+      this.OrgArr = data.orgs;
+      this.Organization = this.OrgArr[0];
     });
   }
 
   ngAfterContentInit() {
     console.log('EMIT SIGNAL');
-    this.ds.getOrganization.next(this.organization);
+    this.ds.getOrganization.next(this.Organization);
   }
 
   /*
    * It updates the name of organization selected
    */
   setOrganization(click: any) {
-    this.organization = this.orgArr[click.target.attributes.id.value];
-    this.ds.getOrganization.next(this.organization);
+    this.Organization = this.OrgArr[click.target.attributes.id.value];
+    this.ds.getOrganization.next(this.Organization);
   }
 
   /*
@@ -59,5 +60,20 @@ export class MenubarComponent implements OnInit, AfterContentInit {
 
   navigateToLogin() {
     this.router.navigateByUrl('/Login');
+  }
+
+  get orgArr(): Organization[] {
+    return this.OrgArr;
+  }
+
+  set orgArr(value: Organization[]) {
+    this.OrgArr = value;
+  }
+  get organization(): Organization {
+    return this.Organization;
+  }
+
+  set organization(value: Organization) {
+    this.Organization = value;
   }
 }
