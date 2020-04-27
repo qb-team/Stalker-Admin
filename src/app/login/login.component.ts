@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit {
    this.authenticationService.userData.subscribe(
      (user) => {
        if (user) {
+         localStorage.setItem('key', 'True');
          this.navigateToContentPanel();
        } else {
        }});

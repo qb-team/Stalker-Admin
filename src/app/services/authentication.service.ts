@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import {AdministratorService, Configuration, ConfigurationParameters, Organization, OrganizationService, Permission} from '../..';
 import {DataService} from './data.service';
+import {FirebaseAuth} from '@angular/fire';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,29 @@ export class AuthenticationService {
   private UserData: Observable<firebase.User>; // user data
   private Token: Promise<string>;
   private SignOk = true; // Indicates whether the login was successful
+  private userDetails: firebase.User = null;
 
 
   constructor(private angularFireAuth: AngularFireAuth, private as: AdministratorService, private os: OrganizationService, private ds: DataService) {
     this.UserData = angularFireAuth.authState;
+    this.UserData.subscribe(
+      (user) => {
+        if (user) {
+          this.userDetails = user;
+          console.log(this.userDetails);
+        } else {
+          this.userDetails = null;
+        }
+      }
+    );
+  }
+
+  isLoggedIn() {
+    if (this.userDetails == null ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   /*
@@ -58,6 +78,7 @@ export class AuthenticationService {
     this.angularFireAuth
       .auth
       .signOut().then(res => {console.log('Good bye'); });
+    localStorage.removeItem('key');
   }
   /*
    * The function allows to reset password to user
