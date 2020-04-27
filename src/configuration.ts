@@ -29,6 +29,10 @@ export class Configuration {
         this.encoder = configurationParameters.encoder;
     }
 
+    setAccessToken(accToken: string) {
+      this.accessToken = accToken;
+    }
+
     /**
      * Select the correct content-type to use for a request.
      * Uses {@link Configuration#isJsonMime} to determine the correct content-type.
@@ -46,10 +50,6 @@ export class Configuration {
             return contentTypes[0];
         }
         return type;
-    }
-
-    public setAccessToken(token: string) {
-      this.accessToken = token;
     }
 
     /**
