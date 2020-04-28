@@ -1,2 +1,5 @@
+<div class="shadow p-4 mb-5 bg-white">
 <h1>Benvenuto amministratore!</h1>
 <p *ngIf="getAcutalOrganization !== undefined">Attualmente sei nell'interfaccia per la gestione dell'organizzazione: {{ getAcutalOrganization.name }}. Se vuoi cambiare organizzazione selezionane una dal menu in alto. Se vuoi invece effettuare qualche azione sull'attuale organizzazione seleziona una funzionalità dal menu di sinistra.</p>
+<p *ngIf="getAcutalOrganization == undefined"> Seleziona una organizzazione nel menu a tendina posto in alto per continuare</p>
+</div>

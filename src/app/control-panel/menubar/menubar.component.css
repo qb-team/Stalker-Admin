@@ -10,9 +10,13 @@
   white-space: nowrap;
   overflow: hidden;
   margin-right: 2.7em;
-  margin-left: 9%;
+  margin-left: 5.5%;
 }
 
 .position{
   margin-left:25%;
+}
+
+#email{
+  margin-bottom: 1em;
 }

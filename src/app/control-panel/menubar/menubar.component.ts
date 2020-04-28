@@ -1,14 +1,14 @@
 /*
  * Vertical menu in the panel control
  */
-import {AfterContentInit, Component, EventEmitter, OnInit} from '@angular/core';
+import {AfterContentInit, Component, OnInit} from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { OrganizationService } from 'src/api/api';
 import { Organization } from 'src/model/models';
 import {ActivatedRoute, Router} from '@angular/router';
-import {escapeLeadingUnderscores} from 'scuri/lib/third_party/github.com/Microsoft/TypeScript/lib/typescript';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {any} from 'codelyzer/util/function';
 
 @Component({
   selector: 'app-menubar',
@@ -41,16 +41,8 @@ export class MenubarComponent implements OnInit, AfterContentInit {
     this.createForm();
     this.activatedRoute.data.subscribe((data: {orgs: Array<Organization> }) => {
       this.OrgArr = data.orgs;
-      this.Organization = this.OrgArr[0];
-      console.log(this.Organization.trackingMode);
-      if (this.Organization.trackingMode === Organization.TrackingModeEnum.Authenticated) {
-        console.log('LDAP');
-        this.LDAP = true;
-      } else {
-        console.log('non LDAP');
-        this.LDAP = false;
-      }
     });
+
   }
 
   ngAfterContentInit() {
@@ -64,7 +56,6 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   setOrganization(click: any) {
     this.Organization = this.OrgArr[click.target.attributes.id.value];
     this.ds.getOrganization.next(this.Organization);
-    console.log(this.Organization.trackingMode);
     if (this.Organization.trackingMode === Organization.TrackingModeEnum.Authenticated) {
       console.log('LDAP');
       this.LDAP = true;
@@ -104,6 +95,25 @@ export class MenubarComponent implements OnInit, AfterContentInit {
         Validators.minLength(8)
       ]),
     });
+  }
+
+  close(): void {
+    let found = false;
+    let i = 0;
+    for (i = 0; !found && i < this.OrgArr.length; i++) {
+      console.log(i);
+      if (this.OrgArr[i].trackingMode === Organization.TrackingModeEnum.Anonymous) {
+        found = true;
+      }
+    }
+    if (found) {
+      this.Organization = this.OrgArr[i - 1];
+      this.ds.getOrganization.next(this.OrgArr[i - 1]);
+    } else {
+      alert('riselezione una organizzazione per continuare');
+      this.Organization = this.OrgArr[-1];
+      this.ds.getOrganization.next(this.Organization);
+    }
   }
 
   onSubmit(): void {

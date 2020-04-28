@@ -32,9 +32,11 @@ export class ContentComponent implements OnInit {
   * Finally, it sets the active specific-component to the home page content component (content-home)
   */
   ngOnInit() {
-    this.activatedRoute.data.subscribe((data: {orgs: Array<Organization> }) => {
-      this.ds.getOrganization.next(data.orgs[0]);
-    });
+   /* this.activatedRoute.data.subscribe((data: {orgs: Array<Organization> }) => {
+      // this.ds.getOrganization.next(data.orgs[0]);
+
+    });*/
+    this.ds.getOrganization.subscribe((o: Organization) => {this.actualOrganization = o; });
   }
 
 }
