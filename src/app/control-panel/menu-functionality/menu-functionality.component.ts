@@ -11,7 +11,7 @@ import {Organization} from '../../..';
   templateUrl: './menu-functionality.component.html',
   styleUrls: ['./menu-functionality.component.css']
 })
-export class MenuFunctionalityComponent implements OnInit, DoCheck {
+export class MenuFunctionalityComponent implements OnInit/*, DoCheck*/ {
 
 private actualOrganization: Organization;
   constructor(private ads: AdministratorDataService, private router: Router ) { }
@@ -27,12 +27,12 @@ private actualOrganization: Organization;
  * Subscribes to the service 'DataService' to retrive the actual specific-component to be showed
  */
   ngOnInit(): void {
-    this.ds.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
+    this.ads.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
   }
 
-  ngDoCheck(): void {
-    this.ds.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
-  }
+  /*ngDoCheck(): void {
+    this.ads.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
+  }*/
 
   updateContent(click: any) {
     this.router.navigateByUrl('/Content-panel/Panel/' + click.target.innerHTML);

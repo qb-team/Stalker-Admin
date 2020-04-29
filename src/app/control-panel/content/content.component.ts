@@ -32,7 +32,7 @@ export class ContentComponent implements OnInit {
   * Finally, it sets the active specific-component to the home page content component (content-home)
   */
   ngOnInit() {
-    this.ds.getOrganization.subscribe((o: Organization) => {this.actualOrganization = o; });
+    this.ads.getOrganization.subscribe((o: Organization) => {this.actualOrganization = o; });
   }
 
 }

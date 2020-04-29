@@ -107,11 +107,11 @@ export class MenubarComponent implements OnInit, AfterContentInit {
     }
     if (found) {
       this.Organization = this.OrgArr[i - 1];
-      this.ds.getOrganization.next(this.OrgArr[i - 1]);
+      this.ads.getOrganization.next(this.OrgArr[i - 1]);
     } else {
       alert('riselezione una organizzazione per continuare');
       this.Organization = this.OrgArr[-1];
-      this.ds.getOrganization.next(this.Organization);
+      this.ads.getOrganization.next(this.Organization);
     }
   }
 
