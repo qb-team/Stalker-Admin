@@ -1,5 +1,5 @@
-<div id="accordion">
-    <div class="card">
+<div id="accordion" class="shadow mb-1 rounded" *ngIf="getAcutalOrganization !== undefined">
+    <div class="card" >
         <span id="span1" (click)="updateContent($event)" class="btn btn-light" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
             aria-controls="collapseOne">Tracciamento</span>
 

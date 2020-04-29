@@ -67,8 +67,7 @@ export class LoginComponent implements OnInit {
        if (user) {
          localStorage.setItem('key', 'True');
          this.navigateToContentPanel();
-       } else {
-       }});
+       } });
   }
 
   /*
