@@ -3,8 +3,7 @@
 */
 import { Component, OnInit, Input } from '@angular/core';
 import { Organization } from 'src/model/models';
-import { DataService } from 'src/app/services/data.service';
-import {ActivatedRoute} from '@angular/router';
+import {AdministratorDataService} from '../../../services/AdministratorData.service';
 
 
 @Component({
@@ -38,7 +37,7 @@ export class ContentTrackUsersComponent implements OnInit {
   */
   private perimeterCoordinates;
 
-  constructor( private ds: DataService, private activatedRoute: ActivatedRoute ) {
+  constructor( private ads: AdministratorDataService ) {
   console.log('Costruttore numero utenti');
   }
 
@@ -91,7 +90,7 @@ export class ContentTrackUsersComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
-    this.ds.getOrganization.subscribe((org: Organization) => {
+    this.ads.getAdministratorOrganizations().subscribe((org: Organization) => {
       this.actualOrganization = org;
       this.jsonCoordinates = this.actualOrganization.trackingArea;
       this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni;

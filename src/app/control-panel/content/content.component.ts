@@ -2,9 +2,9 @@
 * A wrapper component to hold a content-specific component. Switching between functionalities will cause specific components to show or hide into this component
 */
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service';
 import { Organization } from 'src/model/models';
 import {ActivatedRoute} from '@angular/router';
+import {AdministratorDataService} from '../../services/AdministratorData.service';
 
 @Component({
   selector: 'app-content',
@@ -17,7 +17,7 @@ export class ContentComponent implements OnInit {
   */
   private actualOrganization: Organization;
 
-  constructor( private ds: DataService, private activatedRoute: ActivatedRoute ) { /*console.log('Constructor content component');*/ }
+  constructor( private ads: AdministratorDataService, private activatedRoute: ActivatedRoute ) { /*console.log('Constructor content component');*/ }
 
 
   get getOganization(): Organization {
@@ -33,7 +33,7 @@ export class ContentComponent implements OnInit {
   */
   ngOnInit() {
     this.activatedRoute.data.subscribe((data: {orgs: Array<Organization> }) => {
-      this.ds.getOrganization.next(data.orgs[0]);
+      this.ads.getOrganization.next(data.orgs[0]);
     });
   }
 

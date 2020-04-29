@@ -4,7 +4,6 @@ import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { MenuFunctionalityComponent } from './menu-functionality.component';
-import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -28,7 +27,6 @@ describe('MenuFunctionalityComponent', () => {
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
       providers: [
-        { provide: DataService, useClass: MockDataService },
         { provide: Router, useClass: MockRouter }
       ]
     }).overrideComponent(MenuFunctionalityComponent, {

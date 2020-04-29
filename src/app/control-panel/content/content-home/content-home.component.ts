@@ -3,8 +3,7 @@
 */
 import { Component, OnInit, Input } from '@angular/core';
 import { Organization } from 'src/model/models';
-import {DataService} from '../../../services/data.service';
-import {ActivatedRoute} from '@angular/router';
+import {AdministratorDataService} from '../../../services/AdministratorData.service';
 
 @Component({
   selector: 'app-content-home',
@@ -13,18 +12,14 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ContentHomeComponent implements OnInit {
   private actualOrganization: Organization;
-  constructor(private ds: DataService) { }
+  constructor(private ads: AdministratorDataService) { }
 
   get getAcutalOrganization(): Organization {
     return this.actualOrganization;
   }
 
-  set setAcutalOrganization(value: Organization) {
-    this.actualOrganization = value;
-  }
-
   ngOnInit(): void {
-    this.ds.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
+    this.ads.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
   }
 
 }

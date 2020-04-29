@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of as observableOf} from 'rxjs';
 
 import { ContentTrackUsersNumberComponent } from './content-track-users-number.component';
-import { DataService } from 'src/app/services/data.service';
 import { PresenceService } from 'src/api/api';
 
 @Injectable()
@@ -28,7 +27,6 @@ describe('ContentTrackUsersNumberComponent', () => {
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
       providers: [
-        { provide: DataService, useClass: MockDataService },
         { provide: PresenceService, useClass: MockPresenceService }
       ]
     }).overrideComponent(ContentTrackUsersNumberComponent, {

@@ -2,8 +2,8 @@
 * A side-menu that offers all the functionalities available for the administrator on the current organization
 */
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import { DataService } from '../../services/data.service';
 import {Router} from '@angular/router';
+import {AdministratorDataService} from '../../services/AdministratorData.service';
 
 @Component({
   selector: 'app-menu-functionality',
@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 })
 export class MenuFunctionalityComponent implements OnInit {
 
-  constructor(private ds: DataService, private router: Router ) { }
+  constructor(private ads: AdministratorDataService, private router: Router ) { }
 
   ngOnInit(): void {
   }

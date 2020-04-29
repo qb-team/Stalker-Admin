@@ -2,11 +2,11 @@
  * Vertical menu in the panel control
  */
 import {AfterContentInit, Component, EventEmitter, OnInit} from '@angular/core';
-import { DataService } from '../../services/data.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { OrganizationService } from 'src/api/api';
 import { Organization } from 'src/model/models';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AdministratorDataService} from '../../services/AdministratorData.service';
 
 @Component({
   selector: 'app-menubar',
@@ -17,7 +17,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
 
   private Organization: Organization;
   private OrgArr: Organization[];
-  constructor(private ds: DataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router, private activatedRoute: ActivatedRoute ) { }
+  constructor(private ads: AdministratorDataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router, private activatedRoute: ActivatedRoute ) { }
 
   /*
    * Initialization and refresh the list of organization
@@ -32,7 +32,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     console.log('EMIT SIGNAL');
-    this.ds.getOrganization.next(this.Organization);
+    this.ads.getOrganization.next(this.Organization);
   }
 
   /*
@@ -40,7 +40,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
    */
   setOrganization(click: any) {
     this.Organization = this.OrgArr[click.target.attributes.id.value];
-    this.ds.getOrganization.next(this.Organization);
+    this.ads.getOrganization.next(this.Organization);
   }
 
   /*

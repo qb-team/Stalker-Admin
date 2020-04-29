@@ -4,7 +4,6 @@ import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of as observableOf} from 'rxjs';
 import { MenubarComponent } from './menubar.component';
-import { DataService } from '../../services/data.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { OrganizationService } from 'src/api/api';
 import { Router } from '@angular/router';
@@ -41,7 +40,6 @@ describe('MenubarComponent', () => {
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
       providers: [
-        { provide: DataService, useClass: MockDataService },
         { provide: AuthenticationService, useClass: MockAuthenticationService },
         { provide: OrganizationService, useClass: MockOrganizationService },
         { provide: Router, useClass: MockRouter }

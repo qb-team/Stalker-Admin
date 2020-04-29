@@ -4,7 +4,6 @@ import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of as observableOf} from 'rxjs';
 import { ContentTrackUsersComponent } from './content-track-users.component';
-import { DataService } from 'src/app/services/data.service';
 
 @Injectable()
 class MockDataService {}
@@ -42,9 +41,7 @@ describe('ContentTrackUsersComponent', () => {
         ContentTrackUsersComponent
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
-      providers: [
-        { provide: DataService, useClass: MockDataService }
-      ]
+      providers: []
     }).overrideComponent(ContentTrackUsersComponent, {
 
     }).compileComponents();

@@ -2,10 +2,10 @@
 * Shows the number of users actually inside the organization's perimeter
 */
 import { Component, OnInit, Input} from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
 import { Organization, OrganizationPresenceCounter } from 'src/model/models';
 import { PresenceService } from 'src/api/api';
 import {ActivatedRoute} from '@angular/router';
+import {TrackingDataService} from '../../../../services/TrackingData.service';
 
 @Component({
   selector: 'app-content-track-users-number',
@@ -15,7 +15,7 @@ import {ActivatedRoute} from '@angular/router';
 export class ContentTrackUsersNumberComponent implements OnInit {
   @Input() private actualOrganization: Organization;
   UserNumber: OrganizationPresenceCounter;
-  constructor(private ds: DataService, private ps: PresenceService, private activatedRoute: ActivatedRoute) { }
+  constructor(private tds: TrackingDataService, private ps: PresenceService, private activatedRoute: ActivatedRoute) { }
 
 
   get getAcutalOrganization(): Organization {
@@ -27,11 +27,12 @@ export class ContentTrackUsersNumberComponent implements OnInit {
   }
 
   ngOnInit(): void {
-     this.activatedRoute.data.subscribe((org: Organization) => { this.actualOrganization = org; } );
-     this.ds.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
-     this.ps.getOrganizationPresenceCounter(this.actualOrganization.id).subscribe((counter: OrganizationPresenceCounter) => {
-       this.UserNumber = counter;
-     });
+     this.activatedRoute.data.subscribe((org: Organization) => {
+       this.actualOrganization = org;
+       this.ps.getOrganizationPresenceCounter(this.actualOrganization.id).subscribe((counter: OrganizationPresenceCounter) => {
+         this.UserNumber = counter;
+       });
+     } );
   }
 
 }

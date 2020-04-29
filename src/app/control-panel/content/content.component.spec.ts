@@ -4,7 +4,6 @@ import {Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/cor
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of as observableOf} from 'rxjs';
 import { ContentComponent } from './content.component';
-import { DataService } from '../../services/data.service';
 import {By} from '@angular/platform-browser';
 
 @Injectable()
@@ -21,9 +20,7 @@ describe('ContentComponent', () => {
         ContentComponent
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
-      providers: [
-        { provide: DataService, useClass: MockDataService }
-      ]
+      providers: []
     }).overrideComponent(ContentComponent, {
 
     }).compileComponents();

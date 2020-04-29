@@ -13,7 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 /* service */
 import { AuthenticationService } from './services/authentication.service';
 import { OrganizationService } from 'src/api/api';
-import { DataService } from './services/data.service';
 
 import { AppComponent } from './app.component';
 
@@ -33,6 +32,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {OrganizationResolverService} from './services/organization-resolver.service';
 import {RouteReuseStrategy} from '@angular/router';
 import {RouteReuseService} from './services/route-reuse.service';
+import { ManageAdministratorsContentComponent } from './control-panel/content/manage-administrators-content/manage-administrators-content.component';
 
 
 @NgModule({
@@ -48,7 +48,8 @@ import {RouteReuseService} from './services/route-reuse.service';
     ContentTrackUsersNumberComponent,
     ControlPanelComponent,
     ContentTrackUsersGeneralInformationComponent,
-    MenubarComponent
+    MenubarComponent,
+    ManageAdministratorsContentComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +60,7 @@ import {RouteReuseService} from './services/route-reuse.service';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [AuthenticationService, DataService, OrganizationService, OrganizationResolverService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
+  providers: [AuthenticationService, OrganizationService, OrganizationResolverService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

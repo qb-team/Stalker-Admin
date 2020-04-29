@@ -1,12 +1,13 @@
 /*
  * Service for authentication
 */
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {AdministratorService, Configuration, ConfigurationParameters, Organization, OrganizationService, Permission} from '../..';
 import {DataService} from './data.service';
 import {FirebaseAuth} from '@angular/fire';
+import {AdministratorDataService} from './AdministratorData.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,13 @@ import {FirebaseAuth} from '@angular/fire';
 
 export class AuthenticationService {
 
-  private UserPermissions: Permission[];
   private UserData: Observable<firebase.User>; // user data
   private Token: Promise<string>;
   private SignOk = true; // Indicates whether the login was successful
   private userDetails: firebase.User = null;
 
 
-  constructor(private angularFireAuth: AngularFireAuth, private as: AdministratorService, private os: OrganizationService, private ds: DataService) {
+  constructor(private angularFireAuth: AngularFireAuth, private as: AdministratorService, private os: OrganizationService, private ads: AdministratorDataService) {
     this.UserData = angularFireAuth.authState;
     this.UserData.subscribe(
       (user) => {
@@ -56,12 +56,31 @@ export class AuthenticationService {
                        this.angularFireAuth.auth.onAuthStateChanged((user) => {
                          if (user) {
                            // User is signed in.
-                           this.as.getPermissionList(user.uid).subscribe((p: Permission[]) => {
-                             this.UserPermissions = p;
-                             console.log('Permission 1: ' + this.UserPermissions[0].organizationId);
-                             for (const permission of p) {
-                               this.os.getOrganization(permission.organizationId).subscribe((o: Organization) => { this.ds.addOrganization(o); });
-                             }
+                           let organizationList;
+                           this.os.getOrganizationList().subscribe( (orgs: Array<Organization>) => {
+                             orgs.sort((o1, o2) => {
+                               if (o1.id > o2.id) {
+                                 return 1;
+                               }
+                               if (o1.id < o2.id) {
+                                 return -1;
+                               }
+                               return 0;
+                             });
+                             organizationList = orgs;
+                             this.as.getPermissionList(user.uid).subscribe((p: Permission[]) => {
+                               p.sort((p1, p2) => {
+                                 if (p1.organizationId > p2.organizationId) {
+                                   return 1;
+                                 }
+                                 if (p1.organizationId < p2.organizationId) {
+                                   return -1;
+                                 }
+                                 return 0;
+                               });
+                               this.ads.getUserPermissions().emit(p);
+                               this.ads.getAdminOrganizations().emit(this.filterOrganizationsOnPermissions(organizationList, p));
+                             });
                            });
                          }
                        });
@@ -71,6 +90,25 @@ export class AuthenticationService {
                       console.log('Something is wrong:', err.message);
       });
   }
+
+  filterOrganizationsOnPermissions(orgs: Array<Organization>, perms: Array<Permission>): Array<Organization> {
+    const filteredOrgs = new Array<Organization>();
+    let orgIt = 0;
+    let permIt = 0;
+    while (orgIt < orgs.length && permIt < perms.length) {
+      if (orgs[orgIt].id === perms[permIt].organizationId) {
+        filteredOrgs.push(orgs[orgIt]);
+        orgIt++;
+        permIt++;
+      } else if (orgs[orgIt].id < perms[permIt].organizationId) {
+        orgIt++;
+      } else {
+        permIt++;
+      }
+    }
+    return filteredOrgs;
+  }
+
   /*
    * Sign out. It allows the user to exit
   */
@@ -89,14 +127,6 @@ export class AuthenticationService {
 
   getState() {
     return this.angularFireAuth.authState;
-  }
-
-  get userPermissions(): Permission[] {
-    return this.UserPermissions;
-  }
-
-  set userPermissions(value: Permission[]) {
-    this.UserPermissions = value;
   }
 
   get userData(): Observable<firebase.User> {
