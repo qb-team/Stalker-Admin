@@ -16,32 +16,32 @@ export class ResetPasswordComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, private router: Router) {
     this.createForm();
   }
-  private _submitted = false;
-  private _reset = false; // for show page of reset password
-  private _email: string; // email for reset
+  private Submitted = false;
+  private Reset = false; // for show page of reset password
+  private Email: string; // email for reset
   contactForm: FormGroup;
 
 
   get email(): string {
-    return this._email;
+    return this.Email;
   }
 
   set email(value: string) {
-    this._email = value;
+    this.Email = value;
   }
   get reset(): boolean {
-    return this._reset;
+    return this.Reset;
   }
 
   set reset(value: boolean) {
-    this._reset = value;
+    this.Reset = value;
   }
   get submitted(): boolean {
-    return this._submitted;
+    return this.Submitted;
   }
 
   set submitted(value: boolean) {
-    this._submitted = value;
+    this.Submitted = value;
   }
 
   ngOnInit(): void {
@@ -52,20 +52,20 @@ export class ResetPasswordComponent implements OnInit {
    */
   back() {
     this.router.navigateByUrl('/Login');
-    this._reset = false;
+    this.Reset = false;
   }
 
   /*
   * It calls function ResetPassword of the service and updates status
   */
   resetPassword() {
-    this.authenticationService.resetPassword(this._email);
-    this._reset = true;
+    this.authenticationService.resetPassword(this.Email);
+    this.Reset = true;
   }
 
   createForm() {
     this.contactForm = new FormGroup({
-      email: new FormControl(this._email, [
+      email: new FormControl(this.Email, [
         Validators.required,
         Validators.email
       ]),
@@ -73,6 +73,6 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this._submitted = true;
+    this.Submitted = true;
   }
 }
