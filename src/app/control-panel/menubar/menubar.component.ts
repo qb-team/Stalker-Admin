@@ -37,22 +37,17 @@ export class MenubarComponent implements OnInit, AfterContentInit {
    * Initialization and refresh the list of organization
    */
   ngOnInit() {
-    console.log('ngOnInit menubar');
+    this.loadListOrganizations();
+  }
+
+  loadListOrganizations() {
     this.ads.getAdminOrganizations.subscribe((orgs: Array<Organization>) => {
       this.orgArr = orgs;
-      console.log('NgOnInit menubar');
       this.createForm();
     });
-    /*this.activatedRoute.data.subscribe((data: {orgs: ReplaySubject<Array<Organization>> }) => {
-      //this.ads.getAdminOrganizations.next(data.orgs);
-      console.log('sottoscrizione ai dati del resolver e ricezione avvenuta');
-      data.orgs.subscribe((organizzazioni: Array<Organization>) => { this.OrgArr = organizzazioni; });
-      // this.OrgArr = data.orgs; console.log('Subscribed in ngOnInit: ' + data.orgs);
-    });*/
   }
 
   ngAfterContentInit() {
-    console.log('EMIT SIGNAL');
     this.ads.getOrganization.next(this.Organization);
   }
 
@@ -63,10 +58,8 @@ export class MenubarComponent implements OnInit, AfterContentInit {
     this.Organization = this.OrgArr[click.target.attributes.id.value];
     this.ads.getOrganization.next(this.Organization);
     if (this.Organization.trackingMode === Organization.TrackingModeEnum.Authenticated) {
-      console.log('LDAP');
       this.LDAP = true;
     } else {
-      console.log('non LDAP');
       this.LDAP = false;
     }
   }
