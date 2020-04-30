@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
   contactForm: FormGroup;
 
   ngOnInit(): void {
-    this.createForm();
+    this.setupLoginForm();
   }
 
-  createForm() {
+  private setupLoginForm() {
     this.contactForm = new FormGroup({
       email: new FormControl(this.Email, [
         Validators.required,
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
   /*
   * Shows the password reset page and hides the login page
   */
-  CallResetPassword() {
+  callResetPassword() {
     this.router.navigateByUrl('/Reset');
   }
 

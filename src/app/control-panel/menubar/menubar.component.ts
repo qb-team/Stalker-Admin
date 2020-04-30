@@ -20,7 +20,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
 
   private Organization: Organization;
   private OrgArr: Organization[];
-  private LDAP: boolean;
+  private hasLDAP: boolean;
   contactForm: FormGroup;
   private Submitted = false;
   /*
@@ -37,13 +37,13 @@ export class MenubarComponent implements OnInit, AfterContentInit {
    * Initialization and refresh the list of organization
    */
   ngOnInit() {
-    this.loadListOrganizations();
+    this.loadOrganizationList();
   }
 
-  loadListOrganizations() {
+  loadOrganizationList() {
     this.ads.getAdminOrganizations.subscribe((orgs: Array<Organization>) => {
       this.orgArr = orgs;
-      this.createForm();
+      this.setupForm();
     });
   }
 
@@ -58,9 +58,9 @@ export class MenubarComponent implements OnInit, AfterContentInit {
     this.Organization = this.OrgArr[click.target.attributes.id.value];
     this.ads.getOrganization.next(this.Organization);
     if (this.Organization.trackingMode === Organization.TrackingModeEnum.Authenticated) {
-      this.LDAP = true;
+      this.hasLDAP = true;
     } else {
-      this.LDAP = false;
+      this.hasLDAP = false;
     }
   }
 
@@ -83,7 +83,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
     this.router.navigateByUrl('/Login');
   }
 
-  createForm() {
+  private setupForm() {
     this.contactForm = new FormGroup({
       email: new FormControl(this.Email, [
         Validators.required,
@@ -96,7 +96,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
     });
   }
 
-  close(): void {
+  closeLdapForm(): void {
     let found = false;
     let i = 0;
     for (i = 0; !found && i < this.OrgArr.length; i++) {
@@ -135,11 +135,11 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   }
 
   get isLDAP(): boolean {
-    return this.LDAP;
+    return this.hasLDAP;
   }
 
   set isLDAP(value: boolean) {
-    this.LDAP = value;
+    this.hasLDAP = value;
   }
 
   get submitted(): boolean {

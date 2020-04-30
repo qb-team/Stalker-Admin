@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
 export class ResetPasswordComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private router: Router) {
-    this.createForm();
+    this.setupResetPswForm();
   }
   private Submitted = false;
   private Reset = false; // for show page of reset password
@@ -50,7 +50,7 @@ export class ResetPasswordComponent implements OnInit {
   /*
   * Back in login page
    */
-  back() {
+  backToLogin() {
     this.router.navigateByUrl('/Login');
     this.Reset = false;
   }
@@ -63,7 +63,7 @@ export class ResetPasswordComponent implements OnInit {
     this.Reset = true;
   }
 
-  createForm() {
+  private setupResetPswForm() {
     this.contactForm = new FormGroup({
       email: new FormControl(this.Email, [
         Validators.required,

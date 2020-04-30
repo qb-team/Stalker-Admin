@@ -16,7 +16,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Login LDAP</h4>
-          <button class="close" data-dismiss="modal" (click)="close()">&times;</button>
+          <button class="close" data-dismiss="modal" (click)="closeLdapForm()">&times;</button>
         </div>
         <div class="modal-body">
           <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
@@ -31,7 +31,7 @@
         </div>
         <div class="modal-footer">
           <button id="signInBtn" [disabled]="!contactForm.valid" class="btn btn-danger">Login</button> <!--(click)=""-->
-          <button class="btn btn-danger" (click)="close()" data-dismiss="modal">Close</button>
+          <button class="btn btn-danger" (click)="closeLdapForm()" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

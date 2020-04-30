@@ -3,7 +3,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of as observableOf} from 'rxjs';
-import { ContentTrackUsersGeneralInformationComponent } from './content-track-users-general-information.component';
+import { OrganizationInformationContentComponent } from './organization-information-content.component';
 
 @Injectable()
 class MockDataService {
@@ -18,14 +18,14 @@ describe('ContentTrackUsersGeneralInformationComponent', () => {
     TestBed.configureTestingModule({
       imports: [ FormsModule, ReactiveFormsModule ],
       declarations: [
-        ContentTrackUsersGeneralInformationComponent,
+        OrganizationInformationContentComponent,
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
       providers: []
-    }).overrideComponent(ContentTrackUsersGeneralInformationComponent, {
+    }).overrideComponent(OrganizationInformationContentComponent, {
 
     }).compileComponents();
-    fixture = TestBed.createComponent(ContentTrackUsersGeneralInformationComponent);
+    fixture = TestBed.createComponent(OrganizationInformationContentComponent);
     component = fixture.debugElement.componentInstance;
   });
 

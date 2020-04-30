@@ -20,20 +20,21 @@ import { AppComponent } from './app.component';
 import { MenuFunctionalityComponent } from './control-panel/menu-functionality/menu-functionality.component';
 import { MenubarComponent } from './control-panel/menubar/menubar.component';
 import { ContentComponent } from './control-panel/content/content.component';
-import { ContentTrackUsersComponent } from './control-panel/content/content-track-users/content-track-users.component';
+import { OrganizationTrackingAreaContentComponent } from './control-panel/content/content-track-users/organization-tracking-area-content.component';
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { FooterComponent } from './footer/footer.component';
-import { ContentHomeComponent } from './control-panel/content/content-home/content-home.component';
-import { ContentTrackUsersNumberComponent } from './control-panel/content/content-track-users/content-track-users-number/content-track-users-number.component';
+import { HomePageContentComponent } from './control-panel/content/content-home/home-page-content.component';
+import { ContentTrackUsersNumberComponent } from './control-panel/content/content-home/user-tracking-content/content-track-users-number/content-track-users-number.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
-import { ContentTrackUsersGeneralInformationComponent } from './control-panel/content/content-track-users/content-track-users-general-informations/content-track-users-general-information.component';
+import { OrganizationInformationContentComponent } from './control-panel/content/content-home/user-tracking-content/organization-information-content/organization-information-content.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RouteReuseStrategy} from '@angular/router';
 import {RouteReuseService} from './services/route-reuse.service';
 import { ManageAdministratorsContentComponent } from './control-panel/content/manage-administrators-content/manage-administrators-content.component';
 import {AdministratorDataService} from './services/AdministratorData.service';
 import {AccessDataService} from './services/AccessesData.service';
+import {OrganizationTrackingDataService} from './services/OrganizationTrackingData.service';
 
 
 @NgModule({
@@ -41,14 +42,14 @@ import {AccessDataService} from './services/AccessesData.service';
     AppComponent,
     MenuFunctionalityComponent,
     ContentComponent,
-    ContentTrackUsersComponent,
+    OrganizationTrackingAreaContentComponent,
     LoginComponent,
     ResetPasswordComponent,
     FooterComponent,
-    ContentHomeComponent,
+    HomePageContentComponent,
     ContentTrackUsersNumberComponent,
     ControlPanelComponent,
-    ContentTrackUsersGeneralInformationComponent,
+    OrganizationInformationContentComponent,
     MenubarComponent,
     ManageAdministratorsContentComponent
   ],
@@ -61,7 +62,7 @@ import {AccessDataService} from './services/AccessesData.service';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [AuthenticationService, OrganizationService, AdministratorDataService, AccessDataService,{ provide: RouteReuseStrategy, useClass: RouteReuseService }],
+  providers: [AuthenticationService, OrganizationService, AdministratorDataService, AccessDataService, OrganizationTrackingDataService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

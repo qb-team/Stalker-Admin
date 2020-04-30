@@ -7,10 +7,10 @@ import {AdministratorDataService} from '../../../services/AdministratorData.serv
 
 @Component({
   selector: 'app-content-home',
-  templateUrl: './content-home.component.html',
-  styleUrls: ['./content-home.component.css']
+  templateUrl: './home-page-content.component.html',
+  styleUrls: ['./home-page-content.component.css']
 })
-export class ContentHomeComponent implements OnInit {
+export class HomePageContentComponent implements OnInit {
   private actualOrganization: Organization;
   constructor(private ads: AdministratorDataService) { }
 

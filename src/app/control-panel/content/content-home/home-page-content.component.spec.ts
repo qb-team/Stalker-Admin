@@ -1,21 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContentHomeComponent } from './content-home.component';
+import { HomePageContentComponent } from './home-page-content.component';
 import {By} from '@angular/platform-browser';
 
 describe('ContentHomeComponent', () => {
-  let component: ContentHomeComponent;
-  let fixture: ComponentFixture<ContentHomeComponent>;
+  let component: HomePageContentComponent;
+  let fixture: ComponentFixture<HomePageContentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContentHomeComponent ]
+      declarations: [ HomePageContentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContentHomeComponent);
+    fixture = TestBed.createComponent(HomePageContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

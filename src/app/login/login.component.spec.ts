@@ -57,9 +57,9 @@ describe('LoginComponent', () => {
   });
 
   it('should call createForm' , () => {
-    spyOn(component, 'createForm');
+    spyOn(component, 'setupLoginForm');
     component.ngOnInit();
-    expect(component.createForm).toHaveBeenCalledTimes(1);
+    expect(component.setupLoginForm).toHaveBeenCalledTimes(1);
   });
 
   it('shouldn\'t call onSubmit function as long it is disabled and should call it otherwise' , () => {
@@ -113,11 +113,11 @@ describe('LoginComponent', () => {
   }));
 
   it('should call callResetPassword', async(() => {
-    spyOn(component, 'CallResetPassword');
+    spyOn(component, 'callResetPassword');
     const createButton = fixture.debugElement.query(By.css('#resetPswBtn'));
     createButton.triggerEventHandler('click', null);
     fixture.detectChanges();
-    expect(component.CallResetPassword).toHaveBeenCalled();
+    expect(component.callResetPassword).toHaveBeenCalled();
   }));
 
   it('should create label contain "email"', () => {
@@ -149,7 +149,7 @@ describe('LoginComponent', () => {
 
   it('Should navigate to reset password', inject([Router], (router: Router) => {
     const spy = spyOn(router, 'navigateByUrl');
-    component.CallResetPassword();
+    component.callResetPassword();
     const navArgs = spy.calls.first().args[0];
     expect(navArgs).toBe('/Reset');
   }));

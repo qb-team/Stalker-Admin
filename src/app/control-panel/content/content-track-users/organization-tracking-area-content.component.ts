@@ -8,10 +8,10 @@ import {AdministratorDataService} from '../../../services/AdministratorData.serv
 
 @Component({
   selector: 'app-content-track-users',
-  templateUrl: './content-track-users.component.html',
-  styleUrls: ['./content-track-users.component.css']
+  templateUrl: './organization-tracking-area-content.component.html',
+  styleUrls: ['./organization-tracking-area-content.component.css']
 })
-export class ContentTrackUsersComponent implements OnInit {
+export class OrganizationTrackingAreaContentComponent implements OnInit {
   /*
   * The actual organization selected
   */
