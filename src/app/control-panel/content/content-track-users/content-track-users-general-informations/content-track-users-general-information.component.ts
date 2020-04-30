@@ -26,7 +26,10 @@ export class ContentTrackUsersGeneralInformationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('SUBSCRIBE');
+    this.subscribeToOrganization();
+  }
+
+  subscribeToOrganization(): void {
     this.ads.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
   }
 

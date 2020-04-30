@@ -90,6 +90,10 @@ export class ContentTrackUsersComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
+    this.subscribeToOrganization();
+  }
+
+  subscribeToOrganization(): void {
     this.ads.getOrganization.subscribe((org: Organization) => {
       this.actualOrganization = org;
       this.jsonCoordinates = this.actualOrganization.trackingArea;

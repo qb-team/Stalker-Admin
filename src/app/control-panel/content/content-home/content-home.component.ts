@@ -19,7 +19,10 @@ export class ContentHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ads.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
+    this.subscribeToOrganization();
   }
 
+  subscribeToOrganization(): void {
+    this.ads.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
+  }
 }
