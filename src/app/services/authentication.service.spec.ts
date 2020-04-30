@@ -5,7 +5,6 @@ import { Observable, of as observableOf, throwError } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AdministratorService, OrganizationService } from '../..';
-import { DataService } from './data.service';
 
 @Injectable()
 class MockAdministratorService {}

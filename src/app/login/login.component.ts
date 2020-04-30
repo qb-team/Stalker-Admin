@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
   * The function that validates the form and tries to log in
   */
  signIn() {
+   console.log('Sign IN');
    this.authenticationService.signIn(this.Email, this.Password);
    this.authenticationService.userData.subscribe(
      (user) => {
@@ -89,7 +90,8 @@ export class LoginComponent implements OnInit {
   */
 
   navigateToContentPanel() {
-    this.router.navigateByUrl('/Content-panel');
+    console.log('Navigate to content panel');
+    this.router.navigateByUrl('/Content-panel').then((b: boolean) => { console.log('Navigation succeded: ' + b); });
   }
 
   get submitted(): boolean {

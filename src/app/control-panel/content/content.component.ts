@@ -17,7 +17,7 @@ export class ContentComponent implements OnInit {
   */
   private actualOrganization: Organization;
 
-  constructor( private ads: AdministratorDataService, private activatedRoute: ActivatedRoute ) { /*console.log('Constructor content component');*/ }
+  constructor( private ads: AdministratorDataService, private activatedRoute: ActivatedRoute ) { console.log('Constructor content component'); }
 
 
   get getOganization(): Organization {
@@ -33,6 +33,7 @@ export class ContentComponent implements OnInit {
   */
   ngOnInit() {
     this.ads.getOrganization.subscribe((o: Organization) => {this.actualOrganization = o; });
+    console.log('Content: ' + this.actualOrganization);
   }
 
 }

@@ -43,6 +43,7 @@ export class OrganizationService {
                 basePath = this.basePath;
             }
             this.configuration.basePath = basePath;
+            this.configuration.accessToken = localStorage.getItem('adminToken');
         }
         this.encoder = this.configuration.encoder || new CustomHttpParameterCodec();
     }
@@ -276,7 +277,7 @@ export class OrganizationService {
      * Updates one or more properties of an organization.
      * Updates one or more properties of an organization.  Only web-app administrators (if they have the correct access rights) can access this end-point.
      * @param organizationId ID of an organization.
-     * @param organization 
+     * @param organization
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

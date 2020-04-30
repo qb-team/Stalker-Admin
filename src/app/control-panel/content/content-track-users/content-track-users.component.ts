@@ -90,7 +90,7 @@ export class ContentTrackUsersComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
-    this.ads.getAdministratorOrganizations().subscribe((org: Organization) => {
+    this.ads.getOrganization.subscribe((org: Organization) => {
       this.actualOrganization = org;
       this.jsonCoordinates = this.actualOrganization.trackingArea;
       this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni;

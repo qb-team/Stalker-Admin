@@ -44,6 +44,7 @@ export class AccessService {
                 basePath = this.basePath;
             }
             this.configuration.basePath = basePath;
+            this.configuration.accessToken = localStorage.getItem('adminToken');
         }
         this.encoder = this.configuration.encoder || new CustomHttpParameterCodec();
     }

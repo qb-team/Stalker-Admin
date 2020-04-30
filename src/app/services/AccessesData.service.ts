@@ -16,3 +16,4 @@ export class AccessDataService {
   getOrganizationAccesses(): EventEmitter<Array<OrganizationAccess>> {
     return this.usersOrganizationAccesses;
   }
+}

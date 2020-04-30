@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AdministratorDataService} from '../../services/AdministratorData.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {any} from 'codelyzer/util/function';
+import {Observable, ReplaySubject} from 'rxjs';
 
 @Component({
   selector: 'app-menubar',
@@ -36,12 +37,18 @@ export class MenubarComponent implements OnInit, AfterContentInit {
    * Initialization and refresh the list of organization
    */
   ngOnInit() {
-    // this.ds.org = new ReplaySubject<Organization>()<Organization>();
-    this.createForm();
-    this.activatedRoute.data.subscribe((data: {orgs: Array<Organization> }) => {
-      this.OrgArr = data.orgs;
+    console.log('ngOnInit menubar');
+    this.ads.getAdminOrganizations.subscribe((orgs: Array<Organization>) => {
+      this.orgArr = orgs;
+      console.log('NgOnInit menubar');
+      this.createForm();
     });
-
+    /*this.activatedRoute.data.subscribe((data: {orgs: ReplaySubject<Array<Organization>> }) => {
+      //this.ads.getAdminOrganizations.next(data.orgs);
+      console.log('sottoscrizione ai dati del resolver e ricezione avvenuta');
+      data.orgs.subscribe((organizzazioni: Array<Organization>) => { this.OrgArr = organizzazioni; });
+      // this.OrgArr = data.orgs; console.log('Subscribed in ngOnInit: ' + data.orgs);
+    });*/
   }
 
   ngAfterContentInit() {

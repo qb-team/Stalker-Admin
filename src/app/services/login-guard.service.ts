@@ -10,11 +10,13 @@ export class LoginGuardService implements CanActivate {
   constructor(private auth: AuthenticationService, private router: Router) {}
 
   canActivate(): Observable<boolean> |  Promise<boolean> | boolean {
-    let flag = localStorage.getItem('key');
+    const flag = localStorage.getItem('key');
     if (!flag) {
+      console.log('User not logged, redirecting to LOGIN');
       return true;
     }
-    this.router.navigateByUrl('/Content-panel/Panel/Homepage');
+    console.log('navigateBuUrl Homepage request');
+    this.router.navigateByUrl('/Content-panel/Panel/Homepage').then((b: boolean) => { console.log('navigateBuUrl to homepage succeded: ' + b); });
     return false;
   }
 }

@@ -43,6 +43,7 @@ export class AdministratorService {
                 basePath = this.basePath;
             }
             this.configuration.basePath = basePath;
+            this.configuration.accessToken = localStorage.getItem('adminToken');
         }
         this.encoder = this.configuration.encoder || new CustomHttpParameterCodec();
     }
@@ -84,7 +85,7 @@ export class AdministratorService {
     /**
      * Bind an already existent administrator to the organization.
      * Bind an already existent administrator to the organization. Only web-app administrators can access this end-point.
-     * @param permission 
+     * @param permission
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -147,7 +148,7 @@ export class AdministratorService {
     /**
      * Creates and binds a new administrator to the organization.
      * Creates and binds a new administrator to the current organization.  Only web-app administrators can access this end-point.
-     * @param permission 
+     * @param permission
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -316,7 +317,7 @@ export class AdministratorService {
     /**
      * Unbind an administrator to the organization.
      * Unbind an administrator to the organization. Only web-app administrators can access this end-point.
-     * @param permission 
+     * @param permission
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -378,7 +379,7 @@ export class AdministratorService {
     /**
      * Update the permission for an already existent administrator in the organization.
      * Update the permission for an already existent administrator in the organization. Only web-app administrators can access this end-point.
-     * @param permission 
+     * @param permission
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

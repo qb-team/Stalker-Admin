@@ -9,7 +9,6 @@ import {ContentTrackUsersComponent} from './control-panel/content/content-track-
 import {ContentHomeComponent} from './control-panel/content/content-home/content-home.component';
 import {ContentComponent} from './control-panel/content/content.component';
 import {ContentTrackUsersNumberComponent} from './control-panel/content/content-track-users/content-track-users-number/content-track-users-number.component';
-import {OrganizationResolverService} from './services/organization-resolver.service';
 import {LoginGuardService} from './services/login-guard.service';
 
 
@@ -17,13 +16,13 @@ const routes: Routes = [
   { path: '', redirectTo: 'Content-panel/Panel/Homepage', pathMatch: 'full'},
   { path: 'Login', component: LoginComponent, canActivate: [LoginGuardService]},
   { path: 'Reset', component: ResetPasswordComponent, canActivate: [LoginGuardService]},
-  { path: 'Content-panel', component: ControlPanelComponent, resolve: { orgs: OrganizationResolverService } ,
+  { path: 'Content-panel', component: ControlPanelComponent, canActivate: [AuthGuardService],
     children: [
       { path: '', redirectTo: 'Panel', pathMatch: 'full' },
-      { path: 'Panel', component: ContentComponent, resolve: { orgs: OrganizationResolverService } , canActivate: [AuthGuardService],
+      { path: 'Panel', component: ContentComponent,
         children : [
-          { path: '', redirectTo: 'Homepage', resolve: { orgs: OrganizationResolverService }, pathMatch: 'full' },
-          { path: 'Homepage', component: ContentHomeComponent, resolve: { orgs: OrganizationResolverService }},
+          { path: '', redirectTo: 'Homepage', pathMatch: 'full' },
+          { path: 'Homepage', component: ContentHomeComponent},
           { path: 'Tracciamento', component: ContentTrackUsersComponent},
           { path: 'Monitoraggio utenti', component: ContentTrackUsersNumberComponent},
           { path: 'Informazioni sull\'organizzazione', component: ContentTrackUsersGeneralInformationComponent, data: { reuse: true}},

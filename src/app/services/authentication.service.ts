@@ -5,9 +5,9 @@ import {EventEmitter, Injectable} from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {Observable, of} from 'rxjs';
 import {AdministratorService, Configuration, ConfigurationParameters, Organization, OrganizationService, Permission} from '../..';
-import {DataService} from './data.service';
 import {FirebaseAuth} from '@angular/fire';
 import {AdministratorDataService} from './AdministratorData.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +21,17 @@ export class AuthenticationService {
   private userDetails: firebase.User = null;
 
 
-  constructor(private angularFireAuth: AngularFireAuth, private as: AdministratorService, private os: OrganizationService, private ads: AdministratorDataService) {
+  constructor(private angularFireAuth: AngularFireAuth, private as: AdministratorService, private os: OrganizationService, private ads: AdministratorDataService, private router: Router) {
+    //this.signOut();
+    console.log('auth service constructor');
     this.UserData = angularFireAuth.authState;
     this.UserData.subscribe(
       (user) => {
         if (user) {
+          console.log('Constrctor if user');
           this.userDetails = user;
+          this.Token = this.userDetails.getIdToken();
+          this.configureTokenAndGetAdminOrganizations();
         } else {
           this.userDetails = null;
         }
@@ -35,6 +40,7 @@ export class AuthenticationService {
   }
 
   isLoggedIn() {
+    console.log('isLoggedIn() from auth service');
     if (this.userDetails == null ) {
       return false;
     } else {
@@ -46,48 +52,74 @@ export class AuthenticationService {
   * Sign in. It allows you to authenticate the user, otherwise it reports an error
   */
   signIn(email: string, password: string) {
+    console.log('LOGIN');
     this.angularFireAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(res => { this.SignOk = true;
-                     this.Token = this.angularFireAuth.auth.currentUser.getIdToken();
-                     this.Token.then( (s: string) => {
-                       this.as.configuration.setAccessToken(s);
-                       this.angularFireAuth.auth.onAuthStateChanged((user) => {
-                         if (user) {
-                           // User is signed in.
-                           let organizationList;
-                           this.os.getOrganizationList().subscribe( (orgs: Array<Organization>) => {
-                             orgs.sort((o1, o2) => {
-                               if (o1.id > o2.id) {
-                                 return 1;
-                               }
-                               if (o1.id < o2.id) {
-                                 return -1;
-                               }
-                               return 0;
-                             });
-                             organizationList = orgs;
-                             this.as.getPermissionList(user.uid).subscribe((p: Permission[]) => {
-                               p.sort((p1, p2) => {
-                                 if (p1.organizationId > p2.organizationId) {
-                                   return 1;
-                                 }
-                                 if (p1.organizationId < p2.organizationId) {
-                                   return -1;
-                                 }
-                                 return 0;
-                               });
-                               this.ads.getUserPermissions().emit(p);
-                               this.ads.getAdminOrganizations().emit(this.filterOrganizationsOnPermissions(organizationList, p));
-                             });
-                           });
-                         }
-                       });
-                     });
+                     // this.Token = this.angularFireAuth.auth.currentUser.getIdToken();
+                     // this.configureTokenAndGetAdminOrganizations();
                      console.log('You are Successfully logged in!'); })
       .catch(err => { this.SignOk = false;
                       console.log('Something is wrong:', err.message);
       });
+  }
+
+  configureTokenAndGetAdminOrganizations() {
+    this.Token.then( (s: string) => {
+      localStorage.setItem('adminToken', s);
+      this.as.configuration.setAccessToken(s);
+      this.angularFireAuth.auth.onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in.
+          console.log('if(user)');
+          this.as.getPermissionList(user.uid).subscribe((p: Permission[]) => {
+            console.log('Got PermList');
+            p.sort((p1, p2) => {
+              if (p1.organizationId > p2.organizationId) {
+                return 1;
+              }
+              if (p1.organizationId < p2.organizationId) {
+                return -1;
+              }
+              return 0;
+            });
+            this.ads.getUserPermissions().emit(p);
+            const organizationList = new Array<Organization>();
+            let remainingOrgs = p.length;
+            for (const i of p) {
+              this.os.getOrganization(i.organizationId).subscribe((o: Organization) => {
+                console.log('org id to get: ' + i.organizationId);
+                organizationList.push(o);
+                remainingOrgs--;
+                if (remainingOrgs === 0) {
+                  this.ads.getAdminOrganizations.next(this.filterOrganizationsOnPermissions(organizationList, p));
+                  console.log('organizationList emitted: ' + organizationList);
+                  this.router.navigateByUrl('/Content-panel').then((b: boolean) => { console.log('After emit i successfully navigated to content panel: ' + b); });
+                }
+              });
+            }
+          });
+
+ /*         let organizationList;
+          console.log('Pre Get OrgList');
+          this.os.getOrganizationList().subscribe( (orgs: Array<Organization>) => {
+            console.log('Got OrgList');
+            orgs.sort((o1, o2) => {
+              if (o1.id > o2.id) {
+                return 1;
+              }
+              if (o1.id < o2.id) {
+                return -1;
+              }
+              return 0;
+            });
+            organizationList = orgs;
+            console.log('Pre Get PermList');
+
+          });*/
+        }
+      });
+    });
   }
 
   filterOrganizationsOnPermissions(orgs: Array<Organization>, perms: Array<Permission>): Array<Organization> {
@@ -104,6 +136,9 @@ export class AuthenticationService {
       } else {
         permIt++;
       }
+    }
+    for (const o of filteredOrgs) {
+      console.log('Filtered org: ' + o.name);
     }
     return filteredOrgs;
   }

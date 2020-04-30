@@ -12,12 +12,15 @@ export class AuthGuardService implements CanActivate {
    canActivate(): Observable<boolean> |  Promise<boolean> | boolean {
 
     if ( this.auth.isLoggedIn()) {
+      console.log('CanActivate: true because isLoggedIn() === true');
       return true;
     }
-    let flag = localStorage.getItem('key');
+    const flag = localStorage.getItem('key');
     if (flag) {
+      console.log('CanActivate: true because flag from localStorage (key) === true');
       return true;
     }
+    console.log('Back to login because cannot activate');
     this.router.navigateByUrl('/Login');
     return false;
   }
