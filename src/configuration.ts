@@ -29,9 +29,9 @@ export class Configuration {
         this.encoder = configurationParameters.encoder;
     }
 
-    setAccessToken(accToken: string) {
+    /*setAccessToken(accToken: string) {
       this.accessToken = accToken;
-    }
+    }*/
 
     /**
      * Select the correct content-type to use for a request.

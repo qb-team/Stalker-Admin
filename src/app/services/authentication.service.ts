@@ -67,32 +67,24 @@ export class AuthenticationService {
   configureTokenAndGetAdminOrganizations() {
     this.Token.then( (s: string) => {
       localStorage.setItem('adminToken', s);
-      this.as.configuration.setAccessToken(s);
+      //this.as.configuration.setAccessToken(s);
       this.angularFireAuth.auth.onAuthStateChanged((user) => {
         if (user) {
           // User is signed in.
           console.log('if(user)');
           this.as.getPermissionList(user.uid).subscribe((p: Permission[]) => {
             console.log('Got PermList');
-            p.sort((p1, p2) => {
-              if (p1.organizationId > p2.organizationId) {
-                return 1;
-              }
-              if (p1.organizationId < p2.organizationId) {
-                return -1;
-              }
-              return 0;
-            });
             this.ads.getUserPermissions().emit(p);
             const organizationList = new Array<Organization>();
-            let remainingOrgs = p.length;
+            let remainingOrgs = 0;
+            console.log('Orgs number to get: ' + remainingOrgs);
             for (const i of p) {
               this.os.getOrganization(i.organizationId).subscribe((o: Organization) => {
                 console.log('org id to get: ' + i.organizationId);
                 organizationList.push(o);
-                remainingOrgs--;
-                if (remainingOrgs === 0) {
-                  this.ads.getAdminOrganizations.next(this.filterOrganizationsOnPermissions(organizationList, p));
+                remainingOrgs++;
+                if (remainingOrgs === p.length) {
+                  this.ads.getAdminOrganizations.next(this.sortOrganizationsById(this.filterOrganizationsOnPermissions(organizationList, p)));
                   console.log('organizationList emitted: ' + organizationList);
                   this.router.navigateByUrl('/Content-panel').then((b: boolean) => { console.log('After emit i successfully navigated to content panel: ' + b); });
                 }
@@ -119,6 +111,18 @@ export class AuthenticationService {
           });*/
         }
       });
+    });
+  }
+
+  sortOrganizationsById(orgs: Array<Organization>): Array<Organization> {
+    return orgs.sort((o1, o2) => {
+      if (o1.id > o2.id) {
+        return 1;
+      }
+      if (o1.id < o2.id) {
+        return -1;
+      }
+      return 0;
     });
   }
 
