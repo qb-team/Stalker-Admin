@@ -4,6 +4,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Organization } from 'src/model/models';
 import {AdministratorDataService} from '../../../services/AdministratorData.service';
+import {Map} from 'leaflet';
 
 
 @Component({
@@ -37,9 +38,21 @@ export class OrganizationTrackingAreaContentComponent implements OnInit {
   */
   private perimeterCoordinates;
 
+  private map: Map;
+  private zoom: number;
+
   constructor( private ads: AdministratorDataService ) {
-  console.log('Costruttore numero utenti');
+    console.log('Costruttore numero utenti');
   }
+
+  receiveMap(map: Map) {
+    this.map = map;
+  }
+
+  receiveZoom(zoom: number) {
+    this.zoom = zoom;
+  }
+
 
   get getActualOrg(): Organization {
     return this.actualOrganization;
@@ -83,11 +96,11 @@ export class OrganizationTrackingAreaContentComponent implements OnInit {
   /*
   * Set presentUsersOrg at the number of the users actually inside the organization's perimeter
   */
- /* getUsers() {
-    // fetches data from the database
+  /* getUsers() {
+     // fetches data from the database
 
-    // todo
-  }*/
+     // todo
+   }*/
 
   ngOnInit(): void {
     this.subscribeToOrganization();

@@ -7,3 +7,10 @@ td {
 .table td {
   text-align: center;
 }
+.fs-container {
+  width:80%;
+  height:80%;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}

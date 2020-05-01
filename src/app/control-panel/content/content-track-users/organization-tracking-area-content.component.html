@@ -1,4 +1,4 @@
-<div>
+<!--<div>
     <h1>Nome dell'organizzazione: {{getActualOrg.name}} </h1>
     <table class="table">
       <caption>Lista delle coordinate dell'organizzazione</caption>
@@ -20,4 +20,10 @@
           </tr>
         </tbody>
     </table>
-</div>
+</div>-->
+<div class="fs-container">
+  <app-osm-map-content
+    (map$)="receiveMap($event)"
+    (zoom$)="receiveZoom($event)"
+    id='main-map'
+  ></app-osm-map-content></div>
