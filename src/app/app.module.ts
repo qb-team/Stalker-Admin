@@ -35,6 +35,8 @@ import { ManageAdministratorsContentComponent } from './control-panel/content/ma
 import {AdministratorDataService} from './services/AdministratorData.service';
 import {AccessDataService} from './services/AccessesData.service';
 import {OrganizationTrackingDataService} from './services/OrganizationTrackingData.service';
+import {OsmMapContentComponent} from './control-panel/content/content-track-users/osm-map-content/osm-map-content.component';
+import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 
 
 @NgModule({
@@ -51,7 +53,8 @@ import {OrganizationTrackingDataService} from './services/OrganizationTrackingDa
     ControlPanelComponent,
     OrganizationInformationContentComponent,
     MenubarComponent,
-    ManageAdministratorsContentComponent
+    ManageAdministratorsContentComponent,
+    OsmMapContentComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ import {OrganizationTrackingDataService} from './services/OrganizationTrackingDa
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LeafletModule
   ],
   providers: [AuthenticationService, OrganizationService, AdministratorDataService, AccessDataService, OrganizationTrackingDataService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
   bootstrap: [AppComponent]
