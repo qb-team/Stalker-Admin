@@ -13,19 +13,19 @@ import {AdministratorDataService} from '../../services/AdministratorData.service
 })
 export class ContentComponent implements OnInit {
   /*
-  * The actually selected organization
+  * The currently selected organization
   */
-  private actualOrganization: Organization;
+  private currentOrganization: Organization;
 
   constructor( private ads: AdministratorDataService, private activatedRoute: ActivatedRoute ) { console.log('Constructor content component'); }
 
 
   get getOganization(): Organization {
-    return this.actualOrganization;
+    return this.currentOrganization;
   }
 
   set setOrganization(value: Organization) {
-    this.actualOrganization = value;
+    this.currentOrganization = value;
   }
   /*
   * Subscribes to the organization service and to active_content, in order to retrive informations about the selected organization and dinamically update the specific-content component
@@ -36,6 +36,6 @@ export class ContentComponent implements OnInit {
   }
 
   subscribeToOrganization(): void {
-    this.ads.getOrganization.subscribe((o: Organization) => {this.actualOrganization = o; });
+    this.ads.getOrganization.subscribe((o: Organization) => {this.currentOrganization = o; });
   }
 }

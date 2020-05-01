@@ -13,16 +13,16 @@ export class OrganizationInformationContentComponent implements OnInit {
   /*
   * The organization currently active
   */
- private actualOrganization: Organization;
+ private currentOrganization: Organization;
 
   constructor(private ads: AdministratorDataService, private activatedRoute: ActivatedRoute) { console.log('Costruttore general info'); }
 
-  get getActualOrg(): Organization {
-    return this.actualOrganization;
+  get getCurrentOrg(): Organization {
+    return this.currentOrganization;
   }
 
-  set setActualOrg(value: Organization) {
-    this.actualOrganization = value;
+  set setCurrentOrg(value: Organization) {
+    this.currentOrganization = value;
   }
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class OrganizationInformationContentComponent implements OnInit {
   }
 
   subscribeToOrganization(): void {
-    this.ads.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
+    this.ads.getOrganization.subscribe((org: Organization) => { this.currentOrganization = org; });
   }
 
 }

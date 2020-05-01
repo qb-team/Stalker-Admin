@@ -8,7 +8,7 @@ import {TrackingDataService} from './TrackingDataService';
   providedIn: 'root'
 })
 
-export class OrganizationTrackingDataService extends TrackingDataService {
+export class PlaceTrackingDataService extends TrackingDataService {
   constructor(ps: PresenceService) {
     super(ps);
   }

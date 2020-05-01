@@ -13,12 +13,12 @@ import {AdministratorDataService} from '../../../services/AdministratorData.serv
 })
 export class OrganizationTrackingAreaContentComponent implements OnInit {
   /*
-  * The actual organization selected
+  * The current organization selected
   */
-  private actualOrganization: Organization;
+  private currentOrganization: Organization;
 
   /*
-  * The number of users actually inside the organization's perimeter
+  * The number of users currently inside the organization's perimeter
   */
   private presentUsersOrg;
 
@@ -41,12 +41,12 @@ export class OrganizationTrackingAreaContentComponent implements OnInit {
   console.log('Costruttore numero utenti');
   }
 
-  get getActualOrg(): Organization {
-    return this.actualOrganization;
+  get getCurrentOrg(): Organization {
+    return this.currentOrganization;
   }
 
-  set setActualOrg(value: Organization) {
-    this.actualOrganization = value;
+  set setCurrentOrg(value: Organization) {
+    this.currentOrganization = value;
   }
 
   get getPresentUsersOrg() {
@@ -81,7 +81,7 @@ export class OrganizationTrackingAreaContentComponent implements OnInit {
     this.perimeterCoordinates = value;
   }
   /*
-  * Set presentUsersOrg at the number of the users actually inside the organization's perimeter
+  * Set presentUsersOrg at the number of the users currently inside the organization's perimeter
   */
  /* getUsers() {
     // fetches data from the database
@@ -95,8 +95,8 @@ export class OrganizationTrackingAreaContentComponent implements OnInit {
 
   subscribeToOrganization(): void {
     this.ads.getOrganization.subscribe((org: Organization) => {
-      this.actualOrganization = org;
-      this.jsonCoordinates = this.actualOrganization.trackingArea;
+      this.currentOrganization = org;
+      this.jsonCoordinates = this.currentOrganization.trackingArea;
       this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni;
     });
   }
