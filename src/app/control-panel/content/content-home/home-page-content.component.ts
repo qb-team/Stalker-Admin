@@ -11,11 +11,11 @@ import {AdministratorDataService} from '../../../services/AdministratorData.serv
   styleUrls: ['./home-page-content.component.css']
 })
 export class HomePageContentComponent implements OnInit {
-  private actualOrganization: Organization;
+  private currentOrganization: Organization;
   constructor(private ads: AdministratorDataService) { }
 
-  get getAcutalOrganization(): Organization {
-    return this.actualOrganization;
+  get getCurrentOrganization(): Organization {
+    return this.currentOrganization;
   }
 
   ngOnInit(): void {
@@ -23,6 +23,6 @@ export class HomePageContentComponent implements OnInit {
   }
 
   subscribeToOrganization(): void {
-    this.ads.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
+    this.ads.getOrganization.subscribe((org: Organization) => { this.currentOrganization = org; });
   }
 }

@@ -9,7 +9,7 @@ import {Observable, ReplaySubject} from 'rxjs';
 export class AdministratorDataService {
   private userPermissions = new EventEmitter<Array<Permission>>();
   private adminOrganizations: ReplaySubject<Array<Organization>> = new ReplaySubject<Array<Organization>>(); // list of organizations that are accessible for the user
-  private actualOrganization: ReplaySubject<Organization> = new ReplaySubject<Organization>(1);
+  private currentOrganization: ReplaySubject<Organization> = new ReplaySubject<Organization>(1);
 
   getUserPermissions(): EventEmitter<Array<Permission>> {
     return this.userPermissions;
@@ -24,10 +24,10 @@ export class AdministratorDataService {
 
 
   set setOrganization(value: ReplaySubject<Organization>) {
-    this.actualOrganization = value;
+    this.currentOrganization = value;
   }
 
   get getOrganization(): ReplaySubject<Organization> {
-    return this.actualOrganization;
+    return this.currentOrganization;
   }
 }

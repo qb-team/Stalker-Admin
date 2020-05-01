@@ -13,25 +13,25 @@ import {Organization} from '../../..';
 })
 export class MenuFunctionalityComponent implements OnInit/*, DoCheck*/ {
 
-private actualOrganization: Organization;
+private currentOrganization: Organization;
   constructor(private ads: AdministratorDataService, private router: Router ) { }
 
-  get getAcutalOrganization(): Organization {
-    return this.actualOrganization;
+  get getCurrentOrganization(): Organization {
+    return this.currentOrganization;
   }
 
-  set setAcutalOrganization(value: Organization) {
-    this.actualOrganization = value;
+  set setCurrentOrganization(value: Organization) {
+    this.currentOrganization = value;
   }
   /*
- * Subscribes to the service 'DataService' to retrive the actual specific-component to be showed
+ * Subscribes to the service 'DataService' to retrive the current specific-component to be showed
  */
   ngOnInit(): void {
-    this.ads.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
+    this.ads.getOrganization.subscribe((org: Organization) => { this.currentOrganization = org; });
   }
 
   /*ngDoCheck(): void {
-    this.ads.getOrganization.subscribe((org: Organization) => { this.actualOrganization = org; });
+    this.ads.getOrganization.subscribe((org: Organization) => { this.currentOrganization = org; });
   }*/
 
   updateContent(click: any) {
