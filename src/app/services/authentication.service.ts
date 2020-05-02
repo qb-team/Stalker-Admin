@@ -80,7 +80,7 @@ export class AuthenticationService {
                 organizationList.push(o);
                 remainingOrgs++;
                 if (remainingOrgs === p.length) {
-                  this.ads.getAdminOrganizations.next(this.filterOrganizationsOnPermissions(this.sortOrganizationsById(organizationList), p));
+                  this.ads.getAdminOrganizations.next(this.sortOrganizationsById(organizationList));
                   console.log('organizationList emitted: ' + organizationList);
                   this.router.navigateByUrl('/Content-panel').then((b: boolean) => { console.log('After emit i successfully navigated to content panel: ' + b); });
                 }
@@ -104,27 +104,6 @@ export class AuthenticationService {
     });
     console.log('sorted orgs in sort(): ' + orgsToRet);
     return orgsToRet;
-  }
-
-  filterOrganizationsOnPermissions(orgs: Array<Organization>, perms: Array<Permission>): Array<Organization> {
-    const filteredOrgs = new Array<Organization>();
-    let orgIt = 0;
-    let permIt = 0;
-    while (orgIt < orgs.length && permIt < perms.length) {
-      if (orgs[orgIt].id === perms[permIt].organizationId) {
-        filteredOrgs.push(orgs[orgIt]);
-        orgIt++;
-        permIt++;
-      } else if (orgs[orgIt].id < perms[permIt].organizationId) {
-        orgIt++;
-      } else {
-        permIt++;
-      }
-    }
-    for (const o of filteredOrgs) {
-      console.log('Filtered org: ' + o.name);
-    }
-    return filteredOrgs;
   }
 
   /*
