@@ -64,7 +64,7 @@ export class AuthenticationService {
       });
   }
 
-  configureTokenAndGetAdminOrganizations() {
+  private configureTokenAndGetAdminOrganizations() {
     this.Token.then( (s: string) => {
       localStorage.setItem('adminToken', s);
       //this.as.configuration.setAccessToken(s);
