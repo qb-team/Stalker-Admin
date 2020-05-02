@@ -2,13 +2,13 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {AdministratorDataService} from './AdministratorData.service';
 import {Organization, OrganizationPresenceCounter, PresenceService} from '../..';
 import {ReplaySubject, Subscription} from 'rxjs';
-import {TrackingDataServiceService} from './TrackingDataService.service';
+import {TrackingDataService} from './TrackingData.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class OrganizationTrackingDataServiceService extends TrackingDataServiceService {
+export class OrganizationTrackingDataService extends TrackingDataService {
   currentOrgSubscription: Subscription;
   constructor(ps: PresenceService) {
     super(ps);

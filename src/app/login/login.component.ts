@@ -67,7 +67,6 @@ export class LoginComponent implements OnInit {
      (user) => {
        if (user) {
          localStorage.setItem('key', 'True');
-         this.navigateToContentPanel();
        } });
   }
 
@@ -88,11 +87,6 @@ export class LoginComponent implements OnInit {
   /*
   * Return the visible field of DataService
   */
-
-  navigateToContentPanel() {
-    console.log('Navigate to content panel');
-    this.router.navigateByUrl('/Content-panel').then((b: boolean) => { console.log('Navigation succeded: ' + b); });
-  }
 
   get submitted(): boolean {
     return this.Submitted;

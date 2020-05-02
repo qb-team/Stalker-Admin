@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { Map, Control, DomUtil, ZoomAnimEvent , Layer, MapOptions, tileLayer, latLng } from 'leaflet';
+import {Map, Control, DomUtil, ZoomAnimEvent, Layer, MapOptions, tileLayer, latLng} from 'leaflet';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-osm-map-content',
