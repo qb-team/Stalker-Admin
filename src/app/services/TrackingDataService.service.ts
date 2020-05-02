@@ -7,7 +7,7 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 
-export abstract class TrackingDataService {
+export abstract class TrackingDataServiceService {
   private usersNumber: ReplaySubject<number>;
   constructor(protected ps: PresenceService) { this.usersNumber = new ReplaySubject<number>(); }
 
