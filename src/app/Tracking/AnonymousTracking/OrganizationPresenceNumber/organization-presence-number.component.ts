@@ -58,7 +58,7 @@ export class OrganizationPresenceNumberComponent implements OnInit {
     });
   }
 
-  setCounterRefreshInterval(): void {
+  private setCounterRefreshInterval(): void {
     this.refreshTimer = setInterval(() => {
       this.subscriptionToOrgPresenceCounter.unsubscribe();
       this.tds.subscribeOrganizationPresenceCounter(this.currentOrganization.id);
