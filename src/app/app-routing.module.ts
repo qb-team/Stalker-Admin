@@ -1,14 +1,14 @@
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from './login/login.component';
-import {ResetPasswordComponent} from './reset-password/reset-password.component';
-import {ControlPanelComponent} from './control-panel/control-panel.component';
+import {LoginComponent} from './UserNoAuthenticated/login/login.component';
+import {ResetPasswordComponent} from './UserNoAuthenticated/reset-password/reset-password.component';
+import {ControlPanelComponent} from './control-panel.component';
 import {NgModule} from '@angular/core';
 import {AuthGuardService} from './services/auth-guard.service';
-import {OrganizationInformationContentComponent} from './control-panel/content/content-home/user-tracking-content/organization-information-content/organization-information-content.component';
-import {OrganizationTrackingAreaContentComponent} from './control-panel/content/content-track-users/organization-tracking-area-content.component';
-import {HomePageContentComponent} from './control-panel/content/content-home/home-page-content.component';
-import {ContentComponent} from './control-panel/content/content.component';
-import {ContentTrackUsersNumberComponent} from './control-panel/content/content-home/user-tracking-content/content-track-users-number/content-track-users-number.component';
+import {OrganizationInformationContentComponent} from './Organization/Organization-information/Organization-information/organization-information-content.component';
+import {ViewOrganizationTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/View-organization-tracking-area/view-organization-tracking-area-content.component';
+import {HomePageContentComponent} from './Home-page/home-page-content.component';
+import {ContentComponent} from './content/content.component';
+import {OrganizationPresenceNumberComponent} from './Tracking/AnonymousTracking/OrganizationPresenceNumber/organization-presence-number.component';
 import {LoginGuardService} from './services/login-guard.service';
 
 
@@ -23,8 +23,8 @@ const routes: Routes = [
         children : [
           { path: '', redirectTo: 'Homepage', pathMatch: 'full' },
           { path: 'Homepage', component: HomePageContentComponent},
-          { path: 'Tracciamento', component: OrganizationTrackingAreaContentComponent},
-          { path: 'Monitoraggio utenti', component: ContentTrackUsersNumberComponent, data: { reuse: false}},
+          { path: 'Tracciamento', component: ViewOrganizationTrackingAreaContentComponent},
+          { path: 'Monitoraggio utenti', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
           { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: true}},
         ]
       }

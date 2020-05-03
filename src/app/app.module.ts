@@ -17,26 +17,27 @@ import { OrganizationService } from 'src/api/api';
 import { AppComponent } from './app.component';
 
 /* child component */
-import { MenuFunctionalityComponent } from './control-panel/menu-functionality/menu-functionality.component';
-import { MenubarComponent } from './control-panel/menubar/menubar.component';
-import { ContentComponent } from './control-panel/content/content.component';
-import { OrganizationTrackingAreaContentComponent } from './control-panel/content/content-track-users/organization-tracking-area-content.component';
-import { LoginComponent } from './login/login.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { MenuFunctionalityComponent } from './menu-functionality/menu-functionality.component';
+import { MenubarComponent } from './menubar/menubar.component';
+import { ContentComponent } from './content/content.component';
+import { ViewOrganizationTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/View-organization-tracking-area/view-organization-tracking-area-content.component';
+import { LoginComponent } from './UserNoAuthenticated/login/login.component';
+import { ResetPasswordComponent } from './UserNoAuthenticated/reset-password/reset-password.component';
 import { FooterComponent } from './footer/footer.component';
-import { HomePageContentComponent } from './control-panel/content/content-home/home-page-content.component';
-import { ContentTrackUsersNumberComponent } from './control-panel/content/content-home/user-tracking-content/content-track-users-number/content-track-users-number.component';
-import { ControlPanelComponent } from './control-panel/control-panel.component';
-import { OrganizationInformationContentComponent } from './control-panel/content/content-home/user-tracking-content/organization-information-content/organization-information-content.component';
+import { HomePageContentComponent } from './Home-page/home-page-content.component';
+import { OrganizationPresenceNumberComponent } from './Tracking/AnonymousTracking/OrganizationPresenceNumber/organization-presence-number.component';
+import { ControlPanelComponent } from './control-panel.component';
+import { OrganizationInformationContentComponent} from './Organization/Organization-information/Organization-information/organization-information-content.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RouteReuseStrategy} from '@angular/router';
 import {RouteReuseService} from './services/route-reuse.service';
-import { ManageAdministratorsContentComponent } from './control-panel/content/manage-administrators-content/manage-administrators-content.component';
+import { AdministratorManagementComponent } from './AdminManagement/administrator-management.component';
 import {AdministratorOrganizationDataService} from './services/AdministratorOrganizationData.service';
 import {AccessDataService} from './services/AccessesData.service';
 import {OrganizationTrackingDataService} from './services/OrganizationTrackingData.service';
-import {OsmMapContentComponent} from './control-panel/content/content-track-users/osm-map-content/osm-map-content.component';
+import {OsmMapContentComponent} from './Organization/osm-map-content/osm-map-content.component';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import {AdministratorPermissionDataService} from './services/AdministratorPermissionData.service';
 
 
 @NgModule({
@@ -44,16 +45,16 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
     AppComponent,
     MenuFunctionalityComponent,
     ContentComponent,
-    OrganizationTrackingAreaContentComponent,
+    ViewOrganizationTrackingAreaContentComponent,
     LoginComponent,
     ResetPasswordComponent,
     FooterComponent,
     HomePageContentComponent,
-    ContentTrackUsersNumberComponent,
+    OrganizationPresenceNumberComponent,
     ControlPanelComponent,
     OrganizationInformationContentComponent,
     MenubarComponent,
-    ManageAdministratorsContentComponent,
+    AdministratorManagementComponent,
     OsmMapContentComponent
   ],
   imports: [
@@ -66,7 +67,7 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
     ReactiveFormsModule,
     LeafletModule
   ],
-  providers: [AuthenticationService, OrganizationService, AdministratorOrganizationDataService, AccessDataService, OrganizationTrackingDataService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
+  providers: [AuthenticationService, OrganizationService, AdministratorOrganizationDataService, AdministratorPermissionDataService, AccessDataService, OrganizationTrackingDataService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

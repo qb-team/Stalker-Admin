@@ -26,7 +26,7 @@ export class AdministratorOrganizationDataService {
           this.router.navigateByUrl('/Content-panel');
         }
       });
-  }
+    }
   }
 
   sortOrganizationsById(orgs: Array<Organization>): Array<Organization> {
