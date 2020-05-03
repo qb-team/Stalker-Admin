@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import {Observable, of} from 'rxjs';
 import {AdministratorService, Configuration, ConfigurationParameters, Organization, OrganizationService, Permission} from '../..';
 import {FirebaseAuth} from '@angular/fire';
-import {AdministratorDataService} from './AdministratorData.service';
+import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
 import {Router} from '@angular/router';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class AuthenticationService {
   private userDetails: firebase.User = null;
 
 
-  constructor(private angularFireAuth: AngularFireAuth, private as: AdministratorService, private os: OrganizationService, private ads: AdministratorDataService, private router: Router) {
+  constructor(private angularFireAuth: AngularFireAuth, private as: AdministratorService, private os: OrganizationService, private aods: AdministratorOrganizationDataService, private apds: AdministratorPermissionDataService, private router: Router) {
     console.log('auth service constructor');
     this.UserData = angularFireAuth.authState;
     this.UserData.subscribe(
@@ -70,7 +70,7 @@ export class AuthenticationService {
           console.log('if(user)');
           this.as.getPermissionList(user.uid).subscribe((p: Permission[]) => {
             console.log('Got PermList');
-            this.ads.getUserPermissions().emit(p);
+            this.aods.getUserPermissions().emit(p);
             const organizationList = new Array<Organization>();
             let remainingOrgs = 0;
             console.log('Orgs number to get: ' + remainingOrgs);
@@ -80,7 +80,7 @@ export class AuthenticationService {
                 organizationList.push(o);
                 remainingOrgs++;
                 if (remainingOrgs === p.length) {
-                  this.ads.getAdminOrganizations.next(this.sortOrganizationsById(organizationList));
+                  this.aods.getAdminOrganizations.next(this.sortOrganizationsById(organizationList));
                   console.log('organizationList emitted: ' + organizationList);
                   this.router.navigateByUrl('/Content-panel').then((b: boolean) => { console.log('After emit i successfully navigated to content panel: ' + b); });
                 }
