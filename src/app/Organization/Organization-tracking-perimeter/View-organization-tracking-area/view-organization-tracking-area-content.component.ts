@@ -37,7 +37,7 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
   /*
   * The coordinates of the organization's perimeter
   */
-  private perimeterCoordinates;
+  private perimeterCoordinates: string;
 
   private map: Map;
   private zoom: number;
@@ -57,7 +57,9 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
 
   receiveMap(map: Map) {
     this.map = map;
-    L.marker([45.776047, 12.288832], {icon: this.markerIcon}).addTo(this.map);
+    console.log(this.perimeterCoordinates.toString());
+    console.log(JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat);
+    L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
     L.polygon([
       [45.776165, 12.288811],
       [45.776098, 12.288704],
@@ -82,11 +84,6 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
       this.jsonCoordinates = this.currentOrganization.trackingArea;
       this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni;
     });
-    for (const coord of this.perimeterCoordinates) {
-      console.log(coord.lat);
-      break;
-    }
-
   }
 
   get getCurrentOrg(): Organization {
