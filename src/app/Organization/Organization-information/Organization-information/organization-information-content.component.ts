@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Organization } from 'src/model/models';
 import {ActivatedRoute} from '@angular/router';
-import { AdministratorOrganizationDataService} from '../../../services/AdministratorPermissionData.service';
+import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 
 @Component({
   selector: 'app-content-track-users-general-information',

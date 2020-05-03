@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Permission} from '../..';
+import {AdministratorService, Permission} from '../..';
 
 @Injectable({
   providedIn: 'root'
