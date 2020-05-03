@@ -2,7 +2,7 @@
 * A side-menu that offers all the functionalities available for the administrator on the current organization
 */
 import {Component, DoCheck, EventEmitter, OnInit} from '@angular/core';
-import { AdministratorDataService } from '../../services/AdministratorData.service';
+import { AdministratorOrganizationDataService } from '../../services/AdministratorOrganizationData.service';
 import {Router} from '@angular/router';
 import {Organization} from '../../..';
 
@@ -14,7 +14,7 @@ import {Organization} from '../../..';
 export class MenuFunctionalityComponent implements OnInit/*, DoCheck*/ {
 
 private currentOrganization: Organization;
-  constructor(private ads: AdministratorDataService, private router: Router ) { }
+  constructor(private ads: AdministratorOrganizationDataService, private router: Router ) { }
 
   get getCurrentOrganization(): Organization {
     return this.currentOrganization;

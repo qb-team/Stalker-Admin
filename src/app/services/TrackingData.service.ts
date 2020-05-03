@@ -1,4 +1,4 @@
-import {AdministratorDataService} from './AdministratorData.service';
+import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
 import {Organization, OrganizationPresenceCounter, PresenceService} from '../..';
 import {ReplaySubject} from 'rxjs';
 import {Injectable} from '@angular/core';

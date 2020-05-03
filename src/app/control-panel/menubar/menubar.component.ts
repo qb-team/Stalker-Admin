@@ -6,7 +6,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { OrganizationService } from 'src/api/api';
 import { Organization } from 'src/model/models';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AdministratorDataService} from '../../services/AdministratorData.service';
+import {AdministratorOrganizationDataService} from '../../services/AdministratorOrganizationData.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {any} from 'codelyzer/util/function';
 import {Observable, ReplaySubject} from 'rxjs';
@@ -32,7 +32,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   * The password of the user that is logging in
   */
   private Password: string;
-  constructor(private ads: AdministratorDataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router, private activatedRoute: ActivatedRoute ) { }
+  constructor(private ads: AdministratorOrganizationDataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router, private activatedRoute: ActivatedRoute ) { }
   /*
    * Initialization and refresh the list of organization
    */

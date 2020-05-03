@@ -7,7 +7,7 @@ import { PresenceService } from 'src/api/api';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {OrganizationTrackingDataService} from '../../../../../services/OrganizationTrackingData.service';
 import {Subscriber, Subscription} from 'rxjs';
-import {AdministratorDataService} from '../../../../../services/AdministratorData.service';
+import {AdministratorOrganizationDataService} from '../../../../../services/AdministratorOrganizationData.service';
 
 @Component({
   selector: 'app-content-track-users-number',
@@ -19,7 +19,7 @@ export class ContentTrackUsersNumberComponent implements OnInit {
   refreshTimer;
   trackedUsersCounter: number;
   private subscriptionToOrgPresenceCounter: Subscription;
-  constructor(private tds: OrganizationTrackingDataService, private ads: AdministratorDataService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private tds: OrganizationTrackingDataService, private ads: AdministratorOrganizationDataService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
 
   get getCurrentOrganization(): Organization {

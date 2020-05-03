@@ -32,7 +32,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {RouteReuseStrategy} from '@angular/router';
 import {RouteReuseService} from './services/route-reuse.service';
 import { ManageAdministratorsContentComponent } from './control-panel/content/manage-administrators-content/manage-administrators-content.component';
-import {AdministratorDataService} from './services/AdministratorData.service';
+import {AdministratorOrganizationDataService} from './services/AdministratorOrganizationData.service';
 import {AccessDataService} from './services/AccessesData.service';
 import {OrganizationTrackingDataService} from './services/OrganizationTrackingData.service';
 import {OsmMapContentComponent} from './control-panel/content/content-track-users/osm-map-content/osm-map-content.component';
@@ -66,7 +66,7 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
     ReactiveFormsModule,
     LeafletModule
   ],
-  providers: [AuthenticationService, OrganizationService, AdministratorDataService, AccessDataService, OrganizationTrackingDataService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
+  providers: [AuthenticationService, OrganizationService, AdministratorOrganizationDataService, AccessDataService, OrganizationTrackingDataService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

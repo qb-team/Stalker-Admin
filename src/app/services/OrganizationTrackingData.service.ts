@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {AdministratorDataService} from './AdministratorData.service';
+import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
 import {Organization, OrganizationPresenceCounter, PresenceService} from '../..';
 import {ReplaySubject, Subscription} from 'rxjs';
 import {TrackingDataService} from './TrackingData.service';

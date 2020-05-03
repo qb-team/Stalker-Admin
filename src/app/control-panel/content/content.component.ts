@@ -4,7 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Organization } from 'src/model/models';
 import {ActivatedRoute} from '@angular/router';
-import {AdministratorDataService} from '../../services/AdministratorData.service';
+import {AdministratorOrganizationDataService} from '../../services/AdministratorOrganizationData.service';
 
 @Component({
   selector: 'app-content',

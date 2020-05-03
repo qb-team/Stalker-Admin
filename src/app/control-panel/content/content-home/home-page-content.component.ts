@@ -3,7 +3,7 @@
 */
 import { Component, OnInit, Input } from '@angular/core';
 import { Organization } from 'src/model/models';
-import {AdministratorDataService} from '../../../services/AdministratorData.service';
+import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 
 @Component({
   selector: 'app-content-home',
@@ -12,7 +12,7 @@ import {AdministratorDataService} from '../../../services/AdministratorData.serv
 })
 export class HomePageContentComponent implements OnInit {
   private currentOrganization: Organization;
-  constructor(private ads: AdministratorDataService) { }
+  constructor(private ads: AdministratorOrganizationDataService) { }
 
   get getCurrentOrganization(): Organization {
     return this.currentOrganization;

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Organization } from 'src/model/models';
 import {ActivatedRoute} from '@angular/router';
-import {AdministratorDataService} from '../../../../../services/AdministratorData.service';
+import {AdministratorOrganizationDataService} from '../../../../../services/AdministratorOrganizationData.service';
 
 @Component({
   selector: 'app-content-track-users-general-information',
@@ -15,7 +15,7 @@ export class OrganizationInformationContentComponent implements OnInit {
   */
  private currentOrganization: Organization;
 
-  constructor(private ads: AdministratorDataService, private activatedRoute: ActivatedRoute) { console.log('Costruttore general info'); }
+  constructor(private ads: AdministratorOrganizationDataService, private activatedRoute: ActivatedRoute) { console.log('Costruttore general info'); }
 
   get getCurrentOrg(): Organization {
     return this.currentOrganization;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AdministratorService, Permission} from '../../../..';
-import {AdministratorDataService} from '../../../services/AdministratorData.service';
+import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 
 @Component({
   selector: 'app-manage-administrators-content.component.ts',
@@ -19,7 +19,7 @@ export class ManageAdministratorsContentComponent implements OnInit {
    */
   private permissionModifications: Array<Permission>;
 
-  constructor(ads: AdministratorDataService, as: AdministratorService) { }
+  constructor(ads: AdministratorOrganizationDataService, as: AdministratorService) { }
 
   ngOnInit(): void {
   }
