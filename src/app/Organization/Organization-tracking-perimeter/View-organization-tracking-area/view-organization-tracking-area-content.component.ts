@@ -4,7 +4,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Organization } from 'src/model/models';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
-import {icon, Map} from 'leaflet';
+import {icon, latLng, Map, MapOptions, tileLayer} from 'leaflet';
 import * as L from 'leaflet';
 
 
@@ -50,6 +50,16 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
     shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
   });
+  TrackMap: MapOptions = {
+    layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      opacity: 1,
+      maxZoom: 19,
+      minZoom: 8.5,
+      detectRetina: true,
+    })],
+    zoom: 1,
+    center: latLng(42.471967891443384, 13.573022878267201)
+  };
 
   constructor( private ads: AdministratorOrganizationDataService ) {
     console.log('Costruttore numero utenti');
@@ -57,9 +67,11 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
 
   receiveMap(map: Map) {
     this.map = map;
+    this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long]);
+    this.map.zoomIn(9);
     console.log(this.perimeterCoordinates.toString());
     console.log(JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat);
-    L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
+    L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long], {icon: this.markerIcon}).addTo(this.map);
     L.polygon([
       [45.776165, 12.288811],
       [45.776098, 12.288704],
