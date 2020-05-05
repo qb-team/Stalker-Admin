@@ -20,16 +20,6 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
   private currentOrganization: Organization;
 
   /*
-  * The number of users currently inside the organization's perimeter
-  */
-  private presentUsersOrg;
-
-  /*
-  * An observable of an organization
-  */
-  private organization: Organization;
-
-  /*
   * A string to store the coordinates of the organization's perimeter in json format
   */
   private jsonCoordinates: string;
@@ -49,6 +39,7 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
     iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+
   });
   TrackMap: MapOptions = {
     layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -73,10 +64,10 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
     console.log(JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat);
     L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long], {icon: this.markerIcon}).addTo(this.map);
     L.polygon([
-      [45.776165, 12.288811],
-      [45.776098, 12.288704],
-      [45.776001, 12.288834],
-      [45.776083, 12.288941]
+      [JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long],
+      [JSON.parse(this.jsonCoordinates).Organizzazioni[1].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[1].long],
+      [JSON.parse(this.jsonCoordinates).Organizzazioni[2].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long],
+      [JSON.parse(this.jsonCoordinates).Organizzazioni[3].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[3].long]
     ]).addTo(this.map);
   }
 
@@ -105,22 +96,6 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
 
   set setCurrentOrg(value: Organization) {
     this.currentOrganization = value;
-  }
-
-  get getPresentUsersOrg() {
-    return this.presentUsersOrg;
-  }
-
-  set setPresentUsersOrg(value) {
-    this.presentUsersOrg = value;
-  }
-
-  get geOrganization(): Organization {
-    return this.organization;
-  }
-
-  set setOrganization(value: Organization) {
-    this.organization = value;
   }
 
   get getJsonCoordinates(): string {
