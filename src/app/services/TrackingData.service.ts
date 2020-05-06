@@ -8,8 +8,10 @@ import {Injectable} from '@angular/core';
 })
 
 export abstract class TrackingDataService {
-  private usersNumber: ReplaySubject<number>;
-  constructor(protected ps: PresenceService) { this.usersNumber = new ReplaySubject<number>(); }
+  private usersNumber: ReplaySubject<number> = new ReplaySubject<number>();
+  protected constructor(protected ps: PresenceService) {
+    console.log('TS: ' + this.ps);
+  }
 
   get getUsersNumber(): ReplaySubject<number> {
     return this.usersNumber;

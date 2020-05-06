@@ -1,1 +1,19 @@
-<p>administrator-management.component.ts works!</p>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="table" colspan="3">Lista degli amministratori di {{ getCurrentOrganization.name }} e dei loro permessi</th>
+  </tr>
+  <tr>
+    <th scope="col">#Punto</th>
+    <th scope="col">Coordinata X</th>
+    <th scope="col">Coordinata Y</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let perm of getPermissions; index as i">
+    <th scope="row">{{ i+1 }}</th>
+    <td>{{ perm.administratorId }}</td>
+    <td>{{ perm.permission }}</td>
+  </tr>
+  </tbody>
+</table>

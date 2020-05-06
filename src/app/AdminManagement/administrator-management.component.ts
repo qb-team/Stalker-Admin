@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AdministratorService, Permission} from '../../index';
+import {AdministratorService, Organization, Permission} from '../../index';
 import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
 
 @Component({
@@ -19,9 +19,25 @@ export class AdministratorManagementComponent implements OnInit {
    */
   private permissionModifications: Array<Permission>;
 
-  constructor(ads: AdministratorOrganizationDataService, as: AdministratorService) { }
+  private currentOrganization: Organization;
+
+  constructor(private ads: AdministratorOrganizationDataService, private as: AdministratorService) { }
 
   ngOnInit(): void {
+    this.subscribeToOrganziation();
+    this.subscribeToAdministratorPermissions();
+  }
+
+  subscribeToOrganziation() {
+    this.ads.getOrganization.subscribe((o: Organization) => {
+      this.currentOrganization = o;
+    });
+  }
+
+  subscribeToAdministratorPermissions() {
+    this.as.getAdministratorListOfOrganization(this.currentOrganization.id).subscribe((permArr: Array<Permission>) => {
+      this.permissions = permArr;
+    });
   }
 
   /*
@@ -29,7 +45,6 @@ export class AdministratorManagementComponent implements OnInit {
   * If permissionModifications already conains a modification for that administrator, the old one will be replaced with the new one of this method
    */
   private addPermissionModificationInstance(): void {
-
   }
 
   /*
@@ -37,6 +52,13 @@ export class AdministratorManagementComponent implements OnInit {
   * will replace the old ones in permissions using modifyPriviledgesOf(adminId, newPriviledgeLevel)
    */
   private updatePermissionList(): void {
+  }
 
+  get getPermissions() {
+    return this.permissions;
+  }
+
+  get getCurrentOrganization() {
+    return this.currentOrganization;
   }
 }

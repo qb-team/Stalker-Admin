@@ -10,6 +10,7 @@ import {HomePageContentComponent} from './Home-page/home-page-content.component'
 import {ContentComponent} from './content/content.component';
 import {OrganizationPresenceNumberComponent} from './Tracking/AnonymousTracking/OrganizationPresenceNumber/organization-presence-number.component';
 import {LoginGuardService} from './services/login-guard.service';
+import {AdministratorManagementComponent} from './AdminManagement/administrator-management.component';
 
 
 const routes: Routes = [
@@ -23,9 +24,12 @@ const routes: Routes = [
         children : [
           { path: '', redirectTo: 'Homepage', pathMatch: 'full' },
           { path: 'Homepage', component: HomePageContentComponent},
-          { path: 'Tracciamento', component: ViewOrganizationTrackingAreaContentComponent},
-          { path: 'Monitoraggio utenti', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
+          { path: 'Perimetro di tracciamento dell\'organizzazione', component: ViewOrganizationTrackingAreaContentComponent},
+          { path: 'Presenze attuali nell\'organizzazione', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
           { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: true}},
+          { path: 'Aggiungi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
+          { path: 'imuovi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
+          { path: 'Modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: true}},
         ]
       }
     ]

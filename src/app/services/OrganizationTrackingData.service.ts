@@ -10,15 +10,17 @@ import {TrackingDataService} from './TrackingData.service';
 
 export class OrganizationTrackingDataService extends TrackingDataService {
   currentOrgSubscription: Subscription;
-  constructor(ps: PresenceService) {
+  constructor(protected ps: PresenceService) {
     super(ps);
+    console.log('OTS this: ' + this.ps);
+    console.log('OTS super: ' + super.ps);
   }
 
   subscribeOrganizationPresenceCounter(orgId: number): void {
     if (this.currentOrgSubscription != null) {
       this.currentOrgSubscription.unsubscribe();
     }
-    this.currentOrgSubscription = super.ps.getOrganizationPresenceCounter(orgId).subscribe((opc: OrganizationPresenceCounter) => {
+    this.currentOrgSubscription = this.ps.getOrganizationPresenceCounter(orgId).subscribe((opc: OrganizationPresenceCounter) => {
       this.getUsersNumber.next(opc.counter);
     });
   }
