@@ -11,16 +11,7 @@ export class OsmMapContentComponent implements OnInit,  OnDestroy {
 
   @Output() map$: EventEmitter<Map> = new EventEmitter();
   @Output() zoom$: EventEmitter<number> = new EventEmitter();
-  @Input() options: MapOptions = {
-    layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      opacity: 1,
-      maxZoom: 19,
-      minZoom: 5.5,
-      detectRetina: true,
-    })],
-    zoom: 1,
-    center: latLng(42.471967891443384, 13.573022878267201)
-  };
+  @Input() options: MapOptions;
   private map: Map;
   private zoom: number;
 

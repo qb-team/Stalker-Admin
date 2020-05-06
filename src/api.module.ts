@@ -5,8 +5,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { AccessService } from './api/access.service';
 import { AdministratorService } from './api/administrator.service';
-import { FavoriteService } from './api/favorite.service';
-import { MovementService } from './api/movement.service';
 import { OrganizationService } from './api/organization.service';
 import { PlaceService } from './api/place.service';
 import { PresenceService } from './api/presence.service';

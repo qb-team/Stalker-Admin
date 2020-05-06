@@ -23,6 +23,7 @@
 </div>-->
 <div class="fs-container">
   <app-osm-map-content
+    [options]="TrackMap"
     (map$)="receiveMap($event)"
     (zoom$)="receiveZoom($event)"
     id='main-map'
