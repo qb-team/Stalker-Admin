@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {Permission} from '../..';
 import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
 import {AdministratorPermissionDataService} from './AdministratorPermissionData.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class AuthenticationService {
   private userDetails: firebase.User = null;
 
 
-  constructor(private angularFireAuth: AngularFireAuth, private adp: AdministratorPermissionDataService, private ado: AdministratorOrganizationDataService) {
+  constructor(private angularFireAuth: AngularFireAuth, private adp: AdministratorPermissionDataService, private ado: AdministratorOrganizationDataService, private router: Router) {
     this.UserData = angularFireAuth.authState;
     this.UserData.subscribe(
       (user) => {
@@ -59,6 +60,7 @@ export class AuthenticationService {
         if (user) {
           this.adp.requireAdministratorPermissions(user.uid);
           this.adp.getUserPermissions().subscribe((p: Permission[]) => {this.ado.requireAdministratorOrganizations(p); });
+          this.router.navigateByUrl('/Content-panel');
         }
       });
     });
