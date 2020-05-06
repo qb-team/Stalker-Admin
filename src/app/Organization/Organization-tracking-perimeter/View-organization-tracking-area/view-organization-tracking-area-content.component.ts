@@ -35,9 +35,9 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
     iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
     shadowUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png',
 
-    iconSize:     [50, 85], // size of the icon
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4, 62],  // the same for the shadow
+    iconSize:    [20, 50], // size of the icon
+    iconAnchor:   [10, 50], // point of the icon which will correspond to marker's location
+    shadowAnchor: [15, 40],  // the same for the shadow
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 
   });
@@ -58,20 +58,20 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
 
   receiveMap(map: Map) {
     this.map = map;
-    this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long]);
-    this.map.zoomIn(9);
-    console.log(this.perimeterCoordinates.toString());
-    console.log(JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat);
-    L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long], {icon: this.markerIcon}).addTo(this.map);
-    L.polygon([
-      [JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long],
-      [JSON.parse(this.jsonCoordinates).Organizzazioni[1].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[1].long],
-      [JSON.parse(this.jsonCoordinates).Organizzazioni[2].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long],
-      [JSON.parse(this.jsonCoordinates).Organizzazioni[3].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[3].long]
-    ]).addTo(this.map);
+    this.ads.getOrganization.subscribe((org: Organization) => {
+      this.jsonCoordinates = this.currentOrganization.trackingArea;
+      this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long]);
+      this.map.zoomIn(9);
+      L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
+      L.polygon([
+        [JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long],
+        [JSON.parse(this.jsonCoordinates).Organizzazioni[1].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[1].long],
+        [JSON.parse(this.jsonCoordinates).Organizzazioni[2].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long],
+        [JSON.parse(this.jsonCoordinates).Organizzazioni[3].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[3].long]
+      ]).addTo(this.map);
+    });
   }
-
-
+  
   receiveZoom(zoom: number) {
     this.zoom = zoom;
   }
