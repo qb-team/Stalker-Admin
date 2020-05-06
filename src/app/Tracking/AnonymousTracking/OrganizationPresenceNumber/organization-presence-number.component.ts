@@ -38,7 +38,7 @@ export class OrganizationPresenceNumberComponent implements OnInit {
       this.tds.subscribeOrganizationPresenceCounter(o.id);
     });
     this.subscribeToNavigationEvents();
-    this.setCounterRefreshInterval();
+    this.setCounterRefreshInterval(5000);
   }
 
   subscribeToNavigationEvents(): void {
@@ -58,12 +58,12 @@ export class OrganizationPresenceNumberComponent implements OnInit {
     });
   }
 
-  private setCounterRefreshInterval(): void {
+  setCounterRefreshInterval(ms: number): void {
     this.refreshTimer = setInterval(() => {
       this.subscriptionToOrgPresenceCounter.unsubscribe();
       this.tds.subscribeOrganizationPresenceCounter(this.currentOrganization.id);
       console.log('Updated subscription');
-    }, 5000);
+    }, ms);
   }
 
 }
