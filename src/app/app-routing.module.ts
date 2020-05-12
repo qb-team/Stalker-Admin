@@ -11,6 +11,7 @@ import {ContentComponent} from './content/content.component';
 import {OrganizationPresenceNumberComponent} from './Tracking/AnonymousTracking/OrganizationPresenceNumber/organization-presence-number.component';
 import {LoginGuardService} from './services/login-guard.service';
 import {AdministratorManagementComponent} from './AdminManagement/administrator-management.component';
+import {ModifyPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'Homepage', pathMatch: 'full' },
           { path: 'Homepage', component: HomePageContentComponent},
           { path: 'Perimetro di tracciamento dell\'organizzazione', component: ViewOrganizationTrackingAreaContentComponent},
+        { path: 'Modifica del perimetro di tracciamento dell\'organizzazione', component: ModifyPlaceTrackingAreaContentComponent},
           { path: 'Presenze attuali nell\'organizzazione', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
           { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: true}},
           { path: 'Aggiungi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
