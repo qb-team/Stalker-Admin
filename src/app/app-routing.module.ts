@@ -26,7 +26,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'Homepage', pathMatch: 'full' },
           { path: 'Homepage', component: HomePageContentComponent},
           { path: 'Perimetro di tracciamento dell\'organizzazione', component: ViewOrganizationTrackingAreaContentComponent},
-          { path: 'Modifica del perimetro tracciamento dell\'organizzazione', component: ModifyPlaceTrackingAreaContentComponent},
+        { path: 'Modifica del perimetro di tracciamento dell\'organizzazione', component: ModifyPlaceTrackingAreaContentComponent},
           { path: 'Presenze attuali nell\'organizzazione', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
           { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: true}},
           { path: 'Aggiungi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
