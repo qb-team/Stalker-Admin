@@ -90,7 +90,7 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit {
       for (const coord of trackingArea) {
           console.log(coord);
       }
-      this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, trackingArea);
+      this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, trackingArea).subscribe(() => {});
     });
   }
   onSubmit(): void {
