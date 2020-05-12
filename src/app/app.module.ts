@@ -38,7 +38,7 @@ import {OrganizationTrackingDataService} from './services/OrganizationTrackingDa
 import {OsmMapContentComponent} from './Organization/osm-map-content/osm-map-content.component';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {AdministratorPermissionDataService} from './services/AdministratorPermissionData.service';
-import { ModifyPlaceTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component';
+import { ModifyOrganizationTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/modify-organization-tracking-area-content/modify-organization-tracking-area-content.component';
 
 
 @NgModule({
@@ -57,7 +57,7 @@ import { ModifyPlaceTrackingAreaContentComponent } from './Organization/Organiza
     MenubarComponent,
     AdministratorManagementComponent,
     OsmMapContentComponent,
-    ModifyPlaceTrackingAreaContentComponent
+    ModifyOrganizationTrackingAreaContentComponent
   ],
   imports: [
     BrowserModule,
