@@ -28,8 +28,8 @@ const routes: Routes = [
           { path: 'Presenze attuali nell\'organizzazione', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
           { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: true}},
           { path: 'Aggiungi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
-          { path: 'imuovi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
-          { path: 'Modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: true}},
+          { path: 'Rimuovi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
+          { path: 'Modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}},
         ]
       }
     ]

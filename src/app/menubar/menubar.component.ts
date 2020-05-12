@@ -8,8 +8,6 @@ import { Organization } from 'src/model/models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {any} from 'codelyzer/util/function';
-import {Observable, ReplaySubject} from 'rxjs';
 
 @Component({
   selector: 'app-menubar',

@@ -21,6 +21,7 @@
         <div class="modal-body">
           <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
             <fieldset>
+              <legend>Login LDAP</legend>
               <label id="labelE" for="email">Email:</label>
               <input type="email" name="email" id="email" class="form-control" required="required" [(ngModel)]="email" placeholder="email" formControlName="email">
               <label id="labelPSW" for="pwd">Password:</label>

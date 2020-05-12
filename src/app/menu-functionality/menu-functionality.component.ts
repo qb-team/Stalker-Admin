@@ -1,7 +1,7 @@
 /*
 * A side-menu that offers all the functionalities available for the administrator on the current organization
 */
-import {Component, DoCheck, EventEmitter, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { AdministratorOrganizationDataService } from '../services/AdministratorOrganizationData.service';
 import {Router} from '@angular/router';
 import {Organization} from '../../index';

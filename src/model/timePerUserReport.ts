@@ -9,23 +9,22 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
-
+​
+​
 /**
  * Represents a row in the report generated for an user by the viewer administrator.
  */
-export interface TimePerUserReport { 
-    /**
-     * Unique identifier of the organization in which the user had access.
-     */
-    organizationId: number;
-    /**
-     * User unique identifier from the authentication server of the organization.
-     */
-    orgAuthServerId: string;
-    /**
-     * Total amount of time spent inside the organization by the user.
-     */
-    totalTime: Date;
+export interface TimePerUserReport {
+  /**
+   * Unique identifier of the place in which the user had access.
+   */
+  placeId: number;
+  /**
+   * User unique identifier from the authentication server of the organization.
+   */
+  orgAuthServerId: string;
+  /**
+   * Total amount of time spent inside the organization by the user.
+   */
+  totalTime: Date;
 }
-

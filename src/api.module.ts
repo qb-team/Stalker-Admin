@@ -3,13 +3,6 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
-import { AccessService } from './api/access.service';
-import { AdministratorService } from './api/administrator.service';
-import { OrganizationService } from './api/organization.service';
-import { PlaceService } from './api/place.service';
-import { PresenceService } from './api/presence.service';
-import { ReportService } from './api/report.service';
-
 @NgModule({
   imports:      [],
   declarations: [],

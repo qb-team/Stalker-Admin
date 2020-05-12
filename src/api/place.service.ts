@@ -84,7 +84,7 @@ export class PlaceService {
     /**
      * Creates a new place for an organization.
      * Creates a new place for an organization. Only web-app administrators can access this end-point.
-     * @param place 
+     * @param place
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -249,71 +249,67 @@ export class PlaceService {
         );
     }
 
-    /**
-     * Updates one or more properties of a place of an organization.
-     * Updates one or more properties of a place of an organization. Only web-app administrators can access this end-point.
-     * @param placeId ID of a place.
-     * @param place 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public updatePlace(placeId: number, place: Place, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Place>;
-    public updatePlace(placeId: number, place: Place, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Place>>;
-    public updatePlace(placeId: number, place: Place, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Place>>;
-    public updatePlace(placeId: number, place: Place, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
-        if (placeId === null || placeId === undefined) {
-            throw new Error('Required parameter placeId was null or undefined when calling updatePlace.');
-        }
-        if (place === null || place === undefined) {
-            throw new Error('Required parameter place was null or undefined when calling updatePlace.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (bearerAuth) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        let httpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (httpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (httpHeaderAcceptSelected !== undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
-        }
-
-        return this.httpClient.put<Place>(`${this.configuration.basePath}/place/${encodeURIComponent(String(placeId))}`,
-            place,
-            {
-                responseType: <any>responseType,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
+  /**
+   * Updates one or more properties of a place of an organization.
+   * Updates one or more properties of a place of an organization. Only web-app administrators can access this end-point.
+   * @param place
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public updatePlace(place: Place, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Place>;
+  public updatePlace(place: Place, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Place>>;
+  public updatePlace(place: Place, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Place>>;
+  public updatePlace(place: Place, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    if (place === null || place === undefined) {
+      throw new Error('Required parameter place was null or undefined when calling updatePlace.');
     }
+
+    let headers = this.defaultHeaders;
+
+    // authentication (bearerAuth) required
+    if (this.configuration.accessToken) {
+      const accessToken = typeof this.configuration.accessToken === 'function'
+        ? this.configuration.accessToken()
+        : this.configuration.accessToken;
+      headers = headers.set('Authorization', 'Bearer ' + accessToken);
+    }
+    let httpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+    if (httpHeaderAcceptSelected === undefined) {
+      // to determine the Accept header
+      const httpHeaderAccepts: string[] = [
+        'application/json'
+      ];
+      httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    }
+    if (httpHeaderAcceptSelected !== undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
+    }
+
+
+    // to determine the Content-Type header
+    const consumes: string[] = [
+      'application/json'
+    ];
+    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+    if (httpContentTypeSelected !== undefined) {
+      headers = headers.set('Content-Type', httpContentTypeSelected);
+    }
+
+    let responseType: 'text' | 'json' = 'json';
+    if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+      responseType = 'text';
+    }
+
+    return this.httpClient.put<Place>(`${this.configuration.basePath}/place`,
+      place,
+      {
+        responseType: <any>responseType,
+        withCredentials: this.configuration.withCredentials,
+        headers: headers,
+        observe: observe,
+        reportProgress: reportProgress
+      }
+    );
+  }
 
 }

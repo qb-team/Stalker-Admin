@@ -1,12 +1,11 @@
 /*
 * Shows the number of users currently inside the organization's perimeter
 */
-import { Component, OnInit, Input} from '@angular/core';
-import { Organization, OrganizationPresenceCounter } from 'src/model/models';
-import { PresenceService } from 'src/api/api';
+import { Component, OnInit} from '@angular/core';
+import { Organization } from 'src/model/models';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {OrganizationTrackingDataService} from '../../../services/OrganizationTrackingData.service';
-import {Subscriber, Subscription} from 'rxjs';
+import { Subscription} from 'rxjs';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 
 @Component({

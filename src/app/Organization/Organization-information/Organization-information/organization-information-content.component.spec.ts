@@ -1,8 +1,8 @@
 // tslint:disable
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Observable, of as observableOf} from 'rxjs';
+import { of as observableOf} from 'rxjs';
 import { OrganizationInformationContentComponent } from './organization-information-content.component';
 
 @Injectable()

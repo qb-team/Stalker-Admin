@@ -1,4 +1,4 @@
-export * from './favorite';
+export * from './administratorBindingRequest';
 export * from './organization';
 export * from './organizationAccess';
 export * from './organizationMovement';

@@ -27,6 +27,7 @@ export class AuthenticationService {
       (user) => {
         if (user) {
           this.userDetails = user;
+          localStorage.setItem('uid', user.uid);
           this.Token = this.userDetails.getIdToken();
           this.configureTokenAndGetAdminOrganizations();
         } else {

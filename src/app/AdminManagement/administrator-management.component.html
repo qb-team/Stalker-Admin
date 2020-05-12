@@ -1,19 +1,38 @@
-<table class="table">
-  <thead>
-  <tr>
-    <th scope="table" colspan="3">Lista degli amministratori di {{ getCurrentOrganization.name }} e dei loro permessi</th>
-  </tr>
-  <tr>
-    <th scope="col">#Punto</th>
-    <th scope="col">Coordinata X</th>
-    <th scope="col">Coordinata Y</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let perm of getPermissions; index as i">
-    <th scope="row">{{ i+1 }}</th>
-    <td>{{ perm.administratorId }}</td>
-    <td>{{ perm.permission }}</td>
-  </tr>
-  </tbody>
-</table>
+<div *ngIf="this.getCurrentOrganization">
+  <table class="table">
+    <caption>Amministratori di {{ getCurrentOrganization.name }} e i loro permessi</caption>
+    <thead>
+    <tr>
+      <th scope="table" colspan="3">Lista degli amministratori di {{ getCurrentOrganization.name }} e dei loro permessi</th>
+    </tr>
+    <tr>
+      <th scope="col">#amministratore</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">Privilegi</th>
+      <th scope="col">Modifica privilegi</th>
+      <th scope="col">Nuovi privilegi</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let perm of getPermissions; index as i">
+      <th scope="row">{{ i+1 }}</th>
+      <!--td>{{ perm.mail }}</td-->
+      <td>{{ perm.administratorId }}</td>
+      <td>{{ getPermissionLevelNoun(perm.permission) }}</td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Modifica privilegi
+          </button>
+          <div id="{{ perm.administratorId }}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-item" (click)="addPermissionModificationInstance($event, 1); updateModifiedPermissionOnTable(i, 'Visualizzatore')">Visualizzatore</div>
+            <div class="dropdown-item" (click)="addPermissionModificationInstance($event, 2); updateModifiedPermissionOnTable(i, 'Gestore')">Gestore</div>
+          </div>
+        </div>
+      </td>
+      <td *ngIf="permissionModificationsTableText != undefined && i < permissionModificationsTableText.length">{{ permissionModificationsTableText[i] }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <p id="applyChangesP" *ngIf="getPermissionModifications != undefined &&  getPermissionModifications.length != 0"><button (click)="updatePermissionList()" class="btn btn-danger">Salva le modifiche</button></p>
+</div>

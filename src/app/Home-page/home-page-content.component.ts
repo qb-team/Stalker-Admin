@@ -1,7 +1,7 @@
 /*
 * Shows minimal informations about the interface usage
 */
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Organization } from 'src/model/models';
 import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
 

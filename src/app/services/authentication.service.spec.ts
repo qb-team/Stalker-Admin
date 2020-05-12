@@ -1,10 +1,7 @@
-import { async } from '@angular/core/testing';
 import { Injectable } from '@angular/core';
-import { Observable, of as observableOf, throwError } from 'rxjs';
+import { of as observableOf } from 'rxjs';
 
 import { AuthenticationService } from './authentication.service';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AdministratorService, OrganizationService } from '../..';
 
 @Injectable()
 class MockAdministratorService {}
