@@ -59,7 +59,7 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
   receiveMap(map: Map) {
     this.map = map;
     this.ads.getOrganization.subscribe((org: Organization) => {
-      this.jsonCoordinates = this.currentOrganization.trackingArea;
+      this.jsonCoordinates = org.trackingArea;
       this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long]);
       this.map.zoomIn(9);
       L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
@@ -71,7 +71,7 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
       ]).addTo(this.map);
     });
   }
-  
+
   receiveZoom(zoom: number) {
     this.zoom = zoom;
   }
