@@ -1,0 +1,9 @@
+#applyChangesP {
+  text-align: center;
+}
+
+#loadingData {
+  color: red;
+  font-size: 2em;
+  padding: 25% 25%;
+}
