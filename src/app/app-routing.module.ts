@@ -14,6 +14,8 @@ import {AdministratorManagementComponent} from './AdminManagement/administrator-
 import {ModifyOrganizationTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/modify-organization-tracking-area-content/modify-organization-tracking-area-content.component';
 import {DeactivateGuard} from './services/deactivate.service';
 import {OrganizationManagementContentComponent} from './Organization/Organization-information/organization-management-content/organization-management-content.component';
+import {ViewPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/view-place-tracking-area-content/view-place-tracking-area-content.component';
+import {ModifyPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component';
 
 
 const routes: Routes = [
@@ -34,7 +36,9 @@ const routes: Routes = [
           { path: 'Aggiungi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
           { path: 'Rimuovi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
           { path: 'Modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canDeactivate: [DeactivateGuard]},
-          { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent}
+          { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent},
+          { path: 'Perimetro di tracciamento di un luogo dell\'organizzazione', component: ViewPlaceTrackingAreaContentComponent},
+          { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent},
         ]
       }
     ]

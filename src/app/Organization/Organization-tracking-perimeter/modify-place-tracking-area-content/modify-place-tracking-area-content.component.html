@@ -1,0 +1,51 @@
+<form [formGroup]="dynamicForm" class="shadow p-4 mb-5 bg-white">
+  <fieldset>
+    <div class="card m-3">
+      <div class="card-header ">
+        <h1 class="title" >Modifica del perimetro di tracciamento</h1>
+        <div class="dropdown" id="lineDiv">
+          <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Luogo
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item"  (click)="setPlace($event)" *ngFor="let o of PlaceArr; index as i" id="{{i}}" >{{o.name}}</a>
+          </div>
+        </div>
+        <span *ngIf="CurrentPlace!== undefined"> {{CurrentPlace.name}}</span>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <label for="np">Numero di punti da inserire</label>
+            <input id="np" type="text"  class="form-control" #num>
+          </div>
+          <div class="col">
+            <br/>
+            <br/>
+            <button id="subnum" (click)="onChangePoints(num.value)" class="btn btn-danger">Mostra</button>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let point of tArray.controls; let i = index" class="list-group list-group-flush">
+        <div class="list-group-item">
+          <div [formGroup]="point" class="form-row">
+            <div class="form-group col-6">
+              <label for="lat">Latitudine</label>
+              <input id="lat" type="text" formControlName="lat" class="form-control" />
+            </div>
+            <div class="form-group col-6">
+              <label for="long">Longitudine</label>
+              <input id="long" type="text" formControlName="long" class="form-control" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-center">
+        <button class="btn btn-danger mr-1" (click)="onSubmit()" [disabled]="!dynamicForm.valid || !submitted"> Modifica </button>
+        <button class="btn btn-danger mr-1" type="reset" (click)="onReset()">Reset</button>
+        <button class="btn btn-danger" type="button" (click)="onClear()">Pulisci</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+

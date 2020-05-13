@@ -1,23 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Organization, OrganizationService} from '../../../..';
+import {Organization, OrganizationService, Place, PlaceService} from '../../../..';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 
 @Component({
   selector: 'app-modify-place-tracking-area-content',
-  templateUrl: './modify-organization-tracking-area-content.component.html',
-  styleUrls: ['./modify-organization-tracking-area-content.component.css']
+  templateUrl: './modify-place-tracking-area-content.component.html',
+  styleUrls: ['./modify-place-tracking-area-content.component.css']
 })
-export class ModifyOrganizationTrackingAreaContentComponent implements OnInit {
+export class ModifyPlaceTrackingAreaContentComponent implements OnInit {
   private Submitted = false;
   private currentOrganization: Organization;
+  PlaceArr: Array<Place>;
+  private currentPlace: Place;
   dynamicForm: FormGroup;
-  constructor(private ads: AdministratorOrganizationDataService, private orgS: OrganizationService, private formBuilder: FormBuilder) { }
+
+  constructor(private ads: AdministratorOrganizationDataService, private plS: PlaceService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.dynamicForm = this.formBuilder.group({
       Organizzazioni: new FormArray([])
     });
+    this.loadPlaceList();
+  }
+
+  loadPlaceList() {
+    this.ads.getOrganization.subscribe((org: Organization) => {
+      this.currentOrganization = org;
+      this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
+        this.PlaceArr = places;
+        this.currentPlace = places[0];
+      });
+    });
+  }
+
+  setPlace(click: any) {
+    this.currentPlace = this.PlaceArr[click.target.attributes.id.value];
+    console.log(this.currentPlace);
   }
 
   // convenience getters for easy access to form fields
@@ -30,6 +49,7 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit {
       console.log(e);
     } else {
       this.Submitted = true;
+      console.log(e);
       const numberOfPoints = e;
       console.log(numberOfPoints);
       if (this.tArray.length < numberOfPoints) {
@@ -52,8 +72,8 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit {
       // display form values on success
       this.ads.getOrganization.subscribe((org: Organization) => {
         this.currentOrganization = org;
-        this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, JSON.stringify(this.dynamicForm.value, null, 4)).subscribe(() => {});
-        this.currentOrganization.trackingArea = JSON.stringify(this.dynamicForm.value, null, 4);
+        this.currentPlace.trackingArea = JSON.stringify(this.dynamicForm.value, null, 4);
+        this.plS.updatePlace(this.currentPlace).subscribe(() => {});
       });
       alert(JSON.stringify(this.dynamicForm.value, null, 4));
       this.onReset();
@@ -62,7 +82,7 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit {
 
   onReset() {
     // reset whole form back to initial state
-    this.submitted = false;
+    this.Submitted = false;
     this.dynamicForm.reset();
     this.tArray.clear();
   }
@@ -80,11 +100,19 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit {
     this.Submitted = value;
   }
 
-  get getCurrentOrg(): Organization {
+  get CurrentOrg(): Organization {
     return this.currentOrganization;
   }
 
-  set setCurrentOrg(value: Organization) {
+  set CurrentOrg(value: Organization) {
     this.currentOrganization = value;
+  }
+
+  get CurrentPlace(): Place {
+    return this.currentPlace;
+  }
+
+  set CurrentPlace(value: Place) {
+    this.currentPlace = value;
   }
 }

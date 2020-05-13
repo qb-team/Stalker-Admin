@@ -41,6 +41,9 @@ import {AdministratorPermissionDataService} from './services/AdministratorPermis
 import { ModifyOrganizationTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/modify-organization-tracking-area-content/modify-organization-tracking-area-content.component';
 import {DeactivateGuard} from './services/deactivate.service';
 import { OrganizationManagementContentComponent } from './Organization/Organization-information/organization-management-content/organization-management-content.component';
+import { ViewPlaceTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/view-place-tracking-area-content/view-place-tracking-area-content.component';
+import {OsmMapContentPlaceComponent} from './Organization/Organization-tracking-perimeter/view-place-tracking-area-content/osm-map-content-place/osm-map-content-place.component';
+import { ModifyPlaceTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component';
 
 
 @NgModule({
@@ -60,7 +63,10 @@ import { OrganizationManagementContentComponent } from './Organization/Organizat
     AdministratorManagementComponent,
     OsmMapContentComponent,
     ModifyOrganizationTrackingAreaContentComponent,
-    OrganizationManagementContentComponent
+    OrganizationManagementContentComponent,
+    ViewPlaceTrackingAreaContentComponent,
+    OsmMapContentPlaceComponent,
+    ModifyPlaceTrackingAreaContentComponent
   ],
   imports: [
     BrowserModule,

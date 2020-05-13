@@ -1,4 +1,4 @@
-<form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()" class="shadow p-4 mb-5 bg-white">
+<form [formGroup]="dynamicForm"class="shadow p-4 mb-5 bg-white">
   <fieldset>
   <div class="card m-3">
     <h5 class="card-header">Modifica del perimetro di tracciamento</h5>
@@ -9,6 +9,8 @@
           <input id="np" type="text"  class="form-control" #num>
         </div>
         <div class="col">
+          <br/>
+          <br/>
           <button id="subnum" (click)="onChangePoints(num.value)" class="btn btn-danger">Mostra</button>
         </div>
       </div>
@@ -28,7 +30,7 @@
       </div>
     </div>
     <div class="card-footer text-center">
-      <button class="btn btn-danger mr-1"[disabled]="!dynamicForm.valid"> Modifica </button>
+      <button class="btn btn-danger mr-1" (click)="onSubmit()" [disabled]="!dynamicForm.valid || !submitted"> Modifica </button>
       <button class="btn btn-danger mr-1" type="reset" (click)="onReset()">Reset</button>
       <button class="btn btn-danger" type="button" (click)="onClear()">Pulisci</button>
     </div>
