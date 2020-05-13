@@ -1,55 +1,37 @@
-<div class="shadow p-4 mb-5 bg-white">
-  <form [formGroup]="coForm" (ngSubmit)="onSubmit()" >
-    <fieldset>
-    <div class="row">
-      <div class="col">
-        <label id="labelLat1" for="lat1">Latitudine 1</label>
-        <input type="text" id="lat1" name="lat1" class="form-control" [(ngModel)]="Lat1" formControlName="Lat1" placeholder="Latitudine 1">
-      </div>
-      <div class="col">
-        <label id="labelLong1" for="long1">Longitudine 1</label>
-        <input type="text" id="long1" name="long1" class="form-control" [(ngModel)]="Long1" formControlName="Long1" placeholder="Longitudine 1">
+<form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()" class="shadow p-4 mb-5 bg-white">
+  <fieldset>
+  <div class="card m-3">
+    <h5 class="card-header">Modifica del perimetro di tracciamento</h5>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <label for="np">Numero di punti da inserire</label>
+          <input id="np" type="text"  class="form-control" #num>
+        </div>
+        <div class="col">
+          <button id="subnum" (click)="onChangePoints(num.value)" class="btn btn-danger">Mostra</button>
+        </div>
       </div>
     </div>
-      <div class="row">
-        <div class="col">
-          <label id="labelLat2" for="lat2">Latitudine 2</label>
-          <input type="text" id="lat2" name="lat2" class="form-control" [(ngModel)]="Lat2" formControlName="Lat2" placeholder="Latitudine 2">
-        </div>
-        <div class="col">
-          <label id="labelLong2" for="long2">Longitudine 2</label>
-          <input type="text" id="long2" name="long2" class="form-control" [(ngModel)]="Long2" formControlName="Long2" placeholder="Longitudine 2">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label id="labelLat3" for="lat3">Latitudine 3</label>
-          <input type="text" id="lat3" name="lat3" class="form-control" [(ngModel)]="Lat3" formControlName="Lat3" placeholder="Latitudine 3">
-        </div>
-        <div class="col">
-          <label id="labelLong3" for="long3">Longitudine 3</label>
-          <input type="text" id="long3" name="long3" class="form-control" [(ngModel)]="Long3" formControlName="Long3" placeholder="Longitudine 3">
+    <div *ngFor="let point of tArray.controls; let i = index" class="list-group list-group-flush">
+      <div class="list-group-item">
+        <div [formGroup]="point" class="form-row">
+          <div class="form-group col-6">
+            <label for="lat">Latitudine</label>
+            <input id="lat" type="text" formControlName="lat" class="form-control" />
+          </div>
+          <div class="form-group col-6">
+            <label for="long">Longitudine</label>
+            <input id="long" type="text" formControlName="long" class="form-control" />
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <label id="labelLat4" for="lat4">Latitudine 4</label>
-          <input type="text" id="lat4" name="lat4" class="form-control" [(ngModel)]="Lat4" formControlName="Lat4" placeholder="Latitudine 4">
-        </div>
-        <div class="col">
-          <label id="labelLong4" for="long4">Longitudine 4</label>
-          <input type="text" id="long4" name="long4" class="form-control" [(ngModel)]="Long4" formControlName="Long4" placeholder="Longitudine 4">
-        </div>
-      </div>
-      <div id="buttons" class="row">
-        <div class="col">
-          <button id="submit" (click)=" modifyCoord()" [disabled]="!coForm.valid" aria-label="button" class="btn btn-danger">Modifica</button>
-          <input type="reset" id="cancel" aria-label="button" name="Cancel" class="btn btn-danger">
-        </div>
-      </div>
-    </fieldset>
-  </form>
-  <br/>
-
-
-</div>
+    </div>
+    <div class="card-footer text-center">
+      <button class="btn btn-danger mr-1"[disabled]="!dynamicForm.valid"> Modifica </button>
+      <button class="btn btn-danger mr-1" type="reset" (click)="onReset()">Reset</button>
+      <button class="btn btn-danger" type="button" (click)="onClear()">Pulisci</button>
+    </div>
+  </div>
+  </fieldset>
+</form>
