@@ -39,6 +39,7 @@ import {OsmMapContentComponent} from './Organization/osm-map-content/osm-map-con
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {AdministratorPermissionDataService} from './services/AdministratorPermissionData.service';
 import { ModifyOrganizationTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/modify-organization-tracking-area-content/modify-organization-tracking-area-content.component';
+import {DeactivateGuard} from './services/deactivate.service';
 
 
 @NgModule({
@@ -69,7 +70,7 @@ import { ModifyOrganizationTrackingAreaContentComponent } from './Organization/O
     ReactiveFormsModule,
     LeafletModule
   ],
-  providers: [AuthenticationService, OrganizationService, AdministratorOrganizationDataService, AdministratorPermissionDataService, AccessDataService, OrganizationTrackingDataService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
+  providers: [AuthenticationService, DeactivateGuard, OrganizationService, AdministratorOrganizationDataService, AdministratorPermissionDataService, AccessDataService, OrganizationTrackingDataService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

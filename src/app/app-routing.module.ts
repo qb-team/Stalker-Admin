@@ -12,6 +12,7 @@ import {OrganizationPresenceNumberComponent} from './Tracking/AnonymousTracking/
 import {LoginGuardService} from './services/login-guard.service';
 import {AdministratorManagementComponent} from './AdminManagement/administrator-management.component';
 import {ModifyOrganizationTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/modify-organization-tracking-area-content/modify-organization-tracking-area-content.component';
+import {DeactivateGuard} from './services/deactivate.service';
 
 
 const routes: Routes = [
@@ -31,7 +32,7 @@ const routes: Routes = [
           { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: true}},
           { path: 'Aggiungi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
           { path: 'Rimuovi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
-          { path: 'Modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}},
+          { path: 'Modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canDeactivate: [DeactivateGuard]},
         ]
       }
     ]

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AdministratorService, Organization, Permission} from '../../index';
 import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
+import {AdministratorPermissionDataService} from '../services/AdministratorPermissionData.service';
 
 
 export enum permissionLevel {
@@ -50,10 +51,10 @@ export class AdministratorManagementComponent implements OnInit {
   }
 
   subscribeToAdministratorPermissions() {
-    console.log('Subscribed to permissions');
     this.as.getAdministratorListOfOrganization(this.currentOrganization.id).subscribe((permArr: Array<Permission>) => {
       permArr.splice(permArr.findIndex(org => org.administratorId === localStorage.getItem('uid')), 1);
       this.permissions = permArr;
+      this.permissionModifications = new Array<Permission>();
       this.permissionModificationsTableText = new Array<string>(this.permissions.length);
     });
   }
@@ -90,6 +91,40 @@ export class AdministratorManagementComponent implements OnInit {
   * will replace the old ones in permissions using modifyPriviledgesOf(adminId, newPriviledgeLevel)
    */
   public updatePermissionList(): void {
+    this.sortModificationList();
+    let it1 = 0;
+    let it2 = 0;
+    while (it1 < this.permissions.length && it2 < this.permissionModifications.length) {
+      if (this.permissions[it1].administratorId > this.permissionModifications[it2].administratorId) {
+        it2++;
+      } else if (this.permissions[it1].administratorId < this.permissionModifications[it2].administratorId) {
+        it1++;
+      } else {
+        this.permissions[it1].permission = this.permissionModifications[it2].permission;
+        this.as.updateAdministratorPermission(this.permissions[it1]).subscribe();
+        it1++;
+        it2++;
+      }
+    }
+    this.permissionModifications = new Array<Permission>();
+    this.permissionModificationsTableText = new Array<string>(this.permissions.length);
+  }
+
+  public eraseModificationList() {
+    this.permissionModifications = new Array<Permission>();
+    this.permissionModificationsTableText = new Array<string>(this.permissions.length);
+  }
+
+  private sortModificationList() {
+    this.permissionModifications.sort((p1: Permission, p2: Permission) => {
+      if (p1.administratorId > p2.administratorId) {
+        return 1;
+      }
+      if (p1.administratorId < p2.administratorId) {
+        return -1;
+      }
+      return 0;
+    });
   }
 
   get getPermissions() {
@@ -118,5 +153,13 @@ export class AdministratorManagementComponent implements OnInit {
    */
   private alreadyModified(adminId: string) {
     return this.permissionModifications.findIndex((p: Permission) => p.administratorId === adminId);
+  }
+
+  canDeactivate() {
+    if (this.permissionModifications.length > 0) {
+      return confirm('Uscendo dalla pagina attuale le modifiche verranno perse. Continuare?');
+    } else {
+      return true;
+    }
   }
 }

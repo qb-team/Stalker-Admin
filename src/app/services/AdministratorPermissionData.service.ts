@@ -14,9 +14,23 @@ export class AdministratorPermissionDataService {
   requireAdministratorPermissions(adminId: string) {
     console.log('load permission');
     this.as.getPermissionList(adminId).subscribe((p: Permission[]) => {
+      p = this.orderPermissions(p);
       this.userPermissions.next(p);
     });
     console.log('Got PermList');
+  }
+
+  private orderPermissions(p: Permission[]) {
+    p.sort((p1: Permission, p2: Permission) => {
+      if (p1.administratorId > p2.administratorId) {
+        return 1;
+      }
+      if (p1.administratorId < p2.administratorId) {
+        return -1;
+      }
+      return 0;
+    });
+    return p;
   }
 
   setupAccessTokenInAPIService() {
