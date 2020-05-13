@@ -10,9 +10,10 @@ import {HomePageContentComponent} from './Home-page/home-page-content.component'
 import {ContentComponent} from './content/content.component';
 import {OrganizationPresenceNumberComponent} from './Tracking/AnonymousTracking/OrganizationPresenceNumber/organization-presence-number.component';
 import {LoginGuardService} from './services/login-guard.service';
-import {AdministratorManagementComponent} from './AdminManagement/administrator-management.component';
+import {AdministratorManagementComponent} from './AdminManagement/modifyPermission/administrator-management.component';
 import {ModifyOrganizationTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/modify-organization-tracking-area-content/modify-organization-tracking-area-content.component';
 import {DeactivateGuard} from './services/deactivate.service';
+import {CreateAdministratorComponent} from './AdminManagement/createAdministrator/create-administrator.component';
 import {OrganizationManagementContentComponent} from './Organization/Organization-information/organization-management-content/organization-management-content.component';
 import {ViewPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/view-place-tracking-area-content/view-place-tracking-area-content.component';
 import {ModifyPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component';
@@ -29,11 +30,12 @@ const routes: Routes = [
         children : [
           { path: '', redirectTo: 'Homepage', pathMatch: 'full' },
           { path: 'Homepage', component: HomePageContentComponent},
-          { path: 'Perimetro di tracciamento dell\'organizzazione', component: ViewOrganizationTrackingAreaContentComponent},
+          { path: 'Perimetro di tracciamento dell\'organizzazione', component: ViewOrganizationTrackingAreaContentComponent, data: { reuse: false}},
         { path: 'Modifica del perimetro di tracciamento dell\'organizzazione', component: ModifyOrganizationTrackingAreaContentComponent},
           { path: 'Presenze attuali nell\'organizzazione', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
-          { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: true}},
-          { path: 'Aggiungi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
+          { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: false}},
+          { path: 'Crea un amministratore', component: CreateAdministratorComponent, data: { reuse: true}},
+          { path: 'Associa un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
           { path: 'Rimuovi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
           { path: 'Modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canDeactivate: [DeactivateGuard]},
           { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent},

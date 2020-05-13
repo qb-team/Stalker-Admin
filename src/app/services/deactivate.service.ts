@@ -1,5 +1,5 @@
 import { CanDeactivate } from '@angular/router';
-import { AdministratorManagementComponent } from '../AdminManagement/administrator-management.component';
+import { AdministratorManagementComponent } from '../AdminManagement/modifyPermission/administrator-management.component';
 
 export class DeactivateGuard implements CanDeactivate<AdministratorManagementComponent> {
 

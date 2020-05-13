@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AdministratorService, Organization, Permission} from '../../index';
-import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
-import {AdministratorPermissionDataService} from '../services/AdministratorPermissionData.service';
+import {AdministratorService, Organization, Permission} from '../../../index';
+import {AdministratorOrganizationDataService} from '../../services/AdministratorOrganizationData.service';
+import {AdministratorPermissionDataService} from '../../services/AdministratorPermissionData.service';
 
 
 export enum permissionLevel {
@@ -23,6 +23,8 @@ export class AdministratorManagementComponent implements OnInit {
   * A collection of the permissions of the administrators of the current organization
    */
   private permissions: Array<Permission>;
+
+  private _dataHasArrived = false;
 
   private permissionLevel: permissionLevel;
 
@@ -46,6 +48,7 @@ export class AdministratorManagementComponent implements OnInit {
       if (o !== undefined) {
         this.currentOrganization = o;
         this.subscribeToAdministratorPermissions();
+        this._dataHasArrived = false;
       }
     });
   }
@@ -56,6 +59,7 @@ export class AdministratorManagementComponent implements OnInit {
       this.permissions = permArr;
       this.permissionModifications = new Array<Permission>();
       this.permissionModificationsTableText = new Array<string>(this.permissions.length);
+      this._dataHasArrived = true;
     });
   }
 
@@ -161,5 +165,9 @@ export class AdministratorManagementComponent implements OnInit {
     } else {
       return true;
     }
+  }
+
+  get dataHasArrived() {
+    return this._dataHasArrived;
   }
 }

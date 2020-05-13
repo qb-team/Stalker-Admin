@@ -31,7 +31,7 @@ import { OrganizationInformationContentComponent} from './Organization/Organizat
 import {AppRoutingModule} from './app-routing.module';
 import {RouteReuseStrategy} from '@angular/router';
 import {RouteReuseService} from './services/route-reuse.service';
-import { AdministratorManagementComponent } from './AdminManagement/administrator-management.component';
+import { AdministratorManagementComponent } from './AdminManagement/modifyPermission/administrator-management.component';
 import {AdministratorOrganizationDataService} from './services/AdministratorOrganizationData.service';
 import {AccessDataService} from './services/AccessesData.service';
 import {OrganizationTrackingDataService} from './services/OrganizationTrackingData.service';
@@ -40,6 +40,7 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {AdministratorPermissionDataService} from './services/AdministratorPermissionData.service';
 import { ModifyOrganizationTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/modify-organization-tracking-area-content/modify-organization-tracking-area-content.component';
 import {DeactivateGuard} from './services/deactivate.service';
+import { CreateAdministratorComponent } from './AdminManagement/createAdministrator/create-administrator.component';
 import { OrganizationManagementContentComponent } from './Organization/Organization-information/organization-management-content/organization-management-content.component';
 import { ViewPlaceTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/view-place-tracking-area-content/view-place-tracking-area-content.component';
 import {OsmMapContentPlaceComponent} from './Organization/Organization-tracking-perimeter/view-place-tracking-area-content/osm-map-content-place/osm-map-content-place.component';
@@ -63,10 +64,11 @@ import { ModifyPlaceTrackingAreaContentComponent } from './Organization/Organiza
     AdministratorManagementComponent,
     OsmMapContentComponent,
     ModifyOrganizationTrackingAreaContentComponent,
-    OrganizationManagementContentComponent,
     ViewPlaceTrackingAreaContentComponent,
     OsmMapContentPlaceComponent,
-    ModifyPlaceTrackingAreaContentComponent
+    ModifyPlaceTrackingAreaContentComponent,
+    OrganizationManagementContentComponent,
+    CreateAdministratorComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 <div *ngIf="this.getCurrentOrganization">
-  <table class="table">
+  <p id="loadingData" *ngIf="dataHasArrived === false">Attendere, caricamento dati in corso...</p>
+  <table *ngIf="dataHasArrived === true" class="table shadow p-4 mb-5 bg-white">
     <caption>Amministratori di {{ getCurrentOrganization.name }} e i loro permessi</caption>
     <thead>
     <tr>
@@ -17,7 +18,7 @@
     <tr *ngFor="let perm of getPermissions; index as i">
       <th scope="row">{{ i+1 }}</th>
       <!--td>{{ perm.mail }}</td-->
-      <td>{{ perm.administratorId }}</td>
+      <td>{{ perm.mail }}</td>
       <td>{{ getPermissionLevelNoun(perm.permission) }}</td>
       <td>
         <div class="dropdown">
