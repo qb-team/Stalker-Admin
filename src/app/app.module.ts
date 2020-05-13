@@ -41,6 +41,7 @@ import {AdministratorPermissionDataService} from './services/AdministratorPermis
 import { ModifyOrganizationTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/modify-organization-tracking-area-content/modify-organization-tracking-area-content.component';
 import {DeactivateGuard} from './services/deactivate.service';
 import { CreateAdministratorComponent } from './AdminManagement/createAdministrator/create-administrator.component';
+import { OrganizationManagementContentComponent } from './Organization/Organization-information/organization-management-content/organization-management-content.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { CreateAdministratorComponent } from './AdminManagement/createAdministra
     AdministratorManagementComponent,
     OsmMapContentComponent,
     ModifyOrganizationTrackingAreaContentComponent,
-    CreateAdministratorComponent
+    CreateAdministratorComponent,
+    OrganizationManagementContentComponent
   ],
   imports: [
     BrowserModule,

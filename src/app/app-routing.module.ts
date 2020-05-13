@@ -14,6 +14,7 @@ import {AdministratorManagementComponent} from './AdminManagement/modifyPermissi
 import {ModifyOrganizationTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/modify-organization-tracking-area-content/modify-organization-tracking-area-content.component';
 import {DeactivateGuard} from './services/deactivate.service';
 import {CreateAdministratorComponent} from './AdminManagement/createAdministrator/create-administrator.component';
+import {OrganizationManagementContentComponent} from './Organization/Organization-information/organization-management-content/organization-management-content.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
           { path: 'Associa un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
           { path: 'Rimuovi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
           { path: 'Modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canDeactivate: [DeactivateGuard]},
+          { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent}
         ]
       }
     ]
