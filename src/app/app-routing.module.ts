@@ -31,7 +31,7 @@ const routes: Routes = [
           { path: 'Perimetro di tracciamento dell\'organizzazione', component: ViewOrganizationTrackingAreaContentComponent, data: { reuse: false}},
         { path: 'Modifica del perimetro di tracciamento dell\'organizzazione', component: ModifyOrganizationTrackingAreaContentComponent},
           { path: 'Presenze attuali nell\'organizzazione', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
-          { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: true}},
+          { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: false}},
           { path: 'Crea un amministratore', component: CreateAdministratorComponent, data: { reuse: true}},
           { path: 'Associa un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
           { path: 'Rimuovi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},

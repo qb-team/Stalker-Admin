@@ -1,36 +1,53 @@
 <div class="container-fluid">
   <div>
-    <form class="form-group" [formGroup]="getContactForm" novalidate >
+    <form class="form-group shadow p-4 mb-5 bg-white" [formGroup]="getContactForm" novalidate >
       <fieldset>
-        <div class="row">
-          <label class="col-md-3" id="labelE" for="email">Email del nuovo amministratore:</label>
-          <input class="col-md-3 offset-md-3" type="email" name="email" id="email" class="form-control" required="required" [(ngModel)]="setAdminEmail" placeholder="email" formControlName="email">
-        </div>
-        <div class="row">
-          <label class="col-md-3" id="labelPSW" for="pwd">Password del nuovo amministratore:</label>
-          <input class="col-md-3 offset-md-3" type="password" name="pwd" class="form-control" [(ngModel)]="setAdminPsw" required="required" id="pwd" placeholder="password" formControlName="pwd">
-        </div>
-        <div class="row">
-          <label class="col-md-3" id="labelConfirmPSW" for="confPwd">Conferma password del nuovo amministratore:</label>
-          <input class="col-md-3 offset-md-3" type="password" name="confPwd" class="form-control" [(ngModel)]="setAdminConfirmPsw" required="required" id="confPwd" placeholder="password" formControlName="confPwd">
-        </div>
-        <div class="row">
-          <label class="col-md-3" id="labelPermissions" for="confPwd">Permessi del nuovo amministratore:</label>
-          <div class="col-md-3 offset-md-3 dropdown">
-            <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span *ngIf="getSelectedPriviledges == undefined">Modifica privilegi</span>
-              <span *ngIf="getSelectedPriviledges != undefined">{{ getSelectedPriviledges }}</span>
-            </button>
-            <div id="dropDownPermissions" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <div (click)="setSelectedPriviledges('Visualizzatore'); setAdminPermissions(1)" class="dropdown-item">Visualizzatore</div>
-              <div (click)="setSelectedPriviledges('Gestore'); setAdminPermissions(2)" class="dropdown-item">Gestore</div>
-            </div>
+        <div class="row p-2">
+          <div class="col-md-3">
+            <label id="labelE" for="email">Email del nuovo amministratore:</label>
+          </div>
+          <div class="col">
+            <input type="email" name="email" id="email" class="form-control" required="required" [(ngModel)]="setAdminEmail" placeholder="email" formControlName="email">
           </div>
         </div>
+        <div class="row p-2">
+          <div class="col-md-3">
+            <label id="labelPSW" for="pwd">Password amministratore:</label>
+          </div>
+          <div class="col">
+            <input type="password" name="pwd" class="form-control" [(ngModel)]="setAdminPsw" required="required" id="pwd" placeholder="password" formControlName="pwd">
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-md-3">
+            <label id="labelConfirmPSW" for="confPwd">Conferma password:</label>
+          </div>
+          <div class="col">
+            <input type="password" name="confPwd" class="form-control" [(ngModel)]="setAdminConfirmPsw" required="required" id="confPwd" placeholder="conferma password" formControlName="confPwd">
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-md-3">
+            <label id="labelPermissions" for="confPwd">Permessi del nuovo amministratore:</label>
+          </div>
+            <div class="col">
+              <div id="divDropdownNewAdminPriv" class="dropdown">
+                <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButtonNewAdminPriv" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span *ngIf="getSelectedPriviledges == undefined">Modifica privilegi</span>
+                  <span *ngIf="getSelectedPriviledges != undefined">{{ getSelectedPriviledges }}</span>
+                </button>
+                <div id="dropDownPermissions" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div (click)="setSelectedPriviledges('Visualizzatore'); setAdminPermissions(1)" class="dropdown-item">Visualizzatore</div>
+                  <div (click)="setSelectedPriviledges('Gestore'); setAdminPermissions(2)" class="dropdown-item">Gestore</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <p *ngIf="getAdminPsw !== getAdminConfirmPsw">La password e la conferma password devono combaciare</p>
+        <p *ngIf="getEmailAlreadyRegistered === true">L'email inserita per il nuovo amministratore risulta già registrata presso il sistema. Se si vuole associare tale email all'organizzazione utilizzare la funzionalità Associa Amministratore </p>
+        <button id="registerBtn" (click)="registerAdministrator()" [disabled]="!getContactForm.valid || getSelectedPriviledges == undefined || getAdminPsw !== getAdminConfirmPsw" class="btn btn-danger">Crea e associa a {{ getCurrentOrganizationName }}</button>
       </fieldset>
     </form>
-    <p *ngIf="getAdminPsw !== getAdminConfirmPsw">La password e la conferma password devono combaciare</p>
-    <p *ngIf="getEmailAlreadyRegistered === true">L'email inserita per il nuovo amministratore risulta già registrata presso il sistema. Se si vuole associare tale email all'organizzazione utilizzare la funzionalità Associa Amministratore </p>
-    <button class="col-md-2" id="registerBtn" (click)="registerAdministrator()" [disabled]="!getContactForm.valid || getSelectedPriviledges == undefined || getAdminPsw !== getAdminConfirmPsw" class="btn btn-danger">Crea e associa a {{ getCurrentOrganizationName }}</button>
   </div>
 </div>
+
