@@ -1,0 +1,69 @@
+<form [formGroup]="modifyForm" class="shadow p-4 mb-5 bg-white">
+  <fieldset>
+    <div class="card m-3">
+      <div class="card-header">
+            <h1 class="title" *ngIf="Change === 'modify' ">Modifica dati dell'organizzazione</h1>
+            <h1 class="title" *ngIf="Change === 'remove' ">Invio della richiesta di eliminazione dell'organizzazione</h1>
+          <p class=" text-right">
+            <button class=" btn btn-danger mr-1" (click)="onChange('modify')"> Modifica </button>
+            <button class=" btn btn-danger mr-1" (click)="onChange('remove')"> Rimuovi </button>
+          </p>
+      </div>
+      <div class="card-body" *ngIf="Change === 'modify'">
+        <div class="row">
+          <div class="col">
+            <label for="name">Inserisci nuovo nome</label>
+            <input id="name" class="form-control" type="text" formControlName="Name" [(ngModel)]="Name" placeholder="Inserisci un valore per modificare">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="street">Inserisci nuova via</label>
+            <input id="street" class="form-control" type="text" formControlName="Street" [(ngModel)]="Street" placeholder="Inserisci un valore per modificare">
+          </div>
+          <div class="col">
+            <label for="number">Inserisci nuovo numero della via</label>
+            <input id="number" class="form-control" type="text"  formControlName="Number" [(ngModel)]="Number" placeholder="Inserisci un valore per modificare">
+          </div>
+          <div class="col">
+            <label for="postCode">Inserisci nuovo CAP</label>
+            <input id="postCode" class="form-control" type="text" formControlName="PostCode" [(ngModel)]="PostCode" placeholder="Inserisci un valore per modificare">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="city">Inserisci nuova città</label>
+            <input id="city" class="form-control" type="text" formControlName="City" [(ngModel)]="City" placeholder="Inserisci un valore per modificare">
+          </div>
+          <div class="col">
+            <label for="country">Inserisci nuovo stato</label>
+            <input id="country" class="form-control" type="text" formControlName="Country" [(ngModel)]="Country" placeholder="Inserisci un valore per modificare">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="descr">Inserisci nuova descrizione</label>
+            <textarea id="descr" class="form-control" cols="5" rows="6" formControlName="Descr" [(ngModel)]="Descr" placeholder="Inserisci un valore per modificare"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-center" *ngIf="Change === 'modify' ">
+        <button class="btn btn-danger mr-1" (click)="onModify()"> Modifica </button>
+        <input type="reset" class="btn btn-danger"/>
+      </div>
+      <div class="card-body" *ngIf="Change === 'remove'">
+        <div class="row">
+          <div class="col">
+            <label for="descrR">Inserisci motivazione per l'eliminazione</label>
+            <textarea id="descrR" class="form-control" cols="5" rows="6" formControlName="DescrR" [(ngModel)]="DescrR" placeholder="Inserisci motivazione per cui eliminare l'organizzazione"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-center" *ngIf="Change === 'remove' ">
+        <button class="btn btn-danger mr-1"[disabled]="!modifyForm.valid"  (click)="onRemove()"> Invia richiesta </button>
+        <input type="reset" class="btn btn-danger"/>
+      </div>
+    </div>
+  </fieldset>
+</form>
+
