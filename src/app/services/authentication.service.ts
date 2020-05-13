@@ -57,6 +57,8 @@ export class AuthenticationService {
   private configureTokenAndGetAdminOrganizations() {
     this.Token.then( (s: string) => {
       localStorage.setItem('adminToken', s);
+      this.ado.setupAccessTokenInAPIService();
+      this.adp.setupAccessTokenInAPIService();
       this.angularFireAuth.auth.onAuthStateChanged((user) => {
         if (user) {
           this.adp.requireAdministratorPermissions(user.uid);

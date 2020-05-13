@@ -43,6 +43,7 @@ export class AdministratorService {
                 basePath = this.basePath;
             }
             this.configuration.basePath = basePath;
+            console.log('Setting up token: ' + localStorage.getItem('adminToken'));
             this.configuration.accessToken = localStorage.getItem('adminToken');
         }
         this.encoder = this.configuration.encoder || new CustomHttpParameterCodec();

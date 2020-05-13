@@ -42,6 +42,10 @@ export class AdministratorOrganizationDataService {
     return orgsToRet;
   }
 
+  setupAccessTokenInAPIService() {
+    this.os.configuration.accessToken = localStorage.getItem('adminToken');
+  }
+
   get getAdminOrganizations(): ReplaySubject<Array<Organization>> {
     return this.adminOrganizations;
   }

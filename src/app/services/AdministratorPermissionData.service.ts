@@ -19,6 +19,9 @@ export class AdministratorPermissionDataService {
     console.log('Got PermList');
   }
 
+  setupAccessTokenInAPIService() {
+    this.as.configuration.accessToken = localStorage.getItem('adminToken');
+  }
 
   getUserPermissions(): EventEmitter < Array < Permission >> {
     return this.userPermissions;
