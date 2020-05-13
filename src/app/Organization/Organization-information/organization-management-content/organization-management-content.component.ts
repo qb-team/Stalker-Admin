@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
-import {Organization, OrganizationService} from '../../../..';
+import {Organization, OrganizationService} from '../../../../index';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {getLocaleDateTimeFormat} from '@angular/common';
 import {parse} from 'ts-node';

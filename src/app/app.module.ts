@@ -40,7 +40,7 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {AdministratorPermissionDataService} from './services/AdministratorPermissionData.service';
 import { ModifyOrganizationTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/modify-organization-tracking-area-content/modify-organization-tracking-area-content.component';
 import {DeactivateGuard} from './services/deactivate.service';
-import { OrganizationManagementContentComponent } from './Organization/Organization-tracking-perimeter/organization-management-content/organization-management-content.component';
+import { OrganizationManagementContentComponent } from './Organization/Organization-information/organization-management-content/organization-management-content.component';
 
 
 @NgModule({
