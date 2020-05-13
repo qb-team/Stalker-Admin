@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {Organization, OrganizationService} from '../../../..';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {getLocaleDateTimeFormat} from '@angular/common';
+import {parse} from 'ts-node';
 
 @Component({
   selector: 'app-organization-management-content',
@@ -50,32 +52,40 @@ export class OrganizationManagementContentComponent implements OnInit {
   onModify() {
     this.ads.getOrganization.subscribe((org: Organization) => {
       this.currentOrganization = org;
+      let d = new Date();
       if (this.name != null && this.name !== ' ') {
         this.currentOrganization.name = this.name;
+        this.currentOrganization.lastChangeDate = d;
       }
 
       if (this.street != null && this.street !== ' ') {
         this.currentOrganization.street = this.street;
+        this.currentOrganization.lastChangeDate = d;
       }
 
       if (this.number != null && this.number !== ' ') {
         this.currentOrganization.number = this.number;
+        this.currentOrganization.lastChangeDate = d;
       }
 
       if (this.postCode != null) {
         this.currentOrganization.postCode = this.postCode;
+        this.currentOrganization.lastChangeDate = d;
       }
 
       if (this.city != null && this.city !== ' ') {
         this.currentOrganization.city = this.city;
+        this.currentOrganization.lastChangeDate = d;
       }
 
       if (this.country != null && this.country !== ' ') {
         this.currentOrganization.country = this.country;
+        this.currentOrganization.lastChangeDate = d;
       }
 
       if (this.descr != null && this.descr !== ' ') {
         this.currentOrganization.description = this.descr;
+        this.currentOrganization.lastChangeDate = d;
       }
 
       this.orgS.updateOrganization(this.currentOrganization).subscribe(() => {});
