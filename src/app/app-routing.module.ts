@@ -18,7 +18,6 @@ import {OrganizationManagementContentComponent} from './Organization/Organizatio
 import {ViewPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/view-place-tracking-area-content/view-place-tracking-area-content.component';
 import {ModifyPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component';
 import {BindAdministratorComponent} from './AdminManagement/bind-administrator/bind-administrator.component';
-import {RemoveAdministratorComponent} from './AdminManagement/remove-administrator/remove-administrator.component';
 
 
 const routes: Routes = [
@@ -38,8 +37,7 @@ const routes: Routes = [
           { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: false}},
           { path: 'Crea un amministratore', component: CreateAdministratorComponent, data: { reuse: false}},
           { path: 'Associa un amministratore', component: BindAdministratorComponent, data: { reuse: false}},
-          { path: 'Rimuovi un amministratore', component: RemoveAdministratorComponent, data: { reuse: false}},
-          { path: 'Modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canDeactivate: [DeactivateGuard]},
+          { path: 'Rimuovi o modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canDeactivate: [DeactivateGuard]},
           { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent},
           { path: 'Perimetro di tracciamento di un luogo dell\'organizzazione', component: ViewPlaceTrackingAreaContentComponent},
           { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent},

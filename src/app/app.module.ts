@@ -46,7 +46,6 @@ import { ViewPlaceTrackingAreaContentComponent } from './Organization/Organizati
 import {OsmMapContentPlaceComponent} from './Organization/Organization-tracking-perimeter/view-place-tracking-area-content/osm-map-content-place/osm-map-content-place.component';
 import { ModifyPlaceTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component';
 import { BindAdministratorComponent } from './AdminManagement/bind-administrator/bind-administrator.component';
-import { RemoveAdministratorComponent } from './AdminManagement/remove-administrator/remove-administrator.component';
 
 
 @NgModule({
@@ -71,8 +70,7 @@ import { RemoveAdministratorComponent } from './AdminManagement/remove-administr
     ModifyPlaceTrackingAreaContentComponent,
     OrganizationManagementContentComponent,
     CreateAdministratorComponent,
-    BindAdministratorComponent,
-    RemoveAdministratorComponent
+    BindAdministratorComponent
   ],
   imports: [
     BrowserModule,

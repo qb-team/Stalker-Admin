@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Predicate} from '@angular/core';
 import {AdministratorService, Organization, Permission} from '../../../index';
 import {AdministratorOrganizationDataService} from '../../services/AdministratorOrganizationData.service';
 import {AdministratorPermissionDataService} from '../../services/AdministratorPermissionData.service';
@@ -42,10 +42,10 @@ export class AdministratorManagementComponent implements OnInit {
   constructor(private ads: AdministratorOrganizationDataService, private as: AdministratorService) { }
 
   ngOnInit(): void {
-    this.subscribeToOrganziation();
+    this.subscribeToOrganization();
   }
 
-  subscribeToOrganziation() {
+  subscribeToOrganization() {
     this.ads.getOrganization.subscribe((o: Organization) => {
       if (o !== undefined) {
         this.currentOrganization = o;
@@ -133,6 +133,21 @@ export class AdministratorManagementComponent implements OnInit {
       }
       return 0;
     });
+  }
+
+  removeAdministrator(email: string) {
+    const mailPredicate = p => p.mail === email;
+    const index = this.permissions.findIndex(mailPredicate);
+    console.log('Permesso per la api: ' + this.permissions[index].administratorId + this.permissions[index].mail + this.permissions[index].permission + this.permissions[index].orgAuthServerId + ' ORG ID ' + this.permissions[index].organizationId + this.permissions[index].nominatedBy);
+    const permis = this.permissions[index];
+    permis.mail = null;
+    this.as.unbindAdministratorFromOrganization(permis).subscribe();
+    this.permissions.splice(index, 1);
+    this.permissionModificationsTableText.splice(index, 1);
+    const indexMod = this.permissionModifications.findIndex(mailPredicate);
+    if (indexMod !== -1) {
+      this.permissionModifications.splice(indexMod, 1);
+    }
   }
 
   get getPermissions() {
