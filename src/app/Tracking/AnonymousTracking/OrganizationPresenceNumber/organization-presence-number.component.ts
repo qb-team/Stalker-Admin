@@ -20,15 +20,6 @@ export class OrganizationPresenceNumberComponent implements OnInit {
   private subscriptionToOrgPresenceCounter: Subscription;
   constructor(private tds: OrganizationTrackingDataService, private ads: AdministratorOrganizationDataService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
-
-  get getCurrentOrganization(): Organization {
-    return this.currentOrganization;
-  }
-
-  set setCurrentOrganization(value: Organization) {
-    this.currentOrganization = value;
-  }
-
   ngOnInit(): void {
     console.log('ngOnInit content track user number');
     this.subscribeToCounter();
@@ -65,4 +56,11 @@ export class OrganizationPresenceNumberComponent implements OnInit {
     }, ms);
   }
 
+  get getCurrentOrganization(): Organization {
+    return this.currentOrganization;
+  }
+
+  set setCurrentOrganization(value: Organization) {
+    this.currentOrganization = value;
+  }
 }

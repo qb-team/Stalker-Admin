@@ -1,0 +1,18 @@
+<div class="row shadow p-4 mb-5 bg-white">
+ <div class="col-10">
+   <h2  *ngIf="TrackedUsersCounter !== undefined">Totale utenti all'interno: {{ TrackedUsersCounter }}</h2>
+   <span *ngIf="CurrentPlace!== undefined"> {{CurrentPlace.name}}</span>
+ </div>
+  <div class="col-2">
+    <div class="dropdown" id="lineDiv">
+      <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Luogo
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item"  (click)="setPlace($event)" *ngFor="let o of PlaceArr; index as i" id="{{i}}" >{{o.name}}</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+

@@ -17,6 +17,8 @@ import {CreateAdministratorComponent} from './AdminManagement/createAdministrato
 import {OrganizationManagementContentComponent} from './Organization/Organization-information/organization-management-content/organization-management-content.component';
 import {ViewPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/view-place-tracking-area-content/view-place-tracking-area-content.component';
 import {ModifyPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component';
+import {PlaceManagementContentComponent} from './Organization/Organization-information/place-management-content/place-management-content.component';
+import {PlacePresenceNumberComponent} from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
 
 
 const routes: Routes = [
@@ -31,7 +33,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'Homepage', pathMatch: 'full' },
           { path: 'Homepage', component: HomePageContentComponent},
           { path: 'Perimetro di tracciamento dell\'organizzazione', component: ViewOrganizationTrackingAreaContentComponent, data: { reuse: false}},
-        { path: 'Modifica del perimetro di tracciamento dell\'organizzazione', component: ModifyOrganizationTrackingAreaContentComponent},
+          { path: 'Modifica del perimetro di tracciamento dell\'organizzazione', component: ModifyOrganizationTrackingAreaContentComponent},
           { path: 'Presenze attuali nell\'organizzazione', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
           { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: false}},
           { path: 'Crea un amministratore', component: CreateAdministratorComponent, data: { reuse: true}},
@@ -41,6 +43,8 @@ const routes: Routes = [
           { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent},
           { path: 'Perimetro di tracciamento di un luogo dell\'organizzazione', component: ViewPlaceTrackingAreaContentComponent},
           { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent},
+          { path: 'Gestione dei luoghi di tracciamento', component: PlaceManagementContentComponent},
+          { path: 'Presenze attuali in un luogo', component: PlacePresenceNumberComponent, data: { reuse: false}}
         ]
       }
     ]

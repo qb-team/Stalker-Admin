@@ -1,7 +1,7 @@
 import {EventEmitter, Inject, Injectable} from '@angular/core';
 import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
 import {Organization, OrganizationPresenceCounter, PlacePresenceCounter, PresenceService} from '../..';
-import {ReplaySubject} from 'rxjs';
+import {ReplaySubject, Subscription} from 'rxjs';
 import {TrackingDataService} from './TrackingData.service';
 
 @Injectable({
@@ -9,12 +9,16 @@ import {TrackingDataService} from './TrackingData.service';
 })
 
 export class PlaceTrackingDataService extends TrackingDataService {
+  currentPlaceSubscription: Subscription;
   constructor(ps: PresenceService) {
     super(ps);
   }
 
   subscribePlacePresenceCounter(placeId: number): void {
-    super.ps.getPlacePresenceCounter(placeId).subscribe((ppc: PlacePresenceCounter) => {
+    if (this.currentPlaceSubscription != null) {
+      this.currentPlaceSubscription.unsubscribe();
+    }
+    this.currentPlaceSubscription = this.ps.getPlacePresenceCounter(placeId).subscribe((ppc: PlacePresenceCounter) => {
       this.getUsersNumber.next(ppc.counter);
     });
   }
