@@ -19,6 +19,8 @@ import {ViewPlaceTrackingAreaContentComponent} from './Organization/Organization
 import {ModifyPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component';
 import {PlaceManagementContentComponent} from './Organization/Organization-information/place-management-content/place-management-content.component';
 import {PlacePresenceNumberComponent} from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
+import {BindAdministratorComponent} from './AdminManagement/bind-administrator/bind-administrator.component';
+
 
 
 const routes: Routes = [
@@ -36,10 +38,9 @@ const routes: Routes = [
           { path: 'Modifica del perimetro di tracciamento dell\'organizzazione', component: ModifyOrganizationTrackingAreaContentComponent},
           { path: 'Presenze attuali nell\'organizzazione', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
           { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: false}},
-          { path: 'Crea un amministratore', component: CreateAdministratorComponent, data: { reuse: true}},
-          { path: 'Associa un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
-          { path: 'Rimuovi un amministratore', component: AdministratorManagementComponent, data: { reuse: true}},
-          { path: 'Modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canDeactivate: [DeactivateGuard]},
+          { path: 'Crea un amministratore', component: CreateAdministratorComponent, data: { reuse: false}},
+          { path: 'Associa un amministratore', component: BindAdministratorComponent, data: { reuse: false}},
+          { path: 'Rimuovi o modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canDeactivate: [DeactivateGuard]},
           { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent},
           { path: 'Perimetro di tracciamento di un luogo dell\'organizzazione', component: ViewPlaceTrackingAreaContentComponent},
           { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent},

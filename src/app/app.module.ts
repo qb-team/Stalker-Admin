@@ -47,6 +47,8 @@ import {OsmMapContentPlaceComponent} from './Organization/Organization-tracking-
 import { ModifyPlaceTrackingAreaContentComponent } from './Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component';
 import { PlaceManagementContentComponent } from './Organization/Organization-information/place-management-content/place-management-content.component';
 import { PlacePresenceNumberComponent } from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
+import { BindAdministratorComponent } from './AdminManagement/bind-administrator/bind-administrator.component';
+
 
 
 @NgModule({
@@ -72,7 +74,8 @@ import { PlacePresenceNumberComponent } from './Tracking/AnonymousTracking/place
     OrganizationManagementContentComponent,
     CreateAdministratorComponent,
     PlaceManagementContentComponent,
-    PlacePresenceNumberComponent
+    PlacePresenceNumberComponent,
+    BindAdministratorComponent
   ],
   imports: [
     BrowserModule,

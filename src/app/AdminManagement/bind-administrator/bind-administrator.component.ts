@@ -1,24 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdministratorBindingRequest, AdministratorService, Organization} from '../../..';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdministratorOrganizationDataService} from '../../services/AdministratorOrganizationData.service';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
-  selector: 'app-create-administrator',
-  templateUrl: './create-administrator.component.html',
-  styleUrls: ['./create-administrator.component.css']
+  selector: 'app-bind-administrator',
+  templateUrl: './bind-administrator.component.html',
+  styleUrls: ['./bind-administrator.component.css']
 })
-export class CreateAdministratorComponent implements OnInit {
+export class BindAdministratorComponent implements OnInit {
 
   private currentOrganization: Organization;
   private adminEmail: string;
-  private adminPsw: string;
-  private adminConfirmPsw: string;
   private adminPermissions: number;
-  private contactForm: FormGroup;
-  private emailAlreadyRegistered = false;
   private selectedPriviledges: string;
+  private contactForm: FormGroup;
 
   constructor(private as: AdministratorService, private aods: AdministratorOrganizationDataService) { }
 
@@ -37,18 +34,10 @@ export class CreateAdministratorComponent implements OnInit {
         Validators.required,
         Validators.email
       ]),
-      pwd: new FormControl(this.adminPsw, [
-        Validators.required,
-        Validators.minLength(8)
-      ]),
-      confPwd: new FormControl(this.adminConfirmPsw, [
-        Validators.required,
-        Validators.minLength(8)
-      ]),
     });
   }
 
-  registerAdministrator() {
+  bindAdministrator() {
     const br: AdministratorBindingRequest = {
       organizationId: this.currentOrganization.id,
       /*
@@ -59,22 +48,15 @@ export class CreateAdministratorComponent implements OnInit {
        */
       mail: this.adminEmail,
       /**
-       * Administrator\'s new password.
-       */
-      password: this.adminPsw,
-      /**
        * What can or cannot do an organization\'s administrator. The permission levels are: - Owner: 3 (higher level) - Manager: 2 - Viewer: 1 (lowest level)
        */
       permission: this.adminPermissions
     };
-    this.as.createNewAdministratorInOrganization(br).subscribe(() => { alert('Amministratore creato e aggiunto correttamente.'); }, (err: HttpErrorResponse) => {
-      if (err.status === 400) {
-        alert('Errore. L\'amministratore risulta già registrato presso il sitema. Inserire un\'altra mail');
-      } else {
+    this.as.bindAdministratorToOrganization(br).subscribe(() => { alert('Amministratore associato correttamente.'); }, (err: HttpErrorResponse) => {
         alert(err.message);
-      }
     } );
   }
+
 
   setAdminPermissions(privilegeLevel: number) {
     this.adminPermissions = privilegeLevel;
@@ -88,28 +70,8 @@ export class CreateAdministratorComponent implements OnInit {
     this.adminEmail = email;
   }
 
-  get getAdminPsw() {
-    return this.adminPsw;
-  }
-
-  set setAdminPsw(psw) {
-    this.adminPsw = psw;
-  }
-
-  get getAdminConfirmPsw() {
-    return this.adminConfirmPsw;
-  }
-
-  set setAdminConfirmPsw(confPsw) {
-    this.adminConfirmPsw = confPsw;
-  }
-
   get getContactForm() {
     return this.contactForm;
-  }
-
-  get getEmailAlreadyRegistered() {
-    return this.emailAlreadyRegistered;
   }
 
   setSelectedPriviledges(priv: string) {
@@ -123,5 +85,4 @@ export class CreateAdministratorComponent implements OnInit {
   get getCurrentOrganizationName() {
     return this.currentOrganization.name;
   }
-
 }

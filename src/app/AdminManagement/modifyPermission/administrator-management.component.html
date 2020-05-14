@@ -12,6 +12,7 @@
       <th scope="col">Privilegi</th>
       <th scope="col">Modifica privilegi</th>
       <th scope="col">Nuovi privilegi</th>
+      <th scope="col">Rimuovi amministratore</th>
     </tr>
     </thead>
     <tbody>
@@ -32,6 +33,7 @@
         </div>
       </td>
       <td *ngIf="permissionModificationsTableText != undefined && i < permissionModificationsTableText.length">{{ permissionModificationsTableText[i] }}</td>
+      <td><button class="btn btn-danger" (click)="removeAdministrator(perm.mail)">Rimuovi</button></td>
     </tr>
     </tbody>
   </table>
