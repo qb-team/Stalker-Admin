@@ -14,7 +14,7 @@ export class PlacePresenceNumberComponent implements OnInit {
   private currentOrganization: Organization;
   refreshTimer;
   private trackedUsersCounter: number;
-  private subscriptionToOrgPresenceCounter: Subscription;
+  private subscriptionToPlacePresenceCounter: Subscription;
   PlaceArr: Array<Place>;
   private currentPlace: Place;
   constructor(private tds: PlaceTrackingDataService, private plS: PlaceService, private ads: AdministratorOrganizationDataService, private activatedRoute: ActivatedRoute, private router: Router) { }
@@ -56,7 +56,7 @@ export class PlacePresenceNumberComponent implements OnInit {
 
   subscribeToCounter(): void {
     console.log('subscribtion requested');
-    this.subscriptionToOrgPresenceCounter = this.tds.getUsersNumber.subscribe((n: number) => {
+    this.subscriptionToPlacePresenceCounter = this.tds.getUsersNumber.subscribe((n: number) => {
       this.trackedUsersCounter = n;
       console.log('subscribtion resolved');
     });
@@ -64,8 +64,9 @@ export class PlacePresenceNumberComponent implements OnInit {
 
   setCounterRefreshInterval(ms: number): void {
     this.refreshTimer = setInterval(() => {
-      this.subscriptionToOrgPresenceCounter.unsubscribe();
+      this.subscriptionToPlacePresenceCounter.unsubscribe();
       this.tds.subscribePlacePresenceCounter(this.currentPlace.id);
+      this.subscribeToCounter();
       console.log('Updated subscription');
     }, ms);
   }

@@ -52,6 +52,7 @@ export class OrganizationPresenceNumberComponent implements OnInit {
     this.refreshTimer = setInterval(() => {
       this.subscriptionToOrgPresenceCounter.unsubscribe();
       this.tds.subscribeOrganizationPresenceCounter(this.currentOrganization.id);
+      this.subscribeToCounter();
       console.log('Updated subscription');
     }, ms);
   }

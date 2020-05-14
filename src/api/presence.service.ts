@@ -46,6 +46,7 @@ export class PresenceService {
                 basePath = this.basePath;
             }
             this.configuration.basePath = basePath;
+            console.log('Presence Service Token: ' + localStorage.getItem('adminToken'));
             this.configuration.accessToken = localStorage.getItem('adminToken');
         }
         this.encoder = this.configuration.encoder || new CustomHttpParameterCodec();
