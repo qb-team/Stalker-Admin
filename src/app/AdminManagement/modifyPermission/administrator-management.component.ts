@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AdministratorService, Organization, Permission} from '../../../index';
 import {AdministratorOrganizationDataService} from '../../services/AdministratorOrganizationData.service';
 import {AdministratorPermissionDataService} from '../../services/AdministratorPermissionData.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
 
 
 export enum permissionLevel {
@@ -105,7 +107,9 @@ export class AdministratorManagementComponent implements OnInit {
         it1++;
       } else {
         this.permissions[it1].permission = this.permissionModifications[it2].permission;
-        this.as.updateAdministratorPermission(this.permissions[it1]).subscribe();
+        this.as.updateAdministratorPermission(this.permissions[it1]).subscribe(() => {}, (err: HttpErrorResponse) => {
+          alert(err.message);
+        });
         it1++;
         it2++;
       }

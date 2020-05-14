@@ -28,12 +28,12 @@
         </div>
         <div class="row p-2">
           <div class="col-md-3">
-            <label id="labelPermissions" for="confPwd">Permessi del nuovo amministratore:</label>
+            <label id="labelPermissions">Permessi del nuovo amministratore:</label>
           </div>
             <div class="col">
               <div id="divDropdownNewAdminPriv" class="dropdown">
                 <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButtonNewAdminPriv" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span *ngIf="getSelectedPriviledges == undefined">Modifica privilegi</span>
+                  <span *ngIf="getSelectedPriviledges == undefined">Scegli i privilegi</span>
                   <span *ngIf="getSelectedPriviledges != undefined">{{ getSelectedPriviledges }}</span>
                 </button>
                 <div id="dropDownPermissions" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
