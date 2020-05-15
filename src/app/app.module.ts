@@ -48,6 +48,7 @@ import { ModifyPlaceTrackingAreaContentComponent } from './Organization/Organiza
 import { PlaceManagementContentComponent } from './Organization/Organization-information/place-management-content/place-management-content.component';
 import { PlacePresenceNumberComponent } from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
 import { BindAdministratorComponent } from './AdminManagement/bind-administrator/bind-administrator.component';
+import {ChartsModule} from 'ng2-charts';
 
 
 
@@ -85,7 +86,8 @@ import { BindAdministratorComponent } from './AdminManagement/bind-administrator
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    LeafletModule
+    LeafletModule,
+    ChartsModule
   ],
   providers: [AuthenticationService, DeactivateGuard, OrganizationService, AdministratorOrganizationDataService, AdministratorPermissionDataService, AccessDataService, OrganizationTrackingDataService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
   bootstrap: [AppComponent]
