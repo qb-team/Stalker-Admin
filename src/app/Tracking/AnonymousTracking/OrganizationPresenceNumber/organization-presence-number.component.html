@@ -1,12 +1,11 @@
 <h2 class="shadow p-4 mb-5 bg-white" *ngIf="trackedUsersCounter !== undefined">Totale utenti all'interno: {{ trackedUsersCounter }}</h2>
 <div class="shadow p-4 mb-5 bg-white">
-  <!--canvas
+  <!--canvas-- id="myChart"
     baseChart
     [chartType]="'line'"
     [data]="chartData"
     [labels]="chartLabels"
-    [options]="chartOptions"
     (chartClick)="onChartClick($event)">
   </canvas-->
-  <canvas id="myChart" width="400" height="400"></canvas>
+  <canvas id="myChart" width="400" height="200"></canvas>
 </div>

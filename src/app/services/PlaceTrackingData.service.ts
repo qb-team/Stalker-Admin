@@ -19,7 +19,7 @@ export class PlaceTrackingDataService extends TrackingDataService {
       this.currentPlaceSubscription.unsubscribe();
     }
     this.currentPlaceSubscription = this.ps.getPlacePresenceCounter(placeId).subscribe((ppc: PlacePresenceCounter) => {
-      this.getUsersNumber.next(ppc.counter);
+      this.getUsersNumber.emit(ppc.counter);
     });
   }
 }

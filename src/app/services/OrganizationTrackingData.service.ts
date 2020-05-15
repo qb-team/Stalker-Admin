@@ -21,7 +21,8 @@ export class OrganizationTrackingDataService extends TrackingDataService {
       this.currentOrgSubscription.unsubscribe();
     }
     this.currentOrgSubscription = this.ps.getOrganizationPresenceCounter(orgId).subscribe((opc: OrganizationPresenceCounter) => {
-      this.getUsersNumber.next(opc.counter);
+      console.log('TDS next: ' + opc.counter);
+      this.getUsersNumber.emit(opc.counter);
     });
   }
 }
