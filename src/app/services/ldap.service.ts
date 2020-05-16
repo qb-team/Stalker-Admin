@@ -19,7 +19,7 @@ export class LdapService {
   });
 
   constructor() {
-    this.connectToLdap();
+    //this.connectToLdap();
   }
 
   async connectToLdap() {

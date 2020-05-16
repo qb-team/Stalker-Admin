@@ -4,7 +4,7 @@
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import { Organization } from 'src/model/models';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
-import {icon, latLng, Map, MapOptions, tileLayer} from 'leaflet';
+import {icon, LatLng, latLng, Map, MapOptions, Polygon, tileLayer} from 'leaflet';
 import * as L from 'leaflet';
 import {Subscription} from 'rxjs';
 
@@ -65,12 +65,14 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
         this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long]);
         this.map.zoomIn(9);
         L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
-        L.polygon([
-          [JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long],
-          [JSON.parse(this.jsonCoordinates).Organizzazioni[1].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[1].long],
-          [JSON.parse(this.jsonCoordinates).Organizzazioni[2].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long],
-          [JSON.parse(this.jsonCoordinates).Organizzazioni[3].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[3].long]
-        ]).addTo(this.map);
+        let tmp = L.polygon([]).addTo(this.map);
+        let i = 0;
+        for (const point of this.jsonCoordinates) {
+            console.log(this.jsonCoordinates.length);
+            console.log(i);
+            tmp.addLatLng([JSON.parse(this.jsonCoordinates).Organizzazioni[i].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[i].long]);
+            i++;
+        }
       }
     });
   }
