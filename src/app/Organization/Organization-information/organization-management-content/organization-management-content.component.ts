@@ -1,6 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
-import {Organization, OrganizationService} from '../../../../index';
+import {Organization, OrganizationDeletionRequest, OrganizationService} from '../../../../index';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {getLocaleDateTimeFormat} from '@angular/common';
 import {parse} from 'ts-node';
@@ -55,7 +55,7 @@ export class OrganizationManagementContentComponent implements OnInit {
   }
 
   onModify() {
-      let d = new Date();
+      const d = new Date();
       if (this.name != null && this.name !== ' ') {
         this.currentOrganization.name = this.name;
         this.currentOrganization.lastChangeDate = d;
@@ -110,10 +110,15 @@ export class OrganizationManagementContentComponent implements OnInit {
   }
 
   onRemove() {
-      this.orgS.requestDeletionOfOrganization(this.currentOrganization.id, this.descrR).subscribe(() => { alert('Richiesta di eliminazione inviata.'); }, (err: HttpErrorResponse) => {
+    const delReq: OrganizationDeletionRequest = {
+      organizationId: this.currentOrganization.id,
+      requestReason: this.descrR
+    };
+
+    this.orgS.requestDeletionOfOrganization(delReq).subscribe(() => { alert('Richiesta di eliminazione inviata.'); }, (err: HttpErrorResponse) => {
         alert(err.message);
       } );
-      this.descrR = null;
+    this.descrR = null;
   }
   get Name(): string {
     return this.name;
