@@ -49,6 +49,7 @@ import { PlaceManagementContentComponent } from './Organization/Organization-inf
 import { PlacePresenceNumberComponent } from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
 import { BindAdministratorComponent } from './AdminManagement/bind-administrator/bind-administrator.component';
 import {ChartsModule} from 'ng2-charts';
+import { SingleUserAuthenticatedAccessesComponent } from './Tracking/SingleUserAuthenticatedAccess/single-user-authenticated-accesses.component';
 
 
 
@@ -76,7 +77,8 @@ import {ChartsModule} from 'ng2-charts';
     CreateAdministratorComponent,
     PlaceManagementContentComponent,
     PlacePresenceNumberComponent,
-    BindAdministratorComponent
+    BindAdministratorComponent,
+    SingleUserAuthenticatedAccessesComponent
   ],
   imports: [
     BrowserModule,

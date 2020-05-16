@@ -9,3 +9,4 @@ export * from './placeAccess';
 export * from './placeMovement';
 export * from './placePresenceCounter';
 export * from './timePerUserReport';
+export * from './organizationDeletionRequest';

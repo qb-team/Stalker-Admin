@@ -20,6 +20,7 @@ import {ModifyPlaceTrackingAreaContentComponent} from './Organization/Organizati
 import {PlaceManagementContentComponent} from './Organization/Organization-information/place-management-content/place-management-content.component';
 import {PlacePresenceNumberComponent} from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
 import {BindAdministratorComponent} from './AdminManagement/bind-administrator/bind-administrator.component';
+import {SingleUserAuthenticatedAccessesComponent} from './Tracking/SingleUserAuthenticatedAccess/single-user-authenticated-accesses.component';
 
 
 
@@ -45,7 +46,8 @@ const routes: Routes = [
           { path: 'Perimetro di tracciamento di un luogo dell\'organizzazione', component: ViewPlaceTrackingAreaContentComponent},
           { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent},
           { path: 'Gestione dei luoghi di tracciamento', component: PlaceManagementContentComponent},
-          { path: 'Presenze attuali in un luogo', component: PlacePresenceNumberComponent, data: { reuse: false}}
+          { path: 'Presenze attuali in un luogo', component: PlacePresenceNumberComponent, data: { reuse: false}},
+          { path: 'Ricerca accessi di un utente LDAP', component: SingleUserAuthenticatedAccessesComponent, data: { reuse: false}}
         ]
       }
     ]
