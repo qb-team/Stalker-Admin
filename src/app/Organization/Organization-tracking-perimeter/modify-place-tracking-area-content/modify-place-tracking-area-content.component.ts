@@ -27,10 +27,12 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit {
   loadPlaceList() {
     this.ads.getOrganization.subscribe((org: Organization) => {
       this.currentOrganization = org;
-      this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
-        this.PlaceArr = places;
-        this.currentPlace = places[0];
-      });
+      if (org != null) {
+        this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
+          this.PlaceArr = places;
+          this.currentPlace = places[0];
+        });
+      }
     });
   }
 
@@ -67,28 +69,23 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit {
     }
   }
 
+  // display form values on success
   onSubmit() {
     if (!this.dynamicForm.invalid) {
-      // display form values on success
-      this.ads.getOrganization.subscribe((org: Organization) => {
-        this.currentOrganization = org;
         this.currentPlace.trackingArea = JSON.stringify(this.dynamicForm.value, null, 4);
         this.plS.updatePlace(this.currentPlace).subscribe(() => {});
-      });
-      alert(JSON.stringify(this.dynamicForm.value, null, 4));
-      this.onReset();
+        alert(JSON.stringify(this.dynamicForm.value, null, 4));
+        this.onReset();
     }
   }
-
+  // reset whole form back to initial state
   onReset() {
-    // reset whole form back to initial state
     this.Submitted = false;
     this.dynamicForm.reset();
     this.tArray.clear();
   }
-
+  // clear errors and reset ticket fields
   onClear() {
-    // clear errors and reset ticket fields
     this.tArray.reset();
   }
 

@@ -41,10 +41,10 @@ const routes: Routes = [
           { path: 'Crea un amministratore', component: CreateAdministratorComponent, data: { reuse: false}},
           { path: 'Associa un amministratore', component: BindAdministratorComponent, data: { reuse: false}},
           { path: 'Rimuovi o modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canDeactivate: [DeactivateGuard]},
-          { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent},
-          { path: 'Perimetro di tracciamento di un luogo dell\'organizzazione', component: ViewPlaceTrackingAreaContentComponent},
-          { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent},
-          { path: 'Gestione dei luoghi di tracciamento', component: PlaceManagementContentComponent},
+          { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent, data: { reuse: false}},
+          { path: 'Perimetro di tracciamento di un luogo dell\'organizzazione', component: ViewPlaceTrackingAreaContentComponent, data: { reuse: false}},
+          { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent, data: { reuse: false} },
+          { path: 'Gestione dei luoghi di tracciamento', component: PlaceManagementContentComponent, data: { reuse: false}},
           { path: 'Presenze attuali in un luogo', component: PlacePresenceNumberComponent, data: { reuse: false}}
         ]
       }

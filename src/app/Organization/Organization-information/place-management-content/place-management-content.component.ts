@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Organization, Place, PlaceService} from '../../../..';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-place-management-content',
@@ -30,30 +31,35 @@ export class PlaceManagementContentComponent implements OnInit {
   loadPlaceList() {
     this.ads.getOrganization.subscribe((org: Organization) => {
       this.currentOrganization = org;
-      this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
-        this.PlaceArr = places;
-        this.currentPlace = places[0];
-      });
+      if (org != null) {
+        this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
+          this.PlaceArr = places;
+          if (this.PlaceArr != null) {
+            this.currentPlace = places[0];
+          } else {
+            this.onChange('create');
+          }
+        });
+      }
     });
   }
 
   setPlace(click: any) {
+    console.log(this.currentOrganization);
     this.currentPlace = this.PlaceArr[click.target.attributes.id.value];
     console.log(this.currentPlace);
   }
 
   private setupModifyForm() {
+    console.log(this.currentOrganization);
     this.modifyForm = new FormGroup({
       Name: new FormControl(this.name, [Validators.required]),
     });
   }
 
   onModify() {
-    this.ads.getOrganization.subscribe((org: Organization) => {
-      this.currentOrganization = org;
       this.currentPlace.name = this.name;
       this.plS.updatePlace(this.currentPlace).subscribe(() => {});
-    });
   }
 
   onChange(val: string) {
@@ -61,17 +67,10 @@ export class PlaceManagementContentComponent implements OnInit {
   }
 
   onRemove() {
-    if (this.PlaceArr !== null) {
+    if (this.PlaceArr != null) {
       if (confirm('Stai per eliminare ' + this.currentPlace.name + '. Continuare?')) {
-        this.ads.getOrganization.subscribe((org: Organization) => {
-          this.currentOrganization = org;
           this.plS.deletePlace(this.currentPlace.id).subscribe(() => {});
-          this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
-            this.PlaceArr = places;
-            this.currentPlace = places[0];
-            this.loadPlaceList();
-          });
-        });
+          this.loadPlaceList();
       }
     }
   }
@@ -102,38 +101,30 @@ export class PlaceManagementContentComponent implements OnInit {
       }
     }
   }
+  // display form values on success
   onCreate(e) {
     if (!this.createForm.invalid) {
-      // display form values on success
-      this.ads.getOrganization.subscribe((org: Organization) => {
-        this.currentOrganization = org;
         const newPlace = this.currentPlace;
         console.log(e.value);
         newPlace.name = e.value;
         newPlace.id = null;
         console.log(newPlace.id);
-        newPlace.organizationId = org.id;
+        newPlace.organizationId = this.currentOrganization.id;
         newPlace.trackingArea = JSON.stringify(this.createForm.value, null, 4);
         this.plS.createNewPlace(newPlace).subscribe(() => {});
-        this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
-          this.PlaceArr = places;
-          this.currentPlace = places[0];
-          this.loadPlaceList();
-        });
-      });
-      this.onReset();
-      e.innerHTML = null;
+        this.loadPlaceList();
+        this.onReset();
+        e.innerHTML = null;
     }
   }
+  // reset whole form back to initial state
   onReset() {
-    // reset whole form back to initial state
     this.Submitted = false;
     this.createForm.reset();
     this.tArray.clear();
   }
-
+  // clear errors and reset ticket fields
   onClear() {
-    // clear errors and reset ticket fields
     this.tArray.reset();
   }
 

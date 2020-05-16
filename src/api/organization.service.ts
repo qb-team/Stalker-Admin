@@ -12,15 +12,18 @@
 /* tslint:disable:no-unused-variable member-ordering */
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent, HttpParameterCodec }       from '@angular/common/http';
+import {
+  HttpClient, HttpHeaders, HttpParams,
+  HttpResponse, HttpEvent, HttpParameterCodec, HttpErrorResponse
+} from '@angular/common/http';
 import { CustomHttpParameterCodec }                          from '../encoder';
-import { Observable }                                        from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 
 import { Organization } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import {catchError} from 'rxjs/operators';
 
 
 
@@ -145,7 +148,7 @@ export class OrganizationService {
                 observe: observe,
                 reportProgress: reportProgress
             }
-        );
+        ).pipe(catchError((err: HttpErrorResponse) => throwError(err)));
     }
 
     /**
@@ -221,7 +224,7 @@ export class OrganizationService {
                 observe: observe,
                 reportProgress: reportProgress
             }
-        );
+        ).pipe(catchError((err: HttpErrorResponse) => throwError(err)));
     }
 
   /**
@@ -284,7 +287,7 @@ export class OrganizationService {
         observe: observe,
         reportProgress: reportProgress
       }
-    );
+    ).pipe(catchError((err: HttpErrorResponse) => throwError(err)));
   }
 
     /**
@@ -361,7 +364,7 @@ export class OrganizationService {
                 observe: observe,
                 reportProgress: reportProgress
             }
-        );
+        ).pipe(catchError((err: HttpErrorResponse) => throwError(err)));
     }
 
 }

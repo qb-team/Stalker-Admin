@@ -17,15 +17,17 @@ export class AdministratorOrganizationDataService {
   requireAdministratorOrganizations(perm: Array<Permission>) {
     const organizationList = new Array<Organization>();
     let remainingOrgs = 0;
-    for (const i of perm) {
-      this.os.getOrganization(i.organizationId).subscribe((o: Organization) => {
-        organizationList.push(o);
-        remainingOrgs++;
-        if (remainingOrgs === perm.length) {
-          this.adminOrganizations.next(this.sortOrganizationsById(organizationList));
-          this.router.navigateByUrl('/Content-panel');
-        }
-      });
+    if (perm !== null) {
+      for (const i of perm) {
+        this.os.getOrganization(i.organizationId).subscribe((o: Organization) => {
+          organizationList.push(o);
+          remainingOrgs++;
+          if (remainingOrgs === perm.length) {
+            this.adminOrganizations.next(this.sortOrganizationsById(organizationList));
+            this.router.navigateByUrl('/Content-panel');
+          }
+        });
+      }
     }
   }
 

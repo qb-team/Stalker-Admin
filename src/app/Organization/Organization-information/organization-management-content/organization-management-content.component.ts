@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {Organization, OrganizationService} from '../../../../index';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {getLocaleDateTimeFormat} from '@angular/common';
 import {parse} from 'ts-node';
+import {HttpErrorResponse} from '@angular/common/http';
+
 
 @Component({
   selector: 'app-organization-management-content',
@@ -27,6 +29,9 @@ export class OrganizationManagementContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.setupModifyForm();
+    this.ads.getOrganization.subscribe((org: Organization) => {
+      this.currentOrganization = org;
+    });
   }
 
   private setupModifyForm() {
@@ -50,8 +55,6 @@ export class OrganizationManagementContentComponent implements OnInit {
   }
 
   onModify() {
-    this.ads.getOrganization.subscribe((org: Organization) => {
-      this.currentOrganization = org;
       let d = new Date();
       if (this.name != null && this.name !== ' ') {
         this.currentOrganization.name = this.name;
@@ -88,7 +91,15 @@ export class OrganizationManagementContentComponent implements OnInit {
         this.currentOrganization.lastChangeDate = d;
       }
 
-      this.orgS.updateOrganization(this.currentOrganization).subscribe(() => {});
+      this.orgS.updateOrganization(this.currentOrganization).subscribe(() => { alert('Modifica all\'organizzazione effettuata.'); }, (err: HttpErrorResponse) => {
+        if (err.status === 400) {
+          alert('Errore. I dati inseriti non sono validi');
+        } else {
+          alert(err.message);
+        }
+        console.log('ciao');
+      } );
+
       this.name = null;
       this.street = null;
       this.number = null;
@@ -96,15 +107,13 @@ export class OrganizationManagementContentComponent implements OnInit {
       this.city = null;
       this.country = null;
       this.descr = null;
-    });
   }
 
   onRemove() {
-    this.ads.getOrganization.subscribe((org: Organization) => {
-      this.currentOrganization = org;
-      this.orgS.requestDeletionOfOrganization(this.currentOrganization.id, this.descrR).subscribe(() => {});
+      this.orgS.requestDeletionOfOrganization(this.currentOrganization.id, this.descrR).subscribe(() => { alert('Richiesta di eliminazione inviata.'); }, (err: HttpErrorResponse) => {
+        alert(err.message);
+      } );
       this.descrR = null;
-    });
   }
   get Name(): string {
     return this.name;

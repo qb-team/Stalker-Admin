@@ -38,7 +38,7 @@
       <div class="card-header ">
         <h1 class="title" >Inserimento nuovo luogo</h1>
         <p class=" text-right">
-          <button class=" btn btn-danger mr-1" (click)="onChange('modify')"> Modifica </button>
+          <button class=" btn btn-danger mr-1" [disabled]="this.PlaceArr === null" (click)="onChange('modify')"> Modifica </button>
         </p>
       </div>
       <div class="card-body">

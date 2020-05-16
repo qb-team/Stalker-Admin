@@ -1,11 +1,12 @@
 /*
 * Specific-content component to show data about user-tracking
 */
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import { Organization } from 'src/model/models';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {icon, latLng, Map, MapOptions, tileLayer} from 'leaflet';
 import * as L from 'leaflet';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -13,7 +14,7 @@ import * as L from 'leaflet';
   templateUrl: './view-organization-tracking-area-content.component.html',
   styleUrls: ['./view-organization-tracking-area-content.component.css']
 })
-export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
+export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnDestroy {
   /*
   * The current organization selected
   */
@@ -28,7 +29,7 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
   * The coordinates of the organization's perimeter
   */
   private perimeterCoordinates: string;
-
+  private subscriptionToOrg: Subscription;
   private map: Map;
   private zoom: number;
   private markerIcon = icon({
@@ -58,17 +59,19 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
 
   receiveMap(map: Map) {
     this.map = map;
-    this.ads.getOrganization.subscribe((org: Organization) => {
-      this.jsonCoordinates = org.trackingArea;
-      this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long]);
-      this.map.zoomIn(9);
-      L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
-      L.polygon([
-        [JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long],
-        [JSON.parse(this.jsonCoordinates).Organizzazioni[1].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[1].long],
-        [JSON.parse(this.jsonCoordinates).Organizzazioni[2].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long],
-        [JSON.parse(this.jsonCoordinates).Organizzazioni[3].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[3].long]
-      ]).addTo(this.map);
+    this.subscriptionToOrg = this.ads.getOrganization.subscribe((org: Organization) => {
+      if (org !== null) {
+        this.jsonCoordinates = org.trackingArea;
+        this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long]);
+        this.map.zoomIn(9);
+        L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
+        L.polygon([
+          [JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long],
+          [JSON.parse(this.jsonCoordinates).Organizzazioni[1].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[1].long],
+          [JSON.parse(this.jsonCoordinates).Organizzazioni[2].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long],
+          [JSON.parse(this.jsonCoordinates).Organizzazioni[3].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[3].long]
+        ]).addTo(this.map);
+      }
     });
   }
 
@@ -76,18 +79,22 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit {
     this.zoom = zoom;
   }
 
-
-  ngOnInit(): void {
-    this.subscribeToOrganization();
+  ngOnDestroy() {
+    console.log('Destroy the view-org');
+    this.subscriptionToOrg.unsubscribe();
   }
 
-  subscribeToOrganization(): void {
+  ngOnInit(): void {
+ //   this.subscribeToOrganization();
+  }
+
+ /* subscribeToOrganization(): void {
     this.ads.getOrganization.subscribe((org: Organization) => {
       this.currentOrganization = org;
       this.jsonCoordinates = this.currentOrganization.trackingArea;
       this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni;
     });
-  }
+  }*/
 
   get getCurrentOrg(): Organization {
     return this.currentOrganization;
