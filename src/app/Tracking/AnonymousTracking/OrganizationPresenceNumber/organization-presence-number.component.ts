@@ -9,6 +9,7 @@ import { Subscription} from 'rxjs';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import * as Chart from 'chart.js';
 
+
 @Component({
   selector: 'app-content-track-users-number',
   templateUrl: './organization-presence-number.component.html',
@@ -19,20 +20,18 @@ export class OrganizationPresenceNumberComponent implements OnInit {
   refreshTimer;
   trackedUsersCounter: number;
   private subscriptionToOrgPresenceCounter: Subscription;
-  ctx;
-  presenceChart;
+  private ctx;
+  private presenceChart;
 
   chartData: number[] = [];
   chartLabels: string[] = [];
 
   constructor(private tds: OrganizationTrackingDataService, private ads: AdministratorOrganizationDataService, private activatedRoute: ActivatedRoute, private router: Router) { }
   ngOnInit(): void {
-    console.log('ngOnInit content track user number');
     this.subscribeToCounter();
     this.ads.getOrganization.subscribe((o: Organization) => {
-      this.currentOrganization = o;
-      //console.log('Org: ' + o + o.id);
-      if (this.currentOrganization !== undefined) {
+      if (o != null) {
+        this.currentOrganization = o;
         this.tds.subscribeOrganizationPresenceCounter(this.currentOrganization.id);
       }
     });
@@ -47,10 +46,15 @@ export class OrganizationPresenceNumberComponent implements OnInit {
         labels: this.chartLabels,
         datasets: [{
           label: 'Utenti attualmente presenti',
-          data: this.chartData
+          data: this.chartData,
         }]
       },
       options: {
+        elements: {
+          line: {
+            tension: 0,
+          }
+        },
         scales: {
           yAxes: [{
             ticks: {
@@ -66,26 +70,22 @@ export class OrganizationPresenceNumberComponent implements OnInit {
   subscribeToNavigationEvents(): void {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd && ev.urlAfterRedirects !== this.router.getCurrentNavigation().initialUrl) {
-        console.log('DISTRUGGO UPDATE ORA');
         clearInterval(this.refreshTimer);
       }
     });
   }
 
   subscribeToCounter(): void {
-    console.log('subscribtion requested');
     this.subscriptionToOrgPresenceCounter = this.tds.getUsersNumber.subscribe((n: number) => {
       this.trackedUsersCounter = n;
-      console.log('subscribtion resolved');
       if (this.chartData.length > 10) {
 
         this.chartData.shift();
         this.chartLabels.shift();
       }
       this.chartData.push(this.trackedUsersCounter);
-      console.log(this.chartData.toString());
       const d = new Date();
-      this.chartLabels.push(d.getHours().toString());
+      this.chartLabels.push('' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() + '');
       this.presenceChart.update();
     });
   }
@@ -94,14 +94,8 @@ export class OrganizationPresenceNumberComponent implements OnInit {
     this.refreshTimer = setInterval(() => {
       this.tds.subscribeOrganizationPresenceCounter(this.currentOrganization.id);
       this.subscriptionToOrgPresenceCounter.unsubscribe();
-      console.log('Subscription is now: ' + this.subscriptionToOrgPresenceCounter);
       this.subscribeToCounter();
-      console.log('Updated subscription');
     }, ms);
-  }
-
-  onChartClick(event) {
-    console.log(event);
   }
 
   get getCurrentOrganization(): Organization {

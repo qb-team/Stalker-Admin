@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 
-export class AuthenticationService {
+export class AuthenticationService{
 
   private UserData: Observable<firebase.User>; // user data
   private Token: Promise<string>;
@@ -26,6 +26,7 @@ export class AuthenticationService {
     this.UserData.subscribe(
       (user) => {
         if (user) {
+          console.log('init');
           this.userDetails = user;
           localStorage.setItem('uid', user.uid);
           this.Token = this.userDetails.getIdToken();
@@ -77,6 +78,9 @@ export class AuthenticationService {
       .auth
       .signOut().then(res => {console.log('Good bye'); });
     localStorage.removeItem('key');
+    this.adp.getUserPermissions().next(null);
+    this.ado.getAdminOrganizations.next(null);
+    this.ado.getOrganization.next(null);
   }
   /*
    * The function allows to reset password to user

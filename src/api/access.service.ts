@@ -12,16 +12,19 @@
 /* tslint:disable:no-unused-variable member-ordering */
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent, HttpParameterCodec }       from '@angular/common/http';
+import {
+  HttpClient, HttpHeaders, HttpParams,
+  HttpResponse, HttpEvent, HttpParameterCodec, HttpErrorResponse
+} from '@angular/common/http';
 import { CustomHttpParameterCodec }                          from '../encoder';
-import { Observable }                                        from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 
 import { OrganizationAccess } from '../model/models';
 import { PlaceAccess } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import {catchError} from 'rxjs/operators';
 
 
 
@@ -30,7 +33,7 @@ import { Configuration }                                     from '../configurat
 })
 export class AccessService {
 
-    protected basePath = 'http://2.234.128.81:8080';
+    protected basePath = 'http://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -137,7 +140,7 @@ export class AccessService {
                 observe: observe,
                 reportProgress: reportProgress
             }
-        );
+        ).pipe(catchError((err: HttpErrorResponse) => throwError(err)));
     }
 
     /**
@@ -194,7 +197,7 @@ export class AccessService {
                 observe: observe,
                 reportProgress: reportProgress
             }
-        );
+        ).pipe(catchError((err: HttpErrorResponse) => throwError(err)));
     }
 
 }

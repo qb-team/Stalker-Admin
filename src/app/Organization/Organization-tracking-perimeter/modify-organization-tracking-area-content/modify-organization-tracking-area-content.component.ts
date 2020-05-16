@@ -18,6 +18,9 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit {
     this.dynamicForm = this.formBuilder.group({
       Organizzazioni: new FormArray([])
     });
+    this.ads.getOrganization.subscribe((org: Organization) => {
+      this.currentOrganization = org;
+    });
   }
 
   // convenience getters for easy access to form fields
@@ -47,16 +50,13 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit {
     }
   }
 
+  // display form values on success
   onSubmit() {
     if (!this.dynamicForm.invalid) {
-      // display form values on success
-      this.ads.getOrganization.subscribe((org: Organization) => {
-        this.currentOrganization = org;
         this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, JSON.stringify(this.dynamicForm.value, null, 4)).subscribe(() => {});
         this.currentOrganization.trackingArea = JSON.stringify(this.dynamicForm.value, null, 4);
-      });
-      alert(JSON.stringify(this.dynamicForm.value, null, 4));
-      this.onReset();
+        alert(JSON.stringify(this.dynamicForm.value, null, 4));
+        this.onReset();
     }
   }
 
