@@ -2,9 +2,8 @@ import { Component, OnInit, } from '@angular/core';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {Organization, OrganizationDeletionRequest, OrganizationService} from '../../../../index';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {getLocaleDateTimeFormat} from '@angular/common';
-import {parse} from 'ts-node';
 import {HttpErrorResponse} from '@angular/common/http';
+
 
 
 @Component({
@@ -112,9 +111,10 @@ export class OrganizationManagementContentComponent implements OnInit {
   onRemove() {
     const delReq: OrganizationDeletionRequest = {
       organizationId: this.currentOrganization.id,
-      requestReason: this.descrR
+      requestReason: this.descrR,
+      administratorId: localStorage.getItem('uid')
     };
-
+//metti controlo max 512
     this.orgS.requestDeletionOfOrganization(delReq).subscribe(() => { alert('Richiesta di eliminazione inviata.'); }, (err: HttpErrorResponse) => {
         alert(err.message);
       } );

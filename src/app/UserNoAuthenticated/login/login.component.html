@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!--div-- class="container-fluid">
   <div id="img" class="row"></div>
   <div id="login" class="row" *ngIf="!(getAuth().userData | async )">
     <div class="col-md-6 offset-md-3">
@@ -14,6 +14,32 @@
       <button id="signInBtn" (click)="signIn()" [disabled]="!contactForm.valid" class="btn btn-danger">Login</button>
       <button id="resetPswBtn" (click)="callResetPassword()" class="btn btn-danger"> Password dimenticata</button>
     </div>
+  </div>
+</div-->
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img  src='./assets/icons/58329404.png' id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+      <label id="labelE" for="email" class="fadeIn second">Email</label>
+      <input type="text" id="email" class="fadeIn second" name="email" aria-label="email" required="required" [(ngModel)]="email" placeholder="email" formControlName="email">
+      <label id="labelPSW" class="fadeIn third" for="password">Password</label>
+      <input type="password" id="password" class="fadeIn third" name="login" aria-label="password" [(ngModel)]="password" required="required" placeholder="password" formControlName="password">
+      <p *ngIf="!getAuth().signOk"> Credenziali inserite sono errate </p>
+      <input type="submit" (click)="signIn()" [disabled]="!contactForm.valid" class="btn btn-danger fourth" value="Login">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" (click)="callResetPassword()">Password dimanticata?</a>
+    </div>
+
   </div>
 </div>
 <router-outlet></router-outlet>
