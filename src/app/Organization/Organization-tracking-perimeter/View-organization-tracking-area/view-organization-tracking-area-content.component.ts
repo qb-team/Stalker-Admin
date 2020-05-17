@@ -2,11 +2,12 @@
 * Specific-content component to show data about user-tracking
 */
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
-import { Organization } from 'src/model/models';
+import {Organization, Place} from 'src/model/models';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {icon, LatLng, latLng, Map, MapOptions, Polygon, tileLayer} from 'leaflet';
 import * as L from 'leaflet';
-import {Subscription} from 'rxjs';
+import {ReplaySubject, Subscription} from 'rxjs';
+import {PlaceService} from '../../../..';
 
 
 @Component({
@@ -32,6 +33,10 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
   private subscriptionToOrg: Subscription;
   private map: Map;
   private zoom: number;
+  PlaceArr: Array<Place>;
+  private change = 'organization';
+  private polOrg = L.polygon([]);
+  private currentPlace: ReplaySubject<Place> = new ReplaySubject<Place>(1);
   private markerIcon = icon({
     iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
     shadowUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png',
@@ -53,8 +58,8 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
     center: latLng(42.471967891443384, 13.573022878267201)
   };
 
-  constructor( private ads: AdministratorOrganizationDataService ) {
-    console.log('Costruttore numero utenti');
+  constructor( private ads: AdministratorOrganizationDataService, private plS: PlaceService ) {
+    this.loadPlaceList();
   }
 
   receiveMap(map: Map) {
@@ -64,16 +69,20 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
         this.jsonCoordinates = org.trackingArea;
         this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long]);
         this.map.zoomIn(9);
-        L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
-        let tmp = L.polygon([]).addTo(this.map);
-        let i = 0;
-        for (const point of this.jsonCoordinates) {
-            console.log(this.jsonCoordinates.length);
-            console.log(i);
-            tmp.addLatLng([JSON.parse(this.jsonCoordinates).Organizzazioni[i].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[i].long]);
-            i++;
-        }
+       // L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
+        this.polOrg.setLatLngs([]);
+        this.polOrg.addTo(this.map);
+        this.loadMap(this.jsonCoordinates);
       }
+    });
+    this.currentPlace.subscribe( (place: Place) => {
+      this.jsonCoordinates = place.trackingArea;
+      this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long]);
+      this.map.zoomIn(9);
+    //  L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
+      this.polOrg.setLatLngs([]);
+      this.polOrg.addTo(this.map);
+      this.loadMap(this.jsonCoordinates);
     });
   }
 
@@ -82,21 +91,42 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
   }
 
   ngOnDestroy() {
-    console.log('Destroy the view-org');
     this.subscriptionToOrg.unsubscribe();
   }
 
   ngOnInit(): void {
- //   this.subscribeToOrganization();
   }
 
- /* subscribeToOrganization(): void {
+  loadPlaceList() {
     this.ads.getOrganization.subscribe((org: Organization) => {
-      this.currentOrganization = org;
-      this.jsonCoordinates = this.currentOrganization.trackingArea;
-      this.perimeterCoordinates = JSON.parse(this.jsonCoordinates).Organizzazioni;
+      if (org != null) {
+        this.currentOrganization = org;
+        this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
+          this.PlaceArr = places;
+        });
+      }
     });
-  }*/
+  }
+
+  loadMap(e: string) {
+    for (let i = 0; i < JSON.parse(this.jsonCoordinates).Organizzazioni.length; i++) {
+      this.polOrg.addLatLng([JSON.parse(e).Organizzazioni[i].lat, JSON.parse(e).Organizzazioni[i].long]);
+    }
+  }
+
+  setPlace(click: any) {
+    this.currentPlace.next(this.PlaceArr[click.target.attributes.id.value]);
+    console.log(this.currentPlace);
+  }
+
+  onChange(val: string) {
+    this.change = val;
+    if (val === 'organization') {
+      this.polOrg.setLatLngs([]);
+      this.loadMap(this.currentOrganization.trackingArea);
+    }
+  }
+
 
   get getCurrentOrg(): Organization {
     return this.currentOrganization;
@@ -123,5 +153,12 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
     this.perimeterCoordinates = value;
   }
 
+  get Change(): string {
+    return this.change;
+  }
+
+  set Change(value: string) {
+    this.change = value;
+  }
 
 }

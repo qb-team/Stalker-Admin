@@ -1,26 +1,21 @@
-<!--<div>
-    <h1>Nome dell'organizzazione: {{getCurrentOrg.name}} </h1>
-    <table class="table">
-      <caption>Lista delle coordinate dell'organizzazione</caption>
-        <thead>
-            <tr>
-                <th scope="table" colspan="3">Lista delle coordinate dell'organizzazione</th>
-            </tr>
-            <tr>
-                <th scope="col">#Punto</th>
-                <th scope="col">Coordinata X</th>
-                <th scope="col">Coordinata Y</th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let coord of getPerimeterCoordinates; index as i">
-            <th scope="row">{{ i+1 }}</th>
-            <td>{{ coord.lat }}</td>
-            <td>{{ coord.long }}</td>
-          </tr>
-        </tbody>
-    </table>
-</div>-->
+<div class="shadow p-4 mb-5 bg-white">
+  <div class="row text-center">
+    <div class="col-6 pb-md-10 " *ngIf="Change === 'place'" >
+      <div class="dropdown" id="lineDiv">
+        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Luogo
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item"  (click)="setPlace($event)" *ngFor="let o of PlaceArr; index as i" id="{{i}}" >{{o.name}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 ">
+      <button id="bOrg" class=" btn btn-danger mr-1" *ngIf="Change === 'place' " (click)="onChange('organization')"> Organizzazione </button>
+      <button class=" btn btn-danger mr-1" *ngIf="Change === 'organization' " (click)="onChange('place')"> Luogo </button>
+    </div>
+  </div>
+</div>
 <div class="fs-container shadow p-4 mb-5 bg-white">
   <app-osm-map-content
     [options]="TrackMap"
