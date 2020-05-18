@@ -8,7 +8,6 @@ import { Organization } from 'src/model/models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {LdapService} from '../services/ldap.service';
 
 @Component({
   selector: 'app-menubar',
@@ -31,7 +30,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   * The password of the user that is logging in
   */
   private Password: string;
-  constructor(private ads: AdministratorOrganizationDataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router, private activatedRoute: ActivatedRoute, private ldapS: LdapService ) { }
+  constructor(private ads: AdministratorOrganizationDataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router, private activatedRoute: ActivatedRoute ) { }
   /*
    * Initialization and refresh the list of organization
    */
@@ -92,10 +91,6 @@ export class MenubarComponent implements OnInit, AfterContentInit {
         Validators.minLength(8)
       ]),
     });
-  }
-
-  bindAdminToLdap() {
-    this.ldapS.bindUser(this.email, this.password);
   }
 
   closeLdapForm(): void {
