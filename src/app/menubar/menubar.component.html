@@ -31,7 +31,7 @@
           <p *ngIf="false"> Credenziali errate </p>
         </div>
         <div class="modal-footer">
-          <button id="signInBtn" [disabled]="!contactForm.valid" class="btn btn-danger" (click)="bindAdminToLdap()">Login</button> <!--(click)=""-->
+          <button id="signInBtn" [disabled]="!contactForm.valid" class="btn btn-danger">Login</button> <!--(click)=""-->
           <button class="btn btn-danger" (click)="closeLdapForm()" data-dismiss="modal">Close</button>
         </div>
       </div>
