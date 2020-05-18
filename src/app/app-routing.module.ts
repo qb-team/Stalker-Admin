@@ -15,7 +15,6 @@ import {ModifyOrganizationTrackingAreaContentComponent} from './Organization/Org
 import {DeactivateGuard} from './services/deactivate.service';
 import {CreateAdministratorComponent} from './AdminManagement/createAdministrator/create-administrator.component';
 import {OrganizationManagementContentComponent} from './Organization/Organization-information/organization-management-content/organization-management-content.component';
-import {ViewPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/view-place-tracking-area-content/view-place-tracking-area-content.component';
 import {ModifyPlaceTrackingAreaContentComponent} from './Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component';
 import {PlaceManagementContentComponent} from './Organization/Organization-information/place-management-content/place-management-content.component';
 import {PlacePresenceNumberComponent} from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
@@ -43,7 +42,6 @@ const routes: Routes = [
           { path: 'Associa un amministratore', component: BindAdministratorComponent, data: { reuse: false}},
           { path: 'Rimuovi o modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canDeactivate: [DeactivateGuard]},
           { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent},
-          { path: 'Perimetro di tracciamento di un luogo dell\'organizzazione', component: ViewPlaceTrackingAreaContentComponent},
           { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent},
           { path: 'Gestione dei luoghi di tracciamento', component: PlaceManagementContentComponent},
           { path: 'Presenze attuali in un luogo', component: PlacePresenceNumberComponent, data: { reuse: false}},
