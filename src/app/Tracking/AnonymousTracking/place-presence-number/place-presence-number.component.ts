@@ -71,6 +71,12 @@ export class PlacePresenceNumberComponent implements OnInit {
   }
 
   setPlace(click: any) {
+    while (this.chartData.length > 0) {
+      this.chartData.pop();
+    }
+    while (this.chartLabels.length > 0) {
+      this.chartLabels.pop();
+    }
     this.currentPlace = this.PlaceArr[click.target.attributes.id.value];
     console.log(this.currentPlace);
     this.ads.getOrganization.subscribe((o: Organization) => {
