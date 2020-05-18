@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div class="col-4">
+    <div *ngIf="Change === 'place'" class="col-4">
       <p *ngIf="Name != null">{{Name}}</p>
     </div>
     <div class="col-4 ">
