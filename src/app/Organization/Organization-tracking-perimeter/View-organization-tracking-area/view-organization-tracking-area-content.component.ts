@@ -35,8 +35,10 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
   private zoom: number;
   PlaceArr: Array<Place>;
   private change = 'organization';
+  private name: string;
   private polOrg = L.polygon([]);
   private currentPlace: ReplaySubject<Place> = new ReplaySubject<Place>(1);
+
   private markerIcon = icon({
     iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
     shadowUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png',
@@ -116,7 +118,7 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
 
   setPlace(click: any) {
     this.currentPlace.next(this.PlaceArr[click.target.attributes.id.value]);
-    console.log(this.currentPlace);
+    this.name = this.PlaceArr[click.target.attributes.id.value].name;
   }
 
   onChange(val: string) {
@@ -161,4 +163,11 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
     this.change = value;
   }
 
+  get Name(): string {
+    return this.name;
+  }
+
+  set Name(value: string) {
+    this.name = value;
+  }
 }

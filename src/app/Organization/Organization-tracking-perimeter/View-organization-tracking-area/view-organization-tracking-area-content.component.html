@@ -1,6 +1,6 @@
 <div class="shadow p-4 mb-5 bg-white">
   <div class="row text-center">
-    <div class="col-6 pb-md-10 " *ngIf="Change === 'place'" >
+    <div class="col-4" *ngIf="Change === 'place'" >
       <div class="dropdown" id="lineDiv">
         <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Luogo
@@ -10,7 +10,10 @@
         </div>
       </div>
     </div>
-    <div class="col-6 ">
+    <div class="col-4">
+      <p *ngIf="Name != null">{{Name}}</p>
+    </div>
+    <div class="col-4 ">
       <button id="bOrg" class=" btn btn-danger mr-1" *ngIf="Change === 'place' " (click)="onChange('organization')"> Organizzazione </button>
       <button class=" btn btn-danger mr-1" *ngIf="Change === 'organization' " (click)="onChange('place')"> Luogo </button>
     </div>
