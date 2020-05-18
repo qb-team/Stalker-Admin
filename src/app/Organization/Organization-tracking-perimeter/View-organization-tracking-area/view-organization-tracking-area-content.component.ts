@@ -25,7 +25,7 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
   * A string to store the coordinates of the organization's perimeter in json format
   */
   private jsonCoordinates: string;
-
+  private jsonCoordinatesPlace: string;
   /*
   * The coordinates of the organization's perimeter
   */
@@ -69,22 +69,26 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
     this.subscriptionToOrg = this.ads.getOrganization.subscribe((org: Organization) => {
       if (org !== null) {
         this.jsonCoordinates = org.trackingArea;
-        this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long]);
+        this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[3].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[3].long]);
         this.map.zoomIn(9);
        // L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
         this.polOrg.setLatLngs([]);
         this.polOrg.addTo(this.map);
-        this.loadMap(this.jsonCoordinates);
+        for (let i = 0; i < JSON.parse(this.jsonCoordinates).Organizzazioni.length; i++) {
+          this.polOrg.addLatLng([JSON.parse(this.jsonCoordinates).Organizzazioni[i].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[i].long]);
+        }
       }
     });
     this.currentPlace.subscribe( (place: Place) => {
-      this.jsonCoordinates = place.trackingArea;
-      this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[2].long]);
+      this.jsonCoordinatesPlace = place.trackingArea;
+      this.map.panTo([JSON.parse(this.jsonCoordinatesPlace).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinatesPlace).Organizzazioni[0].long]);
       this.map.zoomIn(9);
     //  L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
       this.polOrg.setLatLngs([]);
       this.polOrg.addTo(this.map);
-      this.loadMap(this.jsonCoordinates);
+      for (let i = 0; i < JSON.parse(this.jsonCoordinatesPlace).Organizzazioni.length; i++) {
+        this.polOrg.addLatLng([JSON.parse(this.jsonCoordinatesPlace).Organizzazioni[i].lat, JSON.parse(this.jsonCoordinatesPlace).Organizzazioni[i].long]);
+      }
     });
   }
 
