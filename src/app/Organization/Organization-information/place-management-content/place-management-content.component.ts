@@ -3,6 +3,7 @@ import {Organization, Place, PlaceService} from '../../../..';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {Subscription} from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-place-management-content',
@@ -58,8 +59,19 @@ export class PlaceManagementContentComponent implements OnInit {
   }
 
   onModify() {
-      this.currentPlace.name = this.name;
-      this.plS.updatePlace(this.currentPlace).subscribe(() => {});
+    const modPlace = this.currentPlace;
+    modPlace.name = this.name;
+    this.plS.updatePlace(modPlace).subscribe(() => {
+        this.currentPlace = modPlace;
+        alert('Modifica del luogo effettuata.');
+      }, (err: HttpErrorResponse) => {
+        if (err.status === 400) {
+          alert('Errore. I dati inseriti non sono validi');
+        } else {
+          alert(err.message);
+        }
+      } );
+    this.onReset();
   }
 
   onChange(val: string) {
@@ -111,11 +123,19 @@ export class PlaceManagementContentComponent implements OnInit {
         console.log(newPlace.id);
         newPlace.organizationId = this.currentOrganization.id;
         newPlace.trackingArea = JSON.stringify(this.createForm.value, null, 4);
-        this.plS.createNewPlace(newPlace).subscribe(() => {});
+        this.plS.createNewPlace(newPlace).subscribe(() => { alert('Creazione del nuovo luogo effettuata.');
+      }, (err: HttpErrorResponse) => {
+        if (err.status === 400) {
+          alert('Errore. I dati inseriti non sono validi');
+        } else {
+          alert(err.message);
+        }
+      } );
         this.loadPlaceList();
         this.onReset();
         e.innerHTML = null;
     }
+
   }
   // reset whole form back to initial state
   onReset() {

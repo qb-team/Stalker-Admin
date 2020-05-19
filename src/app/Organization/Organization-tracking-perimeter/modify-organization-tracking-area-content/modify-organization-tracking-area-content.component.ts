@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Organization, OrganizationService} from '../../../..';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-modify-place-tracking-area-content',
@@ -53,22 +54,29 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit {
   // display form values on success
   onSubmit() {
     if (!this.dynamicForm.invalid) {
-        this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, JSON.stringify(this.dynamicForm.value, null, 4)).subscribe(() => {});
-        this.currentOrganization.trackingArea = JSON.stringify(this.dynamicForm.value, null, 4);
-        alert(JSON.stringify(this.dynamicForm.value, null, 4));
+        this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, JSON.stringify(this.dynamicForm.value, null, 4)).subscribe(() => {
+            alert('Modifica al perimetro dell\'organizzazione effettuata.');
+            this.currentOrganization.trackingArea = JSON.stringify(this.dynamicForm.value, null, 4);
+          },
+          (err: HttpErrorResponse) => {
+          if (err.status === 400) {
+            alert('Errore. I dati inseriti non sono validi');
+          } else {
+            alert(err.message);
+          }
+        });
         this.onReset();
     }
   }
-
+  // reset whole form back to initial state
   onReset() {
-    // reset whole form back to initial state
     this.submitted = false;
     this.dynamicForm.reset();
     this.tArray.clear();
   }
 
+  // clear errors and reset ticket fields
   onClear() {
-    // clear errors and reset ticket fields
     this.tArray.reset();
   }
 

@@ -28,7 +28,7 @@
               "./node_modules/leaflet/dist/leaflet.css",
               "src/styles.css"
             ],
-            "scripts": ["././node_modules/chart.js/dist/Chart.js"]
+            "scripts": ["../node_modules/chart.js/dist/Chart.js"]
           },
           "configurations": {
             "production": {

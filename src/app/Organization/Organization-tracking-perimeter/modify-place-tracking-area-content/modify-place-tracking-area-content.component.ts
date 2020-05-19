@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Organization, OrganizationService, Place, PlaceService} from '../../../..';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-modify-place-tracking-area-content',
@@ -72,9 +73,17 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit {
   // display form values on success
   onSubmit() {
     if (!this.dynamicForm.invalid) {
-        this.currentPlace.trackingArea = JSON.stringify(this.dynamicForm.value, null, 4);
-        this.plS.updatePlace(this.currentPlace).subscribe(() => {});
-        alert(JSON.stringify(this.dynamicForm.value, null, 4));
+        this.plS.updatePlace(this.currentPlace).subscribe(() => {
+          alert('Modifica al perimetro del luogo dell\'organizzazione effettuata.');
+          this.currentPlace.trackingArea = JSON.stringify(this.dynamicForm.value, null, 4);
+        },
+        (err: HttpErrorResponse) => {
+          if (err.status === 400) {
+            alert('Errore. I dati inseriti non sono validi');
+          } else {
+            alert(err.message);
+          }
+        });
         this.onReset();
     }
   }
