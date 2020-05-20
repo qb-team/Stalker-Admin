@@ -11,7 +11,7 @@ export class ManagerGuardService implements CanActivate {
 
   canActivate(): Observable<boolean> |  Promise<boolean> | boolean {
     console.log('perm');
-    if (localStorage.getItem('perm') === '2') {
+    if (localStorage.getItem('perm') === '2' || localStorage.getItem('perm') === '3') {
       return true;
     } else {
       this.router.navigateByUrl('/Content-panel');
