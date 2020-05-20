@@ -6,7 +6,9 @@ import { Observable, of as observableOf} from 'rxjs';
 import { MenubarComponent } from './menubar.component';
 import { AuthenticationService } from '../services/authentication.service';
 import { OrganizationService } from 'src/api/api';
-import { Router } from '@angular/router';
+import {/*ActivatedRoute,*/ Router} from '@angular/router';
+import createSpyObj = jasmine.createSpyObj;
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 class MockDataService {}
@@ -29,6 +31,8 @@ class MockRouter {
 
 
 describe('MenubarComponent', () => {
+  const spyHttp = createSpyObj('HttpClient', ['get', 'post', 'update', 'delete']);
+  const spyActivatedRoute = createSpyObj('ActivatedRoute','');
   let fixture;
   let component;
 
@@ -42,7 +46,9 @@ describe('MenubarComponent', () => {
       providers: [
         { provide: AuthenticationService, useClass: MockAuthenticationService },
         { provide: OrganizationService, useClass: MockOrganizationService },
-        { provide: Router, useClass: MockRouter }
+        { provide: Router, useClass: MockRouter },
+        {provide: HttpClient, useValue: spyHttp}/*,
+        {provide: ActivatedRoute, useValue: spyActivatedRoute}*/
       ]
     }).overrideComponent(MenubarComponent, {
 

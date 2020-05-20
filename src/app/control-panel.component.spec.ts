@@ -43,8 +43,4 @@ describe('ControlPanelComponent', () => {
   it('should create tag app-menu-functionality', () => {
     expect(fixture.debugElement.query(By.css('.container-fluid')).nativeElement.innerHTML).toContain('app-menu-functionality');
   });
-  it('should create tag app-menu-functionality', () => {
-    const user = component.getAuth();
-    expect(user).toBeInstanceOf(AuthenticationService);
-  });
 });

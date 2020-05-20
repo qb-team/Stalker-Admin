@@ -1,122 +1,20 @@
-import { Injectable } from '@angular/core';
-import { of as observableOf } from 'rxjs';
-
-import { AuthenticationService } from './authentication.service';
-
-@Injectable()
-class MockAdministratorService {}
-
-@Injectable()
-class MockOrganizationService {}
-
-@Injectable()
-class MockDataService {}
-
-describe('AuthenticationService', () => {
-  let service;
+import {TestBed} from '@angular/core/testing';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ContentComponent} from '../content/content.component';
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import createSpyObj = jasmine.createSpyObj;
 
 
+describe('ContentComponent', () => {
   beforeEach(() => {
-    service = new AuthenticationService({
-        authState: {}
-      }, {}, {}, {});
+    TestBed.configureTestingModule({
+      imports: [FormsModule, ReactiveFormsModule],
+      declarations: [
+        ContentComponent
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      providers: []
+    });
   });
-
-  it('should run #signIn()', async () => {
-    service.angularFireAuth = service.angularFireAuth || {};
-    service.angularFireAuth.auth = {
-      signInWithEmailAndPassword() {
-        return {
-          then() {
-            return {
-              catch() {
-                return [
-                  {
-                    message: {}
-                  }
-                ];
-              }
-            };
-          }
-        };
-      },
-      currentUser: {
-        getIdToken() {
-          return {
-            then() {
-              return [
-                null
-              ];
-            }
-          };
-        }
-      },
-      onAuthStateChanged() {
-        return [
-          {
-            uid: {}
-          }
-        ];
-      }
-    };
-    service.as = service.as || {};
-    service.as.configuration = {
-      setAccessToken() {}
-    };
-    spyOn(service.as, 'getPermissionList').and.returnValue(observableOf({}));
-    service.UserPermissions = service.UserPermissions || {};
-    service.UserPermissions = {
-      organizationId: {}
-    };
-    service.os = service.os || {};
-    spyOn(service.os, 'getOrganization').and.returnValue(observableOf({}));
-    service.ds = service.ds || {};
-    spyOn(service.ds, 'addOrganization');
-    service.signIn({}, {});
-    // expect(service.as.getPermissionList).toHaveBeenCalled();
-    // expect(service.os.getOrganization).toHaveBeenCalled();
-    // expect(service.ds.addOrganization).toHaveBeenCalled();
-  });
-
-  it('should run #signOut()', async () => {
-    service.angularFireAuth = service.angularFireAuth || {};
-    service.angularFireAuth.auth = {
-      signOut() {
-        return {
-          then() {
-            return [
-              null
-            ];
-          }
-        };
-      }
-    };
-    service.signOut();
-
-  });
-
-  it('should run #resetPassword()', async () => {
-    service.angularFireAuth = service.angularFireAuth || {};
-    service.angularFireAuth.auth = {
-      sendPasswordResetEmail() {
-        return {
-          then() {
-            return [
-              null
-            ];
-          }
-        };
-      }
-    };
-    service.resetPassword({});
-
-  });
-
-  it('should run #getState()', async () => {
-    service.angularFireAuth = service.angularFireAuth || {};
-    service.angularFireAuth.authState = 'authState';
-    service.getState();
-
-  });
-
 });

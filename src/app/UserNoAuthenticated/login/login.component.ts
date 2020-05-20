@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.setupLoginForm();
   }
 
-  private setupLoginForm() {
+  public setupLoginForm(): void { // private
     this.contactForm = new FormGroup({
       email: new FormControl(this.Email, [
         Validators.required,

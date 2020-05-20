@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 
-export class AuthenticationService{
+export class AuthenticationService {
 
   private UserData: Observable<firebase.User>; // user data
   private Token: Promise<string>;
