@@ -7,10 +7,10 @@
             <ul class="list-group">
                 <li id="l1" (click)="updateContent($event)" class="list-group-item btn btn-light">Informazioni sull'organizzazione</li>
                 <li id="l2" (click)="updateContent($event)" class="list-group-item btn btn-light">Perimetro di tracciamento dell'organizzazione</li>
-                <li id="l3" (click)="updateContent($event)" class="list-group-item btn btn-light">Modifica del perimetro di tracciamento dell'organizzazione</li>
-                <li id="l4" (click)="updateContent($event)" class="list-group-item btn btn-light">Modifica del perimetro di tracciamento di un luogo dell'organizzazione</li>
-                <li id="l5" (click)="updateContent($event)" class="list-group-item btn btn-light">Gestione dell'organizzazione</li>
-                <li id="l6" (click)="updateContent($event)" class="list-group-item btn btn-light">Gestione dei luoghi di tracciamento</li>
+                <li id="l3" (click)="updateContent($event)" *ngIf="Permession[Index].permission >= 2" class="list-group-item btn btn-light">Modifica del perimetro di tracciamento dell'organizzazione</li>
+                <li id="l4" (click)="updateContent($event)" *ngIf="Permession[Index].permission >= 2" class="list-group-item btn btn-light">Modifica del perimetro di tracciamento di un luogo dell'organizzazione</li>
+                <li id="l5" (click)="updateContent($event)" *ngIf="Permession[Index].permission >= 2" class="list-group-item btn btn-light">Gestione dell'organizzazione</li>
+                <li id="l6" (click)="updateContent($event)" *ngIf="Permession[Index].permission >= 2" class="list-group-item btn btn-light">Gestione dei luoghi di tracciamento</li>
             </ul>
         </div>
     </div>
@@ -36,9 +36,9 @@
 
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
             <ul class="list-group">
-                <li id="l11"(click)="updateContent($event)" class="list-group-item btn btn-light">Crea un amministratore</li>
-                <li id="l12"(click)="updateContent($event)" class="list-group-item btn btn-light">Associa un amministratore</li>
-                <li id="l13"(click)="updateContent($event)" class="list-group-item btn btn-light">Rimuovi o modifica i privilegi degli amminstratori</li>
+                <li id="l11"(click)="updateContent($event)" *ngIf="Permession[Index].permission === 3" class="list-group-item btn btn-light">Crea un amministratore</li>
+                <li id="l12"(click)="updateContent($event)" *ngIf="Permession[Index].permission === 3" class="list-group-item btn btn-light">Associa un amministratore</li>
+                <li id="l13"(click)="updateContent($event)" *ngIf="Permession[Index].permission === 3" class="list-group-item btn btn-light">Rimuovi o modifica i privilegi degli amminstratori</li>
             </ul>
         </div>
     </div>

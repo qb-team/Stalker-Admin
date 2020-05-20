@@ -6,12 +6,12 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 
-export class OwnerGuardService implements CanActivate {
+export class ManagerGuardService implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): Observable<boolean> |  Promise<boolean> | boolean {
     console.log('perm');
-    if (localStorage.getItem('perm') === '3') {
+    if (localStorage.getItem('perm') === '2') {
       return true;
     } else {
       this.router.navigateByUrl('/Content-panel');
