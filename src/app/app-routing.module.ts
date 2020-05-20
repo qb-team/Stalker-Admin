@@ -20,6 +20,8 @@ import {PlaceManagementContentComponent} from './Organization/Organization-infor
 import {PlacePresenceNumberComponent} from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
 import {BindAdministratorComponent} from './AdminManagement/bind-administrator/bind-administrator.component';
 import {SingleUserAuthenticatedAccessesComponent} from './Tracking/SingleUserAuthenticatedAccess/single-user-authenticated-accesses.component';
+import {OwnerGuardService} from "./services/owner-guard.service";
+import {ManagerGuardService} from "./services/manager-guard.service";
 
 
 
@@ -35,15 +37,15 @@ const routes: Routes = [
           { path: '', redirectTo: 'Homepage', pathMatch: 'full' },
           { path: 'Homepage', component: HomePageContentComponent},
           { path: 'Perimetro di tracciamento dell\'organizzazione', component: ViewOrganizationTrackingAreaContentComponent, data: { reuse: false}},
-          { path: 'Modifica del perimetro di tracciamento dell\'organizzazione', component: ModifyOrganizationTrackingAreaContentComponent},
+          { path: 'Modifica del perimetro di tracciamento dell\'organizzazione', component: ModifyOrganizationTrackingAreaContentComponent, canActivate: [ManagerGuardService]},
           { path: 'Presenze attuali nell\'organizzazione', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
           { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: false}},
-          { path: 'Crea un amministratore', component: CreateAdministratorComponent, data: { reuse: false}},
-          { path: 'Associa un amministratore', component: BindAdministratorComponent, data: { reuse: false}},
-          { path: 'Rimuovi o modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canDeactivate: [DeactivateGuard]},
-          { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent},
-          { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent},
-          { path: 'Gestione dei luoghi di tracciamento', component: PlaceManagementContentComponent},
+          { path: 'Crea un amministratore', component: CreateAdministratorComponent, data: { reuse: false},  canActivate: [OwnerGuardService]},
+          { path: 'Associa un amministratore', component: BindAdministratorComponent, data: { reuse: false}, canActivate: [OwnerGuardService]},
+          { path: 'Rimuovi o modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canActivate: [OwnerGuardService], canDeactivate: [DeactivateGuard]},
+          { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent, canActivate: [ManagerGuardService]},
+          { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent, canActivate: [ManagerGuardService]},
+          { path: 'Gestione dei luoghi di tracciamento', component: PlaceManagementContentComponent, canActivate: [ManagerGuardService]},
           { path: 'Presenze attuali in un luogo', component: PlacePresenceNumberComponent, data: { reuse: false}},
           { path: 'Ricerca accessi di un utente LDAP', component: SingleUserAuthenticatedAccessesComponent, data: { reuse: false}}
         ]

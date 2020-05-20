@@ -55,48 +55,45 @@ export class OrganizationManagementContentComponent implements OnInit {
 
   onModify() {
       const d = new Date();
+      const modOrg = this.currentOrganization;
       if (this.name != null && this.name !== ' ') {
-        this.currentOrganization.name = this.name;
-        this.currentOrganization.lastChangeDate = d;
+        modOrg.name = this.name;
       }
 
       if (this.street != null && this.street !== ' ') {
-        this.currentOrganization.street = this.street;
-        this.currentOrganization.lastChangeDate = d;
+        modOrg.street = this.street;
       }
 
       if (this.number != null && this.number !== ' ') {
-        this.currentOrganization.number = this.number;
-        this.currentOrganization.lastChangeDate = d;
+        modOrg.number = this.number;
       }
 
       if (this.postCode != null) {
-        this.currentOrganization.postCode = this.postCode;
-        this.currentOrganization.lastChangeDate = d;
+        modOrg.postCode = this.postCode;
       }
 
       if (this.city != null && this.city !== ' ') {
-        this.currentOrganization.city = this.city;
-        this.currentOrganization.lastChangeDate = d;
+        modOrg.city = this.city;
       }
 
       if (this.country != null && this.country !== ' ') {
-        this.currentOrganization.country = this.country;
-        this.currentOrganization.lastChangeDate = d;
+        modOrg.country = this.country;
       }
 
       if (this.descr != null && this.descr !== ' ') {
-        this.currentOrganization.description = this.descr;
-        this.currentOrganization.lastChangeDate = d;
+        modOrg.description = this.descr;
       }
 
-      this.orgS.updateOrganization(this.currentOrganization).subscribe(() => { alert('Modifica all\'organizzazione effettuata.'); }, (err: HttpErrorResponse) => {
+      this.orgS.updateOrganization(modOrg).subscribe(() => {
+        this.currentOrganization = modOrg;
+        alert('Modifica all\'organizzazione effettuata.');
+        this.currentOrganization.lastChangeDate = d;
+      }, (err: HttpErrorResponse) => {
         if (err.status === 400) {
           alert('Errore. I dati inseriti non sono validi');
         } else {
           alert(err.message);
         }
-        console.log('ciao');
       } );
 
       this.name = null;
@@ -114,7 +111,7 @@ export class OrganizationManagementContentComponent implements OnInit {
       requestReason: this.descrR,
       administratorId: localStorage.getItem('uid')
     };
-//metti controlo max 512
+// metti controlo max 512
     this.orgS.requestDeletionOfOrganization(delReq).subscribe(() => { alert('Richiesta di eliminazione inviata.'); }, (err: HttpErrorResponse) => {
         alert(err.message);
       } );

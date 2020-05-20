@@ -78,6 +78,7 @@ export class AuthenticationService {
       .auth
       .signOut().then(res => {console.log('Good bye'); });
     localStorage.removeItem('key');
+    localStorage.removeItem('perm');
     this.adp.getUserPermissions().next(null);
     this.ado.getAdminOrganizations.next(null);
     this.ado.getOrganization.next(null);
