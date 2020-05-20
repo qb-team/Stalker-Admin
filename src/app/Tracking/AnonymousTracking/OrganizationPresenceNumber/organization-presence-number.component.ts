@@ -3,7 +3,7 @@
 */
 import { Component, OnInit} from '@angular/core';
 import { Organization } from 'src/model/models';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {/*ActivatedRoute,*/ NavigationEnd, Router} from '@angular/router';
 import {OrganizationTrackingDataService} from '../../../services/OrganizationTrackingData.service';
 import { Subscription} from 'rxjs';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
@@ -26,7 +26,7 @@ export class OrganizationPresenceNumberComponent implements OnInit {
   chartData: number[] = [];
   chartLabels: string[] = [];
 
-  constructor(private tds: OrganizationTrackingDataService, private ads: AdministratorOrganizationDataService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private tds: OrganizationTrackingDataService, private ads: AdministratorOrganizationDataService/*, private activatedRoute: ActivatedRoute*/, private router: Router) { }
   ngOnInit(): void {
     this.subscribeToCounter();
     this.ads.getOrganization.subscribe((o: Organization) => {

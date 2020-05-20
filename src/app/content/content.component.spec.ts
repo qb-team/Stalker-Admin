@@ -28,24 +28,7 @@ describe('ContentComponent', () => {
     component = fixture.debugElement.componentInstance;
   });
 
-  afterEach(() => {
-    component.ngOnDestroy = function() {};
-    fixture.destroy();
-  });
-
   it('should run #constructor()', async () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should run #ngOnInit()', async () => {
-    component.ds = component.ds || {};
-    component.ds.getOrganization = observableOf({});
-    component.ds.getActiveContent = observableOf({});
-    component.ngOnInit();
-
-  });
-
-  it('should tag div to contain tag "router-outlet"', () => {
-    expect(fixture.debugElement.query(By.css('#wrapper')).nativeElement.innerHTML).toContain('router-outlet');
   });
 });

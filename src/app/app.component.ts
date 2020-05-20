@@ -15,6 +15,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   constructor() {
-    console.log('App comp consturcotr');
+    console.log('App comp consturctor');
   }
  }

@@ -21,8 +21,10 @@ export class OsmMapContentComponent implements OnInit,  OnDestroy {
   }
 
   ngOnDestroy() {
-    this.map.clearAllEventListeners();
-    this.map.remove();
+    if (this.map !== undefined) {
+      this.map.clearAllEventListeners();
+      this.map.remove();
+    }
   }
 
   onMapReady(map: Map) {

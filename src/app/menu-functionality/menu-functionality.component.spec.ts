@@ -5,6 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { MenuFunctionalityComponent } from './menu-functionality.component';
 import { Router } from '@angular/router';
+import createSpyObj = jasmine.createSpyObj;
+import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
+import {HttpClient} from '@angular/common/http';
+import {AdministratorPermissionDataService} from '../services/AdministratorPermissionData.service';
 
 @Injectable()
 class MockDataService {}
@@ -16,6 +20,9 @@ class MockRouter {
 }
 
 describe('MenuFunctionalityComponent', () => {
+  const spyAODS = createSpyObj('AdministratorOrganizationDataService', ['getOrganization']);
+  const spyHttp = createSpyObj('HttpClient', ['get', 'post', 'update', 'delete']);
+  const spyAPDS = createSpyObj('AdministratorPermissionDataService', ['getUserPermissions']);
   let fixture;
   let component;
 
@@ -27,7 +34,10 @@ describe('MenuFunctionalityComponent', () => {
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
       providers: [
-        { provide: Router, useClass: MockRouter }
+        {provide: AdministratorOrganizationDataService, useValue: spyAODS},
+        {provide: AdministratorPermissionDataService, useValue: spyAPDS},
+        { provide: Router, useClass: MockRouter },
+        {provide: HttpClient, useValue: spyHttp}
       ]
     }).overrideComponent(MenuFunctionalityComponent, {
 

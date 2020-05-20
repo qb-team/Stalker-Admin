@@ -5,9 +5,10 @@ import {AfterContentInit, Component, EventEmitter, OnInit} from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { OrganizationService } from 'src/api/api';
 import { Organization } from 'src/model/models';
-import {/*ActivatedRoute,*/ Router} from '@angular/router';
+/*import {ActivatedRoute, Router} from '@angular/router';*/
 import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-menubar',

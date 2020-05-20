@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Organization } from 'src/model/models';
-import {ActivatedRoute} from '@angular/router';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {Subscription} from 'rxjs';
 
@@ -16,7 +15,7 @@ export class OrganizationInformationContentComponent implements OnInit, OnDestro
   */
  private currentOrganization: Organization;
  private subscriptionToOrg: Subscription;
-  constructor(private ads: AdministratorOrganizationDataService, private activatedRoute: ActivatedRoute) { }
+  constructor(private ads: AdministratorOrganizationDataService) { }
 
   get getCurrentOrg(): Organization {
     return this.currentOrganization;
@@ -35,6 +34,8 @@ export class OrganizationInformationContentComponent implements OnInit, OnDestro
   }
 
   ngOnDestroy() {
-    this.subscriptionToOrg.unsubscribe();
+    if (this.subscriptionToOrg !== undefined) {
+      this.subscriptionToOrg.unsubscribe();
+    }
   }
 }

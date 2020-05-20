@@ -6,16 +6,16 @@ import { Observable, of as observableOf} from 'rxjs';
 import { MenubarComponent } from './menubar.component';
 import { AuthenticationService } from '../services/authentication.service';
 import { OrganizationService } from 'src/api/api';
-import {/*ActivatedRoute,*/ Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import createSpyObj = jasmine.createSpyObj;
-import {HttpClient} from '@angular/common/http';
+import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
 
 @Injectable()
 class MockDataService {}
 
 @Injectable()
 class MockAuthenticationService {
-  SignOut(){}
+  signOut(){}
 }
 
 @Injectable()
@@ -29,10 +29,17 @@ class MockRouter {
   navigateByUrl(url: string) { return url; }
 }
 
+@Injectable()
+class MockActivatedRoute {
+
+}
+
 
 describe('MenubarComponent', () => {
   const spyHttp = createSpyObj('HttpClient', ['get', 'post', 'update', 'delete']);
-  const spyActivatedRoute = createSpyObj('ActivatedRoute','');
+  const spyAODS = createSpyObj('AdministratorOrganizationDataService', ['getOrganization']);
+  //const spyActivatedRoute = createSpyObj('ActivatedRoute','');
+  const mockActivatedRoute = new MockActivatedRoute();
   let fixture;
   let component;
 
@@ -47,8 +54,8 @@ describe('MenubarComponent', () => {
         { provide: AuthenticationService, useClass: MockAuthenticationService },
         { provide: OrganizationService, useClass: MockOrganizationService },
         { provide: Router, useClass: MockRouter },
-        {provide: HttpClient, useValue: spyHttp}/*,
-        {provide: ActivatedRoute, useValue: spyActivatedRoute}*/
+        { provide: AdministratorOrganizationDataService, useValue: spyAODS },
+        { provide: ActivatedRoute, useValue: mockActivatedRoute }
       ]
     }).overrideComponent(MenubarComponent, {
 
@@ -61,17 +68,18 @@ describe('MenubarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should run #ngOnInit()', async () => {
-    component.os = component.os || {};
+  it('should call loadOrganizationList', async () => {
+    /*component.os = component.os || {};
     spyOn(component.os, 'getOrganizationList').and.returnValue(observableOf({}));
     component.orgArr = component.orgArr || {};
     component.orgArr = '0';
     component.ds = component.ds || {};
     component.ds.org = {
       emit: function() {}
-    };
+    };*/
+    spyOn(component, 'loadOrganizationList');
     component.ngOnInit();
-     expect(component.os.getOrganizationList).toHaveBeenCalled();
+     expect(component.loadOrganizationList).toHaveBeenCalled();
   });
 
   it('should run #setOrganization()', async () => {
@@ -87,7 +95,7 @@ describe('MenubarComponent', () => {
 
   it('should run #SignOut()', async () => {
     component.authenticationService = component.authenticationService || {};
-    spyOn(component.authenticationService, 'SignOut');
+    spyOn(component.authenticationService, 'signOut');
     spyOn(component, 'navigateToLogin');
     component.SignOut();
     expect(component.authenticationService.SignOut).toHaveBeenCalled();

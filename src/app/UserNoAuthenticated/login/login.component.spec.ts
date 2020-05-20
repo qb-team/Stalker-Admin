@@ -109,12 +109,12 @@ describe('LoginComponent', () => {
 
   it('should create label contain "email"', () => {
     fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('#labelE')).nativeElement.innerText).toEqual('Email:');
+    expect(fixture.debugElement.query(By.css('#labelE')).nativeElement.innerText).toEqual('Email');
   });
 
   it('should create label contain "password', () => {
     fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('#labelPSW')).nativeElement.innerText).toEqual('Password:');
+    expect(fixture.debugElement.query(By.css('#labelPSW')).nativeElement.innerText).toEqual('Password');
   });
 
   it('should create input-email empty', () => {
@@ -124,7 +124,7 @@ describe('LoginComponent', () => {
 
   it('should create input-psw empty', () => {
     fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('#pwd')).nativeElement.innerText).toEqual('');
+    expect(fixture.debugElement.query(By.css('#password')).nativeElement.innerText).toEqual('');
   });
 
   /*it('Should log in and navigate to dashboard', inject([Router], (router: Router) => {

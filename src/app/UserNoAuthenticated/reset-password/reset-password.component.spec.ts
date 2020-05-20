@@ -12,7 +12,7 @@ import {AngularFireModule} from '@angular/fire';
 @Injectable()
 class MockAuthenticationService {
   userData;
-  ResetPassword(email) { }
+  resetPassword(email) { }
 }
 
 @Injectable()
@@ -59,23 +59,23 @@ describe('ResetPasswordComponent', () => {
 
   });
 
-  it('should run #back()', async () => {
+  /*it('should run #back()', async () => {
     component.router = component.router || {};
     spyOn(component.router, 'navigateByUrl');
     component.back();
      expect(component.router.navigateByUrl).toHaveBeenCalled();
-  });
+  });*/
 
   it('should run #resetPassword()', async () => {
     component.authenticationService = component.authenticationService || {};
-    spyOn(component.authenticationService, 'ResetPassword');
+    spyOn(component.authenticationService, 'resetPassword');
     component.resetPassword();
-    expect(component.authenticationService.ResetPassword).toHaveBeenCalled();
+    expect(component.authenticationService.resetPassword).toHaveBeenCalled();
   });
 
   it('should run #createForm()', async () => {
-    component.createForm();
-    expect(component.contactForm).toBeTruthy();
+    component.setupResetPswForm();
+    expect(component.setupResetPswForm).toBeTruthy();
   });
 
   it('should run #onSubmit()', async () => {
@@ -83,17 +83,17 @@ describe('ResetPasswordComponent', () => {
     expect(component.submitted).toBe(true);
   });
 
-  it('should call back', async(() => {
-    spyOn(component, 'back');
+  it('should call backToLogin', async(() => {
+    spyOn(component, 'backToLogin');
     const createButton = fixture.debugElement.query(By.css('#backBtn'));
     createButton.triggerEventHandler('click', null);
     fixture.detectChanges();
-    expect(component.back).toHaveBeenCalled();
+    expect(component.backToLogin).toHaveBeenCalled();
   }));
 
   it('should create label contain "email"', () => {
     fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('#labelE')).nativeElement.innerText).toEqual('Email:');
+    expect(fixture.debugElement.query(By.css('#labelE')).nativeElement.innerText).toEqual('Email');
   });
 
   it('should create input-email empty', () => {

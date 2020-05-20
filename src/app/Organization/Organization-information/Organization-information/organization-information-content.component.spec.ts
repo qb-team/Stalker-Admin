@@ -4,13 +4,18 @@ import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { of as observableOf} from 'rxjs';
 import { OrganizationInformationContentComponent } from './organization-information-content.component';
+import {HttpClient} from '@angular/common/http';
+import createSpyObj = jasmine.createSpyObj;
+import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 
 @Injectable()
 class MockDataService {
 
 }
 
-describe('ContentTrackUsersGeneralInformationComponent', () => {
+describe('OrganizationInformationContentComponent', () => {
+  const spyHttp = createSpyObj('HttpClient', ['get', 'post', 'update', 'delete']);
+  const spyAODS = createSpyObj('AdministratorOrganizationDataService', ['getOrganization']);
   let fixture;
   let component;
 
@@ -21,7 +26,9 @@ describe('ContentTrackUsersGeneralInformationComponent', () => {
         OrganizationInformationContentComponent,
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
-      providers: []
+      providers: [{provide: HttpClient, useValue: spyHttp},
+        {provide: AdministratorOrganizationDataService, useValue: spyAODS}
+      ]
     }).overrideComponent(OrganizationInformationContentComponent, {
 
     }).compileComponents();
@@ -39,11 +46,9 @@ describe('ContentTrackUsersGeneralInformationComponent', () => {
   });
 
   it('should run #ngOnInit()', async () => {
-    component.ds = component.ds || {};
-    component.ds.getOrganization = observableOf({});
-    spyOn(component.ds.getOrganization, 'subscribe');
+    spyOn(component.ads.getOrganization, 'subscribe');
     component.ngOnInit();
-    expect(component.ds.getOrganization.subscribe).toHaveBeenCalled();
+    expect(component.ads.getOrganization.subscribe).toHaveBeenCalled();
   });
 
 });

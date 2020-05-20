@@ -3,11 +3,16 @@ import { TestBed } from '@angular/core/testing';
 import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewOrganizationTrackingAreaContentComponent } from './view-organization-tracking-area-content.component';
+import {HttpClient} from '@angular/common/http';
+import createSpyObj = jasmine.createSpyObj;
+import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
+import {PlaceService} from '../../../..';
 
-@Injectable()
-class MockDataService {}
+describe('ViewOrganizationTrackingAreaContentComponent', () => {
+  const spyHttp = createSpyObj('HttpClient', ['get', 'post', 'update', 'delete']);
+  const spyAODS = createSpyObj('AdministratorOrganizationDataService', ['getOrganization']);
+  const spyPS = createSpyObj('PlaceService', ['getPlaceListOfOrganization', 'updatePlace', 'deletePlace', 'createNewPlace']);
 
-describe('ContentTrackUsersComponent', () => {
   let fixture;
   let component;
   let mockOrganization: any;
@@ -40,7 +45,10 @@ describe('ContentTrackUsersComponent', () => {
         ViewOrganizationTrackingAreaContentComponent
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
-      providers: []
+      providers: [{provide: AdministratorOrganizationDataService, useValue: spyAODS},
+        {provide: HttpClient, useValue: spyHttp},
+        {provide: PlaceService, useValue: spyPS},
+      ]
     }).overrideComponent(ViewOrganizationTrackingAreaContentComponent, {
 
     }).compileComponents();

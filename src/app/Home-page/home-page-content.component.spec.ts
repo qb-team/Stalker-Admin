@@ -2,14 +2,24 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomePageContentComponent } from './home-page-content.component';
 import {By} from '@angular/platform-browser';
+import {HttpClient} from '@angular/common/http';
+import createSpyObj = jasmine.createSpyObj;
+import {Router} from '@angular/router';
+import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
 
 describe('ContentHomeComponent', () => {
+  const spyHttp = createSpyObj('HttpClient', ['get', 'post', 'update', 'delete']);
+  const spyRouter = createSpyObj('Router', 'navigateByUrl');
+  const spyAODS = createSpyObj('AdministratorOrganizationDataService', ['getOrganization']);
   let component: HomePageContentComponent;
   let fixture: ComponentFixture<HomePageContentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomePageContentComponent ]
+      declarations: [ HomePageContentComponent ],
+      providers: [{provide: HttpClient, useValue: spyHttp},
+        {provide: Router, useValue: spyRouter},
+        { provide: AdministratorOrganizationDataService, useValue: spyAODS }]
     })
     .compileComponents();
   }));
