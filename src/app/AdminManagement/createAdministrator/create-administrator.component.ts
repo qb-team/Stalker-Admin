@@ -27,7 +27,7 @@ export class CreateAdministratorComponent implements OnInit {
     this.setupLoginForm();
   }
 
-  subscribeToOrganization() {
+  subscribeToOrganization(): void {
     this.aods.getOrganization.subscribe((o: Organization) => { this.currentOrganization = o; });
   }
 

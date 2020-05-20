@@ -9,7 +9,7 @@ import {AdministratorOrganizationDataService} from '../services/AdministratorOrg
 
 describe('ContentHomeComponent', () => {
   const spyHttp = createSpyObj('HttpClient', ['get', 'post', 'update', 'delete']);
-  const spyRouter = createSpyObj('Router', 'navigateByUrl');
+  const spyRouter = createSpyObj('Router', ['navigateByUrl']);
   const spyAODS = createSpyObj('AdministratorOrganizationDataService', ['getOrganization']);
   let component: HomePageContentComponent;
   let fixture: ComponentFixture<HomePageContentComponent>;
