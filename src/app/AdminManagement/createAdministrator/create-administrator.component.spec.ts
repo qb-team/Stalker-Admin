@@ -45,7 +45,7 @@ fdescribe('CreateAdministratorComponent', () => {
     // spyOn(spyAODS, 'getOrganization').and.returnValue(organ);
     const repl = new ReplaySubject<Organization>(1);
     repl.next(organ);
-    spyAODS.getOrganization.and.returnValue(repl);
+    spyAODS.getOrganization.and.returnValue(of(organ));
     fixture = TestBed.createComponent(CreateAdministratorComponent);
     component = fixture.debugElement.componentInstance;
     fixture.detectChanges();
