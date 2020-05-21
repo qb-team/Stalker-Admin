@@ -77,25 +77,30 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
   }
 
   onModify() {
-    let track: string = '{\n' + '"Organizzazioni": [\n';
-    for (let i = 0; i + 1 < this.Arltn.length; i++) {
-      track = track.concat('{\n' + '"lat": "' + this.Arltn[i] + '",\n "long": "' + this.Arlong[i] + '"\n},\n');
+    if (this.Arltn.length >= 3) {
+      let track: string = '{\n' + '"Organizzazioni": [\n';
+      for (let i = 0; i + 1 < this.Arltn.length; i++) {
+        track = track.concat('{\n' + '"lat": "' + this.Arltn[i] + '",\n "long": "' + this.Arlong[i] + '"\n},\n');
+      }
+      if (this.Arltn.length >= 1) {
+        track = track.concat('{\n' + '"lat": "' + this.Arltn[this.Arltn.length - 1] + '",\n "long": "' + this.Arlong[this.Arltn.length - 1] + '"\n}\n]\n}');
+      }
+      this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, track).subscribe(() => {
+          alert('Modifica al perimetro dell\'organizzazione effettuata.');
+        },
+        (err: HttpErrorResponse) => {
+          if (err.status === 400) {
+            alert('Errore. I dati inseriti non sono validi');
+          } else {
+            alert(err.message);
+          }
+        });
+      this.change = false;
+      console.log(track.toString());
+    } else {
+      alert('Errore inserisci almeno 3 punti');
     }
-    if (this.Arltn.length >= 1) {
-      track = track.concat('{\n' + '"lat": "' + this.Arltn[this.Arltn.length - 1] + '",\n "long": "' + this.Arlong[this.Arltn.length - 1] + '"\n}\n]\n}');
-    }
-    this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, track).subscribe(() => {
-        alert('Modifica al perimetro dell\'organizzazione effettuata.');
-      },
-      (err: HttpErrorResponse) => {
-        if (err.status === 400) {
-          alert('Errore. I dati inseriti non sono validi');
-        } else {
-          alert(err.message);
-        }
-      });
-    this.change = false;
-    console.log(track.toString());
+
   }
 
   get getCurrentOrg(): Organization {
