@@ -11,5 +11,18 @@ label{
 
 #lineDiv{
   display: inline;
-  padding: 2em 2em;
+  margin-top: 2em;
+  margin-left: 40%;
+}
+.container {
+  width:1200px;
+  height:800px;
+  /* position: absolute;*/
+  top: 20%;
+  left: 10%;
+}
+#namp{
+  margin-top: 0.7em;
+  margin-left: 2em;
+  font-size: 2em;
 }

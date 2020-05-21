@@ -1,4 +1,4 @@
-<form [formGroup]="dynamicForm" class="shadow p-4 mb-5 bg-white">
+<!--form [formGroup]="dynamicForm" class="shadow p-4 mb-5 bg-white">
   <fieldset>
     <div class="card m-3">
       <div class="card-header ">
@@ -47,5 +47,37 @@
       </div>
     </div>
   </fieldset>
-</form>
+</form-->
+<div class="shadow p-4 mb-5 bg-white">
+  <div class="row">
+    <div class="col-9">
+      <p *ngIf="!Change"> Abilita la modifica e seleziona i punti nella mappa per modificare il perimetro di tracciamento </p>
+      <p *ngIf="Change"> Seleziona i punti nella mappa e clicca il bottone Modifica per modificare il perimetro di tracciamento </p>
+    </div>
+    <div class="col-3 text-right">
+      <button class=" btn btn-danger mr-1"  *ngIf="!Change" (click)="Change = true"> Abilità Modifica </button>
+      <button class=" btn btn-danger mr-1"  *ngIf="Change"(click)="Change = false"> Disabilità Modifica </button>
+      <button class=" btn btn-danger mr-1"  [disabled]="!Change" (click)="onModify()"> Modifica </button>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="dropdown text-center" id="lineDiv">
+      <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Luogo
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item"  (click)="setPlace($event)" *ngFor="let o of PlaceArr; index as i" id="{{i}}" >{{o.name}}</a>
+      </div>
+    </div>
+    <p id="namp"*ngIf="CurrentPlace!== undefined"> {{CurrentPlace.name}}</p>
+  </div>
+</div>
+
+<div class="container shadow p-4 mb-5 bg-white">
+  <app-osm-map-content
+    (map$)="receiveMap($event)"
+    (zoom$)="receiveZoom($event)"
+    (Click$)="onMapClick($event)"
+    id='modPlace-map'
+  ></app-osm-map-content></div>
 

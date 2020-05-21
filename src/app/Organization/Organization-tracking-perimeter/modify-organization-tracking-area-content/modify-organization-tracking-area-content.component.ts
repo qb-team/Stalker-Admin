@@ -1,10 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Organization, OrganizationService, Place, PlaceService} from '../../../..';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import {ReplaySubject, Subscription} from 'rxjs';
-import {icon, latLng, LeafletMouseEvent, Map, MapOptions, tileLayer} from 'leaflet';
+import {Subscription} from 'rxjs';
+import {icon, LeafletMouseEvent, Map} from 'leaflet';
 import * as L from 'leaflet';
 
 @Component({
@@ -39,7 +38,7 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
 
   });
 
-  constructor( private ads: AdministratorOrganizationDataService, private orgS: OrganizationService, private plS: PlaceService ) {
+  constructor( private ads: AdministratorOrganizationDataService, private orgS: OrganizationService) {
   }
 
   ngOnInit(): void {
@@ -87,6 +86,7 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
       }
       this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, track).subscribe(() => {
           alert('Modifica al perimetro dell\'organizzazione effettuata.');
+          this.currentOrganization.trackingArea = track;
         },
         (err: HttpErrorResponse) => {
           if (err.status === 400) {
