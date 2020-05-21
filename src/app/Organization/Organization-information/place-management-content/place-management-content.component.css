@@ -14,9 +14,14 @@ label{
   padding: 2em 2em;
 }
 
-#lineDiv2{
-  display: inline;
+#divMap{
   padding: 2em 2em;
 }
 
-
+.container {
+  width:1200px;
+  height:800px;
+  top: 20%;
+  left: 10%;
+  margin-bottom: 2em;
+}

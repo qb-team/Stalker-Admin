@@ -1,9 +1,10 @@
-<form [formGroup]="modifyForm"  *ngIf="Change === 'modify'" class="shadow p-4 mb-5 bg-white">
+<form [formGroup]="modifyForm"  class="shadow p-4 mb-5 bg-white">
   <fieldset>
     <div class="card m-3">
       <div class="card-header">
-        <h1 class="title">Modifica dati dell'organizzazione</h1>
-        <div class="dropdown" id="lineDiv">
+        <h1 class="title" *ngIf="Change === 'modify'">Modifica dati dell'organizzazione</h1>
+        <h1 class="title" *ngIf="Change !== 'modify'">Inserimento nuovo luogo</h1>
+        <div *ngIf="Change === 'modify'" class="dropdown" id="lineDiv" >
           <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Luogo
           </button>
@@ -11,10 +12,11 @@
             <a  class="dropdown-item"  (click)="setPlace($event)" *ngFor="let o of PlaceArr; index as i" id="{{i}}" >{{o.name}}</a>
           </div>
         </div>
-        <span *ngIf="CurrentPlace!== undefined"> {{CurrentPlace.name}}</span>
-        <p class=" text-right">
-          <button class=" btn btn-danger mr-1" (click)="onChange('create')"> Crea </button>
-          <button class=" btn btn-danger mr-1" (click)="onRemove()"> Rimuovi </button>
+        <span *ngIf="CurrentPlace!== undefined && Change === 'modify'"> {{CurrentPlace.name}}</span>
+        <p  class=" text-right">
+          <button class=" btn btn-danger mr-1" *ngIf="Change === 'modify'" (click)="onChange('create')"> Crea </button>
+          <button class=" btn btn-danger mr-1" *ngIf="Change === 'modify'" (click)="onRemove()"> Rimuovi </button>
+          <button class=" btn btn-danger mr-1" *ngIf="Change === 'create'" [disabled]="this.PlaceArr === null" (click)="onChange('modify')"> Modifica </button>
         </p>
       </div>
       <div class="card-body">
@@ -25,63 +27,33 @@
           </div>
         </div>
       </div>
+      <div id="divMap" class="row" *ngIf="Change === 'create'">
+        <div class="col-9">
+          <p *ngIf="!Select"> Abilita la modalità di selezione dei punti nella mappa per inserire il perimetro di tracciamento </p>
+          <p *ngIf="Select"> Seleziona i punti nella mappa e clicca il bottone Crea per inserire il perimetro di tracciamento </p>
+        </div>
+        <div class="col-3 text-right">
+          <button class=" btn btn-danger mr-1"  *ngIf="!Select" (click)="Select = true"> Abilità Modifica </button>
+          <button class=" btn btn-danger mr-1"  *ngIf="Select"(click)="Select = false"> Disabilità Modifica </button>
+        </div>
+      </div>
+      <div *ngIf="Change === 'create'" class="container">
+        <app-osm-map-content
+          (map$)="receiveMap($event)"
+          (zoom$)="receiveZoom($event)"
+          (Click$)="onMapClick($event)"
+          id='newPlace-map'
+        ></app-osm-map-content></div>
       <div class="card-footer text-center">
-        <button class="btn btn-danger mr-1" (click)="onModify()" [disabled]="!modifyForm.valid" > Modifica </button>
+        <button class="btn btn-danger mr-1" *ngIf="Change === 'modify'" (click)="onModify()" [disabled]="!modifyForm.valid" > Modifica </button>
+        <button class="btn btn-danger mr-1" *ngIf="Change === 'create'" (click)="onCreate()" [disabled]="!modifyForm.valid" > Crea </button>
         <input type="reset" class="btn btn-danger"/>
       </div>
     </div>
   </fieldset>
 </form>
-<form [formGroup]="createForm" *ngIf="Change === 'create'" class="shadow p-4 mb-5 bg-white">
-  <fieldset>
-    <div class="card m-3">
-      <div class="card-header ">
-        <h1 class="title" >Inserimento nuovo luogo</h1>
-        <p class=" text-right">
-          <button class=" btn btn-danger mr-1" [disabled]="this.PlaceArr === null" (click)="onChange('modify')"> Modifica </button>
-        </p>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col">
-            <label for="name2">Inserisci nome</label>
-            <input id="name2" class="form-control" type="text"  placeholder="Inserisci un valore per modificare" #name>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <label for="np">Numero di punti da inserire</label>
-            <input id="np" type="text"  class="form-control" #num>
-          </div>
-          <div class="col">
-            <br/>
-            <br/>
-            <button id="subnum" (click)="onChangePoints(num.value, name.value)" class="btn btn-danger">Mostra</button>
-          </div>
-        </div>
-      </div>
-      <div *ngFor="let point of tArray.controls; let i = index" class="list-group list-group-flush">
-        <div class="list-group-item">
-          <div [formGroup]="point" class="form-row">
-            <div class="form-group col-6">
-              <label for="lat">Latitudine</label>
-              <input id="lat" type="text" formControlName="lat" class="form-control" />
-            </div>
-            <div class="form-group col-6">
-              <label for="long">Longitudine</label>
-              <input id="long" type="text" formControlName="long" class="form-control" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer text-center">
-        <button class="btn btn-danger mr-1" (click)="onCreate(name)" [disabled]="!createForm.valid || !submitted"> Crea </button>
-        <button class="btn btn-danger mr-1" type="reset" (click)="onReset()">Reimposta</button>
-        <button class="btn btn-danger" type="button" (click)="onClear()">Pulisci</button>
-      </div>
-    </div>
-  </fieldset>
-</form>
+
+
 
 
 

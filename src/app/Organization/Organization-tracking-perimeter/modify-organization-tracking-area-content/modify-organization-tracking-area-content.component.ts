@@ -71,7 +71,6 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
       this.Arltn.push(e.latlng.lat);
       this.Arlong.push(e.latlng.lng);
       L.marker([e.latlng.lat, e.latlng.lng], {icon: this.markerIcon}).addTo(this.map);
-      console.log('nel modify ' + e.latlng.lat, e.latlng.lng);
     }
   }
 
@@ -96,7 +95,6 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
           }
         });
       this.change = false;
-      console.log(track.toString());
     } else {
       alert('Errore inserisci almeno 3 punti');
     }
