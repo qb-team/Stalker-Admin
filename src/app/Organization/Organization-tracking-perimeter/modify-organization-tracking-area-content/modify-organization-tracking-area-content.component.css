@@ -9,4 +9,11 @@ label{
 #buttons{
   margin-top: 1em;
 }
+.container {
+  width:1200px;
+  height:800px;
+  /* position: absolute;*/
+  top: 20%;
+  left: 10%;
+}
 

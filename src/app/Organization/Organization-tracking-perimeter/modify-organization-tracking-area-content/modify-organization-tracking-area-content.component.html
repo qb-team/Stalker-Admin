@@ -1,39 +1,18 @@
-<form [formGroup]="dynamicForm"class="shadow p-4 mb-5 bg-white">
-  <fieldset>
-  <div class="card m-3">
-    <h5 class="card-header">Modifica del perimetro di tracciamento</h5>
-    <div class="card-body">
-      <div class="row">
-        <div class="col">
-          <label for="np">Numero di punti da inserire</label>
-          <input id="np" type="text"  class="form-control" #num>
-        </div>
-        <div class="col">
-          <br/>
-          <br/>
-          <button id="subnum" (click)="onChangePoints(num.value)" class="btn btn-danger">Mostra</button>
-        </div>
-      </div>
-    </div>
-    <div *ngFor="let point of tArray.controls; let i = index" class="list-group list-group-flush">
-      <div class="list-group-item">
-        <div [formGroup]="point" class="form-row">
-          <div class="form-group col-6">
-            <label for="lat">Latitudine</label>
-            <input id="lat" type="text" formControlName="lat" class="form-control" />
-          </div>
-          <div class="form-group col-6">
-            <label for="long">Longitudine</label>
-            <input id="long" type="text" formControlName="long" class="form-control" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card-footer text-center">
-      <button class="btn btn-danger mr-1" (click)="onSubmit()" [disabled]="!dynamicForm.valid || !submitted"> Modifica </button>
-      <button class="btn btn-danger mr-1" type="reset" (click)="onReset()">Reimposta</button>
-      <button class="btn btn-danger" type="button" (click)="onClear()">Pulisci</button>
-    </div>
+<div class="row shadow p-4 mb-5 bg-white">
+  <div class="col-9">
+    <p *ngIf="!Change"> Abilita la modifica e seleziona i punti nella mappa per modificare il perimetro di tracciamento </p>
+    <p *ngIf="Change"> Seleziona i punti nella mappa e clicca il bottone Modifica per modificare il perimetro di tracciamento </p>
   </div>
-  </fieldset>
-</form>
+  <div class="col-3 text-right">
+    <button class=" btn btn-danger mr-1"  *ngIf="!Change" (click)="Change = true"> Abilità Modifica </button>
+    <button class=" btn btn-danger mr-1"  *ngIf="Change"(click)="Change = false"> Disabilità Modifica </button>
+    <button class=" btn btn-danger mr-1"  [disabled]="!Change" (click)="onModify()"> Modifica </button>
+  </div>
+</div>
+<div class="container shadow p-4 mb-5 bg-white">
+  <app-osm-map-content
+    (map$)="receiveMap($event)"
+    (zoom$)="receiveZoom($event)"
+    (Click$)="onMapClick($event)"
+    id='modOrg-map'
+  ></app-osm-map-content></div>

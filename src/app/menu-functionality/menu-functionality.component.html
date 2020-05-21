@@ -28,7 +28,7 @@
             </ul>
         </div>
     </div>
-    <div class="card">
+    <div class="card" *ngIf="Permession[Index].permission === 3" >
         <span id="span3" class="btn btn-light" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
             aria-controls="collapseThree">
             Gestione amministratori
@@ -36,9 +36,9 @@
 
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
             <ul class="list-group">
-                <li id="l11"(click)="updateContent($event)" *ngIf="Permession[Index].permission === 3" class="list-group-item btn btn-light">Crea un amministratore</li>
-                <li id="l12"(click)="updateContent($event)" *ngIf="Permession[Index].permission === 3" class="list-group-item btn btn-light">Associa un amministratore</li>
-                <li id="l13"(click)="updateContent($event)" *ngIf="Permession[Index].permission === 3" class="list-group-item btn btn-light">Rimuovi o modifica i privilegi degli amminstratori</li>
+                <li id="l11"(click)="updateContent($event)" class="list-group-item btn btn-light">Crea un amministratore</li>
+                <li id="l12"(click)="updateContent($event)" class="list-group-item btn btn-light">Associa un amministratore</li>
+                <li id="l13"(click)="updateContent($event)" class="list-group-item btn btn-light">Rimuovi o modifica i privilegi degli amminstratori</li>
             </ul>
         </div>
     </div>

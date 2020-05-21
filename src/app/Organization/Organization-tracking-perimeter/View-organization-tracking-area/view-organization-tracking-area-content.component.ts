@@ -49,16 +49,6 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 
   });
-  TrackMap: MapOptions = {
-    layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      opacity: 1,
-      maxZoom: 19,
-      minZoom: 8.5,
-      detectRetina: true,
-    })],
-    zoom: 1,
-    center: latLng(42.471967891443384, 13.573022878267201)
-  };
 
   constructor( private ads: AdministratorOrganizationDataService, private plS: PlaceService ) {
     this.loadPlaceList();
@@ -82,7 +72,6 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
     this.currentPlace.subscribe( (place: Place) => {
       this.jsonCoordinatesPlace = place.trackingArea;
       this.map.panTo([JSON.parse(this.jsonCoordinatesPlace).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinatesPlace).Organizzazioni[0].long]);
-      this.map.zoomIn(9);
     //  L.marker([JSON.parse(this.jsonCoordinates).Organizzazioni[0].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[0].long], {icon: this.markerIcon}).addTo(this.map);
       this.polOrg.setLatLngs([]);
       this.polOrg.addTo(this.map);
