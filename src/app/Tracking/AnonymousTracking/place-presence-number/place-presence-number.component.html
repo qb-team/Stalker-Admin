@@ -1,3 +1,5 @@
+<h1>Presenze in {{this.getCurrentOrganization.name}}</h1>
+<h2 *ngIf="this.CurrentPlace !== undefined && this.CurrentPlace !== null">Luogo selezionato: {{this.CurrentPlace.name}}</h2>
 <div class="row shadow p-4 mb-5 bg-white">
  <div class="col-10">
    <h2  *ngIf="TrackedUsersCounter !== undefined">Totale utenti all'interno: {{ TrackedUsersCounter }}</h2>

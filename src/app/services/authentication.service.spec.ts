@@ -1,35 +1,51 @@
-import {TestBed} from '@angular/core/testing';
-import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ContentComponent} from '../content/content.component';
-import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {async, TestBed} from '@angular/core/testing';
+import { Injectable } from '@angular/core';
+import {Observable, of, of as observableOf, throwError} from 'rxjs';
+
+import { AuthenticationService } from './authentication.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AdministratorPermissionDataService } from './AdministratorPermissionData.service';
+import { AdministratorOrganizationDataService } from './AdministratorOrganizationData.service';
+import { Router } from '@angular/router';
 import createSpyObj = jasmine.createSpyObj;
-import {AngularFireAuth} from '@angular/fire/auth';
-import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
-import {PlaceService} from '../..';
-import {AdministratorPermissionDataService} from './AdministratorPermissionData.service';
-import {Router} from '@angular/router';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {RouterTestingModule} from "@angular/router/testing";
+import User from "firebase";
+import * as firebase from "firebase";
 
+@Injectable()
+class MockAdministratorPermissionDataService {}
 
-describe('ContentComponent', () => {
-  const spyAODS = createSpyObj('AdministratorOrganizationDataService', ['getOrganization', 'setupAccessTokenInAPIService', 'requireAdministratorOrganizations', 'getAdminOrganizations']);
-  const spyAPDS = createSpyObj('AdministratorPermissionDataService', ['setupAccessTokenInAPIService', 'requireAdministratorPermissions', 'getUserPermissions']);
-  const spyRouter = createSpyObj('Router', ['navigateByUrl']);
-  const spyAngularFireAuth = createSpyObj('AdministratorOrganizationDataService', ['auth.onAuthStateChanged']);
+@Injectable()
+class MockAdministratorOrganizationDataService {}
+
+@Injectable()
+class MockRouter {
+  navigate() {}
+}
+
+fdescribe('AuthenticationService', () => {
+  let service;
+  const mockFA = createSpyObj(AngularFireAuth, ['auth', 'authState']);
+  const httpClientService = createSpyObj(HttpClientTestingModule, ['get', 'post']);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule],
-      declarations: [
-        ContentComponent
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
       providers: [
-        {provide: AdministratorOrganizationDataService, useValue: spyAODS},
-        {provide: AdministratorPermissionDataService, useValue: spyAPDS},
-        {provide: Router, useValue: spyRouter},
-        {provide: AngularFireAuth, useValue: spyAngularFireAuth}
-      ]
+        {provide: HttpClient, useValue: httpClientService},
+        {provide: Router, useClass: MockRouter},
+        {provide: AngularFireAuth, useValue: mockFA},
+      ],
     });
+    service = TestBed.inject(AuthenticationService);
   });
+
+  it('should be created', () => {
+    mockFA.authState.and.returnValue(of({}));
+    expect(service).toBeTruthy();
+  });
+
+
+
 });

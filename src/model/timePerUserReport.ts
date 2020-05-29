@@ -9,8 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-​
-​
+
+
 /**
  * Represents a row in the report generated for an user by the viewer administrator.
  */
@@ -24,7 +24,8 @@ export interface TimePerUserReport {
    */
   orgAuthServerId: string;
   /**
-   * Total amount of time spent inside the organization by the user.
+   * Total amount of time (in seconds) spent inside the organization by the user.
    */
-  totalTime: Date;
+  totalTime: number;
 }
+

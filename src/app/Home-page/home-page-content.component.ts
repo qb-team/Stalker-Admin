@@ -12,6 +12,7 @@ import {AdministratorOrganizationDataService} from '../services/AdministratorOrg
 })
 export class HomePageContentComponent implements OnInit {
   private currentOrganization: Organization;
+  hasSomePermissions = false;
   constructor(private ads: AdministratorOrganizationDataService) { }
 
   get getCurrentOrganization(): Organization {
@@ -20,6 +21,15 @@ export class HomePageContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeToOrganization();
+    this.ads.getAdminOrganizations.subscribe((orgs: Array<Organization>) => {
+      if (orgs !== undefined) {
+        console.log(orgs);
+        this.hasSomePermissions = true;
+      }
+      else {
+        this.hasSomePermissions = false;
+      }
+    });
   }
 
   subscribeToOrganization(): void {

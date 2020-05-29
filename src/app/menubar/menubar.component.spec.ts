@@ -35,7 +35,7 @@ class MockActivatedRoute {
 }
 
 
-describe('MenubarComponent', () => {
+fdescribe('MenubarComponent', () => {
   const spyHttp = createSpyObj('HttpClient', ['get', 'post', 'update', 'delete']);
   const spyAODS = createSpyObj('AdministratorOrganizationDataService', ['getOrganization']);
   //const spyActivatedRoute = createSpyObj('ActivatedRoute','');
@@ -97,8 +97,8 @@ describe('MenubarComponent', () => {
     component.authenticationService = component.authenticationService || {};
     spyOn(component.authenticationService, 'signOut');
     spyOn(component, 'navigateToLogin');
-    component.SignOut();
-    expect(component.authenticationService.SignOut).toHaveBeenCalled();
+    component.signOut();
+    expect(component.authenticationService.signOut).toHaveBeenCalled();
     expect(component.navigateToLogin).toHaveBeenCalled();
   });
 

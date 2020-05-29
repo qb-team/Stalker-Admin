@@ -35,9 +35,10 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
   private zoom: number;
   PlaceArr: Array<Place>;
   private change = 'organization';
-  private name: string;
+  private placeName: string;
   private polOrg = L.polygon([]);
   private currentPlace: ReplaySubject<Place> = new ReplaySubject<Place>(1);
+  private currentPlaceArrIndex = -1;
 
   private markerIcon = icon({
     iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
@@ -51,7 +52,6 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
   });
 
   constructor( private ads: AdministratorOrganizationDataService, private plS: PlaceService ) {
-    this.loadPlaceList();
   }
 
   receiveMap(map: Map) {
@@ -86,10 +86,13 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
   }
 
   ngOnDestroy() {
-    this.subscriptionToOrg.unsubscribe();
+    if(this.subscriptionToOrg !== undefined) {
+      this.subscriptionToOrg.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
+    this.loadPlaceList();
   }
 
   loadPlaceList() {
@@ -110,8 +113,9 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
   }
 
   setPlace(click: any) {
-    this.currentPlace.next(this.PlaceArr[click.target.attributes.id.value]);
-    this.name = this.PlaceArr[click.target.attributes.id.value].name;
+    this.currentPlaceArrIndex = click.target.attributes.id.value;
+    this.currentPlace.next(this.PlaceArr[this.currentPlaceArrIndex]);
+    this.placeName = this.PlaceArr[this.currentPlaceArrIndex].name;
   }
 
   onChange(val: string) {
@@ -119,6 +123,11 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
     if (val === 'organization') {
       this.polOrg.setLatLngs([]);
       this.loadMap(this.currentOrganization.trackingArea);
+    } else {
+      if(this.currentPlaceArrIndex >= 0) {
+        this.currentPlace.next(this.PlaceArr[this.currentPlaceArrIndex]);
+        this.placeName = this.PlaceArr[this.currentPlaceArrIndex].name;
+      }
     }
   }
 
@@ -156,11 +165,11 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
     this.change = value;
   }
 
-  get Name(): string {
-    return this.name;
+  get getPlaceName(): string {
+    return this.placeName;
   }
 
-  set Name(value: string) {
-    this.name = value;
+  set setPlaceName(value: string) {
+    this.placeName = value;
   }
 }

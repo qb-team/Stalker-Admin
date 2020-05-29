@@ -3,12 +3,14 @@
   <span class="btn btn-light navbar-brand position" (click)="homePage()" *ngIf="organization !== undefined"> {{organization.name}} </span>
   <ul class="navbar-nav mr-auto " id="oneline">
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
-        Organizzazione
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listOrg">
-        <li class="dropdown-item"  data-target="#loginModal" data-toggle="modal" (click)="setOrganization($event)" *ngFor="let o of orgArr; index as i" id="{{i}}" >{{o.name}}</li>
-      </ul>
+      <div *ngIf="this.orgArr !== undefined && this.orgArr !== null && this.orgArr.length > 0">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+          Organizzazione
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listOrg">
+          <li class="dropdown-item"  data-target="#loginModal" data-toggle="modal" (click)="setOrganization($event)" *ngFor="let o of orgArr; index as i" id="{{i}}" >{{o.name}}</li>
+        </ul>
+      </div>
     </li>
   </ul>
   <div class="modal fade" *ngIf="isLDAP" data-keyboard="false" data-backdrop="static" id="loginModal">
@@ -22,16 +24,16 @@
           <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
             <fieldset>
               <legend>Login LDAP</legend>
-              <label id="labelE" for="email">Email:</label>
-              <input type="email" name="email" id="email" class="form-control" required="required" [(ngModel)]="email" placeholder="email" formControlName="email">
+              <label id="labelE" for="username">dn completo:</label>
+              <input type="username" name="username" id="username" class="form-control" required="required" [(ngModel)]="setUsername" placeholder="username" formControlName="username">
               <label id="labelPSW" for="pwd">Password:</label>
-              <input type="password" name="password" class="form-control" [(ngModel)]="password" required="required" id="pwd" placeholder="password" formControlName="password" >
+              <input type="password" name="password" class="form-control" [(ngModel)]="setPassword" required="required" id="pwd" placeholder="password" formControlName="password" >
             </fieldset>
           </form>
-          <p *ngIf="false"> Credenziali errate </p>
+          <p *ngIf="false">Credenziali errate</p>
         </div>
         <div class="modal-footer">
-          <button id="signInBtn" [disabled]="!contactForm.valid" class="btn btn-danger">Login</button> <!--(click)=""-->
+          <button id="signInBtn" [disabled]="!contactForm.valid" (click)="this.loginLDAP()" class="btn btn-danger">Login</button> <!--(click)=""-->
           <button class="btn btn-danger" (click)="closeLdapForm()" data-dismiss="modal">Close</button>
         </div>
       </div>

@@ -13,6 +13,7 @@ export class AdministratorPermissionDataService {
 
   requireAdministratorPermissions(adminId: string) {
     console.log('load permission');
+    console.log(this.as.configuration.accessToken);
     this.as.getPermissionList(adminId).subscribe((p: Permission[]) => {
       p = this.orderPermissions(p);
       this.userPermissions.next(p);

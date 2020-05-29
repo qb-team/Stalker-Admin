@@ -1,21 +1,39 @@
 // tslint:disable
-import { TestBed } from '@angular/core/testing';
-import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Pipe, PipeTransform, Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, Directive, Input, Output } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { of as observableOf} from 'rxjs';
+import { By } from '@angular/platform-browser';
+import { Observable, of as observableOf, throwError } from 'rxjs';
+
+import { Component } from '@angular/core';
 import { OrganizationInformationContentComponent } from './organization-information-content.component';
-import {HttpClient} from '@angular/common/http';
-import createSpyObj = jasmine.createSpyObj;
-import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
+import { AdministratorOrganizationDataService } from '../../../services/AdministratorOrganizationData.service';
 
 @Injectable()
-class MockDataService {
+class MockAdministratorOrganizationDataService {}
 
+@Directive({ selector: '[oneviewPermitted]' })
+class OneviewPermittedDirective {
+  @Input() oneviewPermitted;
 }
 
-describe('OrganizationInformationContentComponent', () => {
-  const spyHttp = createSpyObj('HttpClient', ['get', 'post', 'update', 'delete']);
-  const spyAODS = createSpyObj('AdministratorOrganizationDataService', ['getOrganization']);
+@Pipe({name: 'translate'})
+class TranslatePipe implements PipeTransform {
+  transform(value) { return value; }
+}
+
+@Pipe({name: 'phoneNumber'})
+class PhoneNumberPipe implements PipeTransform {
+  transform(value) { return value; }
+}
+
+@Pipe({name: 'safeHtml'})
+class SafeHtmlPipe implements PipeTransform {
+  transform(value) { return value; }
+}
+
+fdescribe('OrganizationInformationContentComponent', () => {
   let fixture;
   let component;
 
@@ -24,10 +42,12 @@ describe('OrganizationInformationContentComponent', () => {
       imports: [ FormsModule, ReactiveFormsModule ],
       declarations: [
         OrganizationInformationContentComponent,
+        TranslatePipe, PhoneNumberPipe, SafeHtmlPipe,
+        OneviewPermittedDirective
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
-      providers: [{provide: HttpClient, useValue: spyHttp},
-        {provide: AdministratorOrganizationDataService, useValue: spyAODS}
+      providers: [
+        { provide: AdministratorOrganizationDataService, useClass: MockAdministratorOrganizationDataService }
       ]
     }).overrideComponent(OrganizationInformationContentComponent, {
 
@@ -45,10 +65,35 @@ describe('OrganizationInformationContentComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should run SetterDeclaration #setCurrentOrg', async () => {
+
+    component.setCurrentOrg = {};
+
+  });
+
+  it('should run GetterDeclaration #getCurrentOrg', async () => {
+
+    const getCurrentOrg = component.getCurrentOrg;
+
+  });
+
   it('should run #ngOnInit()', async () => {
-    spyOn(component.ads.getOrganization, 'subscribe');
+    spyOn(component, 'subscribeToOrganization');
     component.ngOnInit();
-    expect(component.ads.getOrganization.subscribe).toHaveBeenCalled();
+    // expect(component.subscribeToOrganization).toHaveBeenCalled();
+  });
+
+  it('should run #subscribeToOrganization()', async () => {
+    component.ads = component.ads || {};
+    component.ads.getOrganization = observableOf({});
+    component.subscribeToOrganization();
+
+  });
+
+  it('should run #ngOnDestroy()', async () => {
+    spyOn(component, 'ngOnDestroy');
+    component.ngOnDestroy();
+    expect(component.ngOnDestroy).toHaveBeenCalled();
   });
 
 });

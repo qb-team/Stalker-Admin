@@ -119,7 +119,9 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptionToOrg.unsubscribe();
+    if(this.subscriptionToOrg !== undefined) {
+      this.subscriptionToOrg.unsubscribe();
+    }
   }
 
   onMapClick(e: LeafletMouseEvent) {

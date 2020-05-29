@@ -4,11 +4,12 @@
 import {AfterContentInit, Component, EventEmitter, OnInit} from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { OrganizationService } from 'src/api/api';
-import { Organization } from 'src/model/models';
+import {Organization, OrganizationAuthenticationServerInformation, Permission} from 'src/model/models';
 /*import {ActivatedRoute, Router} from '@angular/router';*/
 import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {LdapService} from '../services/ldap.service';
 
 @Component({
   selector: 'app-menubar',
@@ -23,15 +24,15 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   contactForm: FormGroup;
   private Submitted = false;
   /*
-  * The e-mail of the user that is logging in
+  * The username of the user that is logging in
   */
-  private Email: string;
+  private username: string;
 
   /*
   * The password of the user that is logging in
   */
-  private Password: string;
-  constructor(private ads: AdministratorOrganizationDataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router/*, private activatedRoute: ActivatedRoute*/ ) { }
+  private password: string;
+  constructor(private ads: AdministratorOrganizationDataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router/*, private activatedRoute: ActivatedRoute*/, private ldapS: LdapService ) { }
   /*
    * Initialization and refresh the list of organization
    */
@@ -46,6 +47,14 @@ export class MenubarComponent implements OnInit, AfterContentInit {
     });
   }
 
+  loginLDAP() {
+    this.ldapS.setCredentials(this.username, this.password);
+    console.log('CREDENTIALS: ' + this.username + ' ' + this. password);
+    console.log('LDAP id: ' + localStorage.getItem('permLdapId'));
+    this.ldapS.addUserToGet(localStorage.getItem('permLdapId'));
+    this.ldapS.getUsersLdap(this.Organization.id).subscribe(() => {});
+  }
+
   ngAfterContentInit() {
     this.ads.getOrganization.next(this.Organization);
   }
@@ -56,8 +65,10 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   setOrganization(click: any) {
     this.Organization = this.OrgArr[click.target.attributes.id.value];
     this.ads.getOrganization.next(this.Organization);
+    this.ldapS.clearUsersToGet();
     if (this.Organization.trackingMode === Organization.TrackingModeEnum.Authenticated) {
       this.hasLDAP = true;
+      this.router.navigateByUrl('/Content-panel/Panel/Homepage');
     } else {
       this.hasLDAP = false;
     }
@@ -84,12 +95,12 @@ export class MenubarComponent implements OnInit, AfterContentInit {
 
   private setupForm() {
     this.contactForm = new FormGroup({
-      email: new FormControl(this.Email, [
+      username: new FormControl(this.username, [
         Validators.required
       ]),
-      password: new FormControl(this.Password, [
+      password: new FormControl(this.password, [
         Validators.required,
-        Validators.minLength(8)
+        Validators.minLength(5)
       ]),
     });
   }
@@ -107,7 +118,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
       this.Organization = this.OrgArr[i - 1];
       this.ads.getOrganization.next(this.OrgArr[i - 1]);
     } else {
-      alert('riselezione una organizzazione per continuare');
+      alert('riselezionare un\'organizzazione per continuare');
       this.Organization = this.OrgArr[-1];
       this.ads.getOrganization.next(this.Organization);
     }
@@ -148,20 +159,20 @@ export class MenubarComponent implements OnInit, AfterContentInit {
     this.Submitted = value;
   }
 
-  get email(): string {
-    return this.Email;
+  get getUsername(): string {
+    return this.username;
   }
 
-  set email(value: string) {
-    this.Email = value;
+  set setUsername(value: string) {
+    this.username = value;
   }
 
-  get password(): string {
-    return this.Password;
+  get getPassword(): string {
+    return this.password;
   }
 
-  set password(value: string) {
-    this.Password = value;
+  set setPassword(value: string) {
+    this.password = value;
   }
 
 }

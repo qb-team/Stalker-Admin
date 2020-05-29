@@ -63,7 +63,9 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
   }
 
   ngOnDestroy() {
-    this.subscriptionToOrg.unsubscribe();
+    if(this.subscriptionToOrg !== undefined) {
+      this.subscriptionToOrg.unsubscribe();
+    }
   }
 
   onMapClick(e: LeafletMouseEvent) {

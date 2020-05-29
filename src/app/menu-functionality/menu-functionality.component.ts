@@ -51,7 +51,12 @@ export class MenuFunctionalityComponent implements OnInit {
           flag = true;
         }
       }
-      localStorage.setItem('perm', this.permession[this.index].permission.toString());
+      if (this.permession !== undefined && this.permession.length > this.index) {
+        localStorage.setItem('perm', this.permession[this.index].permission.toString());
+        if (this.permession[this.index].orgAuthServerId !== undefined) {
+          localStorage.setItem('permLdapId', this.permession[this.index].orgAuthServerId.toString());
+        }
+      }
     }
   }
   get Index(): number {

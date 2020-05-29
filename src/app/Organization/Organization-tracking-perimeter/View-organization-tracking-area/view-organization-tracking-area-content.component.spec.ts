@@ -1,60 +1,76 @@
 // tslint:disable
-import { TestBed } from '@angular/core/testing';
-import { Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Pipe, PipeTransform, Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, Directive, Input, Output } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ViewOrganizationTrackingAreaContentComponent } from './view-organization-tracking-area-content.component';
-import {HttpClient} from '@angular/common/http';
-import createSpyObj = jasmine.createSpyObj;
-import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
-import {PlaceService} from '../../../..';
+import { By } from '@angular/platform-browser';
+import { Observable, of as observableOf, throwError } from 'rxjs';
 
-describe('ViewOrganizationTrackingAreaContentComponent', () => {
-  const spyHttp = createSpyObj('HttpClient', ['get', 'post', 'update', 'delete']);
-  const spyAODS = createSpyObj('AdministratorOrganizationDataService', ['getOrganization']);
-  const spyPS = createSpyObj('PlaceService', ['getPlaceListOfOrganization', 'updatePlace', 'deletePlace', 'createNewPlace']);
+import { Component } from '@angular/core';
+import { AdministratorOrganizationDataService } from '../../../services/AdministratorOrganizationData.service';
+import {OrganizationService, PlaceService} from '../../../../index';
+import {HttpClient} from "@angular/common/http";
+import {ViewOrganizationTrackingAreaContentComponent} from "./view-organization-tracking-area-content.component";
 
+@Injectable()
+class MockAdministratorOrganizationDataService {
+  getOrganization(){}
+}
+
+@Injectable()
+class MockPlaceService {
+  getPlaceListOfOrganization(number){}
+}
+
+@Injectable()
+class MockHttpClient {
+}
+
+@Directive({ selector: '[oneviewPermitted]' })
+class OneviewPermittedDirective {
+  @Input() oneviewPermitted;
+}
+
+@Pipe({name: 'translate'})
+class TranslatePipe implements PipeTransform {
+  transform(value) { return value; }
+}
+
+@Pipe({name: 'phoneNumber'})
+class PhoneNumberPipe implements PipeTransform {
+  transform(value) { return value; }
+}
+
+@Pipe({name: 'safeHtml'})
+class SafeHtmlPipe implements PipeTransform {
+  transform(value) { return value; }
+}
+
+describe('ViewOrganizationTrackingContentComponent', () => {
   let fixture;
   let component;
-  let mockOrganization: any;
-  class MockOrganization {
-    trackingArea = '[\n' +
-      '    {\n' +
-      '        "lat": 12.34567890,\n' +
-      '        "long": 12.34567890\n' +
-      '    },\n' +
-      '    {\n' +
-      '        "lat": 12.34567890,\n' +
-      '        "long": 12.34567890\n' +
-      '    },\n' +
-      '    {\n' +
-      '        "lat": 12.34567890,\n' +
-      '        "long": 12.34567890\n' +
-      '    },\n' +
-      '    {\n' +
-      '        "lat": 12.34567890,\n' +
-      '        "long": 12.34567890\n' +
-      '    }\n' +
-      ']';
-  }
 
-  beforeEach(() => {
-    mockOrganization = new MockOrganization();
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ FormsModule, ReactiveFormsModule ],
       declarations: [
-        ViewOrganizationTrackingAreaContentComponent
+        ViewOrganizationTrackingAreaContentComponent,
+        TranslatePipe, PhoneNumberPipe, SafeHtmlPipe,
+        OneviewPermittedDirective
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
-      providers: [{provide: AdministratorOrganizationDataService, useValue: spyAODS},
-        {provide: HttpClient, useValue: spyHttp},
-        {provide: PlaceService, useValue: spyPS},
+      providers: [
+        { provide: AdministratorOrganizationDataService, useClass: MockAdministratorOrganizationDataService },
+        { provide: PlaceService, useClass: MockPlaceService },
+        { provide: HttpClient, useClass: MockHttpClient }
       ]
-    }).overrideComponent(ViewOrganizationTrackingAreaContentComponent, {
-
     }).compileComponents();
+  }));
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(ViewOrganizationTrackingAreaContentComponent);
     component = fixture.debugElement.componentInstance;
-    component.org = mockOrganization;
+    fixture.detectChanges();
   });
 
   afterEach(() => {
@@ -63,17 +79,18 @@ describe('ViewOrganizationTrackingAreaContentComponent', () => {
   });
 
   it('should run #constructor()', async () => {
+    component.ads = component.ads || {};
+    component.ads.getOrganization = observableOf({});
+    component.plS = component.plS || {};
+    component.plS.getPlaceListOfOrganization = observableOf({});
     expect(component).toBeTruthy();
   });
-/*
+
   it('should run #ngOnInit()', async () => {
-    component.ds = component.ds || {};
-    component.ds.getOrganization = observableOf({
-      trackingArea: 'trackingArea'
-    });
-    spyOn(component.ds.getOrganization, 'subscribe');
+    component.ads = component.ads || {};
+    component.ads.getOrganization = observableOf({});
+    component.plS = component.plS || {};
+    component.plS.getPlaceListOfOrganization = observableOf({});
     component.ngOnInit();
-    expect(component.ds.getOrganization.subscribe).toHaveBeenCalled();
   });
-*/
 });

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OsmMapContentComponent } from './osm-map-content.component';
 
-describe('OsmMapContentComponent', () => {
+fdescribe('OsmMapContentComponent', () => {
   let component: OsmMapContentComponent;
   let fixture: ComponentFixture<OsmMapContentComponent>;
 

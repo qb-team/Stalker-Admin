@@ -10,4 +10,7 @@ export * from './presence.service';
 import { PresenceService } from './presence.service';
 export * from './report.service';
 import { ReportService } from './report.service';
+export * from './report.service';
+import { AuthenticationServerService } from './authenticationServer.service';
+export * from './authenticationServer.service';
 export const APIS = [AccessService, AdministratorService, OrganizationService, PlaceService, PresenceService, ReportService];

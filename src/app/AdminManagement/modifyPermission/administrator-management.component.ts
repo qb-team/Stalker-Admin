@@ -4,6 +4,7 @@ import {AdministratorOrganizationDataService} from '../../services/Administrator
 import {AdministratorPermissionDataService} from '../../services/AdministratorPermissionData.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
+import {stringify} from "querystring";
 
 
 export enum permissionLevel {
@@ -71,7 +72,8 @@ export class AdministratorManagementComponent implements OnInit {
    */
   addPermissionModificationInstance(click: any, newPriviledge: number): void {
     const adminId = click.target.parentNode.id;
-    if (newPriviledge !== this.getPermissionTierOf(adminId)) {
+    console.log('LOGGOSO' + adminId);
+    if (typeof adminId === typeof 'string' && newPriviledge !== this.getPermissionTierOf(adminId)) {
       if (this.alreadyModified(adminId) === -1) {
         const p: Permission = {
           administratorId: adminId,
@@ -97,25 +99,27 @@ export class AdministratorManagementComponent implements OnInit {
   * will replace the old ones in permissions using modifyPriviledgesOf(adminId, newPriviledgeLevel)
    */
   public updatePermissionList(): void {
-    this.sortModificationList();
-    let it1 = 0;
-    let it2 = 0;
-    while (it1 < this.permissions.length && it2 < this.permissionModifications.length) {
-      if (this.permissions[it1].administratorId > this.permissionModifications[it2].administratorId) {
-        it2++;
-      } else if (this.permissions[it1].administratorId < this.permissionModifications[it2].administratorId) {
-        it1++;
-      } else {
-        this.permissions[it1].permission = this.permissionModifications[it2].permission;
-        this.as.updateAdministratorPermission(this.permissions[it1]).subscribe(() => {}, (err: HttpErrorResponse) => {
-          alert(err.message);
-        });
-        it1++;
-        it2++;
+    if(this.permissionModifications.length !== 0) {
+      this.sortModificationList();
+      let it1 = 0;
+      let it2 = 0;
+      while (it1 < this.permissions.length && it2 < this.permissionModifications.length) {
+        if (this.permissions[it1].administratorId > this.permissionModifications[it2].administratorId) {
+          it2++;
+        } else if (this.permissions[it1].administratorId < this.permissionModifications[it2].administratorId) {
+          it1++;
+        } else {
+          this.permissions[it1].permission = this.permissionModifications[it2].permission;
+          this.as.updateAdministratorPermission(this.permissions[it1]).subscribe(() => {}, (err: HttpErrorResponse) => {
+            alert(err.message);
+          });
+          it1++;
+          it2++;
+        }
       }
+      this.permissionModifications = new Array<Permission>();
+      this.permissionModificationsTableText = new Array<string>(this.permissions.length);
     }
-    this.permissionModifications = new Array<Permission>();
-    this.permissionModificationsTableText = new Array<string>(this.permissions.length);
   }
 
   public eraseModificationList() {
@@ -167,7 +171,12 @@ export class AdministratorManagementComponent implements OnInit {
   }
 
   private getPermissionTierOf(adminId: string) {
-    return this.permissions[this.permissions.findIndex((p: Permission) => p.administratorId === adminId)].permission;
+    if (this.permissions.length > 0) {
+      const foundIdx = this.permissions.findIndex((p: Permission) => p.administratorId === adminId);
+      if (foundIdx !== -1) {
+        return this.permissions[foundIdx].permission;
+      }
+    }
   }
 
 

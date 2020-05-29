@@ -9,7 +9,7 @@ import {By} from '@angular/platform-browser';
 @Injectable()
 class MockDataService {}
 
-describe('ContentComponent', () => {
+fdescribe('ContentComponent', () => {
   let fixture;
   let component;
 

@@ -1,37 +1,95 @@
+// tslint:disable
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Pipe, PipeTransform, Injectable, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, Directive, Input, Output } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { Observable, of as observableOf, throwError } from 'rxjs';
 
-import { ModifyOrganizationTrackingAreaContentComponent } from './modify-organization-tracking-area-content.component';
-import createSpyObj = jasmine.createSpyObj;
-import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
-import {OrganizationService} from '../../../..';
-import {FormBuilder} from '@angular/forms';
+import { Component } from '@angular/core';
+import { AdministratorOrganizationDataService } from '../../../services/AdministratorOrganizationData.service';
+import {OrganizationService, PlaceService} from '../../../../index';
+import {ModifyOrganizationTrackingAreaContentComponent} from "./modify-organization-tracking-area-content.component";
+import {PlaceManagementContentComponent} from "../../Organization-information/place-management-content/place-management-content.component";
+import {HttpClient} from "@angular/common/http";
 
-describe('ModifyPlaceTrackingAreaContentComponent', () => {
-  let component: ModifyOrganizationTrackingAreaContentComponent;
-  let fixture: ComponentFixture<ModifyOrganizationTrackingAreaContentComponent>;
-  const spyAODS = createSpyObj('AdministratorOrganizationDataService', ['getOrganization']);
-  const spyOS = createSpyObj('OrganizationService', ['updateOrganization', 'requestDeletionOfOrganization']);
-  const spyFromBuilder = createSpyObj('FormBuilder', ['group']);
+@Injectable()
+class MockAdministratorOrganizationDataService {
+  getOrganization() {}
+}
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ModifyOrganizationTrackingAreaContentComponent ],
-      providers: [
-        {provide: AdministratorOrganizationDataService, useValue: spyAODS},
-        {provide: OrganizationService, useValue: spyOS},
-        {provide: FormBuilder, useValue: spyFromBuilder}
-        ]
-    })
-    .compileComponents();
-  }));
+@Injectable()
+class MockOrganizationService {
+}
+
+@Injectable()
+class MockHttpClient {
+}
+
+@Directive({ selector: '[oneviewPermitted]' })
+class OneviewPermittedDirective {
+  @Input() oneviewPermitted;
+}
+
+@Pipe({name: 'translate'})
+class TranslatePipe implements PipeTransform {
+  transform(value) { return value; }
+}
+
+@Pipe({name: 'phoneNumber'})
+class PhoneNumberPipe implements PipeTransform {
+  transform(value) { return value; }
+}
+
+@Pipe({name: 'safeHtml'})
+class SafeHtmlPipe implements PipeTransform {
+  transform(value) { return value; }
+}
+
+fdescribe('ModifyOrganizationTrackingContentComponent', () => {
+  let fixture;
+  let component;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [ FormsModule, ReactiveFormsModule ],
+      declarations: [
+        ModifyOrganizationTrackingAreaContentComponent,
+        TranslatePipe, PhoneNumberPipe, SafeHtmlPipe,
+        OneviewPermittedDirective
+      ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
+      providers: [
+        { provide: AdministratorOrganizationDataService, useClass: MockAdministratorOrganizationDataService },
+        { provide: OrganizationService, useClass: MockOrganizationService },
+        { provide: HttpClient, useClass: MockHttpClient }
+      ]
+    }).overrideComponent(ModifyOrganizationTrackingAreaContentComponent, {
+
+    }).compileComponents();
     fixture = TestBed.createComponent(ModifyOrganizationTrackingAreaContentComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = fixture.debugElement.componentInstance;
   });
 
-  it('should create', () => {
+  afterEach(() => {
+    component.ngOnDestroy = function() {};
+    fixture.destroy();
+  });
+
+  it('should run #constructor()', async () => {
     expect(component).toBeTruthy();
   });
+
+  it('should run #ngOnInit()', async () => {
+    component.ads = component.ads || {};
+    component.ads.getOrganization = observableOf({});
+    component.ngOnInit();
+  });
+
+
+  it('should run #undefined()', async () => {
+
+  });
+
+
 });

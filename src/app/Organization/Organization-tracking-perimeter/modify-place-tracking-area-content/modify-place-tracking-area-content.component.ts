@@ -79,7 +79,9 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
   }
 
   ngOnDestroy() {
-    this.subscriptionToOrg.unsubscribe();
+    if(this.subscriptionToOrg !== undefined) {
+      this.subscriptionToOrg.unsubscribe();
+    }
   }
 
   onMapClick(e: LeafletMouseEvent) {
