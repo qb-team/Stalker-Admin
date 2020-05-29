@@ -10,10 +10,13 @@ cache:
      - ./node_modules
 
 install:
+  - npm cache clean
+  - rm -rf node_modules
   - npm install
 
 script:
   - export CHROME_BIN=chromium-browser
+  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
 
 after_script:
   - npm run coveralls
