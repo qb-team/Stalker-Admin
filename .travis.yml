@@ -14,8 +14,7 @@ install:
 
 script:
   - export CHROME_BIN=chromium-browser
-  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
-  
+
 after_script:
   - npm run coveralls
   - cat ./coverage/*/lcov.info | ./node_modules/coveralls/bin/coveralls.js
