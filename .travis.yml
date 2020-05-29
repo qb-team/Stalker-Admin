@@ -14,7 +14,7 @@ install:
 
 script:
   - export CHROME_BIN=chromium-browser
-  - npm run test
+  - npm run test-headless
 
 after_script:
   - npm run coveralls
