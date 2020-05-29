@@ -10,7 +10,6 @@ cache:
      - ./node_modules
 
 install:
-  - npm cache clean
   - rm -rf node_modules
   - npm install
 
