@@ -98,8 +98,16 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
   onRemove() {
     if (this.PlaceArr != null) {
       if (confirm('Stai per eliminare ' + this.currentPlace.name + '. Continuare?')) {
-          this.plS.deletePlace(this.currentPlace.id).subscribe(() => {});
-          this.loadPlaceList();
+          this.plS.deletePlace(this.currentPlace.id).subscribe(() => {
+            this.loadPlaceList();
+            alert('Eliminazione del nuovo luogo effettuata.');
+          }, (err: HttpErrorResponse) => {
+            if (err.status === 400) {
+              alert('Errore');
+            } else {
+              alert(err.message);
+            }
+          });
       }
     }
   }
@@ -148,6 +156,8 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
       }
       track = track.concat('{\n' + '"lat": "' + this.Arltn[this.Arltn.length - 1] + '",\n "long": "' + this.Arlong[this.Arltn.length - 1] + '"\n}\n]\n}');
       newPlace.trackingArea = track;
+      this.Arltn = [];
+      this.Arlong = [];
       this.plS.createNewPlace(newPlace).subscribe(() => {
         this.loadPlaceList();
         alert('Creazione del nuovo luogo effettuata.');
