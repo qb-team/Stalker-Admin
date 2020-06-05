@@ -30,7 +30,18 @@
 <!--END LDAP-->
 <div *ngIf="isLoggedIn">
   <div *ngIf="!this.viewingAccesses">
-    <h1>Accessi a {{this.getOrganization.name}}</h1>
+    <h1 *ngIf="this.viewingOrgAccesses">Accessi all'organizzazione {{this.getOrganization.name}}</h1>
+    <h1 *ngIf="this.places !== undefined && this.places !== null && !this.viewingOrgAccesses">Accessi al luogo {{this.places[this.currentPlaceIndex].name}}</h1>
+    <button *ngIf="this.places !== null && this.places.length !== 0" (click)="toggleViewMode($event)" id="{{this.switchModeButtonId}}" class="buttonSwitchTo btn btn-danger">Passa alla visualizzazione degli accessi ad un luogo</button>
+    <h2 *ngIf="this.places !== null && this.places.length === 0">Non ci sono luoghi in questa organizzazione. Sarà quindi possibile visualizzare unicamente gli accessi effettuati all'organizzazione.</h2>
+    <div *ngIf="!viewingOrgAccesses" class="dropdown">
+      <button id="selectPlace" *ngIf="this.places !== null && this.places.length !== 0" class="btn btn-danger dropdown-toggle" type="button" id="selectPlaceDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Cambia luogo
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div *ngFor="let place of this.places; index as i" (click)="this.changePlaceToWatchUpon(i)" class="dropdown-item">{{place.name}}</div>
+      </div>
+    </div>
     <table class="table shadow p-4 mb-5 bg-white">
       <caption>Accessi degli utenti di {{ this.getOrganization.name }}</caption>
       <thead>
@@ -47,13 +58,61 @@
       <tr *ngFor="let user of this.getLdapUsers; index as i">
         <td>{{ user.surname }}</td>
         <td>{{ user.name }}</td>
-        <td><button (click)="toggleBtnText($event)" type="button" class="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">NO</button></td>
+        <td><button id="{{user.orgAuthServerId}}" (click)="toggleUser($event)" type="button" class="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">NO</button></td>
       </tr>
       </tbody>
     </table>
-    <button (click)="viewAccesses()" class="btn btn-danger">Visualizza accessi degli utenti selezionati</button>
+    <button [disabled]="this.usersToWatch.length === 0" (click)="viewAccesses()" class="btn btn-danger">Visualizza accessi degli utenti selezionati</button>
   </div>
   <div *ngIf="this.viewingAccesses">
-
+    <button (click)="this.unviewAccesses()" class="btn btn-danger">Torna agli utenti</button>
+    <div *ngIf="this.viewingOrgAccesses">
+      <h1>Accessi all'organizzazione {{this.getOrganization.name}}</h1>
+      <table class="table shadow p-4 mb-5 bg-white">
+        <caption>Accessi degli utenti di {{ this.getOrganization.name }}</caption>
+        <thead>
+        <tr>
+          <th scope="table" colspan="3">Accessi degli utenti in {{ this.getOrganization.name }}</th>
+        </tr>
+        <tr>
+          <th scope="col">Cognome</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Entrato alle</th>
+          <th scope="col">Uscito alle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let acc of this.organizationAccesses; index as i">
+          <td>{{ getUserByID(acc.orgAuthServerId).surname }}</td>
+          <td>{{ getUserByID(acc.orgAuthServerId).name }}</td>
+          <td>{{ acc.entranceTimestamp }}</td>
+          <td>{{ acc.exitTimestamp }}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="!this.viewingOrgAccesses">
+      <h1>Accessi al luogo {{this.places[currentPlaceIndex].name}}</h1>
+      <table class="table shadow p-4 mb-5 bg-white">
+        <caption>Accessi degli utenti di {{ this.getOrganization.name }}</caption>
+        <thead>
+        <tr>
+          <th scope="table" colspan="3">Accessi degli utenti nel luogo {{ this.places[currentPlaceIndex].name }}</th>
+        </tr>
+        <tr>
+          <th scope="col">Cognome</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Entrato alle</th>
+          <th scope="col">Uscito alle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let acc of this.placeAccesses; index as i">
+          <td>{{ getUserByID(acc.orgAuthServerId).surname }}</td>
+          <td>{{ getUserByID(acc.orgAuthServerId).name }}</td>
+          <td>{{ acc.entranceTimestamp }}</td>
+          <td>{{ acc.exitTimestamp }}</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

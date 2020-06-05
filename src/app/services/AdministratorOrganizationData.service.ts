@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Organization, OrganizationService, Permission} from '../..';
+import {Organization, OrganizationService, Permission, Place, PlaceService} from '../..';
 import {ReplaySubject} from 'rxjs';
 import {Router} from '@angular/router';
 
@@ -10,8 +10,16 @@ import {Router} from '@angular/router';
 export class AdministratorOrganizationDataService {
   private adminOrganizations: ReplaySubject<Array<Organization>> = new ReplaySubject<Array<Organization>>(); // list of organizations that are accessible for the user
   private currentOrganization: ReplaySubject<Organization> = new ReplaySubject<Organization>(1);
+  private currentOrganizationPlaces: ReplaySubject<Array<Place>> = new ReplaySubject<Array<Place>>(1);
 
-  constructor(private os: OrganizationService, private router: Router) {
+  constructor(private os: OrganizationService, private ps: PlaceService, private router: Router) {
+    this.currentOrganization.subscribe((o: Organization) => {
+      if (o !== undefined) {
+        this.ps.getPlaceListOfOrganization(o.id).subscribe((places: Array<Place>) => {
+          this.currentOrganizationPlaces.next(places);
+        });
+      }
+    });
   }
 
   requireAdministratorOrganizations(perm: Array<Permission>) {
@@ -58,6 +66,10 @@ export class AdministratorOrganizationDataService {
 
   get getOrganization(): ReplaySubject<Organization> {
     return this.currentOrganization;
+  }
+
+  get getCurrentOrganizationPlaces(): ReplaySubject<Array<Place>> {
+    return this.currentOrganizationPlaces;
   }
 
 }

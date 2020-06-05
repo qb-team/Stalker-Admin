@@ -48,7 +48,7 @@ const routes: Routes = [
           { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent, canActivate: [ManagerGuardService]},
           { path: 'Gestione dei luoghi di tracciamento', component: PlaceManagementContentComponent, canActivate: [ManagerGuardService]},
           { path: 'Presenze attuali in un luogo', component: PlacePresenceNumberComponent, data: { reuse: false}},
-          { path: 'Ricerca accessi degli utenti autenticati', component: AuthenticatedUserAccessesComponent, data: { reuse: false}, canActivate: [AuthenticatedOrganizationGuardService]}
+          { path: 'Ricerca accessi degli utenti autenticati', component: AuthenticatedUserAccessesComponent, data: { reuse: true}, canActivate: [AuthenticatedOrganizationGuardService]}
         ]
       }
     ]

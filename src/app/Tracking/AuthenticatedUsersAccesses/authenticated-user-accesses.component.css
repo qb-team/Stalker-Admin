@@ -5,3 +5,11 @@
 .active {
   background-color: green !important;
 }
+
+.buttonSwitchTo {
+  margin: 1em;
+}
+
+#selectPlaceDropdown {
+  margin: 1em;
+}
