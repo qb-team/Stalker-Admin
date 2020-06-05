@@ -1,11 +1,11 @@
 <h1>Presenze in {{this.getCurrentOrganization.name}}</h1>
-<h2 *ngIf="this.CurrentPlace !== undefined && this.CurrentPlace !== null">Luogo selezionato: {{this.CurrentPlace.name}}</h2>
 <div class="row shadow p-4 mb-5 bg-white">
- <div class="col-10">
-   <h2  *ngIf="TrackedUsersCounter !== undefined">Totale utenti all'interno: {{ TrackedUsersCounter }}</h2>
-   <span *ngIf="CurrentPlace!== undefined"> {{CurrentPlace.name}}</span>
+ <div class="col-6">
+   <h2 *ngIf="TrackedUsersCounter !== undefined && TrackedUsersCounter !== null">Totale utenti all'interno: {{ TrackedUsersCounter }}</h2>
+   <p *ngIf="this.PlaceArr.length > 0 && (TrackedUsersCounter === undefined || TrackedUsersCounter === null)">Seleziona un luogo per iniziare il tracciamento</p>
+   <p *ngIf="this.PlaceArr.length <= 0 ">Non ci sono luoghi per l'organizzazione. È dunque possibile solo la visualizzazione del perimetro dell'organizzazione.</p>
  </div>
-  <div class="col-2">
+  <div class="col-3" *ngIf="this.PlaceArr.length > 0">
     <div class="dropdown" id="lineDiv">
       <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Luogo
@@ -14,6 +14,9 @@
         <a class="dropdown-item"  (click)="setPlace($event)" *ngFor="let o of PlaceArr; index as i" id="{{i}}" >{{o.name}}</a>
       </div>
     </div>
+  </div>
+  <div class="col-3" >
+      <h3 *ngIf="this.CurrentPlace !== undefined && this.CurrentPlace !== null"> {{CurrentPlace.name}}</h3>
   </div>
 </div>
 <div class="shadow p-4 mb-5 bg-white">

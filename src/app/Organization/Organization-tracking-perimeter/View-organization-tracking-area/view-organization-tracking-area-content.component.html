@@ -1,10 +1,10 @@
+<h1 *ngIf="this.Change === 'organization'">Visualizzazione dell'area di tracciamento di {{this.getCurrentOrg.name}}</h1>
+<h1 *ngIf="this.Change === 'place'">Visualizzazione dell'area di tracciamento di un luogo</h1>
 <div class="shadow p-4 mb-5 bg-white">
-  <h1 *ngIf="this.Change === 'organization'">Visualizzazione dell'area di tracciamento di {{this.getCurrentOrg.name}}</h1>
-    <h1 *ngIf="this.Change === 'place'">Visualizzazione dell'area di tracciamento di un luogo</h1>
-    <h2 *ngIf="this.Change === 'place' && this.getPlaceName !== undefined && this.getPlaceName !== null && this.getPlaceName !== ''">Luogo attualmente selezionato: {{getPlaceName}}</h2>
+  <h2 *ngIf="this.Change === 'place'  && this.PlaceArr.length > 0 && this.getPlaceName !== undefined && this.getPlaceName !== null && this.getPlaceName !== ''">Luogo attualmente selezionato: {{getPlaceName}}</h2>
   <h2 *ngIf="this.Change === 'place' && (this.getPlaceName === undefined || this.getPlaceName === null || this.getPlaceName === '')">Perfavore, selezionare un luogo per visualizzarne l'area di tracciamento</h2>
-  <div class="row text-center">
-    <div class="col-4" *ngIf="Change === 'place'" >
+  <div class="row text-center" >
+    <div class="col-6" *ngIf="Change === 'place' && this.PlaceArr.length > 0" >
       <div class="dropdown" id="lineDiv">
         <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Selezionare un luogo
@@ -14,17 +14,15 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row text-center">
-    <div class="col-6 pt-1">
-      <button id="bOrg" class=" btn btn-danger mr-1" *ngIf="Change === 'place' " (click)="onChange('organization')"> Torna alla visualizzazione del perimetro dell'organizzazione </button>
-      <button class=" btn btn-danger mr-1" *ngIf="Change === 'organization' && this.PlaceArr !== undefined && this.PlaceArr.length > 0" (click)="onChange('place')"> Passa alla visualizzazione per luogo </button>
+      <div class="col-6" *ngIf="this.PlaceArr.length > 0">
+        <button id="bOrg" class=" btn btn-danger mr-1" *ngIf="Change === 'place' " (click)="onChange('organization')"> Torna alla visualizzazione del perimetro dell'organizzazione </button>
+        <button class=" btn btn-danger mr-1" *ngIf="Change === 'organization'" (click)="onChange('place')"> Passa alla visualizzazione per luogo </button>
+      </div>
+      <div class="col-12">
+        <p *ngIf="this.PlaceArr === undefined || this.PlaceArr.length <= 0">Non ci sono luoghi per l'organizzazione. È dunque possibile solo la visualizzazione del perimetro dell'organizzazione.</p>
+      </div>
     </div>
-    <div class="col-12">
-      <p *ngIf="this.PlaceArr === undefined || this.PlaceArr.length <= 0">Non ci sono luoghi per l'organizzazione. È dunque possibile solo la visualizzazione del perimetro dell'organizzazione.</p>
-    </div>
   </div>
-</div>
 <div class="container shadow p-4 mb-5 bg-white">
   <app-osm-map-content
     (map$)="receiveMap($event)"

@@ -1,3 +1,4 @@
+<h1>Gestione dell'organizzazione {{this.getCurrentOrg.name}}</h1>
 <form [formGroup]="modifyForm" class="shadow p-4 mb-5 bg-white">
   <fieldset>
     <div class="card m-3">
@@ -5,8 +6,8 @@
             <h1 class="title" *ngIf="Change === 'modify' ">Modifica dati dell'organizzazione</h1>
             <h1 class="title" *ngIf="Change === 'remove' ">Invio della richiesta di eliminazione dell'organizzazione</h1>
           <p class=" text-right">
-            <button class=" btn btn-danger mr-1" (click)="onChange('modify')"> Modifica </button>
-            <button class=" btn btn-danger mr-1" (click)="onChange('remove')"> Rimuovi </button>
+            <button class=" btn btn-danger mr-1" *ngIf="Change === 'remove'" (click)="onChange('modify')"> Modifica </button>
+            <button class=" btn btn-danger mr-1" *ngIf="Change === 'modify'" (click)="onChange('remove')"> Rimuovi </button>
           </p>
       </div>
       <div class="card-body" *ngIf="Change === 'modify'">
