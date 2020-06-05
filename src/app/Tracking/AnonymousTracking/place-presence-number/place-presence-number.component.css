@@ -1,4 +1,11 @@
 #lineDiv{
-  display: inline;
-  padding: 2em 2em;
+ /* display: inline;
+  padding: 2em 2em;*/
+}
+h1 {
+  font-size: 1.9em;
+}
+
+h2 {
+  font-size: 1.6em;
 }

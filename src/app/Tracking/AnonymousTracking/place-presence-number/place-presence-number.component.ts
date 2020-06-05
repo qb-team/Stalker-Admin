@@ -61,6 +61,9 @@ export class PlacePresenceNumberComponent implements OnInit {
 
   loadPlaceList() {
     this.ads.getOrganization.subscribe((org: Organization) => {
+      this.PlaceArr = [];
+      this.trackedUsersCounter = null;
+      this.currentPlace = undefined;
       if (org != null) {
         this.currentOrganization = org;
         this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {

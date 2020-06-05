@@ -97,6 +97,8 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
 
   loadPlaceList() {
     this.ads.getOrganization.subscribe((org: Organization) => {
+      this.PlaceArr = [];
+      this.placeName = null;
       if (org != null) {
         this.currentOrganization = org;
         this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
