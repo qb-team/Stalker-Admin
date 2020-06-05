@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
 import { HomePageContentComponent } from './home-page-content.component';
 import { AdministratorOrganizationDataService } from '../services/AdministratorOrganizationData.service';
 
+
 @Injectable()
 class MockAdministratorOrganizationDataService {}
 
@@ -71,8 +72,16 @@ fdescribe('HomePageContentComponent', () => {
 
   });
 
+  /*it('should run #ngOnInit()', async () => {
+    spyOn(component, 'subscribeToOrganization').and.returnValue(observableOf('some value'));
+    component.ngOnInit();
+    // expect(component.subscribeToOrganization).toHaveBeenCalled();
+  });
+*/
   it('should run #ngOnInit()', async () => {
     spyOn(component, 'subscribeToOrganization');
+    component.ads = component.ads || {};
+    component.ads.getAdminOrganizations = observableOf({});
     component.ngOnInit();
     // expect(component.subscribeToOrganization).toHaveBeenCalled();
   });

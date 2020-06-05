@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Organization, Place, PlaceService} from '../../../..';
+import {Organization, OrganizationDeletionRequest, Place, PlaceService} from '../../../..';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {Subscription} from 'rxjs';
@@ -14,6 +14,7 @@ import * as L from 'leaflet';
 })
 export class PlaceManagementContentComponent implements OnInit, OnDestroy {
   private currentOrganization: Organization;
+  newPlace: Organization;
   private change = 'create';
   private select = false;
   private name: string;
@@ -97,8 +98,16 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
   onRemove() {
     if (this.PlaceArr != null) {
       if (confirm('Stai per eliminare ' + this.currentPlace.name + '. Continuare?')) {
-          this.plS.deletePlace(this.currentPlace.id).subscribe(() => {});
-          this.loadPlaceList();
+          this.plS.deletePlace(this.currentPlace.id).subscribe(() => {
+            this.loadPlaceList();
+            alert('Eliminazione del nuovo luogo effettuata.');
+          }, (err: HttpErrorResponse) => {
+            if (err.status === 400) {
+              alert('Errore');
+            } else {
+              alert(err.message);
+            }
+          });
       }
     }
   }
@@ -119,7 +128,7 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.subscriptionToOrg !== undefined) {
+    if (this.subscriptionToOrg !== undefined) {
       this.subscriptionToOrg.unsubscribe();
     }
   }
@@ -134,10 +143,12 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    const newPlace = this.currentPlace;
-    newPlace.name = this.name;
-    newPlace.id = null;
-    newPlace.organizationId = this.currentOrganization.id;
+    const newPlace: Place = {
+      id: null,
+      name: this.name,
+      organizationId: this.currentOrganization.id,
+      trackingArea: null,
+    };
     if (this.Arltn.length >= 3) {
       let track: string = '{\n' + '"Organizzazioni": [\n';
       for (let i = 0; i + 1 < this.Arltn.length; i++) {
@@ -145,6 +156,8 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
       }
       track = track.concat('{\n' + '"lat": "' + this.Arltn[this.Arltn.length - 1] + '",\n "long": "' + this.Arlong[this.Arltn.length - 1] + '"\n}\n]\n}');
       newPlace.trackingArea = track;
+      this.Arltn = [];
+      this.Arlong = [];
       this.plS.createNewPlace(newPlace).subscribe(() => {
         this.loadPlaceList();
         alert('Creazione del nuovo luogo effettuata.');
