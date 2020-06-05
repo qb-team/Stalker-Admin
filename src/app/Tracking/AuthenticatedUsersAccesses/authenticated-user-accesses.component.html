@@ -1,0 +1,59 @@
+<!--button class="btn btn-danger" (click)="this.toggleShowLoginLdap()" data-target="#loginModal" data-toggle="modal">Login</button-->
+<!--BEGIN LDAP-->
+<div *ngIf="!this.isLoggedIn" data-keyboard="false" data-backdrop="static" id="loginModal">
+  <h1 id="loginRequest">Per visualizzare gli accessi autenticati effettuare prima il login perfavore</h1>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Login LDAP</h4>
+        <button class="close" data-dismiss="modal" (click)="closeLdapForm()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
+          <fieldset>
+            <legend>Login LDAP</legend>
+            <label id="labelE" for="username">dn completo:</label>
+            <input type="username" name="username" id="username" class="form-control" required="required" [(ngModel)]="setUsername" placeholder="username" formControlName="username">
+            <label id="labelPSW" for="pwd">Password:</label>
+            <input type="password" name="password" class="form-control" [(ngModel)]="setPassword" required="required" id="pwd" placeholder="password" formControlName="password" >
+          </fieldset>
+        </form>
+        <p *ngIf="false">Credenziali errate</p>
+      </div>
+      <div class="modal-footer">
+        <button id="signInBtn" [disabled]="!contactForm.valid" (click)="this.loginLDAP()" class="btn btn-danger">Login</button> <!--(click)=""-->
+        <button class="btn btn-danger" (click)="closeLdapForm()" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END LDAP-->
+<div *ngIf="isLoggedIn">
+  <div *ngIf="!this.viewingAccesses">
+    <h1>Accessi a {{this.getOrganization.name}}</h1>
+    <table class="table shadow p-4 mb-5 bg-white">
+      <caption>Accessi degli utenti di {{ this.getOrganization.name }}</caption>
+      <thead>
+      <tr>
+        <th scope="table" colspan="3">Accessi degli utenti in {{ this.getOrganization.name }}</th>
+      </tr>
+      <tr>
+        <th scope="col">Cognome</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Visualizza accessi</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of this.getLdapUsers; index as i">
+        <td>{{ user.surname }}</td>
+        <td>{{ user.name }}</td>
+        <td><button (click)="toggleBtnText($event)" type="button" class="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">NO</button></td>
+      </tr>
+      </tbody>
+    </table>
+    <button (click)="viewAccesses()" class="btn btn-danger">Visualizza accessi degli utenti selezionati</button>
+  </div>
+  <div *ngIf="this.viewingAccesses">
+
+  </div>
+</div>

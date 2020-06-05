@@ -23,7 +23,7 @@ import {AdministratorBindingRequest, Permission} from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {catchError} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {GeneralService} from "./general.service";
 
 
@@ -266,7 +266,7 @@ export class AdministratorService extends GeneralService{
                 observe: observe,
                 reportProgress: reportProgress
             }
-        );
+        ).pipe(catchError( (err: HttpErrorResponse) => throwError(err)));
     }
 
     /**

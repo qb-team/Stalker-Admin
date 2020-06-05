@@ -8,6 +8,7 @@ import {Permission} from '../..';
 import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
 import {AdministratorPermissionDataService} from './AdministratorPermissionData.service';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -62,8 +63,13 @@ export class AuthenticationService {
       this.adp.setupAccessTokenInAPIService();
       this.angularFireAuth.auth.onAuthStateChanged((user) => {
         if (user) {
+          console.log('Pre require');
           this.adp.requireAdministratorPermissions(user.uid);
-          this.adp.getUserPermissions().subscribe((p: Permission[]) => {this.ado.requireAdministratorOrganizations(p); });
+          console.log('Pre get');
+          this.adp.getUserPermissions().subscribe((p: Permission[]) => {this.ado.requireAdministratorOrganizations(p); }, ((err: HttpErrorResponse) => {
+            console.error('CODICE ERRORE: ' + err.status);
+          }));
+          console.log('Post get');
           this.router.navigateByUrl('/Content-panel');
         }
       });

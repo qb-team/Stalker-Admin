@@ -19,9 +19,10 @@ import {ModifyPlaceTrackingAreaContentComponent} from './Organization/Organizati
 import {PlaceManagementContentComponent} from './Organization/Organization-information/place-management-content/place-management-content.component';
 import {PlacePresenceNumberComponent} from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
 import {BindAdministratorComponent} from './AdminManagement/bind-administrator/bind-administrator.component';
-import {SingleUserAuthenticatedAccessesComponent} from './Tracking/SingleUserAuthenticatedAccess/single-user-authenticated-accesses.component';
+import {AuthenticatedUserAccessesComponent} from './Tracking/AuthenticatedUsersAccesses/authenticated-user-accesses.component';
 import {OwnerGuardService} from "./services/owner-guard.service";
 import {ManagerGuardService} from "./services/manager-guard.service";
+import {AuthenticatedOrganizationGuardService} from "./services/authenticated-organization-guard.service";
 
 
 
@@ -47,7 +48,7 @@ const routes: Routes = [
           { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent, canActivate: [ManagerGuardService]},
           { path: 'Gestione dei luoghi di tracciamento', component: PlaceManagementContentComponent, canActivate: [ManagerGuardService]},
           { path: 'Presenze attuali in un luogo', component: PlacePresenceNumberComponent, data: { reuse: false}},
-          { path: 'Ricerca accessi di un utente LDAP', component: SingleUserAuthenticatedAccessesComponent, data: { reuse: false}}
+          { path: 'Ricerca accessi degli utenti autenticati', component: AuthenticatedUserAccessesComponent, data: { reuse: false}, canActivate: [AuthenticatedOrganizationGuardService]}
         ]
       }
     ]

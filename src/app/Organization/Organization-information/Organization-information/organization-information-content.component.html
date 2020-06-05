@@ -1,3 +1,4 @@
+<h1>Informazioni sull'organizzazione</h1>
 <div>
   <table class="table shadow p-4 mb-5 bg-white">
     <caption>Informazione generali dell'organizzazione</caption>
@@ -8,11 +9,7 @@
     <tr>
       <th scope="col">Nome</th>
       <th scope="col">Descrizione</th>
-      <th scope="col">Via</th>
-      <th scope="col">Numero civico</th>
-      <th scope="col">Codice Postale</th>
-      <th scope="col">Città</th>
-      <th scope="col">Stato</th>
+      <th scope="col">Indirizzo</th>
       <th scope="col">Data di creazione</th>
       <th scope="col">Data ultima modifica</th>
     </tr>
@@ -21,11 +18,7 @@
     <tr>
       <td>{{ getCurrentOrg.name }}</td>
       <td>{{ getCurrentOrg.description }}</td>
-      <td>{{ getCurrentOrg.street }}</td>
-      <td>{{ getCurrentOrg.number }}</td>
-      <td>{{ getCurrentOrg.postCode }}</td>
-      <td>{{ getCurrentOrg.city }}</td>
-      <td>{{ getCurrentOrg.country }}</td>
+      <td>{{getCurrentOrg.street}}, {{getCurrentOrg.number}}, {{getCurrentOrg.city}} ({{getCurrentOrg.country}}), CAP: {{getCurrentOrg.postCode}}</td>
       <td>{{ getCurrentOrg.creationDate }}</td>
       <td>{{ getCurrentOrg.lastChangeDate }}</td>
     </tr>

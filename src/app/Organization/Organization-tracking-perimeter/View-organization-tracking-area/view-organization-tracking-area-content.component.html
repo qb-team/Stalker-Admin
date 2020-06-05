@@ -18,7 +18,10 @@
   <div class="row text-center">
     <div class="col-6 pt-1">
       <button id="bOrg" class=" btn btn-danger mr-1" *ngIf="Change === 'place' " (click)="onChange('organization')"> Torna alla visualizzazione del perimetro dell'organizzazione </button>
-      <button class=" btn btn-danger mr-1" *ngIf="Change === 'organization' " (click)="onChange('place')"> Passa alla visualizzazione per luogo </button>
+      <button class=" btn btn-danger mr-1" *ngIf="Change === 'organization' && this.PlaceArr !== undefined && this.PlaceArr.length > 0" (click)="onChange('place')"> Passa alla visualizzazione per luogo </button>
+    </div>
+    <div class="col-12">
+      <p *ngIf="this.PlaceArr === undefined || this.PlaceArr.length <= 0">Non ci sono luoghi per l'organizzazione. È dunque possibile solo la visualizzazione del perimetro dell'organizzazione.</p>
     </div>
   </div>
 </div>
