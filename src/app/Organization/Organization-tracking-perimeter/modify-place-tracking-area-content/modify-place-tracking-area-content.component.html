@@ -49,7 +49,10 @@
   </fieldset>
 </form-->
 <h1>Modifica dell'area di tracciamento di un luogo</h1>
-<div class="shadow p-4 mb-5 bg-white">
+<div class="shadow p-4 mb-5 bg-white" *ngIf="this.PlaceArr === undefined || this.PlaceArr === null || this.PlaceArr.length <= 0">
+  <p>Non ci sono luoghi per l'organizzazione</p>
+</div>
+<div class="shadow p-4 mb-5 bg-white" *ngIf="this.PlaceArr !== undefined && this.PlaceArr !== null && this.PlaceArr.length > 0">
   <div class="row">
     <div class="col-8">
       <p *ngIf="!Change"> Abilita la modifica e seleziona i punti nella mappa per modificare il perimetro di tracciamento </p>
@@ -74,11 +77,12 @@
   </div>
 </div>
 
-<div class="container shadow p-4 mb-5 bg-white">
+<div class="container shadow p-4 mb-5 bg-white" *ngIf="this.PlaceArr !== undefined && this.PlaceArr !== null && this.PlaceArr.length > 0">
   <app-osm-map-content
     (map$)="receiveMap($event)"
     (zoom$)="receiveZoom($event)"
     (Click$)="onMapClick($event)"
     id='modPlace-map'
-  ></app-osm-map-content></div>
+  ></app-osm-map-content>
+</div>
 

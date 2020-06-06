@@ -54,8 +54,9 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
       if (org != null) {
         this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
           this.PlaceArr = places;
-          // if (this.)
-          this.currentPlace = places[0];
+          if (places !== undefined && places !== null) {
+             this.currentPlace = places[0];
+           }
         });
       }
     });
@@ -81,7 +82,7 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
   }
 
   ngOnDestroy() {
-    if(this.subscriptionToOrg !== undefined) {
+    if (this.subscriptionToOrg !== undefined) {
       this.subscriptionToOrg.unsubscribe();
     }
   }

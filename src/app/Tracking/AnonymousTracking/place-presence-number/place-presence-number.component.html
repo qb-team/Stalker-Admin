@@ -3,7 +3,7 @@
  <div class="col-6">
    <h2 *ngIf="TrackedUsersCounter !== undefined && TrackedUsersCounter !== null">Totale utenti all'interno: {{ TrackedUsersCounter }}</h2>
    <p *ngIf="this.PlaceArr !== undefined && this.PlaceArr !== null && this.PlaceArr.length > 0 && (TrackedUsersCounter === undefined || TrackedUsersCounter === null)">Seleziona un luogo per iniziare il tracciamento</p>
-   <p *ngIf="this.PlaceArr === undefined || this.PlaceArr === null || this.PlaceArr.length <= 0">Non ci sono luoghi per l'organizzazione. È dunque possibile solo la visualizzazione del perimetro dell'organizzazione.</p>
+   <p *ngIf="this.PlaceArr === undefined || this.PlaceArr === null || this.PlaceArr.length <= 0">Non ci sono luoghi per l'organizzazione</p>
  </div>
   <div class="col-3" *ngIf="this.PlaceArr !== undefined && this.PlaceArr !== null && this.PlaceArr.length > 0">
     <div class="dropdown" id="lineDiv">
