@@ -2,7 +2,7 @@
 <!--BEGIN LDAP-->
 <div *ngIf="!this.isLoggedIn" data-keyboard="false" data-backdrop="static" id="loginModal">
   <h1 id="loginRequest">Per visualizzare gli accessi autenticati effettuare prima il login perfavore</h1>
-  <div class="modal-dialog">
+  <div class="modal-dialog shadow p-4 mb-5 bg-white">
     <div class="modal-content">
       <div class="modal-body">
         <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
