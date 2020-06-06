@@ -1,5 +1,6 @@
 <div *ngIf="this.getCurrentOrganization">
   <p id="loadingData" *ngIf="dataHasArrived === false">Attendere, caricamento dati in corso...</p>
+  <h1 *ngIf="dataHasArrived === true">Gestione dei amministratori</h1>
   <table *ngIf="dataHasArrived === true" class="table shadow p-4 mb-5 bg-white">
     <caption>Amministratori di {{ getCurrentOrganization.name }} e i loro permessi</caption>
     <thead>
