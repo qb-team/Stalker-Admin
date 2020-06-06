@@ -11,6 +11,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LdapService} from '../../services/ldap.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Place} from "../../../model/place";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-single-user-authenticated-accesses',
@@ -45,16 +46,20 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   private password: string;
 
 
-  constructor(private aods: AdministratorOrganizationDataService, private ldapS: LdapService, private as: AccessService) { }
+  constructor(private aods: AdministratorOrganizationDataService, private ldapS: LdapService, private as: AccessService, private r: Router) { }
 
   ngOnInit(): void {
     this.aods.getOrganization.subscribe((o: Organization) => {
-      this.organization = o;
-      this.ldapS.clearUsersToGet();
-      this.isLoggedIn = localStorage.getItem('isLoggedInLDAP');
-      this.aods.getCurrentOrganizationPlaces.subscribe((p: Array<Place>) => { this.places = p; });
-      // this.
-      // this.as.getAuthenticatedAccessListInOrganization(, this.organization.id).subscribe();
+      if (o.trackingMode === 'authenticated') {
+        this.organization = o;
+        this.ldapS.clearUsersToGet();
+        this.isLoggedIn = localStorage.getItem('isLoggedInLDAP');
+        this.aods.getCurrentOrganizationPlaces.subscribe((p: Array<Place>) => { this.places = p; });
+        // this.
+        // this.as.getAuthenticatedAccessListInOrganization(, this.organization.id).subscribe();
+      } else {
+        this.r.navigateByUrl('/Content-panel');
+      }
     });
     this.setupForm();
   }
@@ -138,14 +143,31 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
     const usersIds = Array<string>();
     this.usersToWatch.forEach(u => usersIds.push(u));
     if (this.viewingOrgAccesses) {
-      this.as.getAuthenticatedAccessListInOrganization(usersIds, this.organization.id).subscribe((acc: Array<OrganizationAccess>) => {this.organizationAccesses = acc; console.log(acc); });
+      this.as.getAuthenticatedAccessListInOrganization(usersIds, this.organization.id).subscribe((acc: Array<OrganizationAccess>) => {
+        this.organizationAccesses = acc;
+        this.organizationAccesses.forEach((a) => {
+          a.entranceTimestamp = new Date(a.entranceTimestamp);
+          if (a.exitTimestamp !== undefined && a.exitTimestamp !== null) {
+            a.exitTimestamp = new Date(a.exitTimestamp);
+          }
+        });
+      });
     } else {
-      this.as.getAuthenticatedAccessListInPlace(usersIds, this.places[this.currentPlaceIndex].id).subscribe((acc: Array<PlaceAccess>) => { this.placeAccesses = acc; console.log(acc); });
+      this.as.getAuthenticatedAccessListInPlace(usersIds, this.places[this.currentPlaceIndex].id).subscribe((acc: Array<PlaceAccess>) => {
+        this.placeAccesses = acc;
+        this.placeAccesses.forEach((a) => {
+          a.entranceTimestamp = new Date(a.entranceTimestamp);
+          if (a.exitTimestamp !== undefined && a.exitTimestamp !== null) {
+            a.exitTimestamp = new Date(a.exitTimestamp);
+          }
+        });
+      });
     }
   }
 
   unviewAccesses() {
     this.viewingAccesses = false;
+    this.usersToWatch = new Array<string>();
   }
 
   getLdapUserIndexById(id: string) {

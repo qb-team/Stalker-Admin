@@ -54,6 +54,7 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
       if (org != null) {
         this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
           this.PlaceArr = places;
+          // if (this.)
           this.currentPlace = places[0];
         });
       }

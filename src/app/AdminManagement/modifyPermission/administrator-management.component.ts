@@ -5,6 +5,7 @@ import {AdministratorPermissionDataService} from '../../services/AdministratorPe
 import {HttpErrorResponse} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {stringify} from "querystring";
+import {Router} from "@angular/router";
 
 
 export enum permissionLevel {
@@ -48,11 +49,11 @@ export class AdministratorManagementComponent implements OnInit {
 
   subscribeToOrganization() {
     this.ads.getOrganization.subscribe((o: Organization) => {
-      if (o !== undefined) {
-        this.currentOrganization = o;
-        this.subscribeToAdministratorPermissions();
-        this._dataHasArrived = false;
-      }
+        if (o !== undefined) {
+          this.currentOrganization = o;
+          this.subscribeToAdministratorPermissions();
+          this._dataHasArrived = false;
+        }
     });
   }
 

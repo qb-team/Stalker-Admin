@@ -4,10 +4,6 @@
   <h1 id="loginRequest">Per visualizzare gli accessi autenticati effettuare prima il login perfavore</h1>
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Login LDAP</h4>
-        <button class="close" data-dismiss="modal" (click)="closeLdapForm()">&times;</button>
-      </div>
       <div class="modal-body">
         <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
           <fieldset>
@@ -16,13 +12,13 @@
             <input type="username" name="username" id="username" class="form-control" required="required" [(ngModel)]="setUsername" placeholder="username" formControlName="username">
             <label id="labelPSW" for="pwd">Password:</label>
             <input type="password" name="password" class="form-control" [(ngModel)]="setPassword" required="required" id="pwd" placeholder="password" formControlName="password" >
+            <div class="modal-footer">
+              <input type="reset" class="btn btn-danger"/>
+              <button id="signInBtn" [disabled]="!contactForm.valid" (click)="this.loginLDAP()" class="btn btn-danger">Login</button> <!--(click)=""-->
+            </div>
           </fieldset>
         </form>
         <p *ngIf="false">Credenziali errate</p>
-      </div>
-      <div class="modal-footer">
-        <button id="signInBtn" [disabled]="!contactForm.valid" (click)="this.loginLDAP()" class="btn btn-danger">Login</button> <!--(click)=""-->
-        <button class="btn btn-danger" (click)="closeLdapForm()" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -77,16 +73,16 @@
         <tr>
           <th scope="col">Cognome</th>
           <th scope="col">Nome</th>
-          <th scope="col">Entrato alle</th>
-          <th scope="col">Uscito alle</th>
+          <th scope="col">Data, Ora di ingresso</th>
+          <th scope="col">Data, Ora di uscita</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let acc of this.organizationAccesses; index as i">
           <td>{{ getUserByID(acc.orgAuthServerId).surname }}</td>
           <td>{{ getUserByID(acc.orgAuthServerId).name }}</td>
-          <td>{{ acc.entranceTimestamp }}</td>
-          <td>{{ acc.exitTimestamp }}</td></tr>
+          <td>{{ acc.entranceTimestamp.toLocaleString() }}</td>
+          <td>{{ acc.exitTimestamp.toLocaleString() }}</td></tr>
         </tbody>
       </table>
     </div>
@@ -109,8 +105,8 @@
         <tr *ngFor="let acc of this.placeAccesses; index as i">
           <td>{{ getUserByID(acc.orgAuthServerId).surname }}</td>
           <td>{{ getUserByID(acc.orgAuthServerId).name }}</td>
-          <td>{{ acc.entranceTimestamp }}</td>
-          <td>{{ acc.exitTimestamp }}</td></tr>
+          <td>{{ acc.entranceTimestamp.toLocaleDateString() }}</td>
+          <td>{{ acc.exitTimestamp.toLocaleString() }}</td></tr>
         </tbody>
       </table>
     </div>

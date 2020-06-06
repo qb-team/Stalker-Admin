@@ -30,6 +30,7 @@ export class MenuFunctionalityComponent implements OnInit {
  */
   ngOnInit(): void {
     this.ads.getOrganization.subscribe((org: Organization) => {
+      this.router.navigateByUrl('Content-panel/Panel/Homepage');
       localStorage.removeItem('perm');
       this.currentOrganization = org;
       this.apd.getUserPermissions().subscribe((perm: Permission[]) => {

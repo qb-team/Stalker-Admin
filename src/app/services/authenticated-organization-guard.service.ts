@@ -12,7 +12,7 @@ export class AuthenticatedOrganizationGuardService implements CanActivate {
   currentOrg: Organization;
 
   constructor(private router: Router, private aods: AdministratorOrganizationDataService) {
-    this.aods.getOrganization.subscribe((org: Organization) => {this.currentOrg = org;});
+    this.aods.getOrganization.subscribe((org: Organization) => {this.currentOrg = org; });
   }
 
   canActivate(): Observable<boolean> |  Promise<boolean> | boolean {
