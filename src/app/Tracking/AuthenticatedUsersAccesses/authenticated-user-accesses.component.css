@@ -13,3 +13,7 @@
 #selectPlaceDropdown {
   margin: 1em;
 }
+
+#incorrect_cred {
+  color: red;
+}

@@ -12,9 +12,10 @@
             <input type="username" name="username" id="username" class="form-control" required="required" [(ngModel)]="setUsername" placeholder="username" formControlName="username">
             <label id="labelPSW" for="pwd">Password:</label>
             <input type="password" name="password" class="form-control" [(ngModel)]="setPassword" required="required" id="pwd" placeholder="password" formControlName="password" >
+            <p id="incorrect_cred" *ngIf="this.incorrectCredentials">Le credenziali inserite non sono corrette. Controllare e riprovare perfavore.</p>
             <div class="modal-footer">
-              <input type="reset" class="btn btn-danger"/>
               <button id="signInBtn" [disabled]="!contactForm.valid" (click)="this.loginLDAP()" class="btn btn-danger">Login</button> <!--(click)=""-->
+              <input type="reset" class="btn btn-danger"/>
             </div>
           </fieldset>
         </form>
@@ -61,9 +62,11 @@
     <button [disabled]="this.usersToWatch.length === 0" (click)="viewAccesses()" class="btn btn-danger">Visualizza accessi degli utenti selezionati</button>
   </div>
   <div *ngIf="this.viewingAccesses">
-    <button (click)="this.unviewAccesses()" class="btn btn-danger">Torna agli utenti</button>
+    <button (click)="this.unviewAccesses()" class="btn btn-danger">&#8592; Torna agli utenti</button>
     <div *ngIf="this.viewingOrgAccesses">
       <h1>Accessi all'organizzazione {{this.getOrganization.name}}</h1>
+      <h2>Accessi ordinati per data di ingresso {{ this.sortingMode }}</h2>
+      <h3>Cambia la modalità di ordinamento a   <button (click)="toggleSortingMode()" class="btn btn-danger">{{ this.sortingModeToSet }}</button></h3>
       <table class="table shadow p-4 mb-5 bg-white">
         <caption>Accessi degli utenti di {{ this.getOrganization.name }}</caption>
         <thead>
@@ -88,6 +91,8 @@
     </div>
     <div *ngIf="!this.viewingOrgAccesses">
       <h1>Accessi al luogo {{this.places[currentPlaceIndex].name}}</h1>
+      <h2>Accessi ordinati per data di ingresso {{ this.sortingMode }}</h2>
+      <h3>Cambia la modalità di ordinamento a   <button (click)="this.toggleSortingMode()" class="btn btn-danger">{{ this.sortingModeToSet }}</button></h3>
       <table class="table shadow p-4 mb-5 bg-white">
         <caption>Accessi degli utenti di {{ this.getOrganization.name }}</caption>
         <thead>

@@ -31,6 +31,9 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   viewingOrgAccesses = true;
   usersToWatch = Array<string>();
   places = Array<Place>();
+  sortingModeToSet = 'Crescente';
+  sortingMode = 'Decrescente';
+  incorrectCredentials = false;
   private usersOrganizationAccesses: Array<OrganizationAccess>;
   organizationAccesses: Array<OrganizationAccess>;
   placeAccesses: Array<PlaceAccess>;
@@ -108,8 +111,13 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
       this.ldapUsers = info;
       console.log(info);
       this.isLoggedIn = 'true';
+      this.incorrectCredentials = false;
       localStorage.setItem('isLoggedInLDAP', 'true');
-    }, (err: HttpErrorResponse) => {alert(err.message); });
+    }, (err: HttpErrorResponse) => {
+      if (err.status === 500) {
+        this.incorrectCredentials = true;
+      }
+    });
   }
 
 
@@ -138,6 +146,61 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
     }
   }
 
+  toggleSortingMode() {
+    console.log('toggle sort mode');
+    if (this.sortingMode === 'Crescente') {
+      this.sortingMode = 'Decrescente';
+      this.sortingModeToSet = 'Crescente';
+      // sorting the accesses array
+      if (this.viewingOrgAccesses) {
+        this.sortOrgAccesses(1);
+      } else {
+        this.sortPlaceAccesses(1);
+      }
+    } else {
+      this.sortingMode = 'Crescente';
+      this.sortingModeToSet = 'Decrescente';
+      // sorting the access array
+      if (this.viewingOrgAccesses) {
+        this.sortOrgAccesses(-1);
+      } else {
+        this.sortPlaceAccesses(-1);
+      }
+    }
+  }
+
+  /*
+  * if 1 is passed, the accesses will be sorted in decreasing date mode
+  * if -1 is passed, the accesses will be sorted in increasing date mode
+   */
+  sortOrgAccesses(mode: number) {
+    this.organizationAccesses.sort((a1, a2) => {
+      if (a1.entranceTimestamp < a2.entranceTimestamp) {
+        return mode;
+      } else if (a1.entranceTimestamp > a2.entranceTimestamp) {
+        return -mode;
+      } else {
+         return 0;
+      }
+    });
+  }
+
+  /*
+* if 1 is passed, the accesses will be sorted in decreasing date mode
+* if -1 is passed, the accesses will be sorted in increasing date mode
+ */
+  sortPlaceAccesses(mode: number) {
+    this.placeAccesses.sort((a1, a2) => {
+      if (a1.entranceTimestamp < a2.entranceTimestamp) {
+        return mode;
+      } else if (a1.entranceTimestamp > a2.entranceTimestamp) {
+        return -mode;
+      } else {
+        return 0;
+      }
+    });
+  }
+
   viewAccesses() {
     this.viewingAccesses = true;
     const usersIds = Array<string>();
@@ -151,6 +214,7 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
             a.exitTimestamp = new Date(a.exitTimestamp);
           }
         });
+        this.sortOrgAccesses(1);
       });
     } else {
       this.as.getAuthenticatedAccessListInPlace(usersIds, this.places[this.currentPlaceIndex].id).subscribe((acc: Array<PlaceAccess>) => {
@@ -161,6 +225,7 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
             a.exitTimestamp = new Date(a.exitTimestamp);
           }
         });
+        this.sortPlaceAccesses(1);
       });
     }
   }
