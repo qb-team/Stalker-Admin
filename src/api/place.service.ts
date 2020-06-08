@@ -35,6 +35,7 @@ export class PlaceService extends GeneralService {
 
   constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
     super(httpClient, basePath, configuration);
+    console.log('PS CONSTRUCTOR');
   }
     /**
      * Creates a new place for an organization.
@@ -193,6 +194,7 @@ export class PlaceService extends GeneralService {
             responseType = 'text';
         }
 
+        super.setupAccessTokenInAPIService();
         return this.httpClient.get<Array<Place>>(`${this.configuration.basePath}/place/organization/${encodeURIComponent(String(organizationId))}`,
             {
                 responseType: <any>responseType,

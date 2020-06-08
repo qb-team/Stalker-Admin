@@ -3,7 +3,7 @@
 */
 import {Injectable} from '@angular/core';
 import {AngularFireAuth } from '@angular/fire/auth';
-import {Observable} from 'rxjs';
+import {Observable, ReplaySubject} from 'rxjs';
 import {
   AuthenticationServerService,
   Organization,
@@ -22,6 +22,7 @@ export class LdapService {
 
   usersToGet: Array<string>;
   credentials: OrganizationAuthenticationServerCredentials;
+  isAdminLoggedInLdap = new ReplaySubject<boolean>(1);
 
   constructor(private ldap: AuthenticationServerService) { }
 

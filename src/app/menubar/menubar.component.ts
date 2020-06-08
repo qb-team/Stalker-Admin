@@ -48,16 +48,15 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   setOrganization(click: any) {
     this.Organization = this.OrgArr[click.target.attributes.id.value];
     this.ads.getOrganization.next(this.Organization);
-    localStorage.removeItem('isLoggedInLDAP');
   }
 
   /*
    * It calls function SignOut of the service
    */
   signOut() {
+    this.ldapS.isAdminLoggedInLdap.next(false);
     this.authenticationService.signOut();
     this.navigateToLogin();
-    localStorage.removeItem('isLoggedInLDAP');
   }
 
   /*

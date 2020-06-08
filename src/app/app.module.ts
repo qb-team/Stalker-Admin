@@ -9,6 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import {NgbDatepickerModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 /* service */
 import { AuthenticationService } from './services/authentication.service';
@@ -85,7 +86,8 @@ import { AuthenticatedUserAccessesComponent } from './Tracking/AuthenticatedUser
     AppRoutingModule,
     ReactiveFormsModule,
     LeafletModule,
-    ChartsModule
+    ChartsModule,
+    NgbDatepickerModule
   ],
   providers: [AuthenticationService, DeactivateGuard, OrganizationService, AdministratorOrganizationDataService, AdministratorPermissionDataService, AccessDataService, OrganizationTrackingDataService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
   bootstrap: [AppComponent]

@@ -17,3 +17,38 @@
 #incorrect_cred {
   color: red;
 }
+
+.sortButton{
+
+}
+
+.no_acc {
+  color: red;
+}
+
+/*.actualSortMode{
+  font-size: 2em;
+  vertical-align: -0.2em;
+}*/
+
+/*.sortingMode {
+  color: #0074D9;
+}*/
+
+table thead th {
+  vertical-align: inherit;
+}
+
+/*.sortingMode {
+  font-size: 2em;
+  vertical-align: -0.2em;
+}*/
+
+.changeSortMode{
+  font-size: 1.6em;
+}
+
+.backUsers {
+  max-width: 10em;
+  max-height: 2.5em;
+}

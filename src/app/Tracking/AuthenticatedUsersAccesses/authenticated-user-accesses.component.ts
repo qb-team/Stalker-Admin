@@ -10,8 +10,8 @@ import {AdministratorOrganizationDataService} from '../../services/Administrator
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LdapService} from '../../services/ldap.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import {Place} from "../../../model/place";
-import {Router} from "@angular/router";
+import {Place} from '../../../model/place';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-single-user-authenticated-accesses',
@@ -20,9 +20,10 @@ import {Router} from "@angular/router";
 })
 export class AuthenticatedUserAccessesComponent implements OnInit {
 
+  sortDate: Date;
   private organization: Organization;
   private hasLDAP: boolean;
-  isLoggedIn: string;
+  isLoggedIn: boolean;
   private ldapUsers: Array<OrganizationAuthenticationServerInformation>;
   contactForm: FormGroup;
   private Submitted = false;
@@ -31,8 +32,9 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   viewingOrgAccesses = true;
   usersToWatch = Array<string>();
   places = Array<Place>();
-  sortingModeToSet = 'Crescente';
-  sortingMode = 'Decrescente';
+  sortingMode = '▲';
+  sortBy = 'ingresso';
+  //sortByAlt = 'uscita';
   incorrectCredentials = false;
   private usersOrganizationAccesses: Array<OrganizationAccess>;
   organizationAccesses: Array<OrganizationAccess>;
@@ -56,7 +58,7 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
       if (o.trackingMode === 'authenticated') {
         this.organization = o;
         this.ldapS.clearUsersToGet();
-        this.isLoggedIn = localStorage.getItem('isLoggedInLDAP');
+        this.ldapS.isAdminLoggedInLdap.subscribe(b => this.isLoggedIn = b );
         this.aods.getCurrentOrganizationPlaces.subscribe((p: Array<Place>) => { this.places = p; });
         // this.
         // this.as.getAuthenticatedAccessListInOrganization(, this.organization.id).subscribe();
@@ -110,9 +112,8 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
     this.ldapS.getUsersLdap(this.organization.id).subscribe((info: Array<OrganizationAuthenticationServerInformation>) => {
       this.ldapUsers = info;
       console.log(info);
-      this.isLoggedIn = 'true';
       this.incorrectCredentials = false;
-      localStorage.setItem('isLoggedInLDAP', 'true');
+      this.ldapS.isAdminLoggedInLdap.next(true);
     }, (err: HttpErrorResponse) => {
       if (err.status === 500) {
         this.incorrectCredentials = true;
@@ -146,26 +147,61 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
     }
   }
 
-  toggleSortingMode() {
-    console.log('toggle sort mode');
-    if (this.sortingMode === 'Crescente') {
-      this.sortingMode = 'Decrescente';
-      this.sortingModeToSet = 'Crescente';
-      // sorting the accesses array
-      if (this.viewingOrgAccesses) {
-        this.sortOrgAccesses(1);
+  /*toggleSortBy() {
+    if (this.sortBy === 'ingresso') {
+      this.sortBy = 'uscita';
+      this.sortByAlt = 'ingresso';
+    } else {
+      this.sortBy = 'ingresso';
+      this.sortByAlt = 'uscita';
+    }
+  }*/
+
+  toggleEnterSortingMode() {
+    if (this.sortBy === 'ingresso') {
+      if (this.sortingMode === '▲') {
+        this.sortingMode = '▼';
+        // sorting the accesses array
+        if (this.viewingOrgAccesses) {
+          this.sortEnterOrgAccesses(-1);
+        } else {
+          this.sortEnterPlaceAccesses(-1);
+        }
       } else {
-        this.sortPlaceAccesses(1);
+        this.sortingMode = '▲';
+        // sorting the access array
+        if (this.viewingOrgAccesses) {
+          this.sortEnterOrgAccesses(1);
+        } else {
+          this.sortEnterPlaceAccesses(1);
+        }
       }
     } else {
-      this.sortingMode = 'Crescente';
-      this.sortingModeToSet = 'Decrescente';
-      // sorting the access array
-      if (this.viewingOrgAccesses) {
-        this.sortOrgAccesses(-1);
+      this.sortBy = 'ingresso';
+    }
+  }
+
+  toggleExitSortingMode() {
+    if (this.sortBy === 'uscita') {
+      if (this.sortingMode === '▲') {
+        this.sortingMode = '▼';
+        // sorting the accesses array
+        if (this.viewingOrgAccesses) {
+          this.sortExitOrgAccesses(-1);
+        } else {
+          this.sortExitPlaceAccesses(-1);
+        }
       } else {
-        this.sortPlaceAccesses(-1);
+        this.sortingMode = '▲';
+        // sorting the access array
+        if (this.viewingOrgAccesses) {
+          this.sortExitOrgAccesses(1);
+        } else {
+          this.sortExitPlaceAccesses(1);
+        }
       }
+    } else {
+      this.sortBy = 'uscita';
     }
   }
 
@@ -173,32 +209,72 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   * if 1 is passed, the accesses will be sorted in decreasing date mode
   * if -1 is passed, the accesses will be sorted in increasing date mode
    */
-  sortOrgAccesses(mode: number) {
-    this.organizationAccesses.sort((a1, a2) => {
-      if (a1.entranceTimestamp < a2.entranceTimestamp) {
-        return mode;
-      } else if (a1.entranceTimestamp > a2.entranceTimestamp) {
-        return -mode;
-      } else {
-         return 0;
-      }
-    });
+  sortEnterOrgAccesses(mode: number) {
+    if (this.organizationAccesses !== undefined && this.organizationAccesses !== null) {
+      this.organizationAccesses.sort((a1, a2) => {
+        if (a1.entranceTimestamp < a2.entranceTimestamp) {
+          return mode;
+        } else if (a1.entranceTimestamp > a2.entranceTimestamp) {
+          return -mode;
+        } else {
+          return 0;
+        }
+      });
+    }
   }
 
   /*
 * if 1 is passed, the accesses will be sorted in decreasing date mode
 * if -1 is passed, the accesses will be sorted in increasing date mode
  */
-  sortPlaceAccesses(mode: number) {
-    this.placeAccesses.sort((a1, a2) => {
-      if (a1.entranceTimestamp < a2.entranceTimestamp) {
-        return mode;
-      } else if (a1.entranceTimestamp > a2.entranceTimestamp) {
-        return -mode;
-      } else {
-        return 0;
-      }
-    });
+  sortEnterPlaceAccesses(mode: number) {
+    if (this.placeAccesses !== undefined && this.placeAccesses !== null) {
+      this.placeAccesses.sort((a1, a2) => {
+        if (a1.entranceTimestamp < a2.entranceTimestamp) {
+          return mode;
+        } else if (a1.entranceTimestamp > a2.entranceTimestamp) {
+          return -mode;
+        } else {
+          return 0;
+        }
+      });
+    }
+  }
+
+  /*
+* if 1 is passed, the accesses will be sorted in decreasing date mode
+* if -1 is passed, the accesses will be sorted in increasing date mode
+ */
+  sortExitOrgAccesses(mode: number) {
+    if (this.organizationAccesses !== undefined && this.organizationAccesses !== null) {
+      this.organizationAccesses.sort((a1, a2) => {
+        if (a1.exitTimestamp < a2.exitTimestamp) {
+          return mode;
+        } else if (a1.exitTimestamp > a2.exitTimestamp) {
+          return -mode;
+        } else {
+          return 0;
+        }
+      });
+    }
+  }
+
+  /*
+* if 1 is passed, the accesses will be sorted in decreasing date mode
+* if -1 is passed, the accesses will be sorted in increasing date mode
+ */
+  sortExitPlaceAccesses(mode: number) {
+    if (this.placeAccesses !== undefined && this.placeAccesses !== null) {
+      this.placeAccesses.sort((a1, a2) => {
+        if (a1.exitTimestamp < a2.exitTimestamp) {
+          return mode;
+        } else if (a1.exitTimestamp > a2.exitTimestamp) {
+          return -mode;
+        } else {
+          return 0;
+        }
+      });
+    }
   }
 
   viewAccesses() {
@@ -207,25 +283,29 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
     this.usersToWatch.forEach(u => usersIds.push(u));
     if (this.viewingOrgAccesses) {
       this.as.getAuthenticatedAccessListInOrganization(usersIds, this.organization.id).subscribe((acc: Array<OrganizationAccess>) => {
-        this.organizationAccesses = acc;
-        this.organizationAccesses.forEach((a) => {
-          a.entranceTimestamp = new Date(a.entranceTimestamp);
-          if (a.exitTimestamp !== undefined && a.exitTimestamp !== null) {
-            a.exitTimestamp = new Date(a.exitTimestamp);
-          }
-        });
-        this.sortOrgAccesses(1);
+        if (acc !== undefined && acc !== null) {
+          this.organizationAccesses = acc;
+          this.organizationAccesses.forEach((a) => {
+            a.entranceTimestamp = new Date(a.entranceTimestamp);
+            if (a.exitTimestamp !== undefined && a.exitTimestamp !== null) {
+              a.exitTimestamp = new Date(a.exitTimestamp);
+            }
+          });
+        }
+        this.sortEnterOrgAccesses(1);
       });
     } else {
       this.as.getAuthenticatedAccessListInPlace(usersIds, this.places[this.currentPlaceIndex].id).subscribe((acc: Array<PlaceAccess>) => {
-        this.placeAccesses = acc;
-        this.placeAccesses.forEach((a) => {
-          a.entranceTimestamp = new Date(a.entranceTimestamp);
-          if (a.exitTimestamp !== undefined && a.exitTimestamp !== null) {
-            a.exitTimestamp = new Date(a.exitTimestamp);
-          }
-        });
-        this.sortPlaceAccesses(1);
+        if (acc !== undefined && acc !== null) {
+          this.placeAccesses = acc;
+          this.placeAccesses.forEach((a) => {
+            a.entranceTimestamp = new Date(a.entranceTimestamp);
+            if (a.exitTimestamp !== undefined && a.exitTimestamp !== null) {
+              a.exitTimestamp = new Date(a.exitTimestamp);
+            }
+          });
+        }
+        this.sortEnterPlaceAccesses(1);
       });
     }
   }
@@ -233,6 +313,8 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   unviewAccesses() {
     this.viewingAccesses = false;
     this.usersToWatch = new Array<string>();
+    this.placeAccesses = new Array<PlaceAccess>();
+    this.organizationAccesses = new Array<OrganizationAccess>();
   }
 
   getLdapUserIndexById(id: string) {

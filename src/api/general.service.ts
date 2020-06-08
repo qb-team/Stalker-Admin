@@ -53,6 +53,10 @@ export class GeneralService {
   }
 
 
+  setupAccessTokenInAPIService() {
+    this.configuration.accessToken = localStorage.getItem('adminToken');
+  }
+
 
   private addToHttpParams(httpParams: HttpParams, value: any, key?: string): HttpParams {
     if (typeof value === "object") {
