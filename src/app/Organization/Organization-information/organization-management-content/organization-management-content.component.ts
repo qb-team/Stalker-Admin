@@ -14,12 +14,11 @@ import {Cloudinary} from '@cloudinary/angular-5.x';
   styleUrls: ['./organization-management-content.component.css']
 })
 export class OrganizationManagementContentComponent implements OnInit {
-
   @Input()
-  responses: Array<any>;
+  private responses: Array<any>;
   hasBaseDropZoneOver = false;
   uploader: FileUploader;
-  flag = false;
+  private flag = false;
   private name: string;
   private street: string;
   private number: string;
@@ -28,6 +27,7 @@ export class OrganizationManagementContentComponent implements OnInit {
   private country: string;
   private descr: string;
   private descrR: string;
+  private indIPLDAP: string;
   private currentOrganization: Organization;
   private change = 'modify';
   modifyForm: FormGroup;
@@ -46,6 +46,7 @@ export class OrganizationManagementContentComponent implements OnInit {
       this.city = this.currentOrganization.city;
       this.country = this.currentOrganization.country;
       this.descr = this.currentOrganization.description;
+      this.indIPLDAP = this.currentOrganization.authenticationServerURL;
     });
     const uploaderOptions: FileUploaderOptions = {
       url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/upload`,
@@ -144,6 +145,7 @@ export class OrganizationManagementContentComponent implements OnInit {
       PostCode: new FormControl(this.postCode),
       City: new FormControl(this.city),
       Country: new FormControl(this.country),
+      IndIPLDAP: new FormControl(this.indIPLDAP),
       Descr: new FormControl(this.descr),
       DescrR: new FormControl(this.descrR, [
         Validators.required,
@@ -186,9 +188,13 @@ export class OrganizationManagementContentComponent implements OnInit {
       if (this.checkStringValidity(this.descr)) {
         modOrg.description = this.descr;
       }
+
+      if (this.checkStringValidity(this.indIPLDAP)) {
+        modOrg.authenticationServerURL = this.indIPLDAP;
+      }
+
       if (this.responses[0] != null && this.flag) {
           modOrg.image = this.responses[0].data.secure_url;
-          console.log('modify image');
       }
 
       this.orgS.updateOrganization(modOrg).subscribe(() => {
@@ -210,6 +216,7 @@ export class OrganizationManagementContentComponent implements OnInit {
       this.city = this.currentOrganization.city;
       this.country = this.currentOrganization.country;
       this.descr = this.currentOrganization.description;
+      this.indIPLDAP = this.currentOrganization.authenticationServerURL;
       this.flag = false;
   }
 
@@ -299,14 +306,35 @@ export class OrganizationManagementContentComponent implements OnInit {
     return this.currentOrganization;
   }
 
-  set setCurrentOrg(value: Organization) {
-    this.currentOrganization = value;
-  }
   get Change(): string {
     return this.change;
   }
 
   set Change(value: string) {
     this.change = value;
+  }
+
+  get IndIPLDAP(): string {
+    return this.indIPLDAP;
+  }
+
+  set IndIPLDAP(value: string) {
+    this.indIPLDAP = value;
+  }
+
+  get Flag(): boolean {
+    return this.flag;
+  }
+
+  set Flag(value: boolean) {
+    this.flag = value;
+  }
+
+  get Responses(): Array<any> {
+    return this.responses;
+  }
+
+  set Responses(value: Array<any>) {
+    this.responses = value;
   }
 }
