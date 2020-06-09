@@ -86,7 +86,9 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
         track = track.concat('{\n' + '"lat": "' + this.Arltn[this.Arltn.length - 1] + '",\n "long": "' + this.Arlong[this.Arltn.length - 1] + '"\n}\n]\n}');
       }
       this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, track).subscribe(() => {
+          const d = new Date();
           alert('Modifica al perimetro dell\'organizzazione effettuata.');
+          this.currentOrganization.lastChangeDate = d;
           this.currentOrganization.trackingArea = track;
         },
         (err: HttpErrorResponse) => {

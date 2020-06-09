@@ -17,12 +17,14 @@ label{
   margin-top: 2em;
   margin-left: 40%;
 }
+
 .container {
-  width:1000px;
-  height:800px;
+  width:80%;
+  height:40em;
   top: 20%;
   left: 10%;
 }
+
 #namp{
   margin-top: 2.2em;
   margin-left: 2em;

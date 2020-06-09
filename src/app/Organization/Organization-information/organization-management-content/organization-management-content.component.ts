@@ -2,7 +2,7 @@ import {Component, Input, NgZone, OnInit} from '@angular/core';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {Organization, OrganizationDeletionRequest, OrganizationService} from '../../../../index';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
 import {Cloudinary} from '@cloudinary/angular-5.x';
 
@@ -20,7 +20,6 @@ export class OrganizationManagementContentComponent implements OnInit {
   hasBaseDropZoneOver = false;
   uploader: FileUploader;
   flag = false;
-  url = [];
   private name: string;
   private street: string;
   private number: string;
@@ -32,9 +31,7 @@ export class OrganizationManagementContentComponent implements OnInit {
   private currentOrganization: Organization;
   private change = 'modify';
   modifyForm: FormGroup;
-  constructor(private ads: AdministratorOrganizationDataService, private orgS: OrganizationService, private cloudinary: Cloudinary,
-              private zone: NgZone,
-              private http: HttpClient) {
+  constructor(private ads: AdministratorOrganizationDataService, private orgS: OrganizationService, private cloudinary: Cloudinary, private zone: NgZone) {
     this.responses = [];
   }
 
@@ -194,10 +191,9 @@ export class OrganizationManagementContentComponent implements OnInit {
           console.log('modify image');
       }
 
-      if (this.responses[0].data.secure_url !== this.url) {
       this.orgS.updateOrganization(modOrg).subscribe(() => {
-        this.currentOrganization = modOrg;
         alert('Modifica all\'organizzazione effettuata.');
+        this.currentOrganization = modOrg;
         this.currentOrganization.lastChangeDate = d;
       }, (err: HttpErrorResponse) => {
         if (err.status === 400) {
@@ -215,7 +211,6 @@ export class OrganizationManagementContentComponent implements OnInit {
       this.country = this.currentOrganization.country;
       this.descr = this.currentOrganization.description;
       this.flag = false;
-    }
   }
 
   checkStringValidity(str: string) {

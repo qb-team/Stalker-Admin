@@ -6,18 +6,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { Observable, of as observableOf, throwError } from 'rxjs';
 
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { OrganizationManagementContentComponent } from './organization-management-content.component';
 import { AdministratorOrganizationDataService } from '../../../services/AdministratorOrganizationData.service';
 import { OrganizationService } from '../../../../index';
+import { Cloudinary } from '@cloudinary/angular-5.x';
 
 @Injectable()
 class MockAdministratorOrganizationDataService {}
 
 @Injectable()
-class MockOrganizationService {
-  requestDeletionOfOrganization() {}
-}
+class MockOrganizationService {}
 
 @Directive({ selector: '[oneviewPermitted]' })
 class OneviewPermittedDirective {
@@ -39,7 +38,7 @@ class SafeHtmlPipe implements PipeTransform {
   transform(value) { return value; }
 }
 
-fdescribe('OrganizationManagementContentComponent', () => {
+describe('OrganizationManagementContentComponent', () => {
   let fixture;
   let component;
 
@@ -54,7 +53,9 @@ fdescribe('OrganizationManagementContentComponent', () => {
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
       providers: [
         { provide: AdministratorOrganizationDataService, useClass: MockAdministratorOrganizationDataService },
-        { provide: OrganizationService, useClass: MockOrganizationService }
+        { provide: OrganizationService, useClass: MockOrganizationService },
+        Cloudinary,
+        NgZone
       ]
     }).overrideComponent(OrganizationManagementContentComponent, {
 
@@ -196,8 +197,32 @@ fdescribe('OrganizationManagementContentComponent', () => {
     spyOn(component, 'setupModifyForm');
     component.ads = component.ads || {};
     component.ads.getOrganization = observableOf({});
+    component.cloudinary = component.cloudinary || {};
+    spyOn(component.cloudinary, 'config').and.returnValue({
+      upload_preset: {},
+      cloud_name: {}
+    });
+    component.uploader = component.uploader || {};
+    component.uploader.onBuildItemForm = 'onBuildItemForm';
+    component.uploader.onCompleteItem = 'onCompleteItem';
+    component.uploader.onProgressItem = 'onProgressItem';
+    component.zone = component.zone || {};
+    spyOn(component.zone, 'run');
+    component.responses = component.responses || {};
+    component.responses = ['responses'];
+    component.responses.existingId = 'existingId';
+    spyOn(component.responses, 'push');
     component.ngOnInit();
     // expect(component.setupModifyForm).toHaveBeenCalled();
+    // expect(component.cloudinary.config).toHaveBeenCalled();
+    // expect(component.zone.run).toHaveBeenCalled();
+    // expect(component.responses.push).toHaveBeenCalled();
+  });
+
+  it('should run #fileOverBase()', async () => {
+
+    component.fileOverBase({});
+
   });
 
   it('should run #setupModifyForm()', async () => {
@@ -213,17 +238,29 @@ fdescribe('OrganizationManagementContentComponent', () => {
   });
 
   it('should run #undefined()', async () => {
-    // Error: ERROR Util.getNode JS code is invalid, "this.currentOrganization.lastChangeDate"
-    //     at Function.getNode (C:\Users\emaci\AppData\Roaming\npm\node_modules\ngentest\src\util.js:189:13)
-    //     at FuncTestGen.setPropsOrParams (C:\Users\emaci\AppData\Roaming\npm\node_modules\ngentest\src\func-test-gen.js:239:24)
-    //     at FuncTestGen.setPropsOrParams (C:\Users\emaci\AppData\Roaming\npm\node_modules\ngentest\src\func-test-gen.js:268:12)
-    //     at FuncTestGen.setPropsOrParams (C:\Users\emaci\AppData\Roaming\npm\node_modules\ngentest\src\func-test-gen.js:268:12)
-    //     at FuncTestGen.setPropsOrParams (C:\Users\emaci\AppData\Roaming\npm\node_modules\ngentest\src\func-test-gen.js:268:12)
-    //     at FuncTestGen.setPropsOrParams (C:\Users\emaci\AppData\Roaming\npm\node_modules\ngentest\src\func-test-gen.js:268:12)
-    //     at FuncTestGen.setPropsOrParams (C:\Users\emaci\AppData\Roaming\npm\node_modules\ngentest\src\func-test-gen.js:268:12)
-    //     at FuncTestGen.setPropsOrParams (C:\Users\emaci\AppData\Roaming\npm\node_modules\ngentest\src\func-test-gen.js:268:12)
-    //     at FuncTestGen.setPropsOrParams (C:\Users\emaci\AppData\Roaming\npm\node_modules\ngentest\src\func-test-gen.js:268:12)
-    //     at FuncTestGen.setPropsOrParams (C:\Users\emaci\AppData\Roaming\npm\node_modules\ngentest\src\func-test-gen.js:268:12)
+    // Error: ERROR Util.getNode JS code is invalid, "modOrg.lastChangeDate"
+    //     at Function.getNode (C:\Users\feder\Desktop\Stalker-Admin\node_modules\ngentest\src\util.js:189:13)
+    //     at FuncTestGen.setPropsOrParams (C:\Users\feder\Desktop\Stalker-Admin\node_modules\ngentest\src\func-test-gen.js:239:24)
+    //     at FuncTestGen.setPropsOrParams (C:\Users\feder\Desktop\Stalker-Admin\node_modules\ngentest\src\func-test-gen.js:268:12)
+    //     at FuncTestGen.setPropsOrParams (C:\Users\feder\Desktop\Stalker-Admin\node_modules\ngentest\src\func-test-gen.js:268:12)
+    //     at FuncTestGen.setPropsOrParams (C:\Users\feder\Desktop\Stalker-Admin\node_modules\ngentest\src\func-test-gen.js:268:12)
+    //     at FuncTestGen.setPropsOrParams (C:\Users\feder\Desktop\Stalker-Admin\node_modules\ngentest\src\func-test-gen.js:268:12)
+    //     at FuncTestGen.setPropsOrParams (C:\Users\feder\Desktop\Stalker-Admin\node_modules\ngentest\src\func-test-gen.js:268:12)
+    //     at FuncTestGen.setPropsOrParams (C:\Users\feder\Desktop\Stalker-Admin\node_modules\ngentest\src\func-test-gen.js:268:12)
+    //     at FuncTestGen.setPropsOrParams (C:\Users\feder\Desktop\Stalker-Admin\node_modules\ngentest\src\func-test-gen.js:268:12)
+    //     at FuncTestGen.setPropsOrParams (C:\Users\feder\Desktop\Stalker-Admin\node_modules\ngentest\src\func-test-gen.js:268:12)
+  });
+
+  it('should run #checkStringValidity()', async () => {
+
+    component.checkStringValidity('str');
+
+  });
+
+  it('should run #checkNumberValidity()', async () => {
+
+    component.checkNumberValidity({});
+
   });
 
   it('should run #onRemove()', async () => {

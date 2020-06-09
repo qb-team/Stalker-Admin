@@ -16,9 +16,8 @@ h2 {
   text-align: center;
 }
 .container {
-  width:1000px;
-  height:800px;
-/* position: absolute;*/
+  width:80%;
+  height:40em;
   top: 20%;
   left: 10%;
 }
