@@ -12,6 +12,7 @@
       <th scope="col">Indirizzo</th>
       <th scope="col">Data di creazione</th>
       <th scope="col">Data ultima modifica</th>
+      <th scope="col">Logo</th>
     </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
       <td>{{getCurrentOrg.street}}, {{getCurrentOrg.number}}, {{getCurrentOrg.city}} ({{getCurrentOrg.country}}), CAP: {{getCurrentOrg.postCode}}</td>
       <td>{{ getCurrentOrg.creationDate }}</td>
       <td>{{ getCurrentOrg.lastChangeDate }}</td>
+      <td><img src="{{ getCurrentOrg.image }}" alt="logo di {{ getCurrentOrg.name }}"/></td>
     </tr>
     </tbody>
   </table>
