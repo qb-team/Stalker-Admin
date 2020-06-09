@@ -85,7 +85,6 @@ import cloudinaryConfiguration from './config';
     AngularFireAuthModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-   // CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'qbteam', upload_preset: 'ml_default'} as CloudinaryConfiguration),
     CloudinaryModule.forRoot(cloudinary, cloudinaryConfiguration),
     FormsModule,
     AppRoutingModule,
