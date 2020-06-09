@@ -52,3 +52,8 @@ table thead th {
   max-width: 10em;
   max-height: 2.5em;
 }
+
+.dateP {
+  max-width: 20em;
+  max-height: 17em;
+}

@@ -116,7 +116,7 @@ export class PlacePresenceNumberComponent implements OnInit {
 
   setCounterRefreshInterval(ms: number): void {
     this.refreshTimer = setInterval(() => {
-      if (this.PlaceArr !== undefined && this.PlaceArr !== null) {
+      if (this.PlaceArr !== undefined && this.PlaceArr !== null && this.PlaceArr.length > 0 && this.currentPlace !== undefined) {
         this.tds.subscribePlacePresenceCounter(this.currentPlace.id);
         this.subscriptionToPlacePresenceCounter.unsubscribe();
         this.subscribeToCounter();

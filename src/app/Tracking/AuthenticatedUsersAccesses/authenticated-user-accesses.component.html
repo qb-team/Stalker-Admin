@@ -26,7 +26,6 @@
 </div>
 <!--END LDAP-->
 <div *ngIf="isLoggedIn">
-  <ngb-datepicker #dp [(ngModel)]="this.sortDate"></ngb-datepicker>
   <div *ngIf="!this.viewingAccesses">
     <h1 *ngIf="this.viewingOrgAccesses">Accessi all'organizzazione {{this.getOrganization.name}}</h1>
     <h1 *ngIf="this.places !== undefined && this.places !== null && !this.viewingOrgAccesses">Accessi al luogo {{this.places[this.currentPlaceIndex].name}}</h1>
@@ -71,45 +70,54 @@
           <button (click)="this.unviewAccesses()" class="col-sm-3 btn btn-outline-danger ml-3 mb-2 backUsers">&#8592; Torna agli utenti</button>
           <p class="col-sm-9">Accessi ordinati secondo Data, Ora di {{ this.sortBy }}.</p>
         </div>
-          <table class="table shadow p-4 mb-5 bg-white">
-          <caption>Accessi degli utenti di {{ this.getOrganization.name }}</caption>
-          <thead>
-          <tr>
-            <th scope="table" colspan="3">Accessi degli utenti in {{ this.getOrganization.name }}</th>
-          </tr>
-          <tr>
-            <th scope="col">Cognome</th>
-            <th scope="col">Nome</th>
-            <th scope="col">
-              <button (click)="toggleEnterSortingMode()" *ngIf="this.sortBy === 'ingresso'" class="btn btn-danger sortButton">Data, Ora di ingresso <span class="sortingMode">{{this.sortingMode }}</span></button>
-              <button (click)="toggleEnterSortingMode()" *ngIf="this.sortBy === 'uscita'" class="btn btn-outline-danger sortButton">Data, Ora di ingresso</button>
-            </th>
-            <th scope="col">
-              <button (click)="toggleExitSortingMode()" *ngIf="this.sortBy === 'uscita'" class="btn btn-danger sortButton">Data, Ora di uscita <span class="sortingMode">{{this.sortingMode }}</span></button>
-              <button (click)="toggleExitSortingMode()" *ngIf="this.sortBy === 'ingresso'" class="btn btn-outline-danger sortButton">Data, Ora di uscita</button>
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let acc of this.organizationAccesses; index as i">
-            <td>{{ getUserByID(acc.orgAuthServerId).surname }}</td>
-            <td>{{ getUserByID(acc.orgAuthServerId).name }}</td>
-            <td>{{ acc.entranceTimestamp.toLocaleString() }}</td>
-            <td>{{ acc.exitTimestamp.toLocaleString() }}</td></tr>
-          </tbody>
-        </table>
+        <div class="row">
+          <table class="col-lg-9 col-md-12 table shadow p-4 mb-5 bg-white">
+            <caption>Accessi degli utenti di {{ this.getOrganization.name }}</caption>
+            <thead>
+            <tr>
+              <th scope="table" colspan="3">Accessi degli utenti in {{ this.getOrganization.name }}</th>
+            </tr>
+            <tr>
+              <th scope="col">Cognome</th>
+              <th scope="col">Nome</th>
+              <th scope="col">
+                <button (click)="toggleEnterSortingMode()" *ngIf="this.sortBy === 'ingresso'" class="btn btn-danger sortButton">Data, Ora di ingresso <span class="sortingMode">{{this.sortingMode }}</span></button>
+                <button (click)="toggleEnterSortingMode()" *ngIf="this.sortBy === 'uscita'" class="btn btn-outline-danger sortButton">Data, Ora di ingresso</button>
+              </th>
+              <th scope="col">
+                <button (click)="toggleExitSortingMode()" *ngIf="this.sortBy === 'uscita'" class="btn btn-danger sortButton">Data, Ora di uscita <span class="sortingMode">{{this.sortingMode }}</span></button>
+                <button (click)="toggleExitSortingMode()" *ngIf="this.sortBy === 'ingresso'" class="btn btn-outline-danger sortButton">Data, Ora di uscita</button>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let acc of this.organizationAccesses; index as i">
+              <td *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ getUserByID(acc.orgAuthServerId).surname }}</td>
+              <td *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ getUserByID(acc.orgAuthServerId).name }}</td>
+              <td *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ acc.entranceTimestamp.toLocaleString() }}</td>
+              <td *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ acc.exitTimestamp.toLocaleString() }}</td></tr>
+            </tbody>
+          </table>
+          <div class="col-lg-3 col-md-12">
+            <label class="checkbox-inline">
+              <input type="checkbox" checked data-toggle="toggle" [(ngModel)]="this.sortByDay">
+              Filtra gli accessi di un giorno specifico <span *ngIf="sortDate !== undefined && sortDate !== null">({{sortDate.day}}/{{sortDate.month}}/{{sortDate.year}})</span>
+            </label>
+            <ngb-datepicker [disabled]="!sortByDay" #dp class="dateP" [(ngModel)]="sortDate"></ngb-datepicker>
+          </div>
+        </div>
       </div>
     </div>
     <div *ngIf="!this.viewingOrgAccesses">
       <h1>Accessi al luogo {{this.places[currentPlaceIndex].name}}</h1>
       <h3 class="no_acc" *ngIf="this.placeAccesses === undefined || this.placeAccesses === null || this.placeAccesses.length <= 0">Non ci sono accessi registrati per gli utenti selezionati. <button (click)="this.unviewAccesses()" class="btn btn-danger m-3 backUsers">&#8592; Torna agli utenti</button></h3>
       <div *ngIf="this.placeAccesses !== undefined && this.placeAccesses !== null && this.placeAccesses.length > 0">
-        <p class="actualSortMode">Accessi ordinati per data di ingresso <span class="sortingMode">{{ this.sortingMode }}</span></p>
         <div class="row">
           <button (click)="this.unviewAccesses()" class="col-sm-4 btn btn-outline-danger ml-3 mb-2 backUsers">&#8592; Torna agli utenti</button>
           <p class="col-sm-9">Accessi ordinati secondo Data, Ora di {{ this.sortBy }}.</p>
         </div>
-        <table class="table shadow p-4 mb-5 bg-white">
+      <div class="row">
+        <table class="col-lg-9 col-md-12 table shadow p-4 mb-5 bg-white">
           <caption>Accessi degli utenti di {{ this.getOrganization.name }}</caption>
           <thead>
           <tr>
@@ -130,12 +138,20 @@
           </thead>
           <tbody>
           <tr *ngFor="let acc of this.placeAccesses; index as i">
-            <td>{{ getUserByID(acc.orgAuthServerId).surname }}</td>
-            <td>{{ getUserByID(acc.orgAuthServerId).name }}</td>
-            <td>{{ acc.entranceTimestamp.toLocaleDateString() }}</td>
-            <td>{{ acc.exitTimestamp.toLocaleString() }}</td></tr>
+            <td *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ getUserByID(acc.orgAuthServerId).surname }}</td>
+            <td *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ getUserByID(acc.orgAuthServerId).name }}</td>
+            <td *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ acc.entranceTimestamp.toLocaleString() }}</td>
+            <td *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ acc.exitTimestamp.toLocaleString() }}</td></tr>
           </tbody>
         </table>
+        <div class="col-lg-3 col-md-12">
+          <label class="checkbox-inline">
+            <input type="checkbox" checked data-toggle="toggle" [(ngModel)]="this.sortByDay">
+            Filtra gli accessi di un giorno specifico <span *ngIf="sortDate !== undefined && sortDate !== null">({{sortDate.day}}/{{sortDate.month}}/{{sortDate.year}})</span>
+          </label>
+          <ngb-datepicker [disabled]="!sortByDay" #dp class="dateP" [(ngModel)]="sortDate"></ngb-datepicker>
+        </div>
+      </div>
       </div>
     </div>
   </div>

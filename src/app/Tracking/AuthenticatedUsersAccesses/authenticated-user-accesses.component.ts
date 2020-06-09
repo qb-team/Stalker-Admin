@@ -12,6 +12,7 @@ import {LdapService} from '../../services/ldap.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Place} from '../../../model/place';
 import {Router} from '@angular/router';
+import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-single-user-authenticated-accesses',
@@ -20,7 +21,9 @@ import {Router} from '@angular/router';
 })
 export class AuthenticatedUserAccessesComponent implements OnInit {
 
-  sortDate: Date;
+  today = new Date();
+  sortDate: NgbDateStruct = { year: this.today.getFullYear(), month: this.today.getMonth(), day: this.today.getDay() };
+  sortByDay = false;
   private organization: Organization;
   private hasLDAP: boolean;
   isLoggedIn: boolean;
@@ -311,6 +314,7 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   }
 
   unviewAccesses() {
+    this.sortByDay = false;
     this.viewingAccesses = false;
     this.usersToWatch = new Array<string>();
     this.placeAccesses = new Array<PlaceAccess>();
