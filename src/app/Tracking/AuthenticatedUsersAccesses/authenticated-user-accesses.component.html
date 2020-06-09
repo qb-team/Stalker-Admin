@@ -26,7 +26,7 @@
 </div>
 <!--END LDAP-->
 <div *ngIf="isLoggedIn">
-  <!--ngb-datepicker #dp [(ngModel)]="this.sortDate"></ngb-datepicker-->
+  <ngb-datepicker #dp [(ngModel)]="this.sortDate"></ngb-datepicker>
   <div *ngIf="!this.viewingAccesses">
     <h1 *ngIf="this.viewingOrgAccesses">Accessi all'organizzazione {{this.getOrganization.name}}</h1>
     <h1 *ngIf="this.places !== undefined && this.places !== null && !this.viewingOrgAccesses">Accessi al luogo {{this.places[this.currentPlaceIndex].name}}</h1>

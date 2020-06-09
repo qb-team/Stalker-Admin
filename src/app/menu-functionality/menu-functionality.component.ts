@@ -54,9 +54,9 @@ export class MenuFunctionalityComponent implements OnInit {
       }
       if (this.permession !== undefined && this.permession.length > this.index) {
         localStorage.setItem('perm', this.permession[this.index].permission.toString());
-        if (this.permession[this.index].orgAuthServerId !== undefined) {
+        /*if (this.permession[this.index].orgAuthServerId !== undefined) {
           localStorage.setItem('permLdapId', this.permession[this.index].orgAuthServerId.toString());
-        }
+        }*/
       }
     }
   }

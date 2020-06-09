@@ -30,6 +30,13 @@ export class OrganizationManagementContentComponent implements OnInit {
     this.setupModifyForm();
     this.ads.getOrganization.subscribe((org: Organization) => {
       this.currentOrganization = org;
+      this.name = this.currentOrganization.name;
+      this.street = this.currentOrganization.street;
+      this.number = this.currentOrganization.number;
+      this.postCode = this.currentOrganization.postCode;
+      this.city = this.currentOrganization.city;
+      this.country = this.currentOrganization.country;
+      this.descr = this.currentOrganization.description;
     });
   }
 
@@ -56,31 +63,31 @@ export class OrganizationManagementContentComponent implements OnInit {
   onModify() {
       const d = new Date();
       const modOrg = this.currentOrganization;
-      if (this.name != null && this.name !== ' ') {
+      if (this.checkStringValidity(this.name)) {
         modOrg.name = this.name;
       }
 
-      if (this.street != null && this.street !== ' ') {
+      if (this.checkStringValidity(this.street)) {
         modOrg.street = this.street;
       }
 
-      if (this.number != null && this.number !== ' ') {
+      if (this.checkStringValidity(this.number)) {
         modOrg.number = this.number;
       }
 
-      if (this.postCode != null) {
+      if (this.checkNumberValidity(this.postCode)) {
         modOrg.postCode = this.postCode;
       }
 
-      if (this.city != null && this.city !== ' ') {
+      if (this.checkStringValidity(this.city)) {
         modOrg.city = this.city;
       }
 
-      if (this.country != null && this.country !== ' ') {
+      if (this.checkStringValidity(this.city)) {
         modOrg.country = this.country;
       }
 
-      if (this.descr != null && this.descr !== ' ') {
+      if (this.checkStringValidity(this.descr)) {
         modOrg.description = this.descr;
       }
 
@@ -90,7 +97,7 @@ export class OrganizationManagementContentComponent implements OnInit {
         this.currentOrganization.lastChangeDate = d;
       }, (err: HttpErrorResponse) => {
         if (err.status === 400) {
-          alert('Errore. I dati inseriti non sono validi');
+          alert('Errore. I dati inseriti non sono validi' + err.message);
         } else {
           alert(err.message);
         }
@@ -103,6 +110,14 @@ export class OrganizationManagementContentComponent implements OnInit {
       this.city = null;
       this.country = null;
       this.descr = null;
+  }
+
+  checkStringValidity(str: string) {
+    return str !== undefined && str !== null && str.trim().length > 0;
+  }
+
+  checkNumberValidity(x: number) {
+    return x !== undefined && x !== null && x > 0;
   }
 
   onRemove() {

@@ -1,9 +1,9 @@
-<h1>Gestione dell'organizzazione {{this.getCurrentOrg.name}}</h1>
-<form [formGroup]="modifyForm" class="shadow p-4 mb-5 bg-white">
+<h1 *ngIf="this.getCurrentOrg !== undefined && this.getCurrentOrg !== null">Gestione dell'organizzazione {{this.getCurrentOrg.name}}</h1>
+<form *ngIf="getCurrentOrg !== undefined" [formGroup]="modifyForm" class="shadow p-4 mb-5 bg-white">
   <fieldset>
     <div class="card m-3">
       <div class="card-header">
-            <h1 class="title" *ngIf="Change === 'modify' ">Modifica dati dell'organizzazione</h1>
+            <h1 class="title" *ngIf="Change === 'modify'">Modifica dati dell'organizzazione</h1>
             <h1 class="title" *ngIf="Change === 'remove' ">Invio della richiesta di eliminazione dell'organizzazione</h1>
           <p class=" text-right">
             <button class=" btn btn-danger mr-1" *ngIf="Change === 'remove'" (click)="onChange('modify')"> Modifica </button>
@@ -14,42 +14,42 @@
         <div class="row">
           <div class="col">
             <label for="name">Inserisci nuovo nome</label>
-            <input id="name" class="form-control" type="text" formControlName="Name" [(ngModel)]="Name" placeholder="Inserisci un valore per modificare">
+            <input id="name" class="form-control" type="text" formControlName="Name" [(ngModel)]="Name" placeholder="Nome dell'organizzazione">
           </div>
         </div>
         <div class="row">
           <div class="col">
             <label for="street">Inserisci nuova via</label>
-            <input id="street" class="form-control" type="text" formControlName="Street" [(ngModel)]="Street" placeholder="Inserisci un valore per modificare">
+            <input id="street" class="form-control" type="text" formControlName="Street" [(ngModel)]="Street" placeholder="Via dell'organizzazione">
           </div>
           <div class="col">
             <label for="number">Inserisci nuovo numero della via</label>
-            <input id="number" class="form-control" type="text"  formControlName="Number" [(ngModel)]="Number" placeholder="Inserisci un valore per modificare">
+            <input id="number" class="form-control" type="text"  formControlName="Number" [(ngModel)]="Number" placeholder="Numero civico">
           </div>
           <div class="col">
             <label for="postCode">Inserisci nuovo CAP</label>
-            <input id="postCode" class="form-control" type="text" formControlName="PostCode" [(ngModel)]="PostCode" placeholder="Inserisci un valore per modificare">
+            <input id="postCode" class="form-control" type="text" formControlName="PostCode" [(ngModel)]="PostCode" placeholder="Codice postale">
           </div>
         </div>
         <div class="row">
           <div class="col">
             <label for="city">Inserisci nuova città</label>
-            <input id="city" class="form-control" type="text" formControlName="City" [(ngModel)]="City" placeholder="Inserisci un valore per modificare">
+            <input id="city" class="form-control" type="text" formControlName="City" [(ngModel)]="City" placeholder="Città">
           </div>
           <div class="col">
             <label for="country">Inserisci nuovo stato</label>
-            <input id="country" class="form-control" type="text" formControlName="Country" [(ngModel)]="Country" placeholder="Inserisci un valore per modificare">
+            <input id="country" class="form-control" type="text" formControlName="Country" [(ngModel)]="Country" placeholder="Nazione">
           </div>
         </div>
         <div class="row">
           <div class="col">
             <label for="descr">Inserisci nuova descrizione</label>
-            <textarea id="descr" class="form-control" cols="5" rows="6" formControlName="Descr" [(ngModel)]="Descr" placeholder="Inserisci un valore per modificare"></textarea>
+            <textarea id="descr" class="form-control" cols="5" rows="6" formControlName="Descr" [(ngModel)]="Descr" placeholder="Descrizione dell'organizzazione"></textarea>
           </div>
         </div>
       </div>
       <div class="card-footer text-center" *ngIf="Change === 'modify' ">
-        <button class="btn btn-danger mr-1" (click)="onModify()"> Modifica </button>
+        <button class="btn btn-danger mr-1" (click)="onModify()" [disabled]="(Name === getCurrentOrg.name && Street === getCurrentOrg.street && Number === getCurrentOrg.number && PostCode === getCurrentOrg.postCode && City === getCurrentOrg.city && Country === getCurrentOrg.country && Descr === getCurrentOrg.description) || Name === '' || Name === undefined || Name === null || Street === undefined || Street === null || Street === '' || Number === undefined || Number === null || Number === '' || City === undefined || City === null || City === '' || PostCode === undefined || PostCode === null || Country === undefined || Country === null || Country === '' || Descr === undefined || Descr === null || Descr === ''"> Modifica </button>
         <input type="reset" class="btn btn-danger"/>
       </div>
       <div class="card-body" *ngIf="Change === 'remove'">
