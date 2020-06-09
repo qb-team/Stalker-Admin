@@ -1,5 +1,5 @@
 <h1 *ngIf="this.getCurrentOrg !== undefined && this.getCurrentOrg !== null">Gestione dell'organizzazione {{this.getCurrentOrg.name}}</h1>
-<form *ngIf="getCurrentOrg !== undefined" [formGroup]="modifyForm" class="shadow p-4 mb-5 bg-white">
+<form *ngIf="getCurrentOrg !== undefined" [formGroup]="modifyForm" class="shadow p-4 mb-5 bg-white" ng2FileDrop [uploader]="uploader" (fileOver)="fileOverBase($event)" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}">
   <fieldset>
     <div class="card m-3">
       <div class="card-header">
@@ -43,13 +43,19 @@
         </div>
         <div class="row">
           <div class="col">
+              <label for="fileupload">Upload</label>
+              <input type="file" id="fileupload" (click)="responses = []; flag =true" ng2FileSelect  [uploader]="uploader"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
             <label for="descr">Inserisci nuova descrizione</label>
             <textarea id="descr" class="form-control" cols="5" rows="6" formControlName="Descr" [(ngModel)]="Descr" placeholder="Descrizione dell'organizzazione"></textarea>
           </div>
         </div>
       </div>
       <div class="card-footer text-center" *ngIf="Change === 'modify' ">
-        <button class="btn btn-danger mr-1" (click)="onModify()" [disabled]="(Name === getCurrentOrg.name && Street === getCurrentOrg.street && Number === getCurrentOrg.number && PostCode === getCurrentOrg.postCode && City === getCurrentOrg.city && Country === getCurrentOrg.country && Descr === getCurrentOrg.description) || Name === '' || Name === undefined || Name === null || Street === undefined || Street === null || Street === '' || Number === undefined || Number === null || Number === '' || City === undefined || City === null || City === '' || PostCode === undefined || PostCode === null || Country === undefined || Country === null || Country === '' || Descr === undefined || Descr === null || Descr === ''"> Modifica </button>
+        <button class="btn btn-danger mr-1" (click)="onModify()" [disabled]="((responses[0] === undefined || !flag) && Name === getCurrentOrg.name && Street === getCurrentOrg.street && Number === getCurrentOrg.number && PostCode === getCurrentOrg.postCode && City === getCurrentOrg.city && Country === getCurrentOrg.country && Descr === getCurrentOrg.description) || Name === '' || Name === undefined || Name === null || Street === undefined || Street === null || Street === '' || Number === undefined || Number === null || Number === '' || City === undefined || City === null || City === '' || PostCode === undefined || PostCode === null || Country === undefined || Country === null || Country === '' || Descr === undefined || Descr === null || Descr === ''"> Modifica </button>
         <input type="reset" class="btn btn-danger"/>
       </div>
       <div class="card-body" *ngIf="Change === 'remove'">

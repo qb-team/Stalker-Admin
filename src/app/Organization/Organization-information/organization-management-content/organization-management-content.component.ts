@@ -1,8 +1,10 @@
-import { Component, OnInit, } from '@angular/core';
+import {Component, Input, NgZone, OnInit} from '@angular/core';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {Organization, OrganizationDeletionRequest, OrganizationService} from '../../../../index';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
+import {Cloudinary} from '@cloudinary/angular-5.x';
 
 
 
@@ -13,6 +15,12 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class OrganizationManagementContentComponent implements OnInit {
 
+  @Input()
+  responses: Array<any>;
+  hasBaseDropZoneOver = false;
+  uploader: FileUploader;
+  flag = false;
+  url = [];
   private name: string;
   private street: string;
   private number: string;
@@ -24,7 +32,11 @@ export class OrganizationManagementContentComponent implements OnInit {
   private currentOrganization: Organization;
   private change = 'modify';
   modifyForm: FormGroup;
-  constructor(private ads: AdministratorOrganizationDataService, private orgS: OrganizationService) { }
+  constructor(private ads: AdministratorOrganizationDataService, private orgS: OrganizationService, private cloudinary: Cloudinary,
+              private zone: NgZone,
+              private http: HttpClient) {
+    this.responses = [];
+  }
 
   ngOnInit(): void {
     this.setupModifyForm();
@@ -38,6 +50,93 @@ export class OrganizationManagementContentComponent implements OnInit {
       this.country = this.currentOrganization.country;
       this.descr = this.currentOrganization.description;
     });
+    const uploaderOptions: FileUploaderOptions = {
+      url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/upload`,
+      // Upload files automatically upon addition to upload queue
+      autoUpload: true,
+      // Use xhrTransport in favor of iframeTransport
+      isHTML5: true,
+      // Calculate progress independently for each uploaded file
+      removeAfterUpload: true,
+      // XHR request headers
+      headers: [
+        {
+          name: 'X-Requested-With',
+          value: 'XMLHttpRequest'
+        }
+      ]
+    };
+    this.uploader = new FileUploader(uploaderOptions);
+
+    this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
+      // Add Cloudinary's unsigned upload preset to the upload form
+      form.append('upload_preset', this.cloudinary.config().upload_preset);
+      // Add built-in and custom tags for displaying the uploaded photo in the list
+      const tags = 'myphotoalbum';
+      // Upload to a custom folder
+      // Note that by default, when uploading via the API, folders are not automatically created in your Media Library.
+      // In order to automatically create the folders based on the API requests,
+      // please go to your account upload settings and set the 'Auto-create folders' option to enabled.
+      form.append('folder', 'angular_sample');
+      // Add custom tags
+      form.append('tags', tags);
+      // Add file to upload
+      form.append('file', fileItem);
+
+      // Use default "withCredentials" value for CORS requests
+      fileItem.withCredentials = false;
+      return { fileItem, form };
+    };
+
+    // Insert or update an entry in the responses array
+    const upsertResponse = fileItem => {
+
+      // Run the update in a custom zone since for some reason change detection isn't performed
+      // as part of the XHR request to upload the files.
+      // Running in a custom zone forces change detection
+      this.zone.run(() => {
+        // Update an existing entry if it's upload hasn't completed yet
+        // Find the id of an existing item
+        const existingId = this.responses.reduce((prev, current, index) => {
+          if (current.file.name === fileItem.file.name && !current.status) {
+            return index;
+          }
+          return prev;
+        }, -1);
+        if (existingId > -1) {
+          // Update existing item with new data
+          this.responses[existingId] = Object.assign(this.responses[existingId], fileItem);
+        } else {
+          // Create new response
+          this.responses.push(fileItem);
+        }
+      });
+
+    };
+
+    // Update model on completion of uploading a file
+    this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) =>
+      upsertResponse(
+        {
+          file: item.file,
+          status,
+          data: JSON.parse(response)
+        }
+      );
+
+    // Update model on upload progress event
+    this.uploader.onProgressItem = (fileItem: any, progress: any) =>
+      upsertResponse(
+        {
+          file: fileItem.file,
+          progress,
+          data: {}
+        }
+      );
+  }
+
+  fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
   }
 
   private setupModifyForm() {
@@ -90,7 +189,12 @@ export class OrganizationManagementContentComponent implements OnInit {
       if (this.checkStringValidity(this.descr)) {
         modOrg.description = this.descr;
       }
+      if (this.responses[0] != null && this.flag) {
+          modOrg.image = this.responses[0].data.secure_url;
+          console.log('modify image');
+      }
 
+      if (this.responses[0].data.secure_url !== this.url) {
       this.orgS.updateOrganization(modOrg).subscribe(() => {
         this.currentOrganization = modOrg;
         alert('Modifica all\'organizzazione effettuata.');
@@ -101,15 +205,17 @@ export class OrganizationManagementContentComponent implements OnInit {
         } else {
           alert(err.message);
         }
-      } );
+      });
 
-      this.name = null;
-      this.street = null;
-      this.number = null;
-      this.postCode = null;
-      this.city = null;
-      this.country = null;
-      this.descr = null;
+      this.name = this.currentOrganization.name;
+      this.street = this.currentOrganization.street;
+      this.number = this.currentOrganization.number;
+      this.postCode = this.currentOrganization.postCode;
+      this.city = this.currentOrganization.city;
+      this.country = this.currentOrganization.country;
+      this.descr = this.currentOrganization.description;
+      this.flag = false;
+    }
   }
 
   checkStringValidity(str: string) {

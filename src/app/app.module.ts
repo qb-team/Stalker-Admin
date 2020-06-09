@@ -49,8 +49,11 @@ import { PlacePresenceNumberComponent } from './Tracking/AnonymousTracking/place
 import { BindAdministratorComponent } from './AdminManagement/bind-administrator/bind-administrator.component';
 import {ChartsModule} from 'ng2-charts';
 import { AuthenticatedUserAccessesComponent } from './Tracking/AuthenticatedUsersAccesses/authenticated-user-accesses.component';
-
-
+import {CloudinaryModule, CloudinaryConfiguration, provideCloudinary} from '@cloudinary/angular-5.x';
+// import {Cloudinary} from 'cloudinary-core';
+import { FileUploadModule } from 'ng2-file-upload';
+import * as cloudinary from 'cloudinary-core';
+import cloudinaryConfiguration from './config';
 
 @NgModule({
   declarations: [
@@ -82,12 +85,15 @@ import { AuthenticatedUserAccessesComponent } from './Tracking/AuthenticatedUser
     AngularFireAuthModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
+   // CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'qbteam', upload_preset: 'ml_default'} as CloudinaryConfiguration),
+    CloudinaryModule.forRoot(cloudinary, cloudinaryConfiguration),
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     LeafletModule,
     ChartsModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    FileUploadModule
   ],
   providers: [AuthenticationService, DeactivateGuard, OrganizationService, AdministratorOrganizationDataService, AdministratorPermissionDataService, AccessDataService, OrganizationTrackingDataService, { provide: RouteReuseStrategy, useClass: RouteReuseService }],
   bootstrap: [AppComponent]
