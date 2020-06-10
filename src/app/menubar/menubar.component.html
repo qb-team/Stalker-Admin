@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg p-3 mb-2 rounded">
   <span id="img"></span>
-  <span class="btn btn-light navbar-brand position" (click)="homePage()" *ngIf="organization !== undefined"> {{organization.name}} </span>
+  <span class="btn btn-light navbar-brand position" (click)="homePage()" *ngIf="organization !== undefined"> <img id="logo" src="{{ organization.image }}" alt="logo di {{ organization.name }}"/> {{organization.name}} </span>
   <ul class="navbar-nav mr-auto " id="oneline">
     <li class="nav-item dropdown">
       <div *ngIf="this.orgArr !== undefined && this.orgArr !== null && this.orgArr.length > 0">
@@ -8,7 +8,9 @@
           Organizzazione
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listOrg">
-          <li class="dropdown-item"  data-target="#loginModal" data-toggle="modal" (click)="setOrganization($event)" *ngFor="let o of orgArr; index as i" id="{{i}}" >{{o.name}}</li>
+          <li class="dropdown-item"  data-target="#loginModal" data-toggle="modal" (click)="setOrganization($event)" *ngFor="let o of orgArr; index as i" id="{{i}}">
+            <img src="{{ o.image }}" alt="logo di {{ o.name }}"/>
+            {{o.name}}</li>
         </ul>
       </div>
     </li>

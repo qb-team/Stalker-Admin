@@ -197,6 +197,7 @@ export class OrganizationManagementContentComponent implements OnInit {
 
       if (this.responses[0] != null && this.flag) {
           modOrg.image = this.responses[0].data.secure_url;
+          console.log('modifica');
       }
 
       this.orgS.updateOrganization(modOrg).subscribe(() => {
