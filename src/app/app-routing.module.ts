@@ -37,18 +37,18 @@ const routes: Routes = [
         children : [
           { path: '', redirectTo: 'Homepage', pathMatch: 'full' },
           { path: 'Homepage', component: HomePageContentComponent},
-          { path: 'Perimetro di tracciamento dell\'organizzazione', component: ViewOrganizationTrackingAreaContentComponent, data: { reuse: false}},
-          { path: 'Modifica del perimetro di tracciamento dell\'organizzazione', component: ModifyOrganizationTrackingAreaContentComponent, canActivate: [ManagerGuardService]},
-          { path: 'Presenze attuali nell\'organizzazione', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
-          { path: 'Informazioni sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: false}},
-          { path: 'Crea un amministratore', component: CreateAdministratorComponent, data: { reuse: false},  canActivate: [OwnerGuardService]},
-          { path: 'Associa un amministratore', component: BindAdministratorComponent, data: { reuse: false}, canActivate: [OwnerGuardService]},
-          { path: 'Rimuovi o modifica i privilegi degli amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canActivate: [OwnerGuardService], canDeactivate: [DeactivateGuard]},
-          { path: 'Gestione dell\'organizzazione', component: OrganizationManagementContentComponent, canActivate: [ManagerGuardService]},
-          { path: 'Modifica del perimetro di tracciamento di un luogo dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent, canActivate: [ManagerGuardService]},
-          { path: 'Gestione dei luoghi di tracciamento', component: PlaceManagementContentComponent, canActivate: [ManagerGuardService]},
-          { path: 'Presenze attuali in un luogo', component: PlacePresenceNumberComponent, data: { reuse: false}},
-          { path: 'Ricerca accessi degli utenti autenticati', component: AuthenticatedUserAccessesComponent, data: { reuse: true}, canActivate: [AuthenticatedOrganizationGuardService]}
+          { path: 'Perimetro_di_tracciamento_dell\'organizzazione', component: ViewOrganizationTrackingAreaContentComponent, data: { reuse: false}},
+          { path: 'Modifica_del_perimetro_di_tracciamento_dell\'organizzazione', component: ModifyOrganizationTrackingAreaContentComponent, canActivate: [ManagerGuardService]},
+          { path: 'Presenze_attuali_nell\'organizzazione', component: OrganizationPresenceNumberComponent, data: { reuse: false}},
+          { path: 'Informazioni_sull\'organizzazione', component: OrganizationInformationContentComponent, data: { reuse: false}},
+          { path: 'Crea_un_amministratore', component: CreateAdministratorComponent, data: { reuse: false},  canActivate: [OwnerGuardService]},
+          { path: 'Associa_un_amministratore', component: BindAdministratorComponent, data: { reuse: false}, canActivate: [OwnerGuardService]},
+          { path: 'Rimuovi_o_modifica_i_privilegi_degli_amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canActivate: [OwnerGuardService], canDeactivate: [DeactivateGuard]},
+          { path: 'Gestione_dell\'organizzazione', component: OrganizationManagementContentComponent, canActivate: [ManagerGuardService]},
+          { path: 'Modifica_del_perimetro_di_tracciamento_di_un luogo_dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent, canActivate: [ManagerGuardService]},
+          { path: 'Gestione_dei_luoghi_di_tracciamento', component: PlaceManagementContentComponent, canActivate: [ManagerGuardService]},
+          { path: 'Presenze_attuali_in_un_luogo', component: PlacePresenceNumberComponent, data: { reuse: false}},
+          { path: 'Ricerca_accessi_degli_utenti_autenticati', component: AuthenticatedUserAccessesComponent, data: { reuse: true}, canActivate: [AuthenticatedOrganizationGuardService]}
         ]
       }
     ]
