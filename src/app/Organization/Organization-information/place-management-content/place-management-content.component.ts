@@ -29,6 +29,7 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
   private zoom: number;
   private Arltn: number[] = [];
   private Arlong: number[] = [];
+  private markers = [];
   modifyForm: FormGroup;
   private markerIcon = icon({
     iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
@@ -139,8 +140,8 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
     if (this.select) {
       this.Arltn.push(e.latlng.lat);
       this.Arlong.push(e.latlng.lng);
-      L.marker([e.latlng.lat, e.latlng.lng], {icon: this.markerIcon}).addTo(this.map);
-      console.log('nel modify ' + e.latlng.lat, e.latlng.lng);
+      const m = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.markerIcon}).addTo(this.map);
+      this.markers.push(m);
     }
   }
 
@@ -158,9 +159,15 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
       }
       track = track.concat('{\n' + '"lat": "' + this.Arltn[this.Arltn.length - 1] + '",\n "long": "' + this.Arlong[this.Arltn.length - 1] + '"\n}\n]\n}');
       newPlace.trackingArea = track;
+      for (let i = 0; i < this.Arltn.length; i++) {
+        console.log('ci sono');
+        this.map.removeLayer(this.markers[i]);
+      }
       this.Arltn = [];
       this.Arlong = [];
+      this.markers = [];
       this.plS.createNewPlace(newPlace).subscribe(() => {
+        this.name = undefined;
         this.loadPlaceList();
         alert('Creazione del nuovo luogo effettuata.');
           }, (err: HttpErrorResponse) => {
@@ -188,9 +195,6 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
     return this.currentOrganization;
   }
 
-  set setCurrentOrg(value: Organization) {
-    this.currentOrganization = value;
-  }
   get Change(): string {
     return this.change;
   }
@@ -200,10 +204,6 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
   }
   get CurrentPlace(): Place {
     return this.currentPlace;
-  }
-
-  set CurrentPlace(value: Place) {
-    this.currentPlace = value;
   }
 
   get Select(): boolean {

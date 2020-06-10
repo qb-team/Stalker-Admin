@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
 import {Cloudinary} from '@cloudinary/angular-5.x';
+import {escapeLeadingUnderscores} from 'scuri/lib/third_party/github.com/Microsoft/TypeScript/lib/typescript';
 
 
 
@@ -149,7 +150,8 @@ export class OrganizationManagementContentComponent implements OnInit {
       Descr: new FormControl(this.descr),
       DescrR: new FormControl(this.descrR, [
         Validators.required,
-        Validators.minLength(100)
+        Validators.minLength(100),
+        Validators.maxLength(512)
         ]),
     });
   }
@@ -234,9 +236,16 @@ export class OrganizationManagementContentComponent implements OnInit {
       requestReason: this.descrR,
       administratorId: localStorage.getItem('uid')
     };
-// metti controlo max 512
     this.orgS.requestDeletionOfOrganization(delReq).subscribe(() => { alert('Richiesta di eliminazione inviata.'); }, (err: HttpErrorResponse) => {
-        alert(err.message);
+      if (err.status === 400) {
+        alert('Errore. I dati inseriti non sono validi' + err.message);
+      } else {
+        if (err.status === 403) {
+          alert('Errore. Non hai i permessi per cancellare l\'organizzazione');
+        } else {
+          alert(err.message);
+        }
+      }
       } );
     this.descrR = null;
   }

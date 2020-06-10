@@ -27,6 +27,7 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
   private Arltn: number[] = [];
   private Arlong: number[] = [];
   private change = false;
+  private markers = [];
   PlaceArr: Array<Place>;
   private currentPlace: Place;
   private markerIcon = icon({
@@ -91,7 +92,8 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
     if (this.change) {
       this.Arltn.push(e.latlng.lat);
       this.Arlong.push(e.latlng.lng);
-      L.marker([e.latlng.lat, e.latlng.lng], {icon: this.markerIcon}).addTo(this.map);
+      const m = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.markerIcon}).addTo(this.map);
+      this.markers.push(m);
     }
   }
 
@@ -104,6 +106,14 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
       if (this.Arltn.length >= 1) {
         track = track.concat('{\n' + '"lat": "' + this.Arltn[this.Arltn.length - 1] + '",\n "long": "' + this.Arlong[this.Arltn.length - 1] + '"\n}\n]\n}');
       }
+
+      for (let i = 0; i < this.Arltn.length; i++) {
+        console.log('ci sono');
+        this.map.removeLayer(this.markers[i]);
+      }
+      this.Arltn = [];
+      this.Arlong = [];
+      this.markers = [];
       const tmp = this.currentPlace;
       tmp.trackingArea = track;
       this.plS.updatePlace(tmp).subscribe(() => {
@@ -112,7 +122,7 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
         },
         (err: HttpErrorResponse) => {
           if (err.status === 400) {
-            alert('Errore. I dati inseriti non sono validi');
+            alert('Errore. I dati inseriti non sono validi, l\'area di tracciamento inserita è troppo grande');
           } else {
             alert(err.message);
           }
@@ -121,16 +131,11 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
     } else {
       alert('Errore inserisci almeno 3 punti');
     }
-
   }
 
   get getCurrentOrg(): Organization {
     return this.currentOrganization;
 
-  }
-
-  set setCurrentOrg(value: Organization) {
-    this.currentOrganization = value;
   }
 
   get Change(): boolean {
