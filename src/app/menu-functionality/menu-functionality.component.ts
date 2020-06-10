@@ -34,7 +34,7 @@ export class MenuFunctionalityComponent implements OnInit {
 
   updateContent(click: any) {
     let route = click.target.innerHTML;
-    route = route.replace(' ', '_');
+    route = route.replace(/ /g, '_');
     this.router.navigateByUrl('/Content-panel/Panel/' + route);
   }
 
