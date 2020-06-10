@@ -40,9 +40,9 @@
             <label for="country">Inserisci nuovo stato</label>
             <input id="country" class="form-control" type="text" formControlName="Country" [(ngModel)]="Country" placeholder="Nazione">
           </div>
-          <div class="col" *ngIf="IndIPLDAP !== undefined && IndIPLDAP !== null && IndIPLDAP.length > 0">
-            <label for="IndIP">Inserisci nuovo indirizzo IP LDAP</label>
-            <input id="IndIP" class="form-control" type="text" formControlName="IndIPLDAP" [(ngModel)]="IndIPLDAP" placeholder="Indirizzo IP LDAP">
+          <div class="col" *ngIf="getCurrentOrg.trackingMode === 'authenticated'">
+            <label for="IndIP" >Inserisci nuovo indirizzo IP LDAP</label>
+            <input id="IndIP"  class="form-control" type="text" formControlName="IndIPLDAP" [(ngModel)]="IndIPLDAP" placeholder="Indirizzo IP LDAP">
           </div>
         </div>
         <div class="row">
@@ -59,7 +59,8 @@
         </div>
       </div>
       <div class="card-footer text-center" *ngIf="Change === 'modify' ">
-        <button class="btn btn-danger mr-1" (click)="onModify()" [disabled]="((Responses[0] === undefined || !Flag) && IndIPLDAP === getCurrentOrg.authenticationServerURL && Name === getCurrentOrg.name && Street === getCurrentOrg.street && Number === getCurrentOrg.number && PostCode === getCurrentOrg.postCode && City === getCurrentOrg.city && Country === getCurrentOrg.country && Descr === getCurrentOrg.description) || Name === '' || Name === undefined || Name === null || Street === undefined || Street === null || Street === '' || Number === undefined || Number === null || Number === '' || City === undefined || City === null || City === '' || PostCode === undefined || PostCode === null || Country === undefined || Country === null || Country === '' || Descr === undefined || Descr === null || Descr === ''  || IndIPLDAP === undefined || IndIPLDAP === null || IndIPLDAP === ''"> Modifica </button>
+        <button class="btn btn-danger mr-1" *ngIf="getCurrentOrg.trackingMode === 'anonymous'" (click)="onModify()" [disabled]="((Responses[0] === undefined || !Flag) && Name === getCurrentOrg.name && Street === getCurrentOrg.street && Number === getCurrentOrg.number && PostCode === getCurrentOrg.postCode && City === getCurrentOrg.city && Country === getCurrentOrg.country && Descr === getCurrentOrg.description) || Name === '' || Name === undefined || Name === null || Street === undefined || Street === null || Street === '' || Number === undefined || Number === null || Number === '' || City === undefined || City === null || City === '' || PostCode === undefined || PostCode === null || Country === undefined || Country === null || Country === '' || Descr === undefined || Descr === null || Descr === '' "> Modifica </button>
+        <button class="btn btn-danger mr-1" *ngIf="getCurrentOrg.trackingMode === 'authenticated'" (click)="onModify()" [disabled]="((Responses[0] === undefined || !Flag) && IndIPLDAP === getCurrentOrg.authenticationServerURL &&  Name === getCurrentOrg.name && Street === getCurrentOrg.street && Number === getCurrentOrg.number && PostCode === getCurrentOrg.postCode && City === getCurrentOrg.city && Country === getCurrentOrg.country && Descr === getCurrentOrg.description) || Name === '' || Name === undefined || Name === null || Street === undefined || Street === null || Street === '' || Number === undefined || Number === null || Number === '' || City === undefined || City === null || City === '' || PostCode === undefined || PostCode === null || Country === undefined || Country === null || Country === '' || Descr === undefined || Descr === null || Descr === '' || IndIPLDAP === undefined || IndIPLDAP === null || IndIPLDAP === '' "> Modifica </button>
         <input type="reset" class="btn btn-danger"/>
       </div>
       <div class="card-body" *ngIf="Change === 'remove'">
@@ -77,4 +78,3 @@
     </div>
   </fieldset>
 </form>
-

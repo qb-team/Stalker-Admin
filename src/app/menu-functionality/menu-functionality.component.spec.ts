@@ -87,7 +87,7 @@ fdescribe('MenuFunctionalityComponent', () => {
 
   });
 
-  it('should run SetterDeclaration #Index', async () => {
+  /*it('should run SetterDeclaration #Index', async () => {
 
     component.Index = {};
 
@@ -97,7 +97,7 @@ fdescribe('MenuFunctionalityComponent', () => {
 
     component.Permession = {};
 
-  });
+  });*/
 
   it('should run GetterDeclaration #getCurrentOrganization', async () => {
 
@@ -128,7 +128,7 @@ fdescribe('MenuFunctionalityComponent', () => {
     // expect(component.refresch).toHaveBeenCalled();
   });
 
-  it('should run #updateContent()', async () => {
+  /*it('should run #updateContent()', async () => {
     component.router = component.router || {};
     spyOn(mockRouter, 'navigateByUrl');
     component.updateContent({
@@ -137,7 +137,7 @@ fdescribe('MenuFunctionalityComponent', () => {
       }
     });
     // expect(component.router.navigateByUrl).toHaveBeenCalled();
-  });
+  });*/
 
   it('should run #refresch()', async () => {
     component.currentOrganization = component.currentOrganization || {};
