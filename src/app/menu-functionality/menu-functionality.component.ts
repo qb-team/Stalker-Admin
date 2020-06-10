@@ -17,14 +17,6 @@ export class MenuFunctionalityComponent implements OnInit {
   private index = 0;
   private permession: Permission[] = [];
   constructor(private ads: AdministratorOrganizationDataService, private apd: AdministratorPermissionDataService, private router: Router ) { }
-
-  get getCurrentOrganization(): Organization {
-    return this.currentOrganization;
-  }
-
-  set setCurrentOrganization(value: Organization) {
-    this.currentOrganization = value;
-  }
   /*
  * Subscribes to the service 'DataService' to retrive the current specific-component to be showed
  */
@@ -39,8 +31,11 @@ export class MenuFunctionalityComponent implements OnInit {
       this.refresch();
     });
   }
+
   updateContent(click: any) {
-    this.router.navigateByUrl('/Content-panel/Panel/' + click.target.innerHTML);
+    let route = click.target.innerHTML;
+    route = route.replace(' ', '_');
+    this.router.navigateByUrl('/Content-panel/Panel/' + route);
   }
 
   refresch() {
@@ -54,9 +49,6 @@ export class MenuFunctionalityComponent implements OnInit {
       }
       if (this.permession !== undefined && this.permession.length > this.index) {
         localStorage.setItem('perm', this.permession[this.index].permission.toString());
-        /*if (this.permession[this.index].orgAuthServerId !== undefined) {
-          localStorage.setItem('permLdapId', this.permession[this.index].orgAuthServerId.toString());
-        }*/
       }
     }
   }
@@ -64,15 +56,11 @@ export class MenuFunctionalityComponent implements OnInit {
     return this.index;
   }
 
-  set Index(value: number) {
-    this.index = value;
+  get getCurrentOrganization(): Organization {
+    return this.currentOrganization;
   }
 
   get Permession(): Permission[] {
     return this.permession;
-  }
-
-  set Permession(value: Permission[]) {
-    this.permession = value;
   }
 }
