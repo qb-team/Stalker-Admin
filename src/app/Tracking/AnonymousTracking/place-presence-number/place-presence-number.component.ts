@@ -84,7 +84,9 @@ export class PlacePresenceNumberComponent implements OnInit {
     console.log(this.currentPlace);
     this.ads.getOrganization.subscribe((o: Organization) => {
       this.currentOrganization = o;
-      this.tds.subscribePlacePresenceCounter(this.currentPlace.id);
+      if (this.currentPlace !== undefined) {
+        this.tds.subscribePlacePresenceCounter(this.currentPlace.id);
+      }
     });
   }
 

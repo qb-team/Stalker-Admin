@@ -40,7 +40,7 @@
             <label for="country">Inserisci nuovo stato</label>
             <input id="country" class="form-control" type="text" formControlName="Country" [(ngModel)]="Country" placeholder="Nazione">
           </div>
-          <div class="col" *ngIf="IndIPLDAP.length > 0">
+          <div class="col" *ngIf="IndIPLDAP !== undefined && IndIPLDAP !== null && IndIPLDAP.length > 0">
             <label for="IndIP">Inserisci nuovo indirizzo IP LDAP</label>
             <input id="IndIP" class="form-control" type="text" formControlName="IndIPLDAP" [(ngModel)]="IndIPLDAP" placeholder="Indirizzo IP LDAP">
           </div>
