@@ -9,8 +9,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 [![Build Status](https://travis-ci.org/qb-team/Stalker-Admin.svg?branch=develop)](https://travis-ci.org/qb-team/Stalker-Admin)
 
-[![Coverage Status](https://coveralls.io/repos/github/qb-team/Stalker-Admin/badge.svg?branch=master)](https://coveralls.io/github/qb-team/Stalker-Admin?branch=master)
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
