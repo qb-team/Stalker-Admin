@@ -3,7 +3,7 @@ import {Organization, OrganizationService, Place, PlaceService} from '../../../.
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Subscription} from 'rxjs';
-import {icon, LeafletMouseEvent, Map} from 'leaflet';
+import {icon, latLng, LeafletMouseEvent, Map} from 'leaflet';
 import * as L from 'leaflet';
 
 @Component({
@@ -27,6 +27,7 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
   private Arltn: number[] = [];
   private Arlong: number[] = [];
   private change = false;
+  private markers = [];
   private markerIcon = icon({
     iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
     shadowUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png',
@@ -63,7 +64,7 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
   }
 
   ngOnDestroy() {
-    if(this.subscriptionToOrg !== undefined) {
+    if (this.subscriptionToOrg !== undefined) {
       this.subscriptionToOrg.unsubscribe();
     }
   }
@@ -72,7 +73,8 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
     if (this.change) {
       this.Arltn.push(e.latlng.lat);
       this.Arlong.push(e.latlng.lng);
-      L.marker([e.latlng.lat, e.latlng.lng], {icon: this.markerIcon}).addTo(this.map);
+      const m = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.markerIcon}).addTo(this.map);
+      this.markers.push(m);
     }
   }
 
@@ -85,6 +87,13 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
       if (this.Arltn.length >= 1) {
         track = track.concat('{\n' + '"lat": "' + this.Arltn[this.Arltn.length - 1] + '",\n "long": "' + this.Arlong[this.Arltn.length - 1] + '"\n}\n]\n}');
       }
+      for (let i = 0; i < this.Arltn.length; i++) {
+        console.log('ci sono');
+        this.map.removeLayer(this.markers[i]);
+      }
+      this.Arltn = [];
+      this.Arlong = [];
+      this.markers = [];
       this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, track).subscribe(() => {
           const d = new Date();
           alert('Modifica al perimetro dell\'organizzazione effettuata.');
@@ -93,7 +102,7 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
         },
         (err: HttpErrorResponse) => {
           if (err.status === 400) {
-            alert('Errore. I dati inseriti non sono validi');
+            alert('Errore. I dati inseriti non sono validi, l\'area di tracciamento inserita è troppo grande');
           } else {
             alert(err.message);
           }
@@ -102,7 +111,6 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
     } else {
       alert('Errore inserisci almeno 3 punti');
     }
-
   }
 
   get getCurrentOrg(): Organization {
