@@ -45,7 +45,7 @@ const routes: Routes = [
           { path: 'Associa_un_amministratore', component: BindAdministratorComponent, data: { reuse: false}, canActivate: [OwnerGuardService]},
           { path: 'Rimuovi_o_modifica_i_privilegi_degli_amminstratori', component: AdministratorManagementComponent, data: { reuse: false}, canActivate: [OwnerGuardService], canDeactivate: [DeactivateGuard]},
           { path: 'Gestione_dell\'organizzazione', component: OrganizationManagementContentComponent, canActivate: [ManagerGuardService]},
-          { path: 'Modifica_del_perimetro_di_tracciamento_di_un luogo_dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent, canActivate: [ManagerGuardService]},
+          { path: 'Modifica_del_perimetro_di_tracciamento_di_un_luogo_dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent, canActivate: [ManagerGuardService]},
           { path: 'Gestione_dei_luoghi_di_tracciamento', component: PlaceManagementContentComponent, canActivate: [ManagerGuardService]},
           { path: 'Presenze_attuali_in_un_luogo', component: PlacePresenceNumberComponent, data: { reuse: false}},
           { path: 'Ricerca_accessi_degli_utenti_autenticati', component: AuthenticatedUserAccessesComponent, data: { reuse: true}, canActivate: [AuthenticatedOrganizationGuardService]}
