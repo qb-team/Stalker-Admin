@@ -46,6 +46,9 @@ export class AuthenticationServerService extends GeneralService {
     public getUserInfoFromAuthServer(organizationAuthenticationServerRequest: OrganizationAuthenticationServerRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<OrganizationAuthenticationServerInformation>>>;
     public getUserInfoFromAuthServer(organizationAuthenticationServerRequest: OrganizationAuthenticationServerRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<OrganizationAuthenticationServerInformation>>>;
     public getUserInfoFromAuthServer(organizationAuthenticationServerRequest: OrganizationAuthenticationServerRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+        if (super.configuration === undefined || super.configuration.accessToken === undefined || super.configuration.accessToken === null) {
+          super.setupAccessTokenInAPIService();
+        }
         if (organizationAuthenticationServerRequest === null || organizationAuthenticationServerRequest === undefined) {
             throw new Error('Required parameter organizationAuthenticationServerRequest was null or undefined when calling getUserInfoFromAuthServer.');
         }
