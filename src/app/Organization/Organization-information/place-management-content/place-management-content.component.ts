@@ -82,8 +82,8 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
     const modPlace = this.currentPlace;
     modPlace.name = this.name;
     this.plS.updatePlace(modPlace).subscribe(() => {
-        this.currentPlace = modPlace;
         alert('Modifica del luogo effettuata.');
+        this.currentPlace = modPlace;
       }, (err: HttpErrorResponse) => {
         if (err.status === 400) {
           alert('Errore. I dati inseriti non sono validi');

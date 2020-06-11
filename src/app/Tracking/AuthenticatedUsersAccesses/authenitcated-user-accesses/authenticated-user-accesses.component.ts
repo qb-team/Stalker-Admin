@@ -12,7 +12,7 @@ import {LdapService} from '../../../services/ldap.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Place} from '../../../../model/place';
 import {Router} from '@angular/router';
-import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-single-user-authenticated-accesses',
@@ -37,12 +37,13 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   places = Array<Place>();
   sortingMode = '▲';
   sortBy = 'ingresso';
-  //sortByAlt = 'uscita';
+  // sortByAlt = 'uscita';
   incorrectCredentials = false;
   private usersOrganizationAccesses: Array<OrganizationAccess>;
   organizationAccesses: Array<OrganizationAccess>;
   placeAccesses: Array<PlaceAccess>;
   switchModeButtonId = 'buttonSwitchToPlace';
+  diff;
   /*
   * The username of the user that is logging in
   */
@@ -339,6 +340,18 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
     this.organizationAccesses = new Array<OrganizationAccess>();
   }
 
+  msToString(ms: number) {
+    return this.toDigitalClock(Math.floor(ms / 3600000).toString()) + ':' + this.toDigitalClock(Math.floor((ms % 3600000) / 60000).toString()) + ':' + this.toDigitalClock(Math.floor((ms % 60000) / 1000).toString());
+  }
+
+  toDigitalClock(str: string) {
+    if (str.length <= 1) {
+      return '0' + str;
+    } else {
+      return str;
+    }
+  }
+
   getLdapUserIndexById(id: string) {
     return this.ldapUsers.findIndex((s) => s.orgAuthServerId === id);
   }
@@ -346,7 +359,6 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   getUserByID(id: string) {
     return this.ldapUsers[this.getLdapUserIndexById(id)];
   }
-
 
   onSubmit(): void {
     this.Submitted = true;
