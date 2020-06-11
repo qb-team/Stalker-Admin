@@ -1,4 +1,4 @@
-<h1 *ngIf="this.Change === 'organization'">Visualizzazione dell'area di tracciamento di {{this.getCurrentOrg.name}}</h1>
+<h1 *ngIf="this.Change === 'organization' && this.getCurrentOrg !== undefined">Visualizzazione dell'area di tracciamento di {{this.getCurrentOrg.name}}</h1>
 <h1 *ngIf="this.Change === 'place'">Visualizzazione dell'area di tracciamento di un luogo</h1>
 <div class="shadow p-4 mb-5 bg-white">
   <h2 *ngIf="this.Change === 'place'  && this.PlaceArr.length > 0 && this.getPlaceName !== undefined && this.getPlaceName !== null && this.getPlaceName !== ''">Luogo attualmente selezionato: {{getPlaceName}}</h2>

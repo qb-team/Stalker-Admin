@@ -57,3 +57,7 @@ table thead th {
   max-width: 20em;
   max-height: 17em;
 }
+
+.btn{
+  margin-bottom: 0.5em;
+}
