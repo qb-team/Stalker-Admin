@@ -28,7 +28,6 @@ export class PlacePresenceNumberComponent implements OnInit {
   ngOnInit(): void {
     this.subscribeToCounter();
     this.loadPlaceList();
-    console.log('ngOnInit content track user number');
     this.subscribeToNavigationEvents();
     this.setCounterRefreshInterval(5000);
     this.ctx = document.getElementById('myChart') as HTMLCanvasElement;
@@ -81,7 +80,6 @@ export class PlacePresenceNumberComponent implements OnInit {
       this.chartLabels.pop();
     }
     this.currentPlace = this.PlaceArr[click.target.attributes.id.value];
-    console.log(this.currentPlace);
     this.ads.getOrganization.subscribe((o: Organization) => {
       this.currentOrganization = o;
       if (this.currentPlace !== undefined) {
@@ -93,17 +91,14 @@ export class PlacePresenceNumberComponent implements OnInit {
   subscribeToNavigationEvents(): void {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd && ev.urlAfterRedirects !== this.router.getCurrentNavigation().initialUrl) {
-        console.log('DISTRUGGO UPDATE ORA');
         clearInterval(this.refreshTimer);
       }
     });
   }
 
   subscribeToCounter(): void {
-    console.log('subscribtion requested');
     this.subscriptionToPlacePresenceCounter = this.tds.getUsersNumber.subscribe((n: number) => {
       this.trackedUsersCounter = n;
-      console.log('subscribtion resolved');
       if (this.chartData.length > 10) {
 
         this.chartData.shift();
@@ -122,7 +117,6 @@ export class PlacePresenceNumberComponent implements OnInit {
         this.tds.subscribePlacePresenceCounter(this.currentPlace.id);
         this.subscriptionToPlacePresenceCounter.unsubscribe();
         this.subscribeToCounter();
-        console.log('Updated subscription');
       }
     }, ms);
   }

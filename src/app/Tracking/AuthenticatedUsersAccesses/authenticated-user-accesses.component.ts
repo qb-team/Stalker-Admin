@@ -111,11 +111,8 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   loginLDAP() {
     this.ldapS.setCredentials(this.username, this.password);
     this.ldapS.addUserToGet('*');
-    console.log(this.ldapS.credentials);
-    console.log(this.ldapS.usersToGet);
     this.ldapS.getUsersLdap(this.organization.id).subscribe((info: Array<OrganizationAuthenticationServerInformation>) => {
       this.ldapUsers = info;
-      console.log(info);
       this.incorrectCredentials = false;
       this.ldapS.isAdminLoggedInLdap.next(true);
     }, (err: HttpErrorResponse) => {
@@ -138,7 +135,6 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   }
 
   toggleViewMode(ev) {
-    console.log(ev.target.id);
     if ('buttonSwitchToPlace' === this.switchModeButtonId) {
       this.viewingOrgAccesses = false;
       this.switchModeButtonId = 'buttonSwitchToOrg';

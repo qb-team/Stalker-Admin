@@ -12,8 +12,6 @@ export class OrganizationTrackingDataService extends TrackingDataService {
   currentOrgSubscription: Subscription;
   constructor(protected ps: PresenceService) {
     super(ps);
-    console.log('OTS this: ' + this.ps);
-    console.log('OTS super: ' + super.ps);
   }
 
   subscribeOrganizationPresenceCounter(orgId: number): void {
@@ -21,7 +19,6 @@ export class OrganizationTrackingDataService extends TrackingDataService {
       this.currentOrgSubscription.unsubscribe();
     }
     this.currentOrgSubscription = this.ps.getOrganizationPresenceCounter(orgId).subscribe((opc: OrganizationPresenceCounter) => {
-      console.log('TDS next: ' + opc.counter);
       this.getUsersNumber.emit(opc.counter);
     });
   }

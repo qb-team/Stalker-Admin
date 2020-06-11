@@ -16,7 +16,6 @@ export class AuthenticatedOrganizationGuardService implements CanActivate {
   }
 
   canActivate(): Observable<boolean> |  Promise<boolean> | boolean {
-    console.log(this.currentOrg.trackingMode);
     if (this.currentOrg.trackingMode === 'authenticated') {
       return true;
     } else {

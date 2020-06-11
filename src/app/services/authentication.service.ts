@@ -27,7 +27,6 @@ export class AuthenticationService {
     this.UserData.subscribe(
       (user) => {
         if (user) {
-          console.log('init');
           this.userDetails = user;
           localStorage.setItem('uid', user.uid);
           this.Token = this.userDetails.getIdToken();
@@ -63,13 +62,10 @@ export class AuthenticationService {
       this.adp.setupAccessTokenInAPIService();
       this.angularFireAuth.auth.onAuthStateChanged((user) => {
         if (user) {
-          console.log('Pre require');
           this.adp.requireAdministratorPermissions(user.uid);
-          console.log('Pre get');
           this.adp.getUserPermissions().subscribe((p: Permission[]) => {this.ado.requireAdministratorOrganizations(p); }, ((err: HttpErrorResponse) => {
             console.error('CODICE ERRORE: ' + err.status);
           }));
-          console.log('Post get');
           this.router.navigateByUrl('/Content-panel');
         }
       });

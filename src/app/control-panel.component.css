@@ -25,12 +25,14 @@ app-menu-functionality{
   padding: 0px 0px;
 }
 
+app-content{
+  background-color: white;
+}
 
 @media screen and (min-height: 721px)
 {
   app-content{
     min-height: 606px;
-    background-color: white;
   }
 }
 
@@ -38,6 +40,5 @@ app-menu-functionality{
 {
   app-content{
     min-height: 894px;
-  background-color: white;
   }
 }

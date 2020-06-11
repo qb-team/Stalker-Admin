@@ -10,7 +10,6 @@ export class OwnerGuardService implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): Observable<boolean> |  Promise<boolean> | boolean {
-    console.log('perm');
     if (localStorage.getItem('perm') === '3') {
       return true;
     } else {

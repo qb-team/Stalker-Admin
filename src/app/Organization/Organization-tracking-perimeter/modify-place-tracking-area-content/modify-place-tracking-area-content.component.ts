@@ -135,6 +135,13 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
     this.markers = [];
   }
 
+  removeLastMarker() {
+    this.map.removeLayer(this.markers[this.markers.length - 1]);
+    this.Arltn.pop();
+    this.Arlong.pop();
+    this.markers.pop();
+  }
+
   get getCurrentOrg(): Organization {
     return this.currentOrganization;
 

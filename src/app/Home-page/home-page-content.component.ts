@@ -23,7 +23,6 @@ export class HomePageContentComponent implements OnInit {
     this.subscribeToOrganization();
     this.ads.getAdminOrganizations.subscribe((orgs: Array<Organization>) => {
       if (orgs !== undefined) {
-        console.log(orgs);
         this.hasSomePermissions = true;
       }
       else {
