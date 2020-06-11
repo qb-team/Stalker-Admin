@@ -1,0 +1,57 @@
+<!--BEGIN LDAP-->
+<div *ngIf="!isLoggedIn" data-keyboard="false" data-backdrop="static" id="loginModal">
+  <h1 id="loginRequest">Per visualizzare i report effettuare prima il login perfavore</h1>
+  <div class="modal-dialog shadow p-4 mb-5 bg-white">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
+          <fieldset>
+            <legend>Login LDAP</legend>
+            <label id="labelE" for="username">dn completo:</label>
+            <input type="username" name="username" id="username" class="form-control" required="required" [(ngModel)]="setUsername" placeholder="username" formControlName="username">
+            <label id="labelPSW" for="pwd">Password:</label>
+            <input type="password" name="password" class="form-control" [(ngModel)]="setPassword" required="required" id="pwd" placeholder="password" formControlName="password" >
+            <p id="incorrect_cred" *ngIf="this.incorrectCredentials">Le credenziali inserite non sono corrette. Controllare e riprovare perfavore.</p>
+            <div class="modal-footer">
+              <button id="signInBtn" [disabled]="!contactForm.valid" (click)="this.loginLDAP()" class="btn btn-danger">Login</button> <!--(click)=""-->
+              <input type="reset" class="btn btn-danger"/>
+            </div>
+          </fieldset>
+        </form>
+        <p *ngIf="false">Credenziali errate</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END LDAP-->
+<div *ngIf="isLoggedIn">
+  <button *ngIf="this.places !== null && this.places.length !== 0" (click)="toggleViewMode($event)" id="{{this.switchModeButtonId}}" class="buttonSwitchTo btn btn-danger">Passa alla visualizzazione del report per luogo</button>
+  <div *ngIf="this.viewingPerUserReport">
+    <table *ngIf="timeSpentByUsersInPlaces !== undefined && timeSpentByUsersInPlaces !== null" class="table shadow p-4 mb-5 bg-white">
+      <caption>Accessi degli utenti di {{ this.getOrganization.name }}</caption>
+      <thead>
+      <tr>
+        <th scope="table" colspan="3">Accessi degli utenti in {{ this.getOrganization.name }}</th>
+      </tr>
+      <tr>
+        <th>Luogo\Utente</th>
+        <th *ngFor="let user of this.getLdapUsers; index as j">{{ user.name }} {{ user.surname }}</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let place of this.places; index as i">
+      <tr>
+        <th>{{place.name}}</th>
+        <td *ngFor="let time of this.timeSpentByUsersInPlaces; index as j">
+          <span *ngIf="this.timeSpentByUsersInPlaces[i] !== undefined && this.timeSpentByUsersInPlaces[i] !== null && this.timeSpentByUsersInPlaces[i][j] !== undefined && this.timeSpentByUsersInPlaces[i][j] !== null">
+            {{ msToString(this.timeSpentByUsersInPlaces[i][j].totalTime) }}
+          </span>
+          <span *ngIf="this.timeSpentByUsersInPlaces[i] === undefined || this.timeSpentByUsersInPlaces[i] === null || this.timeSpentByUsersInPlaces[i][j] === undefined || this.timeSpentByUsersInPlaces[i][j] === null">00:00:00</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!this.viewingPerUserReport">
+
+  </div>
+</div>

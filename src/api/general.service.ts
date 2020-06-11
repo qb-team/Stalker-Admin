@@ -33,8 +33,8 @@ import {catchError} from 'rxjs/operators';
 })
 export class GeneralService {
 
-  //protected basePath = 'https://backend.stalker-qb.team:8080';
-  protected basePath = 'https://2.234.128.81:8080';
+  protected basePath = 'https://backend.stalker-qb.team:8080';
+  //protected basePath = 'https://2.234.128.81:8080';
   public defaultHeaders = new HttpHeaders();
   public configuration = new Configuration();
   public encoder: HttpParameterCodec;

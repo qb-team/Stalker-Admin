@@ -5,12 +5,12 @@ import {
   OrganizationAccess,
   OrganizationAuthenticationServerInformation, PlaceAccess,
   PlaceService
-} from '../../..';
-import {AdministratorOrganizationDataService} from '../../services/AdministratorOrganizationData.service';
+} from '../../../../index';
+import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {LdapService} from '../../services/ldap.service';
+import {LdapService} from '../../../services/ldap.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import {Place} from '../../../model/place';
+import {Place} from '../../../../model/place';
 import {Router} from '@angular/router';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
@@ -62,7 +62,12 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
       if (o.trackingMode === 'authenticated') {
         this.organization = o;
         this.ldapS.clearUsersToGet();
-        this.ldapS.isAdminLoggedInLdap.subscribe(b => this.isLoggedIn = b );
+        this.ldapS.isAdminLoggedInLdap.subscribe(b => {
+          this.isLoggedIn = b;
+          if (this.isLoggedIn) {
+            this.ldapS.getUsersInstances.subscribe((us: Array<OrganizationAuthenticationServerInformation>) => this.ldapUsers = us );
+          }
+        });
         this.aods.getCurrentOrganizationPlaces.subscribe((p: Array<Place>) => { this.places = p; });
         // this.
         // this.as.getAuthenticatedAccessListInOrganization(, this.organization.id).subscribe();
@@ -115,6 +120,7 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
       this.ldapUsers = info;
       this.incorrectCredentials = false;
       this.ldapS.isAdminLoggedInLdap.next(true);
+      this.ldapS.getUsersInstances.next(this.ldapUsers);
     }, (err: HttpErrorResponse) => {
       if (err.status === 500) {
         this.incorrectCredentials = true;
@@ -277,8 +283,19 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
     }
   }
 
+  msToString(ms: number) {
+    return this.toDigitalClock(Math.floor(ms / 3600000).toString()) + ':' + this.toDigitalClock(Math.floor((ms % 3600000) / 60000).toString()) + ':' + this.toDigitalClock(Math.floor((ms % 60000) / 1000).toString());
+  }
+
+  toDigitalClock(str: string) {
+    if (str.length <= 1) {
+      return '0' + str;
+    } else {
+      return str;
+    }
+  }
+
   viewAccesses() {
-    this.viewingAccesses = true;
     const usersIds = Array<string>();
     this.usersToWatch.forEach(u => usersIds.push(u));
     if (this.viewingOrgAccesses) {
@@ -292,6 +309,7 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
             }
           });
         }
+        this.viewingAccesses = true;
         this.sortEnterOrgAccesses(1);
       });
     } else {
@@ -305,6 +323,7 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
             }
           });
         }
+        this.viewingAccesses = true;
         this.sortEnterPlaceAccesses(1);
       });
     }
@@ -316,18 +335,6 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
     this.usersToWatch = new Array<string>();
     this.placeAccesses = new Array<PlaceAccess>();
     this.organizationAccesses = new Array<OrganizationAccess>();
-  }
-
-  msToString(ms: number) {
-    return this.toDigitalClock(Math.floor(ms / 3600000).toString()) + ':' + this.toDigitalClock(Math.floor((ms % 3600000) / 60000).toString()) + ':' + this.toDigitalClock(Math.floor((ms % 60000) / 1000).toString());
-  }
-
-  toDigitalClock(str: string) {
-    if (str.length <= 1) {
-      return '0' + str;
-    } else {
-      return str;
-    }
   }
 
   getLdapUserIndexById(id: string) {

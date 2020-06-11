@@ -19,10 +19,11 @@ import {ModifyPlaceTrackingAreaContentComponent} from './Organization/Organizati
 import {PlaceManagementContentComponent} from './Organization/Organization-information/place-management-content/place-management-content.component';
 import {PlacePresenceNumberComponent} from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
 import {BindAdministratorComponent} from './AdminManagement/bind-administrator/bind-administrator.component';
-import {AuthenticatedUserAccessesComponent} from './Tracking/AuthenticatedUsersAccesses/authenticated-user-accesses.component';
+import {AuthenticatedUserAccessesComponent} from './Tracking/AuthenticatedUsersAccesses/authenitcated-user-accesses/authenticated-user-accesses.component';
 import {OwnerGuardService} from "./services/owner-guard.service";
 import {ManagerGuardService} from "./services/manager-guard.service";
 import {AuthenticatedOrganizationGuardService} from "./services/authenticated-organization-guard.service";
+import {TimeReportComponent} from "./Tracking/AuthenticatedUsersAccesses/time-report/time-report.component";
 
 
 
@@ -48,7 +49,8 @@ const routes: Routes = [
           { path: 'Modifica_del_perimetro_di_tracciamento_di_un_luogo_dell\'organizzazione', component:  ModifyPlaceTrackingAreaContentComponent, canActivate: [ManagerGuardService]},
           { path: 'Gestione_dei_luoghi_di_tracciamento', component: PlaceManagementContentComponent, canActivate: [ManagerGuardService]},
           { path: 'Presenze_attuali_in_un_luogo', component: PlacePresenceNumberComponent, data: { reuse: false}},
-          { path: 'Ricerca_accessi_degli_utenti_autenticati', component: AuthenticatedUserAccessesComponent, data: { reuse: true}, canActivate: [AuthenticatedOrganizationGuardService]}
+          { path: 'Ricerca_accessi_degli_utenti_autenticati', component: AuthenticatedUserAccessesComponent, data: { reuse: false}, canActivate: [AuthenticatedOrganizationGuardService]},
+          { path: 'Report_tabellari_sul_tempo_trascorso', component: TimeReportComponent, data: { reuse: false}, canActivate: [AuthenticatedOrganizationGuardService]}
         ]
       }
     ]
