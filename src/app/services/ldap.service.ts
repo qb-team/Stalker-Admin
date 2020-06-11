@@ -7,7 +7,9 @@ import {Observable, ReplaySubject} from 'rxjs';
 import {
   AuthenticationServerService,
   Organization,
-  OrganizationAuthenticationServerCredentials, OrganizationAuthenticationServerRequest,
+  OrganizationAuthenticationServerCredentials,
+  OrganizationAuthenticationServerInformation,
+  OrganizationAuthenticationServerRequest,
   Permission
 } from '../..';
 import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
@@ -21,6 +23,7 @@ import {Router} from '@angular/router';
 export class LdapService {
 
   usersToGet: Array<string>;
+  private users = new ReplaySubject<Array<OrganizationAuthenticationServerInformation>>(1);
   credentials: OrganizationAuthenticationServerCredentials;
   isAdminLoggedInLdap = new ReplaySubject<boolean>(1);
 
@@ -54,5 +57,9 @@ export class LdapService {
       username: usd,
       password: psw
     };
+  }
+
+  get getUsersInstances() {
+    return this.users;
   }
 }

@@ -48,12 +48,13 @@ import { PlaceManagementContentComponent } from './Organization/Organization-inf
 import { PlacePresenceNumberComponent } from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
 import { BindAdministratorComponent } from './AdminManagement/bind-administrator/bind-administrator.component';
 import {ChartsModule} from 'ng2-charts';
-import { AuthenticatedUserAccessesComponent } from './Tracking/AuthenticatedUsersAccesses/authenticated-user-accesses.component';
+import { AuthenticatedUserAccessesComponent } from './Tracking/AuthenticatedUsersAccesses/authenitcated-user-accesses/authenticated-user-accesses.component';
 import {CloudinaryModule, CloudinaryConfiguration, provideCloudinary} from '@cloudinary/angular-5.x';
 // import {Cloudinary} from 'cloudinary-core';
 import { FileUploadModule } from 'ng2-file-upload';
 import * as cloudinary from 'cloudinary-core';
 import cloudinaryConfiguration from './config';
+import { TimeReportComponent } from './Tracking/AuthenticatedUsersAccesses/time-report/time-report.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import cloudinaryConfiguration from './config';
     PlaceManagementContentComponent,
     PlacePresenceNumberComponent,
     BindAdministratorComponent,
-    AuthenticatedUserAccessesComponent
+    AuthenticatedUserAccessesComponent,
+    TimeReportComponent
   ],
   imports: [
     BrowserModule,

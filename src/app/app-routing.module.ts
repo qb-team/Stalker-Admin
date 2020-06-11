@@ -19,7 +19,7 @@ import {ModifyPlaceTrackingAreaContentComponent} from './Organization/Organizati
 import {PlaceManagementContentComponent} from './Organization/Organization-information/place-management-content/place-management-content.component';
 import {PlacePresenceNumberComponent} from './Tracking/AnonymousTracking/place-presence-number/place-presence-number.component';
 import {BindAdministratorComponent} from './AdminManagement/bind-administrator/bind-administrator.component';
-import {AuthenticatedUserAccessesComponent} from './Tracking/AuthenticatedUsersAccesses/authenticated-user-accesses.component';
+import {AuthenticatedUserAccessesComponent} from './Tracking/AuthenticatedUsersAccesses/authenitcated-user-accesses/authenticated-user-accesses.component';
 import {OwnerGuardService} from "./services/owner-guard.service";
 import {ManagerGuardService} from "./services/manager-guard.service";
 import {AuthenticatedOrganizationGuardService} from "./services/authenticated-organization-guard.service";
