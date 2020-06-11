@@ -39,11 +39,11 @@ export class CreateAdministratorComponent implements OnInit {
       ]),
       pwd: new FormControl(this.adminPsw, [
         Validators.required,
-        Validators.minLength(8)
+        Validators.minLength(6)
       ]),
       confPwd: new FormControl(this.adminConfirmPsw, [
         Validators.required,
-        Validators.minLength(8)
+        Validators.minLength(6)
       ]),
     });
   }

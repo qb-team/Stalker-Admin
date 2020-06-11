@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       ]),
       password: new FormControl(this.Password, [
         Validators.required,
-        Validators.minLength(8)
+        Validators.minLength(6)
       ]),
     });
   }
