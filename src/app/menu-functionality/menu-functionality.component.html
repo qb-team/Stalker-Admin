@@ -25,6 +25,7 @@
                 <li id="l8"(click)="updateContent($event)" class="list-group-item btn btn-light">Presenze attuali nell'organizzazione</li>
                 <li id="l9"(click)="updateContent($event)" class="list-group-item btn btn-light">Presenze attuali in un luogo</li>
                 <li *ngIf="getCurrentOrganization.trackingMode === 'authenticated'" id="l20"(click)="updateContent($event)" class="list-group-item btn btn-light">Ricerca accessi degli utenti autenticati</li>
+                <li *ngIf="getCurrentOrganization.trackingMode === 'authenticated'" id="l21"(click)="updateContent($event)" class="list-group-item btn btn-light">Report tabellari sul tempo trascorso</li>
             </ul>
         </div>
     </div>

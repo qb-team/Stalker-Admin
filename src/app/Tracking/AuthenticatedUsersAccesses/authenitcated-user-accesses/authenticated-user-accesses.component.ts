@@ -300,7 +300,6 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   }
 
   viewAccesses() {
-    this.viewingAccesses = true;
     const usersIds = Array<string>();
     this.usersToWatch.forEach(u => usersIds.push(u));
     if (this.viewingOrgAccesses) {
@@ -314,6 +313,7 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
             }
           });
         }
+        this.viewingAccesses = true;
         this.sortEnterOrgAccesses(1);
       });
     } else {
@@ -327,6 +327,7 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
             }
           });
         }
+        this.viewingAccesses = true;
         this.sortEnterPlaceAccesses(1);
       });
     }
@@ -338,18 +339,6 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
     this.usersToWatch = new Array<string>();
     this.placeAccesses = new Array<PlaceAccess>();
     this.organizationAccesses = new Array<OrganizationAccess>();
-  }
-
-  msToString(ms: number) {
-    return this.toDigitalClock(Math.floor(ms / 3600000).toString()) + ':' + this.toDigitalClock(Math.floor((ms % 3600000) / 60000).toString()) + ':' + this.toDigitalClock(Math.floor((ms % 60000) / 1000).toString());
-  }
-
-  toDigitalClock(str: string) {
-    if (str.length <= 1) {
-      return '0' + str;
-    } else {
-      return str;
-    }
   }
 
   getLdapUserIndexById(id: string) {
