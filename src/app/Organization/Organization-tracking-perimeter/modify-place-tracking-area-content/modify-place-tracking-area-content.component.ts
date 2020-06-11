@@ -106,14 +106,7 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
       if (this.Arltn.length >= 1) {
         track = track.concat('{\n' + '"lat": "' + this.Arltn[this.Arltn.length - 1] + '",\n "long": "' + this.Arlong[this.Arltn.length - 1] + '"\n}\n]\n}');
       }
-
-      for (let i = 0; i < this.Arltn.length; i++) {
-        console.log('ci sono');
-        this.map.removeLayer(this.markers[i]);
-      }
-      this.Arltn = [];
-      this.Arlong = [];
-      this.markers = [];
+      this.resetP();
       const tmp = this.currentPlace;
       tmp.trackingArea = track;
       this.plS.updatePlace(tmp).subscribe(() => {
@@ -133,6 +126,15 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
     }
   }
 
+  resetP() {
+    for (let i = 0; i < this.Arltn.length; i++) {
+      this.map.removeLayer(this.markers[i]);
+    }
+    this.Arltn = [];
+    this.Arlong = [];
+    this.markers = [];
+  }
+
   get getCurrentOrg(): Organization {
     return this.currentOrganization;
 
@@ -150,7 +152,11 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
     return this.currentPlace;
   }
 
-  set CurrentPlace(value: Place) {
-    this.currentPlace = value;
+  get Markers(): any[] {
+    return this.markers;
+  }
+
+  set Markers(value: any[]) {
+    this.markers = value;
   }
 }
