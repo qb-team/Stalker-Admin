@@ -87,13 +87,7 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
       if (this.Arltn.length >= 1) {
         track = track.concat('{\n' + '"lat": "' + this.Arltn[this.Arltn.length - 1] + '",\n "long": "' + this.Arlong[this.Arltn.length - 1] + '"\n}\n]\n}');
       }
-      for (let i = 0; i < this.Arltn.length; i++) {
-        console.log('ci sono');
-        this.map.removeLayer(this.markers[i]);
-      }
-      this.Arltn = [];
-      this.Arlong = [];
-      this.markers = [];
+      this.resetP();
       this.orgS.updateOrganizationTrackingArea(this.currentOrganization.id, track).subscribe(() => {
           const d = new Date();
           alert('Modifica al perimetro dell\'organizzazione effettuata.');
@@ -113,13 +107,19 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
     }
   }
 
+  resetP() {
+    for (let i = 0; i < this.Arltn.length; i++) {
+      this.map.removeLayer(this.markers[i]);
+    }
+    this.Arltn = [];
+    this.Arlong = [];
+    this.markers = [];
+    console.log('rimozione');
+  }
+
   get getCurrentOrg(): Organization {
     return this.currentOrganization;
 
-  }
-
-  set setCurrentOrg(value: Organization) {
-    this.currentOrganization = value;
   }
 
   get Change(): boolean {
@@ -128,5 +128,13 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
 
   set Change(value: boolean) {
     this.change = value;
+  }
+
+  get Markers(): any[] {
+    return this.markers;
+  }
+
+  set Markers(value: any[]) {
+    this.markers = value;
   }
 }

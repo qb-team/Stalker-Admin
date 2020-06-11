@@ -29,13 +29,14 @@
         </div>
       </div>
       <div id="divMap" class="row" *ngIf="Change === 'create'">
-        <div class="col-9">
+        <div class="col-8">
           <p *ngIf="!Select"> Abilita la modalità di selezione dei punti nella mappa per inserire il perimetro di tracciamento </p>
           <p *ngIf="Select"> Seleziona i punti nella mappa e clicca il bottone Crea per inserire il perimetro di tracciamento </p>
         </div>
-        <div class="col-3">
+        <div class="col-4">
           <button class=" btn btn-danger mr-1"  *ngIf="!Select" (click)="Select = true"> Abilità selezione </button>
-          <button class=" btn btn-danger mr-1"  *ngIf="Select"(click)="Select = false"> Disabilità selezione </button>
+          <button class=" btn btn-danger mr-1"  *ngIf="Select" (click)="Select = false"> Disabilità selezione </button>
+          <button class=" btn btn-danger mr-1" *ngIf="Select && Markers.length > 0" (click)="resetP()"> Annulla punti </button>
         </div>
       </div>
       <div *ngIf="Change === 'create'" class="container">

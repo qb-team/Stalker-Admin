@@ -13,8 +13,8 @@ import * as L from 'leaflet';
   styleUrls: ['./place-management-content.component.css']
 })
 export class PlaceManagementContentComponent implements OnInit, OnDestroy {
+
   private currentOrganization: Organization;
-  newPlace: Organization;
   private change = 'create';
   private select = false;
   private name: string;
@@ -94,6 +94,16 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
     this.name = null;
   }
 
+  resetP() {
+    for (let i = 0; i < this.Arltn.length; i++) {
+      this.map.removeLayer(this.markers[i]);
+    }
+    this.Arltn = [];
+    this.Arlong = [];
+    this.markers = [];
+    console.log('rimozione');
+  }
+
   onChange(val: string) {
     this.change = val;
   }
@@ -159,13 +169,7 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
       }
       track = track.concat('{\n' + '"lat": "' + this.Arltn[this.Arltn.length - 1] + '",\n "long": "' + this.Arlong[this.Arltn.length - 1] + '"\n}\n]\n}');
       newPlace.trackingArea = track;
-      for (let i = 0; i < this.Arltn.length; i++) {
-        console.log('ci sono');
-        this.map.removeLayer(this.markers[i]);
-      }
-      this.Arltn = [];
-      this.Arlong = [];
-      this.markers = [];
+      this.resetP();
       this.plS.createNewPlace(newPlace).subscribe(() => {
         this.name = undefined;
         this.loadPlaceList();
@@ -181,6 +185,14 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
     } else {
       alert('Errore inserisci almeno 3 punti');
     }
+  }
+
+  get Markers(): any[] {
+    return this.markers;
+  }
+
+  set Markers(value: any[]) {
+    this.markers = value;
   }
 
   get Name(): string {
