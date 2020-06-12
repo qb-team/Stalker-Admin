@@ -58,6 +58,7 @@ table thead th {
   max-height: 17em;
 }
 
-.btn{
-  margin-bottom: 0.5em;
+.line-down{
+  border-bottom: 1px solid #cccccc ;
+  padding-bottom: 0.5em;
 }

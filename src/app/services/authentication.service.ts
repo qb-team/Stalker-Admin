@@ -82,9 +82,9 @@ export class AuthenticationService {
     localStorage.removeItem('key');
     localStorage.removeItem('adminToken');
     localStorage.removeItem('perm');
-    this.adp.getUserPermissions().next(null);
-    this.ado.getAdminOrganizations.next(null);
-    this.ado.getOrganization.next(null);
+    this.adp.getUserPermissions().next(undefined);
+    this.ado.getAdminOrganizations.next(undefined);
+    this.ado.getOrganization.next(undefined);
   }
   /*
    * The function allows to reset password to user
