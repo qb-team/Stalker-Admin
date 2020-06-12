@@ -79,13 +79,13 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
   }
 
   onModify() {
-    const modPlace = this.currentPlace;
-    modPlace.name = this.name;
-    this.plS.updatePlace(modPlace).subscribe(() => {
+    const tmpName = this.currentPlace.name;
+    this.currentPlace.name = this.name;
+    this.plS.updatePlace(this.currentPlace).subscribe(() => {
         alert('Modifica del luogo effettuata.');
-        this.currentPlace = modPlace;
       }, (err: HttpErrorResponse) => {
-        if (err.status === 400) {
+      this.currentPlace.name = tmpName;
+      if (err.status === 400) {
           alert('Errore. I dati inseriti non sono validi');
         } else {
           alert(err.message);
@@ -101,7 +101,13 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
     this.Arltn = [];
     this.Arlong = [];
     this.markers = [];
-    console.log('rimozione');
+  }
+
+  removeLastMarker() {
+    this.map.removeLayer(this.markers[this.markers.length - 1]);
+    this.Arltn.pop();
+    this.Arlong.pop();
+    this.markers.pop();
   }
 
   onChange(val: string) {

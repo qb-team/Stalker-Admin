@@ -25,3 +25,7 @@ h2 {
 #lineDiv {
   z-index: 1001;
 }
+
+.btn{
+  margin-bottom: 0.5em;
+}

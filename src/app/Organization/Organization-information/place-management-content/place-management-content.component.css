@@ -14,11 +14,10 @@ label{
 
 #lineDiv{
   display: inline;
-  padding: 2em 2em;
 }
 
 #divMap{
-  padding: 2em 2em;
+  padding: 1em 1.2em;
 }
 
 .container {
@@ -27,4 +26,8 @@ label{
   top: 20%;
   left: 10%;
   margin-bottom: 2em;
+}
+
+.btn{
+  margin-bottom: 0.5em;
 }

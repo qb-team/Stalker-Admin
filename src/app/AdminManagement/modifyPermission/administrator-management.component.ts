@@ -73,7 +73,6 @@ export class AdministratorManagementComponent implements OnInit {
    */
   addPermissionModificationInstance(click: any, newPriviledge: number): void {
     const adminId = click.target.parentNode.id;
-    console.log('LOGGOSO' + adminId);
     if (typeof adminId === typeof 'string' && newPriviledge !== this.getPermissionTierOf(adminId)) {
       if (this.alreadyModified(adminId) === -1) {
         const p: Permission = {
@@ -143,7 +142,6 @@ export class AdministratorManagementComponent implements OnInit {
   removeAdministrator(email: string) {
     const mailPredicate = p => p.mail === email;
     const index = this.permissions.findIndex(mailPredicate);
-    console.log('Permesso per la api: ' + this.permissions[index].administratorId + this.permissions[index].mail + this.permissions[index].permission + this.permissions[index].orgAuthServerId + ' ORG ID ' + this.permissions[index].organizationId + this.permissions[index].nominatedBy);
     const permis = this.permissions[index];
     permis.mail = null;
     this.as.unbindAdministratorFromOrganization(permis).subscribe();

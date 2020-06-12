@@ -114,7 +114,13 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
     this.Arltn = [];
     this.Arlong = [];
     this.markers = [];
-    console.log('rimozione');
+  }
+
+  removeLastMarker() {
+    this.map.removeLayer(this.markers[this.markers.length - 1]);
+    this.Arltn.pop();
+    this.Arlong.pop();
+    this.markers.pop();
   }
 
   get getCurrentOrg(): Organization {

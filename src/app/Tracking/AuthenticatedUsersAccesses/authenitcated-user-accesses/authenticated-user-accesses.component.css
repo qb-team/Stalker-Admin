@@ -1,3 +1,6 @@
+*{
+  word-wrap: break-word;
+}
 #loginRequest {
   font-size: 1.75em;
 }
@@ -56,4 +59,9 @@ table thead th {
 .dateP {
   max-width: 20em;
   max-height: 17em;
+}
+
+.line-down{
+  border-bottom: 1px solid #cccccc ;
+  padding-bottom: 0.5em;
 }

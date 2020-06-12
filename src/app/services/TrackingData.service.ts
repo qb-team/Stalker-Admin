@@ -10,7 +10,6 @@ import {EventEmitter, Injectable} from '@angular/core';
 export abstract class TrackingDataService {
   private usersNumber: EventEmitter<number> = new EventEmitter<number>();
   protected constructor(protected ps: PresenceService) {
-    console.log('TS: ' + this.ps);
   }
 
   get getUsersNumber(): EventEmitter<number> {

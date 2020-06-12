@@ -20,6 +20,7 @@ export class OrganizationManagementContentComponent implements OnInit {
   hasBaseDropZoneOver = false;
   uploader: FileUploader;
   private flag = false;
+  private flagError = false;
   private name: string;
   private street: string;
   private number: string;
@@ -162,64 +163,129 @@ export class OrganizationManagementContentComponent implements OnInit {
 
   onModify() {
       const d = new Date();
-      const modOrg = this.currentOrganization;
+      const tmp = [];
+      tmp.push(this.currentOrganization.name);
+      tmp.push(this.currentOrganization.description);
+      tmp.push(this.currentOrganization.image);
+      tmp.push(this.currentOrganization.street);
+      tmp.push(this.currentOrganization.number);
+      tmp.push(this.currentOrganization.postCode);
+      tmp.push(this.currentOrganization.city);
+      tmp.push(this.currentOrganization.country);
+      tmp.push(this.currentOrganization.authenticationServerURL);
+      tmp.push(this.currentOrganization.lastChangeDate);
+
       if (this.checkStringValidity(this.name)) {
-        modOrg.name = this.name;
+        this.currentOrganization.name = this.name;
+      } else {
+        console.log('name');
+        this.flagError = true;
       }
 
       if (this.checkStringValidity(this.street)) {
-        modOrg.street = this.street;
+        this.currentOrganization.street = this.street;
+      } else {
+        console.log('street');
+        this.flagError = true;
       }
 
       if (this.checkStringValidity(this.number)) {
-        modOrg.number = this.number;
+        this.currentOrganization.number = this.number;
+      } else {
+        console.log('number');
+        this.flagError = true;
       }
 
       if (this.checkNumberValidity(this.postCode)) {
-        modOrg.postCode = this.postCode;
+        this.currentOrganization.postCode = this.postCode;
+      } else {
+        console.log('postCode');
+        this.flagError = true;
       }
 
       if (this.checkStringValidity(this.city)) {
-        modOrg.city = this.city;
+        this.currentOrganization.city = this.city;
+      } else {
+        console.log('city');
+        this.flagError = true;
       }
 
-      if (this.checkStringValidity(this.city)) {
-        modOrg.country = this.country;
+      if (this.checkStringValidity(this.country)) {
+        this.currentOrganization.country = this.country;
+      } else {
+        console.log('country');
+        this.flagError = true;
       }
 
       if (this.checkStringValidity(this.descr)) {
-        modOrg.description = this.descr;
+        this.currentOrganization.description = this.descr;
+      } else {
+        console.log('descr');
+        this.flagError = true;
       }
 
-      if (this.checkStringValidity(this.indIPLDAP)) {
-        modOrg.authenticationServerURL = this.indIPLDAP;
+      if (this.currentOrganization.trackingMode === 'authenticated') {
+        if (this.checkStringValidity(this.indIPLDAP)) {
+          this.currentOrganization.authenticationServerURL = this.indIPLDAP;
+        } else {
+          console.log('indIP');
+          this.flagError = true;
+        }
       }
 
       if (this.responses[0] != null && this.flag) {
-          modOrg.image = this.responses[0].data.secure_url;
-          console.log('modifica');
-      }
-
-      this.orgS.updateOrganization(modOrg).subscribe(() => {
-        alert('Modifica all\'organizzazione effettuata.');
-        this.currentOrganization = modOrg;
-        this.currentOrganization.lastChangeDate = d;
-      }, (err: HttpErrorResponse) => {
-        if (err.status === 400) {
-          alert('Errore. I dati inseriti non sono validi' + err.message);
-        } else {
-          alert(err.message);
+        this.currentOrganization.image = this.responses[0].data.secure_url;
+        if (this.currentOrganization.image === undefined) {
+          alert('immagine inserita troppo pesante, per favore carica un immagine meno pesante');
+          this.flagError = true;
+          console.log('img');
         }
-      });
-
-      this.name = this.currentOrganization.name;
-      this.street = this.currentOrganization.street;
-      this.number = this.currentOrganization.number;
-      this.postCode = this.currentOrganization.postCode;
-      this.city = this.currentOrganization.city;
-      this.country = this.currentOrganization.country;
-      this.descr = this.currentOrganization.description;
-      this.indIPLDAP = this.currentOrganization.authenticationServerURL;
+        console.log('entro1');
+      }
+      console.log(this.flagError);
+      if (!this.flagError) {
+        this.currentOrganization.lastChangeDate = d;
+        console.log('entro2');
+        this.orgS.updateOrganization(this.currentOrganization).subscribe(() => {
+          alert('Modifica all\'organizzazione effettuata.');
+        }, (err: HttpErrorResponse) => {
+          this.currentOrganization.name = tmp[0];
+          this.currentOrganization.description = tmp[1];
+          this.currentOrganization.image = tmp[2];
+          this.currentOrganization.street = tmp[3];
+          this.currentOrganization.number = tmp[4];
+          this.currentOrganization.postCode = tmp[5];
+          this.currentOrganization.city = tmp[6];
+          this.currentOrganization.country = tmp[7];
+          this.currentOrganization.authenticationServerURL = tmp[8];
+          this.currentOrganization.lastChangeDate = tmp[9];
+          if (err.status === 400) {
+            alert('Errore. I dati inseriti non sono validi' + err.message);
+          } else {
+            alert(err.message);
+          }
+          this.name = this.currentOrganization.name;
+          this.street = this.currentOrganization.street;
+          this.number = this.currentOrganization.number;
+          this.postCode = this.currentOrganization.postCode;
+          this.city = this.currentOrganization.city;
+          this.country = this.currentOrganization.country;
+          this.descr = this.currentOrganization.description;
+          this.indIPLDAP = this.currentOrganization.authenticationServerURL;
+        });
+      } else {
+        this.currentOrganization.name = tmp[0];
+        this.currentOrganization.description = tmp[1];
+        this.currentOrganization.image = tmp[2];
+        this.currentOrganization.street = tmp[3];
+        this.currentOrganization.number = tmp[4];
+        this.currentOrganization.postCode = tmp[5];
+        this.currentOrganization.city = tmp[6];
+        this.currentOrganization.country = tmp[7];
+        this.currentOrganization.authenticationServerURL = tmp[8];
+        this.currentOrganization.lastChangeDate = tmp[9];
+      }
+      this.flagError = false;
       this.flag = false;
   }
 
