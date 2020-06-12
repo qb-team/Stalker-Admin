@@ -1,3 +1,6 @@
+*{
+  word-wrap: break-word;
+}
 #applyChangesP {
   text-align: center;
 }
@@ -11,6 +14,16 @@ h1 {
   font-size: 1.9em;
 }
 
+h2{
+  font-size: 1.2em;
+}
+
 .btn{
   margin-bottom: 0.5em;
+}
+
+.line-down{
+  border-bottom: 1px solid #cccccc ;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.2em;
 }

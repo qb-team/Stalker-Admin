@@ -1,3 +1,6 @@
+*{
+  word-wrap: break-word;
+}
 #loginRequest {
   font-size: 1.75em;
 }
