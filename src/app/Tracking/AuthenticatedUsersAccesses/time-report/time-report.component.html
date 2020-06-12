@@ -25,33 +25,46 @@
 </div>
 <!--END LDAP-->
 <div *ngIf="isLoggedIn">
-  <button *ngIf="this.places !== null && this.places.length !== 0" (click)="toggleViewMode($event)" id="{{this.switchModeButtonId}}" class="buttonSwitchTo btn btn-danger">Passa alla visualizzazione del report per luogo</button>
+  <button *ngIf="this.places !== null && this.places.length !== 0" (click)="toggleViewMode($event)" id="{{this.switchModeButtonId}}" class="mb-2 buttonSwitchTo btn btn-danger">Passa alla visualizzazione del report per luogo</button>
   <div *ngIf="this.viewingPerUserReport">
     <table *ngIf="timeSpentByUsersInPlaces !== undefined && timeSpentByUsersInPlaces !== null" class="table shadow p-4 mb-5 bg-white">
-      <caption>Accessi degli utenti di {{ this.getOrganization.name }}</caption>
+      <caption>Report degli utenti nei luoghi di {{ this.getOrganization.name }}</caption>
       <thead>
       <tr>
-        <th scope="table" colspan="3">Accessi degli utenti in {{ this.getOrganization.name }}</th>
+        <th scope="table" colspan="3">Report degli utenti nei luoghi di {{ this.getOrganization.name }}</th>
       </tr>
       <tr>
-        <th>Luogo\Utente</th>
-        <th *ngFor="let user of this.getLdapUsers; index as j">{{ user.name }} {{ user.surname }}</th>
+        <th></th>
+        <th *ngFor="let user of this.getLdapUsers; index as j">{{ user.surname }} {{ user.name }}</th>
       </tr>
       </thead>
-      <tbody *ngFor="let place of this.places; index as i">
-      <tr>
+      <tbody>
+      <tr *ngFor="let place of this.places; index as i">
         <th>{{place.name}}</th>
-        <td *ngFor="let time of this.timeSpentByUsersInPlaces; index as j">
-          <span *ngIf="this.timeSpentByUsersInPlaces[i] !== undefined && this.timeSpentByUsersInPlaces[i] !== null && this.timeSpentByUsersInPlaces[i][j] !== undefined && this.timeSpentByUsersInPlaces[i][j] !== null">
-            {{ msToString(this.timeSpentByUsersInPlaces[i][j].totalTime) }}
-          </span>
-          <span *ngIf="this.timeSpentByUsersInPlaces[i] === undefined || this.timeSpentByUsersInPlaces[i] === null || this.timeSpentByUsersInPlaces[i][j] === undefined || this.timeSpentByUsersInPlaces[i][j] === null">00:00:00</span>
-        </td>
+        <td *ngFor="let user of this.getLdapUsers; index as j">{{ timeSpentBy(i ,user.orgAuthServerId) }}</td>
       </tr>
       </tbody>
     </table>
   </div>
   <div *ngIf="!this.viewingPerUserReport">
-
+    <table>
+      <caption>Report del tempo totale trascorso dagli utenti nei luoghi di {{ this.getOrganization.name }}</caption>
+      <thead>
+      <tr>
+        <th scope="table" colspan="3">Report del tempo totale trascorso dagli utenti nei luoghi di {{ this.getOrganization.name }}</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>Tempo totale</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of this.getLdapUsers; index as j">
+          <th>{{ user.surname }} {{ user.name }}</th>
+          <td *ngIf="this.totalUserTimes[j] !== undefined && this.totalUserTimes[j] !== null && this.totalUserTimes[j] !== 0">{{this.sToString(this.totalUserTimes[j])}}</td>
+          <td *ngIf="this.totalUserTimes[j] === undefined || this.totalUserTimes[j] === null || this.totalUserTimes[j] === 0">00:00:00</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

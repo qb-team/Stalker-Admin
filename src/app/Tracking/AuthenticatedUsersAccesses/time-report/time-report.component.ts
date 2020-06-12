@@ -27,8 +27,9 @@ export class TimeReportComponent implements OnInit {
   incorrectCredentials = false;
   private Submitted = false;
   switchModeButtonId = 'buttonSwitchToPlace';
-  viewingPerUserReport = true;
+  viewingPerUserReport = false;
   timeSpentByUsersInPlaces = new Array<Array<TimePerUserReport>>(); // first array describes the places, the nested one describes the time spent in a specific place for each user
+  totalUserTimes: Array<number>;
 
   /*
 * The username of the user that is logging in
@@ -54,8 +55,22 @@ export class TimeReportComponent implements OnInit {
             if (this.isLoggedIn) {
               this.ldapS.getUsersInstances.subscribe((us: Array<OrganizationAuthenticationServerInformation>) => {
                 this.ldapUsers = us;
+                this.totalUserTimes = new Array<number>(this.ldapUsers.length);
+                for (let t = 0; t < this.totalUserTimes.length; t++) {
+                  this.totalUserTimes[t] = 0;
+                }
                 for (let i = 0; i < this.places.length; i++) {
-                  this.tr.getTimePerUserReport(this.places[i].id).subscribe((r: Array<TimePerUserReport>) => this.timeSpentByUsersInPlaces[i] = r );
+                  this.tr.getTimePerUserReport(this.places[i].id).subscribe((r: Array<TimePerUserReport>) => {
+                    this.timeSpentByUsersInPlaces[i] = r;
+                    if (this.timeSpentByUsersInPlaces[i] !== null) {
+                      this.timeSpentByUsersInPlaces[i].forEach(el => {
+                        if (el !== undefined && el !== null) {
+                          const idx = this.ldapUsers.findIndex(u => u.orgAuthServerId === el.orgAuthServerId);
+                          this.totalUserTimes[idx] += el.totalTime;
+                        }
+                      });
+                    }
+                  } );
                 }
               });
             }
@@ -70,8 +85,8 @@ export class TimeReportComponent implements OnInit {
     this.setupForm();
   }
 
-  msToString(ms: number) {
-    return this.toDigitalClock(Math.floor(ms / 3600000).toString()) + ':' + this.toDigitalClock(Math.floor((ms % 3600000) / 60000).toString()) + ':' + this.toDigitalClock(Math.floor((ms % 60000) / 1000).toString());
+  sToString(s: number) {
+    return this.toDigitalClock(Math.floor(s / 3600).toString()) + ':' + this.toDigitalClock(Math.floor((s % 3600) / 60).toString()) + ':' + this.toDigitalClock((s % 60).toString());
   }
 
   toDigitalClock(str: string) {
@@ -110,6 +125,16 @@ export class TimeReportComponent implements OnInit {
         Validators.minLength(5)
       ]),
     });
+  }
+
+  timeSpentBy(placeArrIndex: number, ordID: string) {
+    if (this.timeSpentByUsersInPlaces[placeArrIndex] !== undefined && this.timeSpentByUsersInPlaces[placeArrIndex] !== null) {
+      const idx = this.timeSpentByUsersInPlaces[placeArrIndex].findIndex(inst => inst.orgAuthServerId === ordID);
+      if (idx !== -1) {
+        return this.sToString(this.timeSpentByUsersInPlaces[placeArrIndex][idx].totalTime);
+      }
+    }
+    return '00:00:00';
   }
 
   toggleViewMode(ev) {
