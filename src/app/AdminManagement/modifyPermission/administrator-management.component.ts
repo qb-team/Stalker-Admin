@@ -140,16 +140,18 @@ export class AdministratorManagementComponent implements OnInit {
   }
 
   removeAdministrator(email: string) {
-    const mailPredicate = p => p.mail === email;
-    const index = this.permissions.findIndex(mailPredicate);
-    const permis = this.permissions[index];
-    permis.mail = null;
-    this.as.unbindAdministratorFromOrganization(permis).subscribe();
-    this.permissions.splice(index, 1);
-    this.permissionModificationsTableText.splice(index, 1);
-    const indexMod = this.permissionModifications.findIndex(mailPredicate);
-    if (indexMod !== -1) {
-      this.permissionModifications.splice(indexMod, 1);
+    if (confirm('Sei sicuro di voler rimuovere l\'amministratore associato a ' + email + '?')) {
+      const mailPredicate = p => p.mail === email;
+      const index = this.permissions.findIndex(mailPredicate);
+      const permis = this.permissions[index];
+      permis.mail = null;
+      this.as.unbindAdministratorFromOrganization(permis).subscribe();
+      this.permissions.splice(index, 1);
+      this.permissionModificationsTableText.splice(index, 1);
+      const indexMod = this.permissionModifications.findIndex(mailPredicate);
+      if (indexMod !== -1) {
+        this.permissionModifications.splice(indexMod, 1);
+      }
     }
   }
 
