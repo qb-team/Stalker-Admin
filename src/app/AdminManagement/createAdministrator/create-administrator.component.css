@@ -5,3 +5,12 @@ h1 {
 .btn{
   margin-bottom: 0.5em;
 }
+
+#waitForAccountCreation{
+  color: red;
+}
+
+#confBox {
+  font-size: 1.9em;
+  color: cornflowerblue;
+}

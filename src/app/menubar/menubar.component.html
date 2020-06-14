@@ -8,8 +8,8 @@
           Organizzazione
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listOrg">
-          <li class="dropdown-item"  data-target="#loginModal" data-toggle="modal" (click)="setOrganization($event)" *ngFor="let o of orgArr; index as i" id="{{i}}">
-            <img src="{{ o.image }}" alt="logo di {{ o.name }}"/>
+          <li class="dropdown-item"  data-target="#loginModal" data-toggle="modal" *ngFor="let o of orgArr; index as i" (click)="setOrganization(i)">
+            <img (click)="setOrganization(i)" src="{{ o.image }}" alt="logo di {{ o.name }}"/>
             {{o.name}}</li>
         </ul>
       </div>

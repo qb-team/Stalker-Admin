@@ -45,8 +45,11 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   /*
    * It updates the name of organization selected
    */
-  setOrganization(click: any) {
-    this.Organization = this.OrgArr[click.target.attributes.id.value];
+  setOrganization(idx: number) {
+    if (this.Organization && this.Organization.id !== this.OrgArr[idx].id && this.OrgArr[idx].trackingMode === 'authenticated') {
+      this.ldapS.isAdminLoggedInLdap.next(false);
+    }
+    this.Organization = this.OrgArr[idx];
     this.ads.getOrganization.next(this.Organization);
   }
 

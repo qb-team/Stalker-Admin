@@ -1,11 +1,18 @@
 import {Component, OnInit, Predicate} from '@angular/core';
-import {AdministratorService, Organization, Permission} from '../../../index';
+import {
+  AdministratorService,
+  Organization,
+  OrganizationAuthenticationServerInformation,
+  Permission
+} from '../../../index';
 import {AdministratorOrganizationDataService} from '../../services/AdministratorOrganizationData.service';
 import {AdministratorPermissionDataService} from '../../services/AdministratorPermissionData.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {stringify} from "querystring";
 import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {LdapService} from "../../services/ldap.service";
 
 
 export enum permissionLevel {
@@ -41,10 +48,21 @@ export class AdministratorManagementComponent implements OnInit {
 
   private currentOrganization: Organization;
 
-  constructor(private ads: AdministratorOrganizationDataService, private as: AdministratorService) { }
+
+  // ldap
+  private Submitted = false;
+  isLoggedIn: boolean;
+  contactForm: FormGroup;
+  incorrectCredentials = false;
+  private username: string;
+  private password: string;
+  private ldapUsers: Array<OrganizationAuthenticationServerInformation>;
+
+  constructor(private ads: AdministratorOrganizationDataService, private as: AdministratorService, private ldapS: LdapService) { }
 
   ngOnInit(): void {
     this.subscribeToOrganization();
+    this.setupLoginForm();
   }
 
   subscribeToOrganization() {
@@ -54,8 +72,81 @@ export class AdministratorManagementComponent implements OnInit {
           this.subscribeToAdministratorPermissions();
           this._dataHasArrived = false;
         }
+      // ldap begin
+        if (this.currentOrganization.trackingMode === 'authenticated') {
+        this.ldapS.clearUsersToGet();
+        this.ldapS.isAdminLoggedInLdap.subscribe(b => {
+          this.isLoggedIn = b;
+          if (this.isLoggedIn) {
+            this.ldapS.getUsersInstances.subscribe((us: Array<OrganizationAuthenticationServerInformation>) => this.ldapUsers = us);
+          }
+        });
+      }
+          // ldap end
     });
   }
+
+  // login section
+  loginLDAP() {
+    this.ldapS.setCredentials(this.username, this.password);
+    this.ldapS.addUserToGet('*');
+    this.ldapS.getUsersLdap(this.currentOrganization.id).subscribe((info: Array<OrganizationAuthenticationServerInformation>) => {
+      this.ldapUsers = info;
+      this.incorrectCredentials = false;
+      this.ldapS.isAdminLoggedInLdap.next(true);
+      this.ldapS.getUsersInstances.next(this.ldapUsers);
+    }, (err: HttpErrorResponse) => {
+      if (err.status === 500) {
+        this.incorrectCredentials = true;
+      }
+    });
+  }
+
+  onSubmit(): void {
+    this.Submitted = true;
+  }
+
+  get submitted(): boolean {
+    return this.Submitted;
+  }
+
+  set submitted(value: boolean) {
+    this.Submitted = value;
+  }
+
+
+  get getUsername(): string {
+    return this.username;
+  }
+
+  set setUsername(value: string) {
+    this.username = value;
+  }
+
+  get getPassword(): string {
+    return this.password;
+  }
+
+  set setPassword(value: string) {
+    this.password = value;
+  }
+
+  private setupLoginForm() {
+    this.contactForm = new FormGroup({
+      username: new FormControl(this.username, [
+        Validators.required
+      ]),
+      password: new FormControl(this.password, [
+        Validators.required,
+        Validators.minLength(5)
+      ]),
+    });
+  }
+
+  get getLdapUsers() {
+    return this.ldapUsers;
+  }
+  // end login section
 
   subscribeToAdministratorPermissions() {
     this.as.getAdministratorListOfOrganization(this.currentOrganization.id).subscribe((permArr: Array<Permission>) => {
@@ -92,6 +183,11 @@ export class AdministratorManagementComponent implements OnInit {
 
   updateModifiedPermissionOnTable(ind: number, perm: string) {
     this.permissionModificationsTableText[ind] = perm;
+  }
+
+  getNameOfLdapUser(ldapID: string) {
+    const userIdx = this.ldapUsers.findIndex((us) => us.orgAuthServerId === ldapID);
+    return this.ldapUsers[userIdx].surname + ' ' + this.ldapUsers[userIdx].name;
   }
 
   /*

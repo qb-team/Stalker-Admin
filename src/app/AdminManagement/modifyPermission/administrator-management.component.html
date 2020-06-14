@@ -1,11 +1,38 @@
-<div *ngIf="this.getCurrentOrganization">
-  <p id="loadingData" *ngIf="dataHasArrived === false">Attendere, caricamento dati in corso...</p>
+<!--BEGIN LDAP-->
+<div *ngIf="this.getCurrentOrganization !== undefined && this.getCurrentOrganization.trackingMode === 'authenticated' && !isLoggedIn" data-keyboard="false" data-backdrop="static" id="loginModal">
+  <h1 id="loginRequest">Per visualizzare gli amministratori effettuare prima il login perfavore</h1>
+  <div class="modal-dialog shadow p-4 mb-5 bg-white">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
+          <fieldset>
+            <legend>Login al server aziendale</legend>
+            <label id="labelEL" for="username">dn completo:</label>
+            <input type="username" name="username" id="username" class="form-control" required="required" [(ngModel)]="setUsername" placeholder="username" formControlName="username">
+            <label id="labelPSWL" for="pwdL">Password:</label>
+            <input type="password" name="password" class="form-control" [(ngModel)]="setPassword" required="required" id="pwdL" placeholder="password" formControlName="password" >
+            <p id="incorrect_cred" *ngIf="this.incorrectCredentials">Le credenziali inserite non sono corrette. Controllare e riprovare perfavore.</p>
+            <div class="modal-footer">
+              <button id="signInBtn" [disabled]="!contactForm.valid" (click)="this.loginLDAP()" class="btn btn-danger">Login</button> <!--(click)=""-->
+              <input type="reset" class="btn btn-danger"/>
+            </div>
+          </fieldset>
+        </form>
+        <p *ngIf="false">Credenziali errate</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END LDAP-->
+<div *ngIf="this.getCurrentOrganization !== undefined && (this.getCurrentOrganization.trackingMode !== 'authenticated' || isLoggedIn)">
+  <p id="loadingData" *ngIf="dataHasArrived === false">Attendere perfavore, caricamento dati in corso...</p>
   <h1 *ngIf="dataHasArrived === true">Gestione dei amministratori</h1>
   <div *ngIf="dataHasArrived === true" class="shadow p-4 mb-5 bg-white">
     <h2>Amministratori di {{ getCurrentOrganization.name }} e i loro permessi</h2>
     <div class="row line-down">
       <div class="col-3">
-        <strong>E-mail</strong>
+        <strong *ngIf="this.getCurrentOrganization && this.getCurrentOrganization.trackingMode === 'anonymous'">e-mail</strong>
+        <strong *ngIf="this.getCurrentOrganization && this.getCurrentOrganization.trackingMode === 'authenticated'">Cognome Nome</strong>
       </div>
       <div class="col-2">
         <strong>Privilegi</strong>
@@ -22,7 +49,8 @@
     </div>
     <div class="row p-1" *ngFor="let perm of getPermissions; index as i">
       <div class="col-3">
-        <p>{{ perm.mail }}</p>
+        <p *ngIf="this.getCurrentOrganization && (this.getCurrentOrganization.trackingMode === 'anonymous' || perm.orgAuthServerId === undefined || perm.orgAuthServerId === null || perm.orgAuthServerId === '')">{{ perm.mail }}</p>
+        <p *ngIf="this.getCurrentOrganization && this.getCurrentOrganization.trackingMode === 'authenticated'  && perm.orgAuthServerId && perm.orgAuthServerId !== ''">{{ getNameOfLdapUser(perm.orgAuthServerId) }}</p>
       </div>
       <div class="col-2">
         <p>{{ getPermissionLevelNoun(perm.permission) }}</p>
@@ -44,45 +72,11 @@
       </div>
     </div>
   </div>
-  <!--table *ngIf="dataHasArrived === true" class="table shadow p-4 mb-5 bg-white">
-    <caption>Amministratori di {{ getCurrentOrganization.name }} e i loro permessi</caption>
-    <thead>
-    <tr>
-      <th scope="table" colspan="3">Lista degli amministratori di {{ getCurrentOrganization.name }} e dei loro permessi</th>
-    </tr>
-    <tr>
-      <th scope="col">#amministratore</th>
-      <th scope="col">E-mail</th>
-      <th scope="col">Privilegi</th>
-      <th scope="col">Modifica privilegi</th>
-      <th scope="col">Nuovi privilegi</th>
-      <th scope="col">Rimuovi amministratore</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let perm of getPermissions; index as i">
-      <th scope="row">{{ i+1 }}</th-->
-      <!--td>{{ perm.mail }}</td-->
-      <!--td>{{ perm.mail }}</td>
-      <td>{{ getPermissionLevelNoun(perm.permission) }}</td>
-      <td>
-        <div class="dropdown">
-          <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Modifica privilegi
-          </button>
-          <div id="{{ perm.administratorId }}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <div *ngIf="perm.permission !== 1" class="dropdown-item" (click)="addPermissionModificationInstance($event, 1); updateModifiedPermissionOnTable(i, 'Visualizzatore')">Visualizzatore</div>
-            <div *ngIf="perm.permission !== 2" class="dropdown-item" (click)="addPermissionModificationInstance($event, 2); updateModifiedPermissionOnTable(i, 'Gestore')">Gestore</div>
-          </div>
-        </div>
-      </td>
-      <td *ngIf="permissionModificationsTableText != undefined && i < permissionModificationsTableText.length">{{ permissionModificationsTableText[i] }}</td>
-      <td><button class="btn btn-danger" (click)="removeAdministrator(perm.mail)">Rimuovi</button></td>
-    </tr>
-    </tbody>
-  </table-->
-  <div class="container">
-    <div class="row shadow p-4 mb-5 bg-white" *ngIf="getPermissionModifications != undefined &&  getPermissionModifications.length != 0">
+  <div *ngIf="getPermissionModifications != undefined &&  getPermissionModifications.length != 0" class="container shadow p-4 mb-5 bg-white">
+    <div class="row">
+      <h1>Applicare le modifiche?</h1>
+    </div>
+    <div class="row">
       <div class="col-sm-3 text-right">
         <div class="next">
           <button (click)="eraseModificationList()" class="btn btn-danger">Annulla le modifiche</button>
