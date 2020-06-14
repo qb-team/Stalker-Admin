@@ -5,8 +5,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
 import {Cloudinary} from '@cloudinary/angular-5.x';
-import {escapeLeadingUnderscores} from 'scuri/lib/third_party/github.com/Microsoft/TypeScript/lib/typescript';
-
 
 
 @Component({
@@ -16,23 +14,23 @@ import {escapeLeadingUnderscores} from 'scuri/lib/third_party/github.com/Microso
 })
 export class OrganizationManagementContentComponent implements OnInit {
   @Input()
-  private responses: Array<any>;
+  private responses: Array<any>; // date of cloudinary
   hasBaseDropZoneOver = false;
-  uploader: FileUploader;
-  private flag = false;
-  private flagError = false;
-  private name: string;
-  private street: string;
-  private number: string;
-  private postCode: number;
-  private city: string;
-  private country: string;
-  private descr: string;
-  private descrR: string;
-  private indIPLDAP: string;
-  private currentOrganization: Organization;
-  private change = 'modify';
-  modifyForm: FormGroup;
+  uploader: FileUploader; // contain the image got to HTML form
+  private flag = false; // for check form load img
+  private flagError = false; // for check that the values are corrects
+  private name: string; // contain name of organization
+  private street: string; // contain street of organization
+  private number: string; // contain number of organization
+  private postCode: number; // contain postCode of organization
+  private city: string; // contain city of organization
+  private country: string; // contain country of organization
+  private descr: string; // contain description of organization
+  private descrR: string; // contain description the request for delete a organization
+  private indIPLDAP: string; // contain IP address for LDAP server
+  private currentOrganization: Organization; // contain current organization
+  private change = 'modify'; // allow to show the correct form
+  modifyForm: FormGroup; // for check form
   constructor(private ads: AdministratorOrganizationDataService, private orgS: OrganizationService, private cloudinary: Cloudinary, private zone: NgZone) {
     this.responses = [];
   }
@@ -114,7 +112,9 @@ export class OrganizationManagementContentComponent implements OnInit {
 
     };
 
-    // Update model on completion of uploading a file
+    /*
+     Update model on completion of uploading a file
+     */
     this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) =>
       upsertResponse(
         {
@@ -124,7 +124,9 @@ export class OrganizationManagementContentComponent implements OnInit {
         }
       );
 
-    // Update model on upload progress event
+    /*
+     Update model on upload progress event
+     */
     this.uploader.onProgressItem = (fileItem: any, progress: any) =>
       upsertResponse(
         {
@@ -139,6 +141,9 @@ export class OrganizationManagementContentComponent implements OnInit {
     this.hasBaseDropZoneOver = e;
   }
 
+  /*
+   Setup form for modify data of organization
+   */
   private setupModifyForm() {
     this.modifyForm = new FormGroup({
       Name: new FormControl(this.name),
@@ -157,10 +162,16 @@ export class OrganizationManagementContentComponent implements OnInit {
     });
   }
 
+  /*
+   change value of this.change
+   */
   onChange(val: string) {
     this.change = val;
   }
 
+  /*
+   Modify data of organization through API method
+   */
   onModify() {
       const d = new Date();
       const tmp = [];
@@ -178,49 +189,42 @@ export class OrganizationManagementContentComponent implements OnInit {
       if (this.checkStringValidity(this.name)) {
         this.currentOrganization.name = this.name;
       } else {
-        console.log('name');
         this.flagError = true;
       }
 
       if (this.checkStringValidity(this.street)) {
         this.currentOrganization.street = this.street;
       } else {
-        console.log('street');
         this.flagError = true;
       }
 
       if (this.checkStringValidity(this.number)) {
         this.currentOrganization.number = this.number;
       } else {
-        console.log('number');
         this.flagError = true;
       }
 
       if (this.checkNumberValidity(this.postCode)) {
         this.currentOrganization.postCode = this.postCode;
       } else {
-        console.log('postCode');
         this.flagError = true;
       }
 
       if (this.checkStringValidity(this.city)) {
         this.currentOrganization.city = this.city;
       } else {
-        console.log('city');
         this.flagError = true;
       }
 
       if (this.checkStringValidity(this.country)) {
         this.currentOrganization.country = this.country;
       } else {
-        console.log('country');
         this.flagError = true;
       }
 
       if (this.checkStringValidity(this.descr)) {
         this.currentOrganization.description = this.descr;
       } else {
-        console.log('descr');
         this.flagError = true;
       }
 
@@ -228,7 +232,6 @@ export class OrganizationManagementContentComponent implements OnInit {
         if (this.checkStringValidity(this.indIPLDAP)) {
           this.currentOrganization.authenticationServerURL = this.indIPLDAP;
         } else {
-          console.log('indIP');
           this.flagError = true;
         }
       }
@@ -238,14 +241,10 @@ export class OrganizationManagementContentComponent implements OnInit {
         if (this.currentOrganization.image === undefined) {
           alert('immagine inserita troppo pesante, per favore carica un immagine meno pesante');
           this.flagError = true;
-          console.log('img');
         }
-        console.log('entro1');
       }
-      console.log(this.flagError);
       if (!this.flagError) {
         this.currentOrganization.lastChangeDate = d;
-        console.log('entro2');
         this.orgS.updateOrganization(this.currentOrganization).subscribe(() => {
           alert('Modifica all\'organizzazione effettuata.');
         }, (err: HttpErrorResponse) => {
@@ -289,14 +288,22 @@ export class OrganizationManagementContentComponent implements OnInit {
       this.flag = false;
   }
 
+  /*
+  Check if the input string is valid
+   */
   checkStringValidity(str: string) {
     return str !== undefined && str !== null && str.trim().length > 0;
   }
 
+  /*
+   Check if the input number is valid
+   */
   checkNumberValidity(x: number) {
     return x !== undefined && x !== null && x > 0;
   }
-
+  /*
+  Remove data of organization through API method
+   */
   onRemove() {
     const delReq: OrganizationDeletionRequest = {
       organizationId: this.currentOrganization.id,

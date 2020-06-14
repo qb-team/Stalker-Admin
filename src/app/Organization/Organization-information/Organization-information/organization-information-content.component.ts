@@ -17,25 +17,26 @@ export class OrganizationInformationContentComponent implements OnInit, OnDestro
  private subscriptionToOrg: Subscription;
   constructor(private ads: AdministratorOrganizationDataService) { }
 
-  get getCurrentOrg(): Organization {
-    return this.currentOrganization;
-  }
-
-  set setCurrentOrg(value: Organization) {
-    this.currentOrganization = value;
-  }
-
   ngOnInit(): void {
     this.subscribeToOrganization();
   }
 
+  /*
+  Get current organization
+   */
   subscribeToOrganization(): void {
     this.subscriptionToOrg = this.ads.getOrganization.subscribe((org: Organization) => { this.currentOrganization = org; });
   }
-
+  /*
+  Destroy last subscription
+   */
   ngOnDestroy() {
     if (this.subscriptionToOrg !== undefined) {
       this.subscriptionToOrg.unsubscribe();
     }
+  }
+
+  get getCurrentOrg(): Organization {
+    return this.currentOrganization;
   }
 }

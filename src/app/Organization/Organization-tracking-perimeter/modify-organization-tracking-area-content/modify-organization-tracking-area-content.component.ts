@@ -140,7 +140,4 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
     return this.markers;
   }
 
-  set Markers(value: any[]) {
-    this.markers = value;
-  }
 }
