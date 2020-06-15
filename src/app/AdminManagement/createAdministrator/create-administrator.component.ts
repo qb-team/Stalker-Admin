@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AdministratorBindingRequest, AdministratorService, Organization} from '../../..';
+import {
+  AdministratorBindingRequest,
+  AdministratorService,
+  Organization,
+  OrganizationAuthenticationServerInformation
+} from '../../..';
 import {AdministratorOrganizationDataService} from '../../services/AdministratorOrganizationData.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {LdapService} from '../../services/ldap.service';
 
 @Component({
   selector: 'app-create-administrator',
@@ -16,23 +22,54 @@ export class CreateAdministratorComponent implements OnInit {
   private adminPsw: string;
   private adminConfirmPsw: string;
   private adminPermissions: number;
-  private contactForm: FormGroup;
+  adminForm: FormGroup;
   private emailAlreadyRegistered = false;
   private selectedPriviledges: string;
+  newAdminLdapId = null;
+  newAdminLdapNameStr = '';
+  loading = false;
+  confirmBox = false;
 
-  constructor(private as: AdministratorService, private aods: AdministratorOrganizationDataService) { }
+  // ldap
+  private Submitted = false;
+  isLoggedIn: boolean;
+  contactForm: FormGroup;
+  incorrectCredentials = false;
+  private username: string;
+  private password: string;
+  private ldapUsers: Array<OrganizationAuthenticationServerInformation>;
+
+  constructor(private as: AdministratorService, private aods: AdministratorOrganizationDataService, private ldapS: LdapService) { }
 
   ngOnInit(): void {
     this.subscribeToOrganization();
+    this.setupAdminForm();
     this.setupLoginForm();
   }
 
   subscribeToOrganization(): void {
-    this.aods.getOrganization.subscribe((o: Organization) => { this.currentOrganization = o; });
+    this.aods.getOrganization.subscribe((o: Organization) => {
+      this.currentOrganization = o;
+      // ldap begin
+      if (this.currentOrganization && this.currentOrganization.trackingMode === 'authenticated') {
+        this.ldapS.clearUsersToGet();
+        this.ldapS.isAdminLoggedInLdap.subscribe(b => {
+          this.isLoggedIn = b;
+          if (this.isLoggedIn) {
+            this.ldapS.getUsersInstances.subscribe((us: Array<OrganizationAuthenticationServerInformation>) => this.ldapUsers = us );
+          }
+        });
+      }
+        // ldap end
+    });
   }
 
-  private setupLoginForm() {
-    this.contactForm = new FormGroup({
+  closeConfirmBox() {
+    this.confirmBox = false;
+  }
+
+  private setupAdminForm() {
+    this.adminForm = new FormGroup({
       email: new FormControl(this.adminEmail, [
         Validators.required,
         Validators.email
@@ -51,9 +88,8 @@ export class CreateAdministratorComponent implements OnInit {
   registerAdministrator() {
     const br: AdministratorBindingRequest = {
       organizationId: this.currentOrganization.id,
-      /*
-       * Administrator unique identifier from the authentication server of the organization.
-      orgAuthServerId?: string;*/
+
+      orgAuthServerId: this.newAdminLdapId,
       /**
        * Administrator\'s e-mail address.
        */
@@ -67,13 +103,83 @@ export class CreateAdministratorComponent implements OnInit {
        */
       permission: this.adminPermissions
     };
-    this.as.createNewAdministratorInOrganization(br).subscribe(() => { alert('Amministratore creato e aggiunto correttamente.'); }, (err: HttpErrorResponse) => {
+    this.loading = true;
+    this.as.createNewAdministratorInOrganization(br).subscribe(() => { this.loading = false; this.confirmBox = true; }, (err: HttpErrorResponse) => {
       if (err.status === 400) {
+        this.loading = false;
         alert('Errore. L\'amministratore risulta già registrato presso il sitema. Inserire un\'altra mail');
       } else {
+        this.loading = false;
         alert(err.message);
       }
     } );
+  }
+
+  // login section
+  loginLDAP() {
+    this.ldapS.setCredentials(this.username, this.password);
+    this.ldapS.addUserToGet('*');
+    this.ldapS.getUsersLdap(this.currentOrganization.id).subscribe((info: Array<OrganizationAuthenticationServerInformation>) => {
+      this.ldapUsers = info;
+      this.incorrectCredentials = false;
+      this.ldapS.isAdminLoggedInLdap.next(true);
+      this.ldapS.getUsersInstances.next(this.ldapUsers);
+    }, (err: HttpErrorResponse) => {
+      if (err.status === 500) {
+        this.incorrectCredentials = true;
+      }
+    });
+  }
+
+  onSubmit(): void {
+    this.Submitted = true;
+  }
+
+  get submitted(): boolean {
+    return this.Submitted;
+  }
+
+  set submitted(value: boolean) {
+    this.Submitted = value;
+  }
+
+
+  get getUsername(): string {
+    return this.username;
+  }
+
+  set setUsername(value: string) {
+    this.username = value;
+  }
+
+  get getPassword(): string {
+    return this.password;
+  }
+
+  set setPassword(value: string) {
+    this.password = value;
+  }
+
+  private setupLoginForm() {
+    this.contactForm = new FormGroup({
+      username: new FormControl(this.username, [
+        Validators.required
+      ]),
+      password: new FormControl(this.password, [
+        Validators.required,
+        Validators.minLength(5)
+      ]),
+    });
+  }
+
+  get getLdapUsers() {
+    return this.ldapUsers;
+  }
+  // end login section
+
+  setNewAdminLdapId(index: number) {
+    this.newAdminLdapId = this.ldapUsers[index].orgAuthServerId;
+    this.newAdminLdapNameStr = this.ldapUsers[index].name + ' ' + this.ldapUsers[index].surname;
   }
 
   setAdminPermissions(privilegeLevel: number) {
@@ -104,8 +210,8 @@ export class CreateAdministratorComponent implements OnInit {
     this.adminConfirmPsw = confPsw;
   }
 
-  get getContactForm() {
-    return this.contactForm;
+  get getAdminForm() {
+    return this.adminForm;
   }
 
   get getEmailAlreadyRegistered() {
@@ -118,6 +224,10 @@ export class CreateAdministratorComponent implements OnInit {
 
   get getSelectedPriviledges() {
     return this.selectedPriviledges;
+  }
+
+  get getCurrentOrganization() {
+    return this.currentOrganization;
   }
 
   get getCurrentOrganizationName() {

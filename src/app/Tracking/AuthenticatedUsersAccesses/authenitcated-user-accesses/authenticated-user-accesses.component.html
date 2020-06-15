@@ -124,10 +124,8 @@
           </div>
           <div class="col-lg-3 col-md-12 shadow p-4 mb-5">
             <div class="row">
-              <label class="col-10">
-                Filtra gli accessi di un giorno specifico <span *ngIf="sortDate !== undefined && sortDate !== null">({{sortDate.day}}/{{sortDate.month}}/{{sortDate.year}})</span>
-              </label>
-              <input class="col-2" type="checkbox" checked data-toggle="toggle" [(ngModel)]="this.sortByDay">
+              <input class="col-1" type="checkbox" checked data-toggle="toggle" [(ngModel)]="this.sortByDay">
+              <label class="col-11">Filtra gli accessi di un giorno specifico</label>
             </div>
             <div class="text-center">
               <ngb-datepicker [disabled]="!sortByDay" #dp class="dateP" [(ngModel)]="sortDate"></ngb-datepicker>
@@ -185,12 +183,12 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-12 shadow p-4 mb-5">
+        <div id="calendar" class="col-lg-3 col-md-12 shadow p-4 mb-5">
           <div class="row">
             <label class="col-10">
               Filtra gli accessi di un giorno specifico <span *ngIf="sortDate !== undefined && sortDate !== null">({{sortDate.day}}/{{sortDate.month}}/{{sortDate.year}})</span>
             </label>
-            <input class="col-2" type="checkbox" checked data-toggle="toggle" [(ngModel)]="this.sortByDay">
+            <input id="checkBox" class="col-2" type="checkbox" checked data-toggle="toggle" [(ngModel)]="this.sortByDay">
           </div>
           <div class="text-center">
             <ngb-datepicker [disabled]="!sortByDay" #dp class="dateP" [(ngModel)]="sortDate"></ngb-datepicker>

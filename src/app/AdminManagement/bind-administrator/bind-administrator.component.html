@@ -1,35 +1,81 @@
-<h1>Associa un nuovo amministratore</h1>
-<div class="container-fluid">
-  <div>
-    <form class="form-group shadow p-4 mb-5 bg-white" [formGroup]="getContactForm" novalidate >
-      <fieldset>
-        <div class="row p-2">
-          <div class="col-md-3">
-            <label id="labelE" for="email">Email del nuovo amministratore:</label>
+<!--BEGIN LDAP-->
+<div *ngIf="this.getCurrentOrganization !== undefined && this.getCurrentOrganization.trackingMode === 'authenticated' && !isLoggedIn" data-keyboard="false" data-backdrop="static" id="loginModal">
+  <h1 id="loginRequest">Per associare un amministratore effettuare prima il login perfavore</h1>
+  <div class="modal-dialog shadow p-4 mb-5 bg-white">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
+          <fieldset>
+            <legend>Login al server aziendale</legend>
+            <label id="labelEL" for="username">dn completo:</label>
+            <input type="username" name="username" id="username" class="form-control" required="required" [(ngModel)]="setUsername" placeholder="username" formControlName="username">
+            <label id="labelPSWL" for="pwdL">Password:</label>
+            <input type="password" name="password" class="form-control" [(ngModel)]="setPassword" required="required" id="pwdL" placeholder="password" formControlName="password" >
+            <p id="incorrect_cred" *ngIf="this.incorrectCredentials">Le credenziali inserite non sono corrette. Controllare e riprovare perfavore.</p>
+            <div class="modal-footer">
+              <button id="signInBtn" [disabled]="!contactForm.valid" (click)="this.loginLDAP()" class="btn btn-danger">Login</button> <!--(click)=""-->
+              <input type="reset" class="btn btn-danger"/>
+            </div>
+          </fieldset>
+        </form>
+        <p *ngIf="false">Credenziali errate</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END LDAP-->
+<div *ngIf="this.getCurrentOrganization !== undefined && (this.getCurrentOrganization.trackingMode !== 'authenticated' || isLoggedIn)">
+  <h1>Associa un nuovo amministratore</h1>
+  <div class="container-fluid">
+    <div>
+      <form class="form-group shadow p-4 mb-5 bg-white" [formGroup]="getAdminForm" novalidate >
+        <fieldset>
+          <div class="row p-2">
+            <div class="col-md-3">
+              <label id="labelE" for="email">Email del nuovo amministratore:</label>
+            </div>
+            <div class="col">
+              <input type="email" name="email" id="email" class="form-control" required="required" [(ngModel)]="setAdminEmail" placeholder="email" formControlName="email">
+            </div>
           </div>
-          <div class="col">
-            <input type="email" name="email" id="email" class="form-control" required="required" [(ngModel)]="setAdminEmail" placeholder="email" formControlName="email">
-          </div>
-        </div>
-        <div class="row p-2">
-          <div class="col-md-3">
-            <label id="labelPermissions">Permessi del nuovo amministratore:</label>
-          </div>
-          <div class="col">
-            <div id="divDropdownNewAdminPriv" class="dropdown">
-              <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButtonNewAdminPriv" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span *ngIf="getSelectedPriviledges == undefined">Scegli i privilegi</span>
-                <span *ngIf="getSelectedPriviledges != undefined">{{ getSelectedPriviledges }}</span>
-              </button>
-              <div id="dropDownPermissions" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <div (click)="setSelectedPriviledges('Visualizzatore'); setAdminPermissions(1)" class="dropdown-item">Visualizzatore</div>
-                <div (click)="setSelectedPriviledges('Gestore'); setAdminPermissions(2)" class="dropdown-item">Gestore</div>
+          <div class="row p-2">
+            <div class="col-md-3">
+              <label id="labelPermissions">Permessi del nuovo amministratore:</label>
+            </div>
+            <div class="col">
+              <div id="divDropdownNewAdminPriv" class="dropdown">
+                <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButtonNewAdminPriv" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span *ngIf="getSelectedPriviledges == undefined">Scegli i privilegi</span>
+                  <span *ngIf="getSelectedPriviledges != undefined">{{ getSelectedPriviledges }}</span>
+                </button>
+                <div id="dropDownPermissions" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div (click)="setSelectedPriviledges('Visualizzatore'); setAdminPermissions(1)" class="dropdown-item">Visualizzatore</div>
+                  <div (click)="setSelectedPriviledges('Gestore'); setAdminPermissions(2)" class="dropdown-item">Gestore</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <button id="registerBtn" (click)="bindAdministrator()" [disabled]="!getContactForm.valid || getSelectedPriviledges == undefined" class="btn btn-danger">Associa a {{ getCurrentOrganizationName }}</button>
-      </fieldset>
-    </form>
+          <div *ngIf="this.getCurrentOrganization.trackingMode === 'authenticated'" class="row p-2">
+            <div class="col-md-3">
+              <label id="labelLdapId">Identità dell'amministratore nel server aziendale:</label>
+            </div>
+            <div class="col">
+              <div id="divDropdownNewAdminLdapId" class="dropdown">
+                <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButtonNewAdminLdapId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span *ngIf="this.newAdminLdapNameStr === undefined || this.newAdminLdapNameStr === ''">Scegli l'identità</span>
+                  <span *ngIf="newAdminLdapNameStr !== undefined && newAdminLdapNameStr !== ''">{{ newAdminLdapNameStr }}</span>
+                </button>
+                <div id="dropDownLdapId" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div *ngFor="let user of this.getLdapUsers, index as i">
+                    <div (click)="setNewAdminLdapId(i)" class="dropdown-item">{{user.name}} {{user.surname}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button id="registerBtn" (click)="bindAdministrator()" [disabled]="!getAdminForm.valid || getSelectedPriviledges == undefined" class="btn btn-danger">Associa a {{ getCurrentOrganizationName }}</button>
+        </fieldset>
+      </form>
+    </div>
   </div>
 </div>

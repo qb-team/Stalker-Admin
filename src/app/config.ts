@@ -1,4 +1,4 @@
 export default {
-  cloud_name: '',
-  upload_preset: ''
+  cloud_name: 'qbteam',
+  upload_preset: 'fpwab9ao'
 };
