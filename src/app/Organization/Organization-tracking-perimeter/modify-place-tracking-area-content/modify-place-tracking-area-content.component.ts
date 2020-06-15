@@ -162,8 +162,4 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
   get Markers(): any[] {
     return this.markers;
   }
-
-  set Markers(value: any[]) {
-    this.markers = value;
-  }
 }

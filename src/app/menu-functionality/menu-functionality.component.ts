@@ -13,9 +13,9 @@ import {AdministratorPermissionDataService} from '../services/AdministratorPermi
   styleUrls: ['./menu-functionality.component.css']
 })
 export class MenuFunctionalityComponent implements OnInit {
-  private currentOrganization: Organization;
+  private currentOrganization: Organization; // contain the current organization
   private index = 0;
-  private permession: Permission[] = [];
+  private permession: Permission[] = []; // contain the permissions of the administrator
   constructor(private ads: AdministratorOrganizationDataService, private apd: AdministratorPermissionDataService, private router: Router ) { }
   /*
  * Subscribes to the service 'DataService' to retrive the current specific-component to be showed
@@ -31,13 +31,17 @@ export class MenuFunctionalityComponent implements OnInit {
       this.refresch();
     });
   }
-
+/*
+Select the correct functionality
+ */
   updateContent(click: any) {
     let route = click.target.innerHTML;
     route = route.replace(/ /g, '_');
     this.router.navigateByUrl('/Content-panel/Panel/' + route);
   }
-
+/*
+Update permissions of the administartor
+ */
   refresch() {
     let flag = false;
     if (this.currentOrganization != null) {

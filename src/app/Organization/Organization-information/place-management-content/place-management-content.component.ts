@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Organization, OrganizationDeletionRequest, Place, PlaceService} from '../../../..';
+import {Organization, Place, PlaceService} from '../../../..';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdministratorOrganizationDataService} from '../../../services/AdministratorOrganizationData.service';
 import {Subscription} from 'rxjs';
@@ -14,22 +14,19 @@ import * as L from 'leaflet';
 })
 export class PlaceManagementContentComponent implements OnInit, OnDestroy {
 
-  private currentOrganization: Organization;
-  private change = 'create';
-  private select = false;
-  private name: string;
-  PlaceArr: Array<Place>;
-  private currentPlace: Place;
-  private jsonCoordinates: string;
-  /*
-  * The coordinates of the organization's perimeter
-  */
+  private currentOrganization: Organization; // contain current organization
+  private change = 'create'; // allow to show the correct form
+  private select = false; // allow to show the correct button
+  private name: string; // contain the name of place
+  PlaceArr: Array<Place>; // contain a list of places of organization
+  private currentPlace: Place; // contain current place
+  private jsonCoordinates: string; // The coordinates of the organization's perimeter
   private subscriptionToOrg: Subscription;
-  private map: Map;
-  private zoom: number;
-  private Arltn: number[] = [];
-  private Arlong: number[] = [];
-  private markers = [];
+  private map: Map; // contain th object that represent a interactive map
+  private zoom: number; // contain current zoom
+  private Arltn: number[] = []; // contain a list of latitudes
+  private Arlong: number[] = []; // contain a list of longitudes
+  private markers = []; // contain a list of markers of the map
   modifyForm: FormGroup;
   private markerIcon = icon({
     iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
@@ -41,15 +38,17 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 
   });
-
-  // createForm: FormGroup;
   constructor(private ads: AdministratorOrganizationDataService, private plS: PlaceService) { }
-
+  /*
+  load list of places and setup form
+   */
   ngOnInit(): void {
     this.loadPlaceList();
     this.setupModifyForm();
   }
-
+/*
+load a list of places
+ */
   loadPlaceList() {
     this.ads.getOrganization.subscribe((org: Organization) => {
       this.PlaceArr = [];
@@ -67,17 +66,24 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+/*
+Set the current place
+ */
   setPlace(click: any) {
     this.currentPlace = this.PlaceArr[click.target.attributes.id.value];
   }
-
+/*
+Setup form for modify data of a place
+ */
   private setupModifyForm() {
     this.modifyForm = new FormGroup({
       Name: new FormControl(this.name, [Validators.required]),
     });
   }
 
+  /*
+   Modify data of place of organization through API method
+  */
   onModify() {
     const tmpName = this.currentPlace.name;
     this.currentPlace.name = this.name;
@@ -94,6 +100,9 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
     this.name = null;
   }
 
+  /*
+  Remove points from the map
+   */
   resetP() {
     for (let i = 0; i < this.Arltn.length; i++) {
       this.map.removeLayer(this.markers[i]);
@@ -102,18 +111,24 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
     this.Arlong = [];
     this.markers = [];
   }
-
+  /*
+  Remove last point from the map
+   */
   removeLastMarker() {
     this.map.removeLayer(this.markers[this.markers.length - 1]);
     this.Arltn.pop();
     this.Arlong.pop();
     this.markers.pop();
   }
-
+  /*
+   change value of this.change
+   */
   onChange(val: string) {
     this.change = val;
   }
-
+  /*
+  Remove data of place of organization through API method
+   */
   onRemove() {
     if (this.PlaceArr != null) {
       if (confirm('Stai per eliminare ' + this.currentPlace.name + '. Continuare?')) {
@@ -131,6 +146,9 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
     }
   }
 
+  /*
+  Receive the data from the map
+   */
   receiveMap(map: Map) {
     this.map = map;
     this.subscriptionToOrg = this.ads.getOrganization.subscribe((org: Organization) => {
@@ -141,17 +159,23 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+/*
+Receive a new zoom on the map
+ */
   receiveZoom(zoom: number) {
     this.zoom = zoom;
   }
-
+/*
+Destroy a subscription
+ */
   ngOnDestroy() {
     if (this.subscriptionToOrg !== undefined) {
       this.subscriptionToOrg.unsubscribe();
     }
   }
-
+/*
+receive last clink on the map
+ */
   onMapClick(e: LeafletMouseEvent) {
     if (this.select) {
       this.Arltn.push(e.latlng.lat);
@@ -160,7 +184,9 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
       this.markers.push(m);
     }
   }
-
+  /*
+  Create data of place of organization through API method
+   */
   onCreate() {
     const newPlace: Place = {
       id: null,
@@ -195,10 +221,6 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
 
   get Markers(): any[] {
     return this.markers;
-  }
-
-  set Markers(value: any[]) {
-    this.markers = value;
   }
 
   get Name(): string {

@@ -15,22 +15,28 @@ export class HomePageContentComponent implements OnInit {
   hasSomePermissions = false;
   constructor(private ads: AdministratorOrganizationDataService) { }
 
+  /*
+  return to the selected organization
+   */
   get getCurrentOrganization(): Organization {
     return this.currentOrganization;
   }
-
+  /*
+  Get the current organization and check if the adminstrator has organizations
+   */
   ngOnInit(): void {
     this.subscribeToOrganization();
     this.ads.getAdminOrganizations.subscribe((orgs: Array<Organization>) => {
       if (orgs !== undefined) {
         this.hasSomePermissions = true;
-      }
-      else {
+      } else {
         this.hasSomePermissions = false;
       }
     });
   }
-
+  /*
+  Get the current organization
+   */
   subscribeToOrganization(): void {
     this.ads.getOrganization.subscribe((org: Organization) => { this.currentOrganization = org; });
   }

@@ -1,18 +1,11 @@
 /*
  * Vertical menu in the panel control
  */
-import {AfterContentInit, Component, EventEmitter, OnInit} from '@angular/core';
+import {AfterContentInit, Component, OnInit} from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { OrganizationService } from 'src/api/api';
-import {
-  Organization,
-  OrganizationAccess,
-  OrganizationAuthenticationServerInformation,
-  Permission
-} from 'src/model/models';
-/*import {ActivatedRoute, Router} from '@angular/router';*/
+import {Organization} from 'src/model/models';
 import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {LdapService} from '../services/ldap.service';
 
@@ -22,8 +15,8 @@ import {LdapService} from '../services/ldap.service';
   styleUrls: ['./menubar.component.css']
 })
 export class MenubarComponent implements OnInit, AfterContentInit {
-  private Organization: Organization;
-  private OrgArr: Organization[];
+  private Organization: Organization; // contain the current organization
+  private OrgArr: Organization[]; // contain a list of organization
   constructor(private ads: AdministratorOrganizationDataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router/*, private activatedRoute: ActivatedRoute*/, private ldapS: LdapService ) { }
   /*
    * Initialization and refresh the list of organization
@@ -31,7 +24,9 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   ngOnInit() {
     this.loadOrganizationList();
   }
-
+  /*
+  load a list of organization
+   */
   loadOrganizationList() {
     this.ads.getAdminOrganizations.subscribe((orgs: Array<Organization>) => {
       this.orgArr = orgs;
@@ -68,7 +63,9 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   homePage() {
     this.router.navigateByUrl('/Content-panel/Panel/Homepage');
   }
-
+  /*
+  call component Login
+   */
   navigateToLogin() {
     this.router.navigateByUrl('/Login');
   }
