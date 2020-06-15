@@ -13,21 +13,15 @@ import * as L from 'leaflet';
 })
 export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, OnDestroy {
 
-  private currentOrganization: Organization;
-  /*
-  * A string to store the coordinates of the organization's perimeter in json format
-  */
-  private jsonCoordinates: string;
-  /*
-  * The coordinates of the organization's perimeter
-  */
+  private currentOrganization: Organization; // A string to store the coordinates of the organization's perimeter in json format
+  private jsonCoordinates: string; // The coordinates of the organization's perimeter
   private subscriptionToOrg: Subscription;
-  private map: Map;
-  private zoom: number;
-  private Arltn: number[] = [];
-  private Arlong: number[] = [];
-  private change = false;
-  private markers = [];
+  private map: Map; // contain th object that represent a interactive map
+  private zoom: number; // contain current zoom
+  private Arltn: number[] = []; // contain a list of latitudes
+  private Arlong: number[] = []; // contain a list of longitudes
+  private change = false; // allow to show the correct form
+  private markers = []; // contain a list of markers of the map
   private markerIcon = icon({
     iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
     shadowUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png',
@@ -37,7 +31,7 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
     shadowAnchor: [15, 40],  // the same for the shadow
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 
-  });
+  }); // setup style of the marker
 
   constructor( private ads: AdministratorOrganizationDataService, private orgS: OrganizationService) {
   }

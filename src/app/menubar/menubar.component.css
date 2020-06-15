@@ -32,3 +32,15 @@ img{
   max-width:2.5em;
   max-height:2.5em;
 }
+
+#help{
+  background-image: url('../../assets/icons/iconfinder_13_330398.png');
+  width: 3em;
+  height: 3em;
+  text-indent: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 2em;
+}
