@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
 import { AdministratorManagementComponent } from './administrator-management.component';
 import { AdministratorOrganizationDataService } from '../../services/AdministratorOrganizationData.service';
 import { AdministratorService } from '../../../index';
+import {LdapService} from "../../services/ldap.service";
 
 @Injectable()
 class MockAdministratorOrganizationDataService {
@@ -18,6 +19,9 @@ class MockAdministratorOrganizationDataService {
 
 @Injectable()
 class MockAdministratorService {}
+
+@Injectable()
+class MockLDAPDataService {}
 
 @Directive({ selector: '[oneviewPermitted]' })
 class OneviewPermittedDirective {
@@ -56,7 +60,8 @@ fdescribe('AdministratorManagementComponent', () => {
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
       providers: [
         { provide: AdministratorOrganizationDataService, useClass: MockAdministratorOrganizationDataService },
-        { provide: AdministratorService, useValue: mockAS }
+        { provide: AdministratorService, useValue: mockAS },
+        { provide: LdapService, useClass: MockLDAPDataService }
       ]
     }).overrideComponent(AdministratorManagementComponent, {
 
