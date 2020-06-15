@@ -57,6 +57,7 @@ load a list of places
       if (org != null) {
         this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
           this.PlaceArr = places;
+          this.ads.getCurrentOrganizationPlaces.next(places);
           if (this.PlaceArr != null) {
             this.currentPlace = places[0];
           } else {
