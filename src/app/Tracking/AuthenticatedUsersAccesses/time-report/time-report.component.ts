@@ -103,11 +103,15 @@ export class TimeReportComponent implements OnInit {
     console.log(this.ldapS.credentials);
     console.log(this.ldapS.usersToGet);
     this.ldapS.getUsersLdap(this.organization.id).subscribe((info: Array<OrganizationAuthenticationServerInformation>) => {
-      this.ldapUsers = info;
-      console.log(info);
-      this.incorrectCredentials = false;
-      this.ldapS.isAdminLoggedInLdap.next(true);
-      this.ldapS.getUsersInstances.next(this.ldapUsers);
+      if (info === undefined || info === null || info.length === 0) {
+        this.incorrectCredentials = true;
+      } else {
+        this.ldapUsers = info;
+        console.log(info);
+        this.incorrectCredentials = false;
+        this.ldapS.isAdminLoggedInLdap.next(true);
+        this.ldapS.getUsersInstances.next(this.ldapUsers);
+      }
     }, (err: HttpErrorResponse) => {
       if (err.status === 500) {
         this.incorrectCredentials = true;

@@ -47,10 +47,14 @@ export class BindAdministratorComponent implements OnInit {
     this.ldapS.setCredentials(this.username, this.password);
     this.ldapS.addUserToGet('*');
     this.ldapS.getUsersLdap(this.currentOrganization.id).subscribe((info: Array<OrganizationAuthenticationServerInformation>) => {
-      this.ldapUsers = info;
-      this.incorrectCredentials = false;
-      this.ldapS.isAdminLoggedInLdap.next(true);
-      this.ldapS.getUsersInstances.next(this.ldapUsers);
+      if (info === undefined || info === null || info.length === 0) {
+        this.incorrectCredentials = true;
+      } else {
+        this.ldapUsers = info;
+        this.incorrectCredentials = false;
+        this.ldapS.isAdminLoggedInLdap.next(true);
+        this.ldapS.getUsersInstances.next(this.ldapUsers);
+      }
     }, (err: HttpErrorResponse) => {
       if (err.status === 500) {
         this.incorrectCredentials = true;
@@ -113,7 +117,7 @@ export class BindAdministratorComponent implements OnInit {
     this.aods.getOrganization.subscribe((o: Organization) => {
       this.currentOrganization = o;
       // ldap begin
-      if (this.currentOrganization.trackingMode === 'authenticated') {
+      if (this.currentOrganization && this.currentOrganization.trackingMode === 'authenticated') {
         this.ldapS.clearUsersToGet();
         this.ldapS.isAdminLoggedInLdap.subscribe(b => {
           this.isLoggedIn = b;
@@ -152,6 +156,8 @@ export class BindAdministratorComponent implements OnInit {
     this.as.bindAdministratorToOrganization(br).subscribe(() => { alert('Amministratore associato correttamente.'); }, (err: HttpErrorResponse) => {
         if (err.status === 404) {
           alert('Errore. L\'email inserita non è registrata presso il sistema. Se si vuole associare un amministratore con l\'email inserita selezionare la funzionalità \'Crea un amministratore\'');
+        } else if(err.status === 400) {
+          alert('Errore. L\'amministratore identificato da questa email risulta già associato all\'organizzazione corrente.');
         } else {
           alert(err.message);
         }

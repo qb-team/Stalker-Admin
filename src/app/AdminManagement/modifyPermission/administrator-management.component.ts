@@ -71,18 +71,18 @@ export class AdministratorManagementComponent implements OnInit {
           this.currentOrganization = o;
           this.subscribeToAdministratorPermissions();
           this._dataHasArrived = false;
-        }
-      // ldap begin
-        if (this.currentOrganization.trackingMode === 'authenticated') {
-        this.ldapS.clearUsersToGet();
-        this.ldapS.isAdminLoggedInLdap.subscribe(b => {
-          this.isLoggedIn = b;
-          if (this.isLoggedIn) {
-            this.ldapS.getUsersInstances.subscribe((us: Array<OrganizationAuthenticationServerInformation>) => this.ldapUsers = us);
+          // ldap begin
+          if (this.currentOrganization.trackingMode === 'authenticated') {
+            this.ldapS.clearUsersToGet();
+            this.ldapS.isAdminLoggedInLdap.subscribe(b => {
+              this.isLoggedIn = b;
+              if (this.isLoggedIn) {
+                this.ldapS.getUsersInstances.subscribe((us: Array<OrganizationAuthenticationServerInformation>) => this.ldapUsers = us);
+              }
+            });
           }
-        });
-      }
           // ldap end
+        }
     });
   }
 
@@ -91,10 +91,14 @@ export class AdministratorManagementComponent implements OnInit {
     this.ldapS.setCredentials(this.username, this.password);
     this.ldapS.addUserToGet('*');
     this.ldapS.getUsersLdap(this.currentOrganization.id).subscribe((info: Array<OrganizationAuthenticationServerInformation>) => {
-      this.ldapUsers = info;
-      this.incorrectCredentials = false;
-      this.ldapS.isAdminLoggedInLdap.next(true);
-      this.ldapS.getUsersInstances.next(this.ldapUsers);
+      if (info === undefined || info === null || info.length === 0) {
+        this.incorrectCredentials = true;
+      } else {
+        this.ldapUsers = info;
+        this.incorrectCredentials = false;
+        this.ldapS.isAdminLoggedInLdap.next(true);
+        this.ldapS.getUsersInstances.next(this.ldapUsers);
+      }
     }, (err: HttpErrorResponse) => {
       if (err.status === 500) {
         this.incorrectCredentials = true;
@@ -164,13 +168,14 @@ export class AdministratorManagementComponent implements OnInit {
    */
   addPermissionModificationInstance(click: any, newPriviledge: number): void {
     const adminId = click.target.parentNode.id;
+    const idx = this.permissions.findIndex(p => p.administratorId === adminId);
+    const email = this.permissions[idx].mail;
     if (typeof adminId === typeof 'string' && newPriviledge !== this.getPermissionTierOf(adminId)) {
       if (this.alreadyModified(adminId) === -1) {
         const p: Permission = {
           administratorId: adminId,
+          mail: email,
           organizationId: this.currentOrganization.id,
-          /*Administrator unique identifier from the authentication server of the organization.
-          orgAuthServerId?: string;*/
           permission: newPriviledge,
           nominatedBy: localStorage.getItem('uid')
         };
@@ -239,14 +244,23 @@ export class AdministratorManagementComponent implements OnInit {
     if (confirm('Sei sicuro di voler rimuovere l\'amministratore associato a ' + email + '?')) {
       const mailPredicate = p => p.mail === email;
       const index = this.permissions.findIndex(mailPredicate);
-      const permis = this.permissions[index];
-      permis.mail = null;
-      this.as.unbindAdministratorFromOrganization(permis).subscribe();
+      console.log('first: ' + index);
+      //const permis = this.permissions[index];
+      this.as.unbindAdministratorFromOrganization(this.permissions[index]).subscribe();
       this.permissions.splice(index, 1);
       this.permissionModificationsTableText.splice(index, 1);
       const indexMod = this.permissionModifications.findIndex(mailPredicate);
+      console.log('email: ' + email);
+      console.log('Perm modif length: ' + this.permissionModifications.length);
+      console.log('Perm modif 0: ' + this.permissionModifications[0]);
+      console.log('Perm modif 0 mail: ' + this.permissionModifications[0].mail);
+      console.log('Perm modif 0 admin id: ' + this.permissionModifications[0].administratorId);
+      console.log('Perm modif 0 org id: ' + this.permissionModifications[0].organizationId);
+      console.log(indexMod);
       if (indexMod !== -1) {
+        console.log(this.permissionModifications.length);
         this.permissionModifications.splice(indexMod, 1);
+        console.log(this.permissionModifications.length);
       }
     }
   }

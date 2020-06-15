@@ -34,8 +34,8 @@
           <p *ngIf="Select"> Seleziona i punti nella mappa e clicca il bottone Crea per inserire il perimetro di tracciamento </p>
         </div>
         <div class="col-6">
-          <button class=" btn btn-danger mr-1" *ngIf="!Select" (click)="Select = true"> Abilità selezione </button>
-          <button class=" btn btn-danger mr-1" *ngIf="Select" (click)="Select = false"> Disabilità selezione </button>
+          <button class=" btn btn-danger mr-1" *ngIf="!Select" (click)="Select = true"> Abilita selezione </button>
+          <button class=" btn btn-danger mr-1" *ngIf="Select" (click)="Select = false"> Disabilita selezione </button>
           <button class=" btn btn-danger mr-1" *ngIf="Select && Markers.length > 0" (click)="resetP()"> Annulla punti </button>
           <button class=" btn btn-danger mr-1" *ngIf="Select && Markers.length > 0" (click)="removeLastMarker()"> Annulla ultimo punto </button>
         </div>
