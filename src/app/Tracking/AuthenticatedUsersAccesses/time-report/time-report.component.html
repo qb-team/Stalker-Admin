@@ -25,13 +25,15 @@
 </div>
 <!--END LDAP-->
 <div *ngIf="isLoggedIn">
+  <div class="row shadow p-4 mb-5">
   <button *ngIf="this.places !== null && this.places.length !== 0" (click)="toggleViewMode($event)" id="{{this.switchModeButtonId}}" class="mb-2 buttonSwitchTo btn btn-danger">Passa alla visualizzazione del report per luogo</button>
+  </div>
   <div *ngIf="this.viewingPerUserReport">
     <table *ngIf="timeSpentByUsersInPlaces !== undefined && timeSpentByUsersInPlaces !== null" class="table shadow p-4 mb-5 bg-white">
       <caption>Report degli utenti nei luoghi di {{ this.getOrganization.name }}</caption>
       <thead>
       <tr>
-        <th scope="table" colspan="3">Report degli utenti nei luoghi di {{ this.getOrganization.name }}</th>
+        <th scope="table" colspan="5">Report degli utenti nei luoghi di {{ this.getOrganization.name }}</th>
       </tr>
       <tr>
         <th></th>
@@ -47,14 +49,14 @@
     </table>
   </div>
   <div *ngIf="!this.viewingPerUserReport">
-    <table>
+    <table class="table shadow p-4 mb-5 bg-white">
       <caption>Report del tempo totale trascorso dagli utenti nei luoghi di {{ this.getOrganization.name }}</caption>
       <thead>
       <tr>
-        <th scope="table" colspan="3">Report del tempo totale trascorso dagli utenti nei luoghi di {{ this.getOrganization.name }}</th>
+        <th scope="table" colspan="5">Report del tempo totale trascorso dagli utenti nei luoghi di {{ this.getOrganization.name }}</th>
       </tr>
       <tr>
-        <th></th>
+        <th>Nominativo</th>
         <th>Tempo totale</th>
       </tr>
       </thead>
