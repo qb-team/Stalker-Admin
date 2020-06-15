@@ -5,8 +5,8 @@
     <p *ngIf="Change"> Seleziona i punti nella mappa e clicca il bottone Modifica per modificare il perimetro di tracciamento </p>
   </div>
   <div class="col-7">
-    <button class=" btn btn-danger mr-1" *ngIf="!Change" (click)="Change = true"> Abilità Modifica </button>
-    <button class=" btn btn-danger mr-1" *ngIf="Change" (click)="Change = false"> Disabilità Modifica </button>
+    <button class=" btn btn-danger mr-1" *ngIf="!Change" (click)="Change = true"> Abilita Modifica </button>
+    <button class=" btn btn-danger mr-1" *ngIf="Change" (click)="Change = false"> Disabilita Modifica </button>
     <button class=" btn btn-danger mr-1" [disabled]="!Change" (click)="onModify()"> Invia Modifica </button>
     <button class=" btn btn-danger mr-1" *ngIf="Change && Markers.length > 0" (click)="resetP()"> Annulla punti </button>
     <button class=" btn btn-danger mr-1" *ngIf="Change && Markers.length > 0" (click)="removeLastMarker()"> Annulla ultimo punto </button>

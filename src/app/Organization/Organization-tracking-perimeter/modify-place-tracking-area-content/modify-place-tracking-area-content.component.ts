@@ -115,14 +115,14 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
         },
         (err: HttpErrorResponse) => {
           if (err.status === 400) {
-            alert('Errore. I dati inseriti non sono validi, l\'area di tracciamento inserita è troppo grande');
+            alert('Errore. I dati inseriti non sono validi, l\'area di tracciamento inserita non è valida. L\'area inserita potrebbe fuoriuscire dal perimetro di tracciamento dell\'organizzazione oppure potrebbe sovrapporsi ad aree di altri luoghi.');
           } else {
             alert(err.message);
           }
         });
       this.change = false;
     } else {
-      alert('Errore inserisci almeno 3 punti');
+      alert('Errore. inserisci almeno 3 punti.');
     }
   }
 

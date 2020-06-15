@@ -134,7 +134,7 @@ Setup form for modify data of a place
       if (confirm('Stai per eliminare ' + this.currentPlace.name + '. Continuare?')) {
           this.plS.deletePlace(this.currentPlace.id).subscribe(() => {
             this.loadPlaceList();
-            alert('Eliminazione del nuovo luogo effettuata.');
+            alert('Eliminazione del luogo effettuata.');
           }, (err: HttpErrorResponse) => {
             if (err.status === 400) {
               alert('Errore');

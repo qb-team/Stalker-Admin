@@ -6,7 +6,7 @@
       <div class="modal-body">
         <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
           <fieldset>
-            <legend>Login LDAP</legend>
+            <legend>Login al server aziendale</legend>
             <label id="labelE" for="username">dn completo:</label>
             <input type="username" name="username" id="username" class="form-control" required="required" [(ngModel)]="setUsername" placeholder="username" formControlName="username">
             <label id="labelPSW" for="pwd">Password:</label>

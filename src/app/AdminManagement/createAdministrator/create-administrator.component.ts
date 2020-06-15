@@ -120,10 +120,14 @@ export class CreateAdministratorComponent implements OnInit {
     this.ldapS.setCredentials(this.username, this.password);
     this.ldapS.addUserToGet('*');
     this.ldapS.getUsersLdap(this.currentOrganization.id).subscribe((info: Array<OrganizationAuthenticationServerInformation>) => {
-      this.ldapUsers = info;
-      this.incorrectCredentials = false;
-      this.ldapS.isAdminLoggedInLdap.next(true);
-      this.ldapS.getUsersInstances.next(this.ldapUsers);
+      if (info === undefined || info === null || info.length === 0) {
+        this.incorrectCredentials = true;
+      } else {
+        this.ldapUsers = info;
+        this.incorrectCredentials = false;
+        this.ldapS.isAdminLoggedInLdap.next(true);
+        this.ldapS.getUsersInstances.next(this.ldapUsers);
+      }
     }, (err: HttpErrorResponse) => {
       if (err.status === 500) {
         this.incorrectCredentials = true;
