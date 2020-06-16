@@ -15,6 +15,9 @@ export class AdministratorOrganizationDataService {
   constructor(private os: OrganizationService, private ps: PlaceService, private router: Router) {
     this.currentOrganization.subscribe((o: Organization) => {
       if (o !== undefined) {
+        if (this.ps.configuration.accessToken === undefined || this.plS.configuration.accessToken === null) {
+          this.ps.setupAccessTokenInAPIService();
+        }
         this.ps.getPlaceListOfOrganization(o.id).subscribe((places: Array<Place>) => {
           this.currentOrganizationPlaces.next(places);
         });
