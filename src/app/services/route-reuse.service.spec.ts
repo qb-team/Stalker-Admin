@@ -2,7 +2,7 @@ import { async } from '@angular/core/testing';
 import { Observable, of as observableOf, throwError } from 'rxjs';
 
 import { RouteReuseService } from './route-reuse.service';
-describe('RouteReuseService', () => {
+fdescribe('RouteReuseService', () => {
   let obj;
 
   beforeEach(() => {

@@ -1,6 +1,6 @@
 import {DeactivateGuard} from './deactivate.service';
 
-describe('DeactivateGuard', () => {
+fdescribe('DeactivateGuard', () => {
   let obj;
 
   beforeEach(() => {

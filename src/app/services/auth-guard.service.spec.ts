@@ -13,7 +13,7 @@ class MockRouter {
   navigate() {}
 }
 
-describe('AuthGuardService', () => {
+fdescribe('AuthGuardService', () => {
   let service: AuthGuardService;
   beforeEach(() => {
     TestBed.configureTestingModule({
