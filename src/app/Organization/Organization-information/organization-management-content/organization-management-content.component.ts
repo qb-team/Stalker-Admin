@@ -259,7 +259,7 @@ export class OrganizationManagementContentComponent implements OnInit {
           this.currentOrganization.authenticationServerURL = tmp[8];
           this.currentOrganization.lastChangeDate = tmp[9];
           if (err.status === 400) {
-            alert('Errore. I dati inseriti non sono validi' + err.message);
+            alert('Errore. I dati inseriti non sono validi');
           } else {
             alert(err.message);
           }
