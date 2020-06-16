@@ -8,14 +8,16 @@
 #loadingData {
   font-size: 4em;
   padding: 5% 5%;
-  margin: 15% 45%;
+}
+
+#semplice_è_bello{
+  margin: 30%
 }
 
 .center{
   color: red;
   font-size: 2em;
   font-weight: bold;
-  margin: 0 40%;
 }
 
 h1 {
