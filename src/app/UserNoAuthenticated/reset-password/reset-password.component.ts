@@ -13,14 +13,47 @@ import {Router} from '@angular/router';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
-    this.setupResetPswForm();
-  }
   private Submitted = false;
   private Reset = false; // for show page of reset password
   private Email: string; // email for reset
   contactForm: FormGroup;
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
+    this.setupResetPswForm();
+  }
 
+  ngOnInit(): void {
+  }
+
+  /*
+  * Back in login page
+   */
+  backToLogin() {
+    this.router.navigateByUrl('/Login');
+    this.Reset = false;
+  }
+
+  /*
+  * It calls function ResetPassword of the service and updates status
+  */
+  resetPassword() {
+    this.authenticationService.resetPassword(this.Email);
+    this.Reset = true;
+  }
+  /*
+  Setup the reset password form's
+   */
+  private setupResetPswForm() {
+    this.contactForm = new FormGroup({
+      email: new FormControl(this.Email, [
+        Validators.required,
+        Validators.email
+      ]),
+    });
+  }
+
+  onSubmit(): void {
+    this.Submitted = true;
+  }
 
   get email(): string {
     return this.Email;
@@ -44,35 +77,4 @@ export class ResetPasswordComponent implements OnInit {
     this.Submitted = value;
   }
 
-  ngOnInit(): void {
-  }
-
-  /*
-  * Back in login page
-   */
-  backToLogin() {
-    this.router.navigateByUrl('/Login');
-    this.Reset = false;
-  }
-
-  /*
-  * It calls function ResetPassword of the service and updates status
-  */
-  resetPassword() {
-    this.authenticationService.resetPassword(this.Email);
-    this.Reset = true;
-  }
-
-  private setupResetPswForm() {
-    this.contactForm = new FormGroup({
-      email: new FormControl(this.Email, [
-        Validators.required,
-        Validators.email
-      ]),
-    });
-  }
-
-  onSubmit(): void {
-    this.Submitted = true;
-  }
 }

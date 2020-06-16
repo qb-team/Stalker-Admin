@@ -22,14 +22,14 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
   * The coordinates of the organization's perimeter
   */
   private subscriptionToOrg: Subscription;
-  private map: Map;
-  private zoom: number;
-  private Arltn: number[] = [];
-  private Arlong: number[] = [];
-  private change = false;
-  private markers = [];
-  PlaceArr: Array<Place>;
-  private currentPlace: Place;
+  private map: Map; // contain th object that represent a interactive map
+  private zoom: number; // contain current zoom
+  private Arltn: number[] = []; // contain a list of latitudes
+  private Arlong: number[] = []; // contain a list of longitudes
+  private change = false; // allow to show the correct form
+  private markers = []; // contain a list of markers of the map
+  PlaceArr: Array<Place>; // contain a list of places of organization
+  private currentPlace: Place; // contain current place
   private markerIcon = icon({
     iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
     shadowUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png',
@@ -47,7 +47,9 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
   ngOnInit(): void {
     this.loadPlaceList();
   }
-
+  /*
+  Load a list of places
+ */
   loadPlaceList() {
     this.ads.getOrganization.subscribe((org: Organization) => {
       this.PlaceArr = [];
@@ -62,11 +64,15 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
       }
     });
   }
-
+  /*
+  Set the current place
+ */
   setPlace(click: any) {
     this.currentPlace = this.PlaceArr[click.target.attributes.id.value];
   }
-
+  /*
+  Receive the data from the map
+   */
   receiveMap(map: Map) {
     this.map = map;
     this.subscriptionToOrg = this.ads.getOrganization.subscribe((org: Organization) => {
@@ -77,17 +83,23 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
       }
     });
   }
-
+  /*
+  Receive a new zoom on the map
+ */
   receiveZoom(zoom: number) {
     this.zoom = zoom;
   }
-
+  /*
+Destroy a subscription
+*/
   ngOnDestroy() {
     if (this.subscriptionToOrg !== undefined) {
       this.subscriptionToOrg.unsubscribe();
     }
   }
-
+  /*
+ Receive last clink on the map
+*/
   onMapClick(e: LeafletMouseEvent) {
     if (this.change) {
       this.Arltn.push(e.latlng.lat);
@@ -96,7 +108,9 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
       this.markers.push(m);
     }
   }
-
+  /*
+  Update the place tracking perimeter's
+  */
   onModify() {
     if (this.Arltn.length >= 3) {
       let track: string = '{\n' + '"Organizzazioni": [\n';
@@ -125,7 +139,9 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
       alert('Errore. inserisci almeno 3 punti.');
     }
   }
-
+  /*
+  Remove points from the map
+   */
   resetP() {
     for (let i = 0; i < this.Arltn.length; i++) {
       this.map.removeLayer(this.markers[i]);
@@ -134,7 +150,9 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
     this.Arlong = [];
     this.markers = [];
   }
-
+  /*
+  Remove last point from the map
+   */
   removeLastMarker() {
     this.map.removeLayer(this.markers[this.markers.length - 1]);
     this.Arltn.pop();

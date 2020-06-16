@@ -16,15 +16,14 @@ import * as Chart from 'chart.js';
   styleUrls: ['./organization-presence-number.component.css']
 })
 export class OrganizationPresenceNumberComponent implements OnInit {
-  private currentOrganization: Organization;
-  refreshTimer;
-  trackedUsersCounter: number;
+  private currentOrganization: Organization; // contain the current organization
+  refreshTimer; // time for refresh
+  private trackedUsersCounter: number; // number of user into organization
   private subscriptionToOrgPresenceCounter: Subscription;
   private ctx;
-  private presenceChart;
-
-  chartData: number[] = [];
-  chartLabels: string[] = [];
+  private presenceChart; // contain the tacking char
+  chartData: number[] = []; // contain the data of the tacking char
+  chartLabels: string[] = [];  // contain the labels of the tacking char
 
   constructor(private tds: OrganizationTrackingDataService, private ads: AdministratorOrganizationDataService/*, private activatedRoute: ActivatedRoute*/, private router: Router) { }
   ngOnInit(): void {
@@ -66,7 +65,9 @@ export class OrganizationPresenceNumberComponent implements OnInit {
       }
     });
   }
-
+  /*
+  Subscribe to event route
+  */
   subscribeToNavigationEvents(): void {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd && ev.urlAfterRedirects !== this.router.getCurrentNavigation().initialUrl) {
@@ -74,7 +75,9 @@ export class OrganizationPresenceNumberComponent implements OnInit {
       }
     });
   }
-
+  /*
+  Subscribe to counter of user into place
+  */
   subscribeToCounter(): void {
     this.subscriptionToOrgPresenceCounter = this.tds.getUsersNumber.subscribe((n: number) => {
       this.trackedUsersCounter = n;
@@ -89,7 +92,9 @@ export class OrganizationPresenceNumberComponent implements OnInit {
       this.presenceChart.update();
     });
   }
-
+  /*
+  Set refresh interval of the counter
+   */
   setCounterRefreshInterval(ms: number): void {
     this.refreshTimer = setInterval(() => {
       this.tds.subscribeOrganizationPresenceCounter(this.currentOrganization.id);
@@ -102,7 +107,7 @@ export class OrganizationPresenceNumberComponent implements OnInit {
     return this.currentOrganization;
   }
 
-  set setCurrentOrganization(value: Organization) {
-    this.currentOrganization = value;
+  get TrackedUsersCounter(): number {
+    return this.trackedUsersCounter;
   }
 }
