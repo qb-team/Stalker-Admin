@@ -30,11 +30,11 @@
   <div *ngIf="dataHasArrived === true" class="shadow p-4 mb-5 bg-white">
     <h2>Amministratori di {{ getCurrentOrganization.name }} e i loro permessi</h2>
     <div class="row line-down">
-      <div class="col-2">
-        <strong *ngIf="this.getCurrentOrganization && this.getCurrentOrganization.trackingMode === 'authenticated'">Cognome Nome</strong>
+      <div *ngIf="this.getCurrentOrganization && this.getCurrentOrganization.trackingMode === 'authenticated'" class="col-2">
+        <strong>Cognome Nome</strong>
       </div>
-      <div class="col-2">
-        e-mail
+      <div class="col-3">
+        <strong>E-mail</strong>
       </div>
       <div class="col-2">
         <strong>Privilegi</strong>
@@ -42,19 +42,22 @@
       <div class="col-2 text-center">
         <strong>Modifica privilegi</strong>
       </div>
-      <div class="col-1">
+      <div *ngIf="this.getCurrentOrganization && this.getCurrentOrganization.trackingMode === 'authenticated'" class="col-1">
         <strong>Nuovi privilegi</strong>
       </div>
-      <div class="col-3 text-center">
+      <div *ngIf="this.getCurrentOrganization && this.getCurrentOrganization.trackingMode === 'anonymous'" class="col-3">
+        <strong>Nuovi privilegi</strong>
+      </div>
+      <div class="col-2 text-center">
         <strong>Rimuovi amministratore</strong>
       </div>
     </div>
     <div class="row p-1" *ngFor="let perm of getPermissions; index as i">
-      <div class="col-3">
-        <p *ngIf="this.getCurrentOrganization && (this.getCurrentOrganization.trackingMode === 'anonymous' || perm.orgAuthServerId === undefined || perm.orgAuthServerId === null || perm.orgAuthServerId === '')">Non disponibile</p>
-        <p *ngIf="this.getCurrentOrganization && this.getCurrentOrganization.trackingMode === 'authenticated'  && perm.orgAuthServerId && perm.orgAuthServerId !== ''">{{ getNameOfLdapUser(perm.orgAuthServerId) }}</p>
+      <div class="col-2" *ngIf="this.getCurrentOrganization && this.getCurrentOrganization.trackingMode === 'authenticated'">
+        <p *ngIf="perm.orgAuthServerId === undefined || perm.orgAuthServerId === null || perm.orgAuthServerId === ''">Non disponibile</p>
+        <p *ngIf="perm.orgAuthServerId && perm.orgAuthServerId !== ''">{{ getNameOfLdapUser(perm.orgAuthServerId) }}</p>
       </div>
-      <div class="col-2">
+      <div class="col-3">
         <p>{{ perm.mail }}</p>
       </div>
       <div class="col-2">
@@ -69,10 +72,13 @@
           </div>
         </div>
       </div>
-      <div class="col-1">
+      <div *ngIf="this.getCurrentOrganization && this.getCurrentOrganization.trackingMode === 'anonymous'" class="col-3">
         <p *ngIf="permissionModificationsTableText != undefined && i < permissionModificationsTableText.length">{{ permissionModificationsTableText[i] }}</p>
       </div>
-      <div class="col-3 text-center">
+      <div *ngIf="this.getCurrentOrganization && this.getCurrentOrganization.trackingMode === 'authenticated'" class="col-1">
+        <p *ngIf="permissionModificationsTableText != undefined && i < permissionModificationsTableText.length">{{ permissionModificationsTableText[i] }}</p>
+      </div>
+      <div class="col-2 text-center">
         <button class="btn btn-danger" (click)="removeAdministrator(perm.mail)">Rimuovi</button>
       </div>
     </div>
