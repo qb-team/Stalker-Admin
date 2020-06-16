@@ -1,6 +1,4 @@
-import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
-import {Organization, OrganizationPresenceCounter, PresenceService} from '../..';
-import {Observable} from 'rxjs';
+import {PresenceService} from '../..';
 import {EventEmitter, Injectable} from '@angular/core';
 
 @Injectable({

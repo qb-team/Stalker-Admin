@@ -2,19 +2,13 @@
  * Service for authentication
 */
 import {Injectable} from '@angular/core';
-import {AngularFireAuth } from '@angular/fire/auth';
-import {Observable, ReplaySubject} from 'rxjs';
+import {ReplaySubject} from 'rxjs';
 import {
   AuthenticationServerService,
-  Organization,
   OrganizationAuthenticationServerCredentials,
   OrganizationAuthenticationServerInformation,
-  OrganizationAuthenticationServerRequest,
-  Permission
+  OrganizationAuthenticationServerRequest
 } from '../..';
-import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
-import {AdministratorPermissionDataService} from './AdministratorPermissionData.service';
-import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'

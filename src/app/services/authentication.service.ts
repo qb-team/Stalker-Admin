@@ -8,7 +8,7 @@ import {Permission, PlaceService} from '../..';
 import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
 import {AdministratorPermissionDataService} from './AdministratorPermissionData.service';
 import {Router} from '@angular/router';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class AuthenticationService {
   private userDetails: firebase.User = null;
 
 
-  constructor(private angularFireAuth: AngularFireAuth, private adp: AdministratorPermissionDataService, private ps: PlaceService,private ado: AdministratorOrganizationDataService, private router: Router) {
+  constructor(private angularFireAuth: AngularFireAuth, private adp: AdministratorPermissionDataService, private ps: PlaceService, private ado: AdministratorOrganizationDataService, private router: Router) {
     this.UserData = angularFireAuth.authState;
     this.UserData.subscribe(
       (user) => {

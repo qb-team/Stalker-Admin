@@ -1,15 +1,12 @@
-import {async, TestBed} from '@angular/core/testing';
-import { Injectable } from '@angular/core';
-import {Observable, of, of as observableOf, throwError} from 'rxjs';
+import {TestBed} from '@angular/core/testing';
+import {Injectable} from '@angular/core';
 
-import { AuthenticationService } from './authentication.service';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AdministratorPermissionDataService } from './AdministratorPermissionData.service';
-import { AdministratorOrganizationDataService } from './AdministratorOrganizationData.service';
-import { Router } from '@angular/router';
+import {AuthenticationService} from './authentication.service';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import createSpyObj = jasmine.createSpyObj;
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 
 @Injectable()
@@ -23,7 +20,7 @@ class MockRouter {
   navigate() {}
 }
 
-fdescribe('AuthenticationService', () => {
+describe('AuthenticationService', () => {
   let service;
   const mockFA = createSpyObj(AngularFireAuth, ['auth', 'authState']);
   const httpClientService = createSpyObj(HttpClientTestingModule, ['get', 'post']);
