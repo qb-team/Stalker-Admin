@@ -55,7 +55,7 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
   private password: string;
 
 
-  constructor(private aods: AdministratorOrganizationDataService, private ldapS: LdapService, private as: AccessService, private r: Router) { }
+  constructor(private aods: AdministratorOrganizationDataService, private ldapS: LdapService, private as: AccessService, private r: Router, private plS: PlaceService) { }
 
   ngOnInit(): void {
     this.aods.getOrganization.subscribe((o: Organization) => {
@@ -68,14 +68,25 @@ export class AuthenticatedUserAccessesComponent implements OnInit {
             this.ldapS.getUsersInstances.subscribe((us: Array<OrganizationAuthenticationServerInformation>) => this.ldapUsers = us );
           }
         });
-        this.aods.getCurrentOrganizationPlaces.subscribe((p: Array<Place>) => { this.places = p; });
-        // this.
-        // this.as.getAuthenticatedAccessListInOrganization(, this.organization.id).subscribe();
+        this.loadPlaceList();
       } else {
         this.r.navigateByUrl('/Content-panel');
       }
     });
     this.setupForm();
+  }
+
+  loadPlaceList() {
+    this.aods.getOrganization.subscribe((org: Organization) => {
+      this.places = [];
+      this.currentPlaceIndex = 0;
+      if (org != null) {
+        this.organization = org;
+        this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
+          this.places = places;
+        });
+      }
+    });
   }
 
   changePlaceToWatchUpon(placeID: number) {
