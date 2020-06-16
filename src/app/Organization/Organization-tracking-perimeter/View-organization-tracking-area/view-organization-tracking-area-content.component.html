@@ -2,7 +2,7 @@
 <h1 *ngIf="this.Change === 'place'">Visualizzazione dell'area di tracciamento di un luogo</h1>
 <div class="shadow p-4 mb-5 bg-white">
   <h2 *ngIf="this.Change === 'place'  && this.PlaceArr.length > 0 && this.getPlaceName !== undefined && this.getPlaceName !== null && this.getPlaceName !== ''">Luogo attualmente selezionato: {{getPlaceName}}</h2>
-  <h2 *ngIf="this.Change === 'place' && (this.getPlaceName === undefined || this.getPlaceName === null || this.getPlaceName === '')">Perfavore, selezionare un luogo per visualizzarne l'area di tracciamento</h2>
+  <h2 *ngIf="this.Change === 'place' && (this.getPlaceName === undefined || this.getPlaceName === null || this.getPlaceName === '')">Per favore, selezionare un luogo per visualizzarne l'area di tracciamento</h2>
   <div class="row text-center" >
     <div class="col-6" *ngIf="Change === 'place' && this.PlaceArr.length > 0" >
       <div class="dropdown" id="lineDiv">

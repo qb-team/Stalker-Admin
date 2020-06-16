@@ -1,6 +1,6 @@
 <!--BEGIN LDAP-->
 <div *ngIf="this.getCurrentOrganization !== undefined && this.getCurrentOrganization.trackingMode === 'authenticated' && !isLoggedIn" data-keyboard="false" data-backdrop="static" id="loginModal">
-  <h1 id="loginRequest">Per creare un nuovo amministratore effettuare prima il login perfavore</h1>
+  <h1 id="loginRequest">Per creare un nuovo amministratore effettuare prima il login per favore</h1>
   <div class="modal-dialog shadow p-4 mb-5 bg-white">
     <div class="modal-content">
       <div class="modal-body">
@@ -11,7 +11,7 @@
             <input type="username" name="username" id="username" class="form-control" required="required" [(ngModel)]="setUsername" placeholder="username" formControlName="username">
             <label id="labelPSWL" for="pwdL">Password:</label>
             <input type="password" name="password" class="form-control" [(ngModel)]="setPassword" required="required" id="pwdL" placeholder="password" formControlName="password" >
-            <p id="incorrect_cred" *ngIf="this.incorrectCredentials">Le credenziali inserite non sono corrette. Controllare e riprovare perfavore.</p>
+            <p id="incorrect_cred" *ngIf="this.incorrectCredentials">Le credenziali inserite non sono corrette. Controllare e riprovare per favore.</p>
             <div class="modal-footer">
               <button id="signInBtn" [disabled]="!contactForm.valid" (click)="this.loginLDAP()" class="btn btn-danger">Login</button> <!--(click)=""-->
               <input type="reset" class="btn btn-danger"/>
@@ -97,7 +97,7 @@
           <p *ngIf="getAdminPsw !== getAdminConfirmPsw">La password e la conferma password devono combaciare</p>
           <p *ngIf="getEmailAlreadyRegistered === true">L'email inserita per il nuovo amministratore risulta già registrata presso il sistema. Se si vuole associare tale email all'organizzazione utilizzare la funzionalità Associa Amministratore </p>
           <button id="registerBtn" (click)="registerAdministrator()" [disabled]="!getAdminForm.valid || getSelectedPriviledges == undefined || getAdminPsw !== getAdminConfirmPsw" class="btn btn-danger">Crea e associa a {{ getCurrentOrganizationName }}</button>
-          <p id="waitForAccountCreation" *ngIf="this.loading">Attendere perfavore, creazione account in corso...</p>
+          <p id="waitForAccountCreation" *ngIf="this.loading">Attendere per favore, creazione account in corso...</p>
         </fieldset>
       </form>
     </div>
