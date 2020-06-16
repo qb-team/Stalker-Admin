@@ -1,12 +1,10 @@
-import {async, TestBed} from '@angular/core/testing';
-import { Injectable } from '@angular/core';
-import { Observable, of as observableOf, throwError } from 'rxjs';
+import {TestBed} from '@angular/core/testing';
+import {Injectable} from '@angular/core';
+import {of as observableOf} from 'rxjs';
 
-import { AuthenticatedOrganizationGuardService } from './authenticated-organization-guard.service';
-import { Router } from '@angular/router';
-import { AdministratorOrganizationDataService } from './AdministratorOrganizationData.service';
-import {AuthGuardService} from './auth-guard.service';
-import {AuthenticationService} from './authentication.service';
+import {AuthenticatedOrganizationGuardService} from './authenticated-organization-guard.service';
+import {Router} from '@angular/router';
+import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
 
 @Injectable()
 class MockRouter {

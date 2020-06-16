@@ -1,10 +1,7 @@
-import { async } from '@angular/core/testing';
-import { Injectable } from '@angular/core';
-import { Observable, of as observableOf, throwError } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {of as observableOf} from 'rxjs';
 
-import { AdministratorOrganizationDataService } from './AdministratorOrganizationData.service';
-import { OrganizationService, PlaceService } from '../..';
-import { Router } from '@angular/router';
+import {AdministratorOrganizationDataService} from './AdministratorOrganizationData.service';
 
 @Injectable()
 class MockOrganizationService {}

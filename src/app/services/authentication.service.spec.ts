@@ -36,10 +36,9 @@ describe('AuthenticationService', () => {
     service = TestBed.inject(AuthenticationService);
   });
 
- /* it('should be created', () => {
-    mockFA.authState.and.returnValue(of({}));
+  it('should be created', () => {
     expect(service).toBeTruthy();
-  });*/
+  });
 
 
 

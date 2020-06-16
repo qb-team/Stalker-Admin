@@ -1,9 +1,10 @@
 import {TestBed} from '@angular/core/testing';
 import {Injectable} from '@angular/core';
 
-import {AuthGuardService} from './auth-guard.service';
+import {LoginGuardService} from './login-guard.service';
 import {AuthenticationService} from './authentication.service';
 import {Router} from '@angular/router';
+
 
 @Injectable()
 class MockAuthenticationService {}
@@ -13,8 +14,9 @@ class MockRouter {
   navigate() {}
 }
 
-describe('AuthGuardService', () => {
-  let service: AuthGuardService;
+describe('LoginGuardService', () => {
+
+  let service: LoginGuardService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -22,10 +24,15 @@ describe('AuthGuardService', () => {
         {provide: AuthenticationService, useValue: MockAuthenticationService}
       ],
     });
-    service = TestBed.inject(AuthGuardService);
+    service = TestBed.inject(LoginGuardService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should run #canActivate()', async () => {
+    expect(service.canActivate).toHaveBeenCalled();
+  });
+
 });
