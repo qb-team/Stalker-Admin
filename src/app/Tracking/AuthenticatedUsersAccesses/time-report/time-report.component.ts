@@ -88,9 +88,6 @@ export class TimeReportComponent implements OnInit {
       this.places = [];
       if (org != null) {
         this.organization = org;
-        if (this.plS.configuration.accessToken === undefined || this.plS.configuration.accessToken === null) {
-          this.plS.setupAccessTokenInAPIService();
-        }
         this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
           this.places = places;
         });
