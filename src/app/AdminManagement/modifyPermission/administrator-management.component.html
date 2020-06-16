@@ -25,7 +25,9 @@
 </div>
 <!--END LDAP-->
 <div *ngIf="this.getCurrentOrganization !== undefined && (this.getCurrentOrganization.trackingMode !== 'authenticated' || isLoggedIn)">
-  <p id="loadingData" *ngIf="dataHasArrived === false">Attendere per favore, caricamento dati in corso...</p>
+  <div id="loadingData" *ngIf="dataHasArrived === false" class="spinner-border text-danger" role="status">
+  </div>
+  <span *ngIf="dataHasArrived === false" class="center">Caricamento...</span>
   <h1 *ngIf="dataHasArrived === true">Gestione dei amministratori</h1>
   <div *ngIf="dataHasArrived === true" class="shadow p-4 mb-5 bg-white">
     <h2>Amministratori di {{ getCurrentOrganization.name }} e i loro permessi</h2>
