@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   Organization,
   OrganizationAuthenticationServerInformation,
-  Place, PlaceService,
+  Place,
   ReportService,
   TimePerUserReport
 } from '../../../..';
@@ -41,15 +41,16 @@ export class TimeReportComponent implements OnInit {
   */
   private password: string;
 
-  constructor(private aods: AdministratorOrganizationDataService, private ldapS: LdapService, private r: Router, private tr: ReportService, private plS: PlaceService) { }
+  constructor(private aods: AdministratorOrganizationDataService, private ldapS: LdapService, private r: Router, private tr: ReportService) { }
 
   ngOnInit(): void {
     this.aods.getOrganization.subscribe((o: Organization) => {
       if (o.trackingMode === 'authenticated') {
         this.organization = o;
         this.ldapS.clearUsersToGet();
-        this.loadPlaceList();
-        this.ldapS.isAdminLoggedInLdap.subscribe(b => {
+        this.aods.getCurrentOrganizationPlaces.subscribe((p: Array<Place>) => {
+          this.places = p;
+          this.ldapS.isAdminLoggedInLdap.subscribe(b => {
             this.isLoggedIn = b;
             if (this.isLoggedIn) {
               this.ldapS.getUsersInstances.subscribe((us: Array<OrganizationAuthenticationServerInformation>) => {
@@ -74,6 +75,7 @@ export class TimeReportComponent implements OnInit {
               });
             }
           });
+        });
         // this.
         // this.as.getAuthenticatedAccessListInOrganization(, this.organization.id).subscribe();
       } else {
@@ -81,18 +83,6 @@ export class TimeReportComponent implements OnInit {
       }
     });
     this.setupForm();
-  }
-
-  loadPlaceList() {
-    this.aods.getOrganization.subscribe((org: Organization) => {
-      this.places = [];
-      if (org != null) {
-        this.organization = org;
-        this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array<Place>) => {
-          this.places = places;
-        });
-      }
-    });
   }
 
   sToString(s: number) {
@@ -110,11 +100,14 @@ export class TimeReportComponent implements OnInit {
   loginLDAP() {
     this.ldapS.setCredentials(this.username, this.password);
     this.ldapS.addUserToGet('*');
+    console.log(this.ldapS.credentials);
+    console.log(this.ldapS.usersToGet);
     this.ldapS.getUsersLdap(this.organization.id).subscribe((info: Array<OrganizationAuthenticationServerInformation>) => {
       if (info === undefined || info === null || info.length === 0) {
         this.incorrectCredentials = true;
       } else {
         this.ldapUsers = info;
+        console.log(info);
         this.incorrectCredentials = false;
         this.ldapS.isAdminLoggedInLdap.next(true);
         this.ldapS.getUsersInstances.next(this.ldapUsers);
@@ -149,6 +142,7 @@ export class TimeReportComponent implements OnInit {
   }
 
   toggleViewMode(ev) {
+    console.log(ev.target.id);
     if ('buttonSwitchToPerUser' === this.switchModeButtonId) {
       this.viewingPerUserReport = false;
       this.switchModeButtonId = 'buttonSwitchToGrouped';

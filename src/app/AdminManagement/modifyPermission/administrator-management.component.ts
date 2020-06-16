@@ -244,12 +244,23 @@ export class AdministratorManagementComponent implements OnInit {
     if (confirm('Sei sicuro di voler rimuovere l\'amministratore associato a ' + email + '?')) {
       const mailPredicate = p => p.mail === email;
       const index = this.permissions.findIndex(mailPredicate);
+      console.log('first: ' + index);
+      //const permis = this.permissions[index];
       this.as.unbindAdministratorFromOrganization(this.permissions[index]).subscribe();
       this.permissions.splice(index, 1);
       this.permissionModificationsTableText.splice(index, 1);
       const indexMod = this.permissionModifications.findIndex(mailPredicate);
+      console.log('email: ' + email);
+      console.log('Perm modif length: ' + this.permissionModifications.length);
+      console.log('Perm modif 0: ' + this.permissionModifications[0]);
+      console.log('Perm modif 0 mail: ' + this.permissionModifications[0].mail);
+      console.log('Perm modif 0 admin id: ' + this.permissionModifications[0].administratorId);
+      console.log('Perm modif 0 org id: ' + this.permissionModifications[0].organizationId);
+      console.log(indexMod);
       if (indexMod !== -1) {
+        console.log(this.permissionModifications.length);
         this.permissionModifications.splice(indexMod, 1);
+        console.log(this.permissionModifications.length);
       }
     }
   }
