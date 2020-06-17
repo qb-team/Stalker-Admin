@@ -1,0 +1,44 @@
+.move{
+  margin-left: 1em;
+}
+
+p.move{
+  margin-left: 2.5em;
+}
+
+h1{
+  font-size: 1em
+}
+.col{
+  padding: 0;
+}
+
+.btn{
+  margin-left: 1em;
+}
+
+app-menu-functionality{
+  padding: 0px 0px;
+}
+
+#menubar{
+  padding: 0px 0px;
+}
+
+app-content{
+  background-color: white;
+}
+
+@media screen and (min-height: 721px)
+{
+  app-content{
+    min-height: 606px;
+  }
+}
+
+@media screen and (min-height: 1010px)
+{
+  app-content{
+    min-height: 894px;
+  }
+}

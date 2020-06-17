@@ -9,32 +9,34 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
-
+​
+​
 /**
  * What can or cannot do an organization\'s administrator.
  */
 export interface Permission {
-    /**
-     * Authentication service\'s administrator unique identifier.
-     */
-    administratorId?: string;
-    /**
-     * Unique identifier of the organization the administrator is part of.
-     */
-    organizationId: number;
-    /**
-     * What can or cannot do an organization\'s administrator. Owner is the highest level of permissions while viewer is the lowest.
-     */
-    permission: Permission.PermissionEnum;
+  /**
+   * Authentication service\'s administrator unique identifier.
+   */
+  administratorId: string;
+  /**
+   * Unique identifier of the organization the administrator is part of.
+   */
+  organizationId: number;
+  /**
+   * Administrator unique identifier from the authentication server of the organization.
+   */
+  orgAuthServerId?: string;
+  /**
+   * Administrator\'s e-mail address.
+   */
+  mail?: string;
+  /**
+   * What can or cannot do an organization\'s administrator. The permission levels are: - Owner: 3 (higher level) - Manager: 2 - Viewer: 1 (lowest level)
+   */
+  permission: number;
+  /**
+   * administratorId of the owner administrator who nominated the current administrators. If this field is equal to administratorId then this administrator is the original owner of the organization (i.e. the one whose account was created during the creation of the organization by Stalker administrators).
+   */
+  nominatedBy: string;
 }
-export namespace Permission {
-    export type PermissionEnum = 'owner' | 'manager' | 'viewer';
-    export const PermissionEnum = {
-        Owner: 'owner' as PermissionEnum,
-        Manager: 'manager' as PermissionEnum,
-        Viewer: 'viewer' as PermissionEnum
-    };
-}
-
-

@@ -1,0 +1,201 @@
+<!--button class="btn btn-danger" (click)="this.toggleShowLoginLdap()" data-target="#loginModal" data-toggle="modal">Login</button-->
+<!--BEGIN LDAP-->
+<div *ngIf="!isLoggedIn" data-keyboard="false" data-backdrop="static" id="loginModal">
+  <h1 id="loginRequest">Per visualizzare gli accessi autenticati effettuare prima il login perfavore</h1>
+  <div class="modal-dialog shadow p-4 mb-5">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >
+          <fieldset>
+            <legend>Login al server aziendale</legend>
+            <label id="labelE" for="username">dn completo:</label>
+            <input type="username" name="username" id="username" class="form-control" required="required" [(ngModel)]="setUsername" placeholder="username" formControlName="username">
+            <label id="labelPSW" for="pwd">Password:</label>
+            <input type="password" name="password" class="form-control" [(ngModel)]="setPassword" required="required" id="pwd" placeholder="password" formControlName="password" >
+            <p id="incorrect_cred" *ngIf="this.incorrectCredentials">Le credenziali inserite non sono corrette. Controllare e riprovare perfavore.</p>
+            <div class="modal-footer">
+              <button id="signInBtn" [disabled]="!contactForm.valid" (click)="this.loginLDAP()" class="btn btn-danger">Login</button> <!--(click)=""-->
+              <input type="reset" class="btn btn-danger"/>
+            </div>
+          </fieldset>
+        </form>
+        <p *ngIf="false">Credenziali errate</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END LDAP-->
+<div *ngIf="isLoggedIn">
+  <div *ngIf="!this.viewingAccesses">
+    <h1 *ngIf="this.viewingOrgAccesses">Accessi all'organizzazione {{this.getOrganization.name}}</h1>
+    <h2 *ngIf="this.places !== undefined && this.places !== null && !this.viewingOrgAccesses">Accessi al luogo {{this.places[this.currentPlaceIndex].name}}</h2>
+    <div class="row shadow p-4 mb-5">
+      <button *ngIf="this.places !== null && this.places.length !== 0" (click)="toggleViewMode($event)" id="{{this.switchModeButtonId}}" class="buttonSwitchTo btn btn-danger">Passa alla visualizzazione degli accessi ad un luogo</button>
+      <h3 *ngIf="this.places !== null && this.places.length === 0">Non ci sono luoghi in questa organizzazione. Sarà quindi possibile visualizzare unicamente gli accessi effettuati all'organizzazione.</h3>
+      <div *ngIf="!viewingOrgAccesses" class="dropdown">
+        <button id="selectPlace" *ngIf="this.places !== null && this.places.length !== 0" class="btn btn-danger dropdown-toggle" type="button" id="selectPlaceDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Cambia luogo
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <div *ngFor="let place of this.places; index as i" (click)="this.changePlaceToWatchUpon(i)" class="dropdown-item">{{place.name}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="shadow p-4 mb-5">
+      <h3>
+        Accessi degli utenti di {{ this.getOrganization.name }}
+      </h3>
+      <div class="row line-down">
+        <div class="col-5">
+          <strong>Cognome</strong>
+        </div>
+        <div class="col-4">
+          <strong>Nome</strong>
+        </div>
+        <div class="col-3">
+          <strong>Visualizza accessi</strong>
+        </div>
+      </div>
+      <div class="row p-2" *ngFor="let user of this.getLdapUsers; index as i">
+        <div class="col-5">
+          <p>{{ user.surname }}</p>
+        </div>
+        <div class="col-4">
+          <p>{{ user.name }}</p>
+        </div>
+        <div class="col-2 text-center">
+          <button id="{{user.orgAuthServerId}}" (click)="toggleUser($event)" type="button" class="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">NO</button>
+        </div>
+      </div>
+    </div>
+    <div class="row shadow p-4 mb-5">
+      <button [disabled]="this.usersToWatch.length === 0" (click)="viewAccesses()" class="btn btn-danger ">Visualizza accessi degli utenti selezionati</button>
+    </div>
+  </div>
+  <div *ngIf="this.viewingAccesses">
+    <div *ngIf="this.viewingOrgAccesses">
+      <h1>Accessi all'organizzazione {{this.getOrganization.name}}</h1>
+      <div class="row shadow p-4 mb-5" *ngIf="this.organizationAccesses === undefined || this.organizationAccesses === null || this.organizationAccesses.length <= 0">
+        <h3 class="no_acc">Non ci sono accessi registrati per gli utenti selezionati.  <button (click)="this.unviewAccesses()" class="btn btn-danger m-3 backUsers">&#8592; Torna agli utenti</button></h3>
+      </div>
+      <div *ngIf="this.organizationAccesses !== undefined && this.organizationAccesses !== null && this.organizationAccesses.length > 0">
+        <div class="row shadow p-4 mb-5 text-center">
+          <h3 class="col-sm-9">Accessi ordinati secondo Data, Ora di {{ this.sortBy }}.</h3>
+          <button (click)="this.unviewAccesses()" class="col-sm-3 btn btn-outline-danger ml-3 mb-2 backUsers">&#8592; Torna agli utenti</button>
+        </div>
+        <div class="row">
+          <div class="col-lg-9 col-md-12 table shadow p-4 mb-5 bg-white">
+            <div class="row line-down">
+              <div class="col-2">
+                <strong>Cognome</strong>
+              </div>
+              <div class="col-2">
+                <strong>Nome</strong>
+              </div>
+              <div class="col-3 text-center">
+                <button (click)="toggleEnterSortingMode()" *ngIf="this.sortBy === 'ingresso'" class="btn btn-danger sortButton">Data, Ora di ingresso <span class="sortingMode">{{this.sortingMode }}</span></button>
+                <button (click)="toggleEnterSortingMode()" *ngIf="this.sortBy === 'uscita'" class="btn btn-outline-danger sortButton">Data, Ora di ingresso</button>
+              </div>
+              <div class="col-3 text-center">
+                <button (click)="toggleExitSortingMode()" *ngIf="this.sortBy === 'uscita'" class="btn btn-danger sortButton">Data, Ora di uscita <span class="sortingMode">{{this.sortingMode }}</span></button>
+                <button (click)="toggleExitSortingMode()" *ngIf="this.sortBy === 'ingresso'" class="btn btn-outline-danger sortButton">Data, Ora di uscita</button>
+              </div>
+              <div class="col-2">
+                <strong>Tempo trascorso</strong>
+              </div>
+            </div>
+            <div class="row p-2" *ngFor="let acc of this.organizationAccesses; index as i">
+              <div class="col-2">
+                <p *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ getUserByID(acc.orgAuthServerId).surname }}</p>
+              </div>
+              <div class="col-2">
+                <p *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ getUserByID(acc.orgAuthServerId).name }}</p>
+              </div>
+              <div class="col-3 text-center">
+                <p *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ acc.entranceTimestamp.toLocaleString() }}</p>
+              </div>
+              <div class="col-3 text-center">
+                <p *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ acc.exitTimestamp.toLocaleString() }}</p>
+              </div>
+              <div class="col-2 text-center">
+                <p *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{msToString(acc.exitTimestamp.getTime() - acc.entranceTimestamp.getTime())}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-12 shadow p-4 mb-5">
+            <div class="row">
+              <input class="col-1" type="checkbox" checked data-toggle="toggle" [(ngModel)]="this.sortByDay">
+              <label class="col-11">Filtra gli accessi di un giorno specifico</label>
+            </div>
+            <div class="text-center">
+              <ngb-datepicker [disabled]="!sortByDay" #dp class="dateP" [(ngModel)]="sortDate"></ngb-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!this.viewingOrgAccesses">
+      <h1>Accessi al luogo {{this.places[currentPlaceIndex].name}}</h1>
+      <div class="row shadow p-4 mb-5" *ngIf="this.placeAccesses === undefined || this.placeAccesses === null || this.placeAccesses.length <= 0">
+        <h3 class="no_acc">Non ci sono accessi registrati per gli utenti selezionati. <button (click)="this.unviewAccesses()" class="btn btn-danger m-3 backUsers">&#8592; Torna agli utenti</button></h3>
+      </div>
+      <div *ngIf="this.placeAccesses !== undefined && this.placeAccesses !== null && this.placeAccesses.length > 0">
+        <div class="row shadow p-4 mb-5 text-center">
+          <h3 class="col-sm-9">Accessi ordinati secondo Data, Ora di {{ this.sortBy }}.</h3>
+          <button (click)="this.unviewAccesses()" class="col-sm-3 btn btn-outline-danger ml-3 mb-2 backUsers">&#8592; Torna agli utenti</button>
+        </div>
+      <div class="row">
+        <div class="col-lg-9 col-md-12 table shadow p-4 mb-5 bg-white">
+          <div class="row line-down">
+            <div class="col-2">
+              <strong>Cognome</strong>
+            </div>
+            <div class="col-2">
+              <strong>Nome</strong>
+            </div>
+            <div class="col-3 text-center">
+              <button (click)="toggleEnterSortingMode()" *ngIf="this.sortBy === 'ingresso'" class="btn btn-danger sortButton">Data, Ora di ingresso <span class="sortingMode">{{this.sortingMode }}</span></button>
+              <button (click)="toggleEnterSortingMode()" *ngIf="this.sortBy === 'uscita'" class="btn btn-outline-danger sortButton">Data, Ora di ingresso</button>
+            </div>
+            <div class="col-3 text-center">
+              <button (click)="toggleExitSortingMode()" *ngIf="this.sortBy === 'uscita'" class="btn btn-danger sortButton">Data, Ora di uscita <span class="sortingMode">{{this.sortingMode }}</span></button>
+              <button (click)="toggleExitSortingMode()" *ngIf="this.sortBy === 'ingresso'" class="btn btn-outline-danger sortButton">Data, Ora di uscita</button>
+            </div>
+            <div class="col-2">
+              <strong>Tempo trascorso</strong>
+            </div>
+          </div>
+          <div class="row p-2" *ngFor="let acc of this.placeAccesses; index as i">
+            <div class="col-2">
+              <p *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ getUserByID(acc.orgAuthServerId).surname }}</p>
+            </div>
+            <div class="col-2">
+              <p *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ getUserByID(acc.orgAuthServerId).name }}</p>
+            </div>
+            <div class="col-3 text-center">
+              <p *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ acc.entranceTimestamp.toLocaleString() }}</p>
+            </div>
+            <div class="col-3 text-center">
+              <p *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{ acc.exitTimestamp.toLocaleString() }}</p>
+            </div>
+            <div class="col-2 text-center">
+              <p *ngIf="sortByDay === false || (sortDate !== undefined && sortDate !== null && acc.entranceTimestamp.toLocaleDateString() === sortDate.day + '/' + sortDate.month + '/' + sortDate.year)">{{msToString(acc.exitTimestamp.getTime() - acc.entranceTimestamp.getTime())}}</p>
+            </div>
+          </div>
+        </div>
+        <div id="calendar" class="col-lg-3 col-md-12 shadow p-4 mb-5">
+          <div class="row">
+            <label class="col-10">
+              Filtra gli accessi di un giorno specifico
+            </label>
+            <input id="checkBox" class="col-2" type="checkbox" checked data-toggle="toggle" [(ngModel)]="this.sortByDay">
+          </div>
+          <div class="text-center">
+            <ngb-datepicker [disabled]="!sortByDay" #dp class="dateP" [(ngModel)]="sortDate"></ngb-datepicker>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

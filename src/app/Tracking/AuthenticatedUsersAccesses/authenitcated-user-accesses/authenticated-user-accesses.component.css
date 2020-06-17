@@ -1,0 +1,71 @@
+*{
+  word-wrap: break-word;
+}
+#loginRequest {
+  font-size: 1.75em;
+}
+
+.active {
+  background-color: green !important;
+}
+
+.buttonSwitchTo {
+  margin: 1em;
+}
+
+#selectPlaceDropdown {
+  margin: 1em;
+}
+
+#incorrect_cred {
+  color: red;
+}
+
+.sortButton{
+
+}
+
+.no_acc {
+  color: red;
+}
+
+/*.actualSortMode{
+  font-size: 2em;
+  vertical-align: -0.2em;
+}*/
+
+/*.sortingMode {
+  color: #0074D9;
+}*/
+
+table thead th {
+  vertical-align: inherit;
+}
+
+/*.sortingMode {
+  font-size: 2em;
+  vertical-align: -0.2em;
+}*/
+
+.changeSortMode{
+  font-size: 1.6em;
+}
+
+.backUsers {
+  max-width: 10em;
+  max-height: 2.5em;
+}
+
+.dateP {
+  max-width: 20em;
+  max-height: 17em;
+}
+
+.line-down{
+  border-bottom: 1px solid #cccccc ;
+  padding-bottom: 0.5em;
+}
+
+#calendar #checkBox {
+  align-self: center !important;
+}

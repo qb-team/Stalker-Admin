@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "cyclomatic-complexity": [true, 5],
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {

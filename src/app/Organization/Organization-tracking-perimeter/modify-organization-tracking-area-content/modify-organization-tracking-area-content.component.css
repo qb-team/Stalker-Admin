@@ -1,0 +1,24 @@
+h1 {
+  font-size: 1.9em;
+}
+label{
+  margin-top: 1em;
+  margin-left: 0.1em;
+}
+
+#cancel{
+  margin-left: 0.2em;
+}
+#buttons{
+  margin-top: 1em;
+}
+.container {
+  width:80%;
+  height:40em;
+  top: 20%;
+  left: 10%;
+}
+
+.btn{
+  margin-bottom: 0.5em;
+}

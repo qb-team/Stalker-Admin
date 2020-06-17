@@ -23,12 +23,12 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
+			"styles": [
               "././node_modules/bootstrap/dist/css/bootstrap.min.css",
-
+              "./node_modules/leaflet/dist/leaflet.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["./node_modules/chart.js/dist/Chart.js"]
           },
           "configurations": {
             "production": {
@@ -92,7 +92,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/chart.js/dist/Chart.min.js"
+            ]
           }
         },
         "lint": {

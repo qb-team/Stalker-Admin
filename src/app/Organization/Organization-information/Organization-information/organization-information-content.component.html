@@ -1,0 +1,29 @@
+<h1>Informazioni sull'organizzazione</h1>
+<div>
+  <table class="table shadow p-4 mb-5 bg-white">
+    <caption>Informazione generali dell'organizzazione</caption>
+    <thead>
+    <tr>
+      <th scope="tabel"  colspan="8">Informazione generali dell'organizzazione</th>
+    </tr>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Descrizione</th>
+      <th scope="col">Indirizzo</th>
+      <th scope="col">Data di creazione</th>
+      <th scope="col">Data ultima modifica</th>
+      <th scope="col">Logo</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{ getCurrentOrg.name }}</td>
+      <td>{{ getCurrentOrg.description }}</td>
+      <td>{{getCurrentOrg.street}}, {{getCurrentOrg.number}}, {{getCurrentOrg.city}} ({{getCurrentOrg.country}}), CAP: {{getCurrentOrg.postCode}}</td>
+      <td>{{ getCurrentOrg.creationDate }}</td>
+      <td>{{ getCurrentOrg.lastChangeDate }}</td>
+      <td><img src="{{ getCurrentOrg.image }}" alt="logo di {{ getCurrentOrg.name }}"/></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

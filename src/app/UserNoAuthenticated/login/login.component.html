@@ -1,0 +1,27 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img  src='./assets/icons/stalker-red.png' id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+      <label id="labelE" for="email" class="fadeIn second">Email</label>
+      <input type="text" id="email" class="fadeIn second" name="email" aria-label="email" required="required" [(ngModel)]="email" placeholder="email" formControlName="email">
+      <label id="labelPSW" class="fadeIn third" for="password">Password</label>
+      <input type="password" id="password" class="fadeIn third" name="login" aria-label="password" [(ngModel)]="password" required="required" placeholder="password" formControlName="password">
+      <p *ngIf="!getAuth().signOk"> Credenziali inserite sono errate </p>
+      <input id="signInBtn" type="submit" (click)="signIn()" [disabled]="!contactForm.valid" class="btn btn-danger fourth" value="Login">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" id="resetPswBtn" (click)="callResetPassword()">Password dimenticata?</a>
+    </div>
+
+  </div>
+</div>
+<router-outlet></router-outlet>

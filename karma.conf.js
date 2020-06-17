@@ -19,7 +19,7 @@ module.exports = function (config) {
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, './coverage/UI'),
       reports: ['html', 'lcovonly', 'text-summary'],
-      fixWebpackSourcePaths: true
+      fixWebpackSourcePaths: true,
     },
     reporters: ['progress', 'kjhtml'],
     customLaunchers: {
@@ -30,7 +30,7 @@ module.exports = function (config) {
     },
 	preprocessors: { 'dist/app/**/!(*spec).js': ['coverage'] },
 	coverageReporter: {
-  dir : 'coverage/',
+  dir : 'coverage/UI/',
     reporters: [
       { type: 'html' },
       { type: 'lcov' }

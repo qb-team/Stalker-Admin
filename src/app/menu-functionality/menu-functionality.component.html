@@ -1,0 +1,46 @@
+<div id="accordion" class="shadow mb-1" *ngIf="getCurrentOrganization !== undefined">
+    <div class="card" >
+        <span id="span1" class="btn btn-light" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+            aria-controls="collapseOne">Organizzazione</span>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <ul class="list-group">
+                <li id="l1" (click)="updateContent($event)" class="list-group-item btn btn-light">Informazioni sull'organizzazione</li>
+                <li id="l2" (click)="updateContent($event)" class="list-group-item btn btn-light">Perimetro di tracciamento dell'organizzazione</li>
+                <li id="l3" (click)="updateContent($event)" *ngIf="Permession[Index].permission >= 2" class="list-group-item btn btn-light">Modifica del perimetro di tracciamento dell'organizzazione</li>
+                <li id="l4" (click)="updateContent($event)" *ngIf="Permession[Index].permission >= 2" class="list-group-item btn btn-light">Modifica del perimetro di tracciamento di un luogo dell'organizzazione</li>
+                <li id="l5" (click)="updateContent($event)" *ngIf="Permession[Index].permission >= 2" class="list-group-item btn btn-light">Gestione dell'organizzazione</li>
+                <li id="l6" (click)="updateContent($event)" *ngIf="Permession[Index].permission >= 2" class="list-group-item btn btn-light">Gestione dei luoghi di tracciamento</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card">
+        <span id="span2" class="btn btn-light" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+            aria-controls="collapseTwo">
+            Tracciamento
+    </span>
+
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <ul class="list-group">
+                <li id="l8"(click)="updateContent($event)" class="list-group-item btn btn-light">Presenze attuali nell'organizzazione</li>
+                <li id="l9"(click)="updateContent($event)" class="list-group-item btn btn-light">Presenze attuali in un luogo</li>
+                <li *ngIf="getCurrentOrganization.trackingMode === 'authenticated'" id="l20"(click)="updateContent($event)" class="list-group-item btn btn-light">Ricerca accessi degli utenti autenticati</li>
+                <li *ngIf="getCurrentOrganization.trackingMode === 'authenticated'" id="l21"(click)="updateContent($event)" class="list-group-item btn btn-light">Report tabellari sul tempo trascorso</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card" *ngIf="Permession[Index].permission === 3" >
+        <span id="span3" class="btn btn-light" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
+            aria-controls="collapseThree">
+            Gestione amministratori
+    </span>
+
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <ul class="list-group">
+                <li id="l11"(click)="updateContent($event)" class="list-group-item btn btn-light">Crea un amministratore</li>
+                <li id="l12"(click)="updateContent($event)" class="list-group-item btn btn-light">Associa un amministratore</li>
+                <li id="l13"(click)="updateContent($event)" class="list-group-item btn btn-light">Rimuovi o modifica i privilegi degli amminstratori</li>
+            </ul>
+        </div>
+    </div>
+</div>
