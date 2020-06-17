@@ -1,34 +1,19 @@
-# Qbteam Admin Interface Stalker
-### Stalker-Admin 
-
-<img src='./src/assets/icons/58329404.png' alt=""/>
-
-Project's qbteam for software engineering course. This is Admin Inteface for project Stalker.
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3, and the login is managed by Firebase :fire:
-
+# Stalker
 [![Build Status](https://travis-ci.org/qb-team/Stalker-Admin.svg?branch=develop)](https://travis-ci.org/qb-team/Stalker-Admin)
 
-## Development server
+Repository per il codice sorgente per la Web-App dei amministratori del progetto sul capitolato "Stalker" del corso di Ingegneria del Software all'Università di Padova, A.A. 2019/2020, svolta dal gruppo *qbteam*.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Versione
+1.0.0
 
-## Code scaffolding
+## Documentazione
+La documentazione del prodotto è disponibile al seguente [link](https://stalker-manuale-manutentore.readthedocs.io/webapp/introduzione/).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Tecnologie usate
+ - Angular 2+
+ - Firebase
+ - Bootstrap
+ - Cloudinary
+ - Jasmine
+ - Docker
+ - Rest-API
