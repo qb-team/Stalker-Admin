@@ -1,0 +1,1822 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>TimeReportComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-time-report</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./time-report.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./time-report.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#contactForm">contactForm</a>
+                            </li>
+                            <li>
+                                <a href="#incorrectCredentials">incorrectCredentials</a>
+                            </li>
+                            <li>
+                                <a href="#isLoggedIn">isLoggedIn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#ldapUsers">ldapUsers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#organization">organization</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#password">password</a>
+                            </li>
+                            <li>
+                                <a href="#places">places</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#Submitted">Submitted</a>
+                            </li>
+                            <li>
+                                <a href="#switchModeButtonId">switchModeButtonId</a>
+                            </li>
+                            <li>
+                                <a href="#timeSpentByUsersInPlaces">timeSpentByUsersInPlaces</a>
+                            </li>
+                            <li>
+                                <a href="#totalUserTimes">totalUserTimes</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#username">username</a>
+                            </li>
+                            <li>
+                                <a href="#viewingPerUserReport">viewingPerUserReport</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#loginLDAP">loginLDAP</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit">onSubmit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setupForm">setupForm</a>
+                            </li>
+                            <li>
+                                <a href="#sToString">sToString</a>
+                            </li>
+                            <li>
+                                <a href="#timeSpentBy">timeSpentBy</a>
+                            </li>
+                            <li>
+                                <a href="#toDigitalClock">toDigitalClock</a>
+                            </li>
+                            <li>
+                                <a href="#toggleViewMode">toggleViewMode</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#getUsername">getUsername</a>
+                                </li>
+                                <li>
+                                    <a href="#setUsername">setUsername</a>
+                                </li>
+                                <li>
+                                    <a href="#getPassword">getPassword</a>
+                                </li>
+                                <li>
+                                    <a href="#setPassword">setPassword</a>
+                                </li>
+                                <li>
+                                    <a href="#getLdapUsers">getLdapUsers</a>
+                                </li>
+                                <li>
+                                    <a href="#submitted">submitted</a>
+                                </li>
+                                <li>
+                                    <a href="#getOrganization">getOrganization</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(aods: <a href="../injectables/AdministratorOrganizationDataService.html">AdministratorOrganizationDataService</a>, ldapS: <a href="../injectables/LdapService.html">LdapService</a>, r: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, tr: <a href="../injectables/ReportService.html">ReportService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:42</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>aods</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AdministratorOrganizationDataService.html" target="_self" >AdministratorOrganizationDataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>ldapS</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LdapService.html" target="_self" >LdapService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>r</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>tr</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ReportService.html" target="_self" >ReportService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loginLDAP"></a>
+                    <span class="name">
+                        <b>
+                            loginLDAP
+                        </b>
+                        <a href="#loginLDAP"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loginLDAP()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="100"
+                            class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:100</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:46</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <b>
+                            onSubmit
+                        </b>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="158"
+                            class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:158</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setupForm"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            setupForm
+                        </b>
+                        <a href="#setupForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setupForm()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="122"
+                            class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:122</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sToString"></a>
+                    <span class="name">
+                        <b>
+                            sToString
+                        </b>
+                        <a href="#sToString"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sToString(s: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:88</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>s</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="timeSpentBy"></a>
+                    <span class="name">
+                        <b>
+                            timeSpentBy
+                        </b>
+                        <a href="#timeSpentBy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>timeSpentBy(placeArrIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, ordID: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="134"
+                            class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:134</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>placeArrIndex</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>ordID</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toDigitalClock"></a>
+                    <span class="name">
+                        <b>
+                            toDigitalClock
+                        </b>
+                        <a href="#toDigitalClock"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toDigitalClock(str: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:92</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>str</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleViewMode"></a>
+                    <span class="name">
+                        <b>
+                            toggleViewMode
+                        </b>
+                        <a href="#toggleViewMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleViewMode(ev)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="144"
+                            class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:144</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ev</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="contactForm"></a>
+                        <span class="name">
+                            <b>
+                            contactForm</b>
+                            <a href="#contactForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="incorrectCredentials"></a>
+                        <span class="name">
+                            <b>
+                            incorrectCredentials</b>
+                            <a href="#incorrectCredentials"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isLoggedIn"></a>
+                        <span class="name">
+                            <b>
+                            isLoggedIn</b>
+                            <a href="#isLoggedIn"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ldapUsers"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            ldapUsers</b>
+                            <a href="#ldapUsers"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/OrganizationAuthenticationServerInformation.html" target="_self" >Array&lt;OrganizationAuthenticationServerInformation&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="organization"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            organization</b>
+                            <a href="#organization"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Organization</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:22</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="password"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            password</b>
+                            <a href="#password"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:42</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="places"></a>
+                        <span class="name">
+                            <b>
+                            places</b>
+                            <a href="#places"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>Array&lt;Place&gt;()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="Submitted"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            Submitted</b>
+                            <a href="#Submitted"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="switchModeButtonId"></a>
+                        <span class="name">
+                            <b>
+                            switchModeButtonId</b>
+                            <a href="#switchModeButtonId"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;buttonSwitchToPlace&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="timeSpentByUsersInPlaces"></a>
+                        <span class="name">
+                            <b>
+                            timeSpentByUsersInPlaces</b>
+                            <a href="#timeSpentByUsersInPlaces"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Array&lt;Array&lt;TimePerUserReport&gt;&gt;()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="totalUserTimes"></a>
+                        <span class="name">
+                            <b>
+                            totalUserTimes</b>
+                            <a href="#totalUserTimes"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Array&lt;number&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="username"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            username</b>
+                            <a href="#username"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="viewingPerUserReport"></a>
+                        <span class="name">
+                            <b>
+                            viewingPerUserReport</b>
+                            <a href="#viewingPerUserReport"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getUsername"></a>
+                        <span class="name"><b>getUsername</b><a href="#getUsername"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>getUsername()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:162</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setUsername"></a>
+                        <span class="name"><b>setUsername</b><a href="#setUsername"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>setUsername(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:166</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getPassword"></a>
+                        <span class="name"><b>getPassword</b><a href="#getPassword"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>getPassword()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="170" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:170</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setPassword"></a>
+                        <span class="name"><b>setPassword</b><a href="#setPassword"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>setPassword(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="174" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:174</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getLdapUsers"></a>
+                        <span class="name"><b>getLdapUsers</b><a href="#getLdapUsers"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>getLdapUsers()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="178" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:178</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="submitted"></a>
+                        <span class="name"><b>submitted</b><a href="#submitted"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>submitted()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="182" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:182</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>submitted(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="186" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:186</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getOrganization"></a>
+                        <span class="name"><b>getOrganization</b><a href="#getOrganization"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>getOrganization()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/Tracking/AuthenticatedUsersAccesses/time-report/time-report.component.ts:190</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import {
+  Organization,
+  OrganizationAuthenticationServerInformation,
+  Place,
+  ReportService,
+  TimePerUserReport
+} from &#x27;../../../..&#x27;;
+import {AdministratorOrganizationDataService} from &#x27;../../../services/AdministratorOrganizationData.service&#x27;;
+import {LdapService} from &#x27;../../../services/ldap.service&#x27;;
+import {Router} from &#x27;@angular/router&#x27;;
+import {FormControl, FormGroup, Validators} from &#x27;@angular/forms&#x27;;
+import {HttpErrorResponse} from &#x27;@angular/common/http&#x27;;
+
+@Component({
+  selector: &#x27;app-time-report&#x27;,
+  templateUrl: &#x27;./time-report.component.html&#x27;,
+  styleUrls: [&#x27;./time-report.component.css&#x27;]
+})
+export class TimeReportComponent implements OnInit {
+
+  private organization: Organization;
+  isLoggedIn: boolean;
+  contactForm: FormGroup;
+  private ldapUsers: Array&lt;OrganizationAuthenticationServerInformation&gt;;
+  places &#x3D; Array&lt;Place&gt;();
+  incorrectCredentials &#x3D; false;
+  private Submitted &#x3D; false;
+  switchModeButtonId &#x3D; &#x27;buttonSwitchToPlace&#x27;;
+  viewingPerUserReport &#x3D; false;
+  timeSpentByUsersInPlaces &#x3D; new Array&lt;Array&lt;TimePerUserReport&gt;&gt;(); // first array describes the places, the nested one describes the time spent in a specific place for each user
+  totalUserTimes: Array&lt;number&gt;;
+
+  /*
+* The username of the user that is logging in
+*/
+  private username: string;
+
+  /*
+  * The password of the user that is logging in
+  */
+  private password: string;
+
+  constructor(private aods: AdministratorOrganizationDataService, private ldapS: LdapService, private r: Router, private tr: ReportService) { }
+
+  ngOnInit(): void {
+    this.aods.getOrganization.subscribe((o: Organization) &#x3D;&gt; {
+      if (o.trackingMode &#x3D;&#x3D;&#x3D; &#x27;authenticated&#x27;) {
+        this.organization &#x3D; o;
+        this.ldapS.clearUsersToGet();
+        this.aods.getCurrentOrganizationPlaces.subscribe((p: Array&lt;Place&gt;) &#x3D;&gt; {
+          this.places &#x3D; p;
+          this.ldapS.isAdminLoggedInLdap.subscribe(b &#x3D;&gt; {
+            this.isLoggedIn &#x3D; b;
+            if (this.isLoggedIn) {
+              this.ldapS.getUsersInstances.subscribe((us: Array&lt;OrganizationAuthenticationServerInformation&gt;) &#x3D;&gt; {
+                this.ldapUsers &#x3D; us;
+                this.totalUserTimes &#x3D; new Array&lt;number&gt;(this.ldapUsers.length);
+                for (let t &#x3D; 0; t &lt; this.totalUserTimes.length; t++) {
+                  this.totalUserTimes[t] &#x3D; 0;
+                }
+                for (let i &#x3D; 0; i &lt; this.places.length; i++) {
+                  this.tr.getTimePerUserReport(this.places[i].id).subscribe((r: Array&lt;TimePerUserReport&gt;) &#x3D;&gt; {
+                    this.timeSpentByUsersInPlaces[i] &#x3D; r;
+                    if (this.timeSpentByUsersInPlaces[i] !&#x3D;&#x3D; null) {
+                      this.timeSpentByUsersInPlaces[i].forEach(el &#x3D;&gt; {
+                        if (el !&#x3D;&#x3D; undefined &amp;&amp; el !&#x3D;&#x3D; null) {
+                          const idx &#x3D; this.ldapUsers.findIndex(u &#x3D;&gt; u.orgAuthServerId &#x3D;&#x3D;&#x3D; el.orgAuthServerId);
+                          this.totalUserTimes[idx] +&#x3D; el.totalTime;
+                        }
+                      });
+                    }
+                  } );
+                }
+              });
+            }
+          });
+        });
+        // this.
+        // this.as.getAuthenticatedAccessListInOrganization(, this.organization.id).subscribe();
+      } else {
+        this.r.navigateByUrl(&#x27;/Content-panel&#x27;);
+      }
+    });
+    this.setupForm();
+  }
+
+  sToString(s: number) {
+    return this.toDigitalClock(Math.floor(s / 3600).toString()) + &#x27;:&#x27; + this.toDigitalClock(Math.floor((s % 3600) / 60).toString()) + &#x27;:&#x27; + this.toDigitalClock((s % 60).toString());
+  }
+
+  toDigitalClock(str: string) {
+    if (str.length &lt;&#x3D; 1) {
+      return &#x27;0&#x27; + str;
+    } else {
+      return str;
+    }
+  }
+
+  loginLDAP() {
+    this.ldapS.setCredentials(this.username, this.password);
+    this.ldapS.addUserToGet(&#x27;*&#x27;);
+    console.log(this.ldapS.credentials);
+    console.log(this.ldapS.usersToGet);
+    this.ldapS.getUsersLdap(this.organization.id).subscribe((info: Array&lt;OrganizationAuthenticationServerInformation&gt;) &#x3D;&gt; {
+      if (info &#x3D;&#x3D;&#x3D; undefined || info &#x3D;&#x3D;&#x3D; null || info.length &#x3D;&#x3D;&#x3D; 0) {
+        this.incorrectCredentials &#x3D; true;
+      } else {
+        this.ldapUsers &#x3D; info;
+        console.log(info);
+        this.incorrectCredentials &#x3D; false;
+        this.ldapS.isAdminLoggedInLdap.next(true);
+        this.ldapS.getUsersInstances.next(this.ldapUsers);
+      }
+    }, (err: HttpErrorResponse) &#x3D;&gt; {
+      if (err.status &#x3D;&#x3D;&#x3D; 500) {
+        this.incorrectCredentials &#x3D; true;
+      }
+    });
+  }
+
+  private setupForm() {
+    this.contactForm &#x3D; new FormGroup({
+      username: new FormControl(this.username, [
+        Validators.required
+      ]),
+      password: new FormControl(this.password, [
+        Validators.required,
+        Validators.minLength(5)
+      ]),
+    });
+  }
+
+  timeSpentBy(placeArrIndex: number, ordID: string) {
+    if (this.timeSpentByUsersInPlaces[placeArrIndex] !&#x3D;&#x3D; undefined &amp;&amp; this.timeSpentByUsersInPlaces[placeArrIndex] !&#x3D;&#x3D; null) {
+      const idx &#x3D; this.timeSpentByUsersInPlaces[placeArrIndex].findIndex(inst &#x3D;&gt; inst.orgAuthServerId &#x3D;&#x3D;&#x3D; ordID);
+      if (idx !&#x3D;&#x3D; -1) {
+        return this.sToString(this.timeSpentByUsersInPlaces[placeArrIndex][idx].totalTime);
+      }
+    }
+    return &#x27;00:00:00&#x27;;
+  }
+
+  toggleViewMode(ev) {
+    console.log(ev.target.id);
+    if (&#x27;buttonSwitchToPerUser&#x27; &#x3D;&#x3D;&#x3D; this.switchModeButtonId) {
+      this.viewingPerUserReport &#x3D; false;
+      this.switchModeButtonId &#x3D; &#x27;buttonSwitchToGrouped&#x27;;
+      ev.target.innerHTML &#x3D; &#x27;Passa alla visualizzazione del report per luogo&#x27;;
+
+    } else {
+      this.switchModeButtonId &#x3D; &#x27;buttonSwitchToPerUser&#x27;;
+      ev.target.innerHTML &#x3D; &#x27;Passa alla visualizzazione del report per utente&#x27;;
+      this.viewingPerUserReport &#x3D; true;
+    }
+  }
+
+  onSubmit(): void {
+    this.Submitted &#x3D; true;
+  }
+
+  get getUsername(): string {
+    return this.username;
+  }
+
+  set setUsername(value: string) {
+    this.username &#x3D; value;
+  }
+
+  get getPassword(): string {
+    return this.password;
+  }
+
+  set setPassword(value: string) {
+    this.password &#x3D; value;
+  }
+
+  get getLdapUsers() {
+    return this.ldapUsers;
+  }
+
+  get submitted(): boolean {
+    return this.Submitted;
+  }
+
+  set submitted(value: boolean) {
+    this.Submitted &#x3D; value;
+  }
+
+  get getOrganization() {
+    return this.organization;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!--BEGIN LDAP--&gt;
+&lt;div *ngIf&#x3D;&quot;!isLoggedIn&quot; data-keyboard&#x3D;&quot;false&quot; data-backdrop&#x3D;&quot;static&quot; id&#x3D;&quot;loginModal&quot;&gt;
+  &lt;h1 id&#x3D;&quot;loginRequest&quot;&gt;Per visualizzare i report effettuare prima il login per favore&lt;/h1&gt;
+  &lt;div class&#x3D;&quot;modal-dialog shadow p-4 mb-5 bg-white&quot;&gt;
+    &lt;div class&#x3D;&quot;modal-content&quot;&gt;
+      &lt;div class&#x3D;&quot;modal-body&quot;&gt;
+        &lt;form class&#x3D;&quot;form-group&quot; [formGroup]&#x3D;&quot;contactForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; novalidate &gt;
+          &lt;fieldset&gt;
+            &lt;legend&gt;Login al server aziendale&lt;/legend&gt;
+            &lt;label id&#x3D;&quot;labelE&quot; for&#x3D;&quot;username&quot;&gt;dn completo:&lt;/label&gt;
+            &lt;input type&#x3D;&quot;username&quot; name&#x3D;&quot;username&quot; id&#x3D;&quot;username&quot; class&#x3D;&quot;form-control&quot; required&#x3D;&quot;required&quot; [(ngModel)]&#x3D;&quot;setUsername&quot; placeholder&#x3D;&quot;username&quot; formControlName&#x3D;&quot;username&quot;&gt;
+            &lt;label id&#x3D;&quot;labelPSW&quot; for&#x3D;&quot;pwd&quot;&gt;Password:&lt;/label&gt;
+            &lt;input type&#x3D;&quot;password&quot; name&#x3D;&quot;password&quot; class&#x3D;&quot;form-control&quot; [(ngModel)]&#x3D;&quot;setPassword&quot; required&#x3D;&quot;required&quot; id&#x3D;&quot;pwd&quot; placeholder&#x3D;&quot;password&quot; formControlName&#x3D;&quot;password&quot; &gt;
+            &lt;p id&#x3D;&quot;incorrect_cred&quot; *ngIf&#x3D;&quot;this.incorrectCredentials&quot;&gt;Le credenziali inserite non sono corrette. Controllare e riprovare per favore.&lt;/p&gt;
+            &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
+              &lt;button id&#x3D;&quot;signInBtn&quot; [disabled]&#x3D;&quot;!contactForm.valid&quot; (click)&#x3D;&quot;this.loginLDAP()&quot; class&#x3D;&quot;btn btn-danger&quot;&gt;Login&lt;/button&gt; &lt;!--(click)&#x3D;&quot;&quot;--&gt;
+              &lt;input type&#x3D;&quot;reset&quot; class&#x3D;&quot;btn btn-danger&quot;/&gt;
+            &lt;/div&gt;
+          &lt;/fieldset&gt;
+        &lt;/form&gt;
+        &lt;p *ngIf&#x3D;&quot;false&quot;&gt;Credenziali errate&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;!--END LDAP--&gt;
+&lt;div *ngIf&#x3D;&quot;isLoggedIn&quot;&gt;
+  &lt;div class&#x3D;&quot;row shadow p-4 mb-5&quot;&gt;
+  &lt;button *ngIf&#x3D;&quot;this.places !&#x3D;&#x3D; null &amp;&amp; this.places.length !&#x3D;&#x3D; 0&quot; (click)&#x3D;&quot;toggleViewMode($event)&quot; id&#x3D;&quot;{{this.switchModeButtonId}}&quot; class&#x3D;&quot;mb-2 buttonSwitchTo btn btn-danger&quot;&gt;Passa alla visualizzazione del report per luogo&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div *ngIf&#x3D;&quot;this.viewingPerUserReport&quot;&gt;
+    &lt;table *ngIf&#x3D;&quot;timeSpentByUsersInPlaces !&#x3D;&#x3D; undefined &amp;&amp; timeSpentByUsersInPlaces !&#x3D;&#x3D; null&quot; class&#x3D;&quot;table shadow p-4 mb-5 bg-white&quot;&gt;
+      &lt;caption&gt;Report degli utenti nei luoghi di {{ this.getOrganization.name }}&lt;/caption&gt;
+      &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th scope&#x3D;&quot;table&quot; colspan&#x3D;&quot;5&quot;&gt;Report degli utenti nei luoghi di {{ this.getOrganization.name }}&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th&gt;&lt;/th&gt;
+        &lt;th *ngFor&#x3D;&quot;let user of this.getLdapUsers; index as j&quot;&gt;{{ user.surname }} {{ user.name }}&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+      &lt;tr *ngFor&#x3D;&quot;let place of this.places; index as i&quot;&gt;
+        &lt;th&gt;{{place.name}}&lt;/th&gt;
+        &lt;td *ngFor&#x3D;&quot;let user of this.getLdapUsers; index as j&quot;&gt;{{ timeSpentBy(i ,user.orgAuthServerId) }}&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+  &lt;div *ngIf&#x3D;&quot;!this.viewingPerUserReport&quot;&gt;
+    &lt;table class&#x3D;&quot;table shadow p-4 mb-5 bg-white&quot;&gt;
+      &lt;caption&gt;Report del tempo totale trascorso dagli utenti nei luoghi di {{ this.getOrganization.name }}&lt;/caption&gt;
+      &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th scope&#x3D;&quot;table&quot; colspan&#x3D;&quot;5&quot;&gt;Report del tempo totale trascorso dagli utenti nei luoghi di {{ this.getOrganization.name }}&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Nominativo&lt;/th&gt;
+        &lt;th&gt;Tempo totale&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr *ngFor&#x3D;&quot;let user of this.getLdapUsers; index as j&quot;&gt;
+          &lt;th&gt;{{ user.surname }} {{ user.name }}&lt;/th&gt;
+          &lt;td *ngIf&#x3D;&quot;this.totalUserTimes[j] !&#x3D;&#x3D; undefined &amp;&amp; this.totalUserTimes[j] !&#x3D;&#x3D; null &amp;&amp; this.totalUserTimes[j] !&#x3D;&#x3D; 0&quot;&gt;{{this.sToString(this.totalUserTimes[j])}}&lt;/td&gt;
+          &lt;td *ngIf&#x3D;&quot;this.totalUserTimes[j] &#x3D;&#x3D;&#x3D; undefined || this.totalUserTimes[j] &#x3D;&#x3D;&#x3D; null || this.totalUserTimes[j] &#x3D;&#x3D;&#x3D; 0&quot;&gt;00:00:00&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./time-report.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.btn{
+  margin-bottom: 0.5em;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!--BEGIN LDAP--><div *ngIf="!isLoggedIn" data-keyboard="false" data-backdrop="static" id="loginModal">  <h1 id="loginRequest">Per visualizzare i report effettuare prima il login per favore</h1>  <div class="modal-dialog shadow p-4 mb-5 bg-white">    <div class="modal-content">      <div class="modal-body">        <form class="form-group" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate >          <fieldset>            <legend>Login al server aziendale</legend>            <label id="labelE" for="username">dn completo:</label>            <input type="username" name="username" id="username" class="form-control" required="required" [(ngModel)]="setUsername" placeholder="username" formControlName="username">            <label id="labelPSW" for="pwd">Password:</label>            <input type="password" name="password" class="form-control" [(ngModel)]="setPassword" required="required" id="pwd" placeholder="password" formControlName="password" >            <p id="incorrect_cred" *ngIf="this.incorrectCredentials">Le credenziali inserite non sono corrette. Controllare e riprovare per favore.</p>            <div class="modal-footer">              <button id="signInBtn" [disabled]="!contactForm.valid" (click)="this.loginLDAP()" class="btn btn-danger">Login</button> <!--(click)=""-->              <input type="reset" class="btn btn-danger"/>            </div>          </fieldset>        </form>        <p *ngIf="false">Credenziali errate</p>      </div>    </div>  </div></div><!--END LDAP--><div *ngIf="isLoggedIn">  <div class="row shadow p-4 mb-5">  <button *ngIf="this.places !== null && this.places.length !== 0" (click)="toggleViewMode($event)" id="{{this.switchModeButtonId}}" class="mb-2 buttonSwitchTo btn btn-danger">Passa alla visualizzazione del report per luogo</button>  </div>  <div *ngIf="this.viewingPerUserReport">    <table *ngIf="timeSpentByUsersInPlaces !== undefined && timeSpentByUsersInPlaces !== null" class="table shadow p-4 mb-5 bg-white">      <caption>Report degli utenti nei luoghi di {{ this.getOrganization.name }}</caption>      <thead>      <tr>        <th scope="table" colspan="5">Report degli utenti nei luoghi di {{ this.getOrganization.name }}</th>      </tr>      <tr>        <th></th>        <th *ngFor="let user of this.getLdapUsers; index as j">{{ user.surname }} {{ user.name }}</th>      </tr>      </thead>      <tbody>      <tr *ngFor="let place of this.places; index as i">        <th>{{place.name}}</th>        <td *ngFor="let user of this.getLdapUsers; index as j">{{ timeSpentBy(i ,user.orgAuthServerId) }}</td>      </tr>      </tbody>    </table>  </div>  <div *ngIf="!this.viewingPerUserReport">    <table class="table shadow p-4 mb-5 bg-white">      <caption>Report del tempo totale trascorso dagli utenti nei luoghi di {{ this.getOrganization.name }}</caption>      <thead>      <tr>        <th scope="table" colspan="5">Report del tempo totale trascorso dagli utenti nei luoghi di {{ this.getOrganization.name }}</th>      </tr>      <tr>        <th>Nominativo</th>        <th>Tempo totale</th>      </tr>      </thead>      <tbody>        <tr *ngFor="let user of this.getLdapUsers; index as j">          <th>{{ user.surname }} {{ user.name }}</th>          <td *ngIf="this.totalUserTimes[j] !== undefined && this.totalUserTimes[j] !== null && this.totalUserTimes[j] !== 0">{{this.sToString(this.totalUserTimes[j])}}</td>          <td *ngIf="this.totalUserTimes[j] === undefined || this.totalUserTimes[j] === null || this.totalUserTimes[j] === 0">00:00:00</td>        </tr>      </tbody>    </table>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AdministratorManagementComponent', 'selector': 'app-manage-administrators-content.component.ts'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthenticatedUserAccessesComponent', 'selector': 'app-single-user-authenticated-accesses'},{'name': 'BindAdministratorComponent', 'selector': 'app-bind-administrator'},{'name': 'ContentComponent', 'selector': 'app-content'},{'name': 'ControlPanelComponent', 'selector': 'app-control-panel'},{'name': 'CreateAdministratorComponent', 'selector': 'app-create-administrator'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomePageContentComponent', 'selector': 'app-content-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MenubarComponent', 'selector': 'app-menubar'},{'name': 'MenuFunctionalityComponent', 'selector': 'app-menu-functionality'},{'name': 'ModifyOrganizationTrackingAreaContentComponent', 'selector': 'app-modify-place-tracking-area-content'},{'name': 'ModifyPlaceTrackingAreaContentComponent', 'selector': 'app-modify-place-tracking-area-content'},{'name': 'OrganizationInformationContentComponent', 'selector': 'app-content-track-users-general-information'},{'name': 'OrganizationManagementContentComponent', 'selector': 'app-organization-management-content'},{'name': 'OrganizationPresenceNumberComponent', 'selector': 'app-content-track-users-number'},{'name': 'OsmMapContentComponent', 'selector': 'app-osm-map-content'},{'name': 'PlaceManagementContentComponent', 'selector': 'app-place-management-content'},{'name': 'PlacePresenceNumberComponent', 'selector': 'app-place-presence-number'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'TimeReportComponent', 'selector': 'app-time-report'},{'name': 'ViewOrganizationTrackingAreaContentComponent', 'selector': 'app-content-track-users'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TimeReportComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TimeReportComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

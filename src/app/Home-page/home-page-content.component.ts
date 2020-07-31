@@ -1,6 +1,6 @@
-/*
-* Shows minimal informations about the interface usage
-*/
+/**
+ * Shows minimal informations about the interface usage
+ */
 import { Component, OnInit } from '@angular/core';
 import { Organization } from 'src/model/models';
 import {AdministratorOrganizationDataService} from '../services/AdministratorOrganizationData.service';
@@ -15,14 +15,14 @@ export class HomePageContentComponent implements OnInit {
   hasSomePermissions = false;
   constructor(private ads: AdministratorOrganizationDataService) { }
 
-  /*
-  return to the selected organization
+  /**
+   * Return to the selected organization
    */
   get getCurrentOrganization(): Organization {
     return this.currentOrganization;
   }
-  /*
-  Get the current organization and check if the adminstrator has organizations
+  /**
+   * Get the current organization and check if the administrator has organizations
    */
   ngOnInit(): void {
     this.subscribeToOrganization();
@@ -34,8 +34,8 @@ export class HomePageContentComponent implements OnInit {
       }
     });
   }
-  /*
-  Get the current organization
+  /**
+   * Get the current organization
    */
   subscribeToOrganization(): void {
     this.ads.getOrganization.subscribe((org: Organization) => { this.currentOrganization = org; });

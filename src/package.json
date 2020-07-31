@@ -9,7 +9,8 @@
   ],
   "license": "Unlicense",
   "scripts": {
-    "build": "ng-packagr -p ng-package.json"
+    "build": "ng-packagr -p ng-package.json",
+    "compodoc": "npx compodoc -p src/tsconfig.app.json"
   },
   "peerDependencies": {
     "@angular/core": "^9.0.2",

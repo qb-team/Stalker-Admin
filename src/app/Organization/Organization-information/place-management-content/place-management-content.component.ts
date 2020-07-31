@@ -39,15 +39,15 @@ export class PlaceManagementContentComponent implements OnInit, OnDestroy {
 
   });
   constructor(private ads: AdministratorOrganizationDataService, private plS: PlaceService) { }
-  /*
-  load list of places and setup form
+  /**
+   * load list of places and setup form
    */
   ngOnInit(): void {
     this.loadPlaceList();
     this.setupModifyForm();
   }
-/*
-load a list of places
+/**
+ * load a list of places
  */
   loadPlaceList() {
     this.ads.getOrganization.subscribe((org: Organization) => {
@@ -67,14 +67,14 @@ load a list of places
       }
     });
   }
-/*
-Set the current place
+/**
+ * Set the current place
  */
   setPlace(click: any) {
     this.currentPlace = this.PlaceArr[click.target.attributes.id.value];
   }
-/*
-Setup form for modify data of a place
+/**
+ * Setup form for modify data of a place
  */
   private setupModifyForm() {
     this.modifyForm = new FormGroup({
@@ -82,9 +82,9 @@ Setup form for modify data of a place
     });
   }
 
-  /*
-   Modify data of place of organization through API method
-  */
+  /**
+   * Modify data of place of organization through API method
+   */
   onModify() {
     const tmpName = this.currentPlace.name;
     this.currentPlace.name = this.name;
@@ -101,8 +101,8 @@ Setup form for modify data of a place
     this.name = null;
   }
 
-  /*
-  Remove points from the map
+  /**
+   * Remove points from the map
    */
   resetP() {
     for (let i = 0; i < this.Arltn.length; i++) {
@@ -112,8 +112,8 @@ Setup form for modify data of a place
     this.Arlong = [];
     this.markers = [];
   }
-  /*
-  Remove last point from the map
+  /**
+   * Remove last point from the map
    */
   removeLastMarker() {
     this.map.removeLayer(this.markers[this.markers.length - 1]);
@@ -121,14 +121,14 @@ Setup form for modify data of a place
     this.Arlong.pop();
     this.markers.pop();
   }
-  /*
-   change value of this.change
+  /**
+   * Change value of this.change
    */
   onChange(val: string) {
     this.change = val;
   }
-  /*
-  Remove data of place of organization through API method
+  /**
+   * Remove data of place of organization through API method
    */
   onRemove() {
     if (this.PlaceArr != null) {
@@ -147,8 +147,8 @@ Setup form for modify data of a place
     }
   }
 
-  /*
-  Receive the data from the map
+  /**
+   * Receive the data from the map
    */
   receiveMap(map: Map) {
     this.map = map;
@@ -160,22 +160,22 @@ Setup form for modify data of a place
       }
     });
   }
-/*
-Receive a new zoom on the map
+/**
+ * Receive a new zoom on the map
  */
   receiveZoom(zoom: number) {
     this.zoom = zoom;
   }
-/*
-Destroy a subscription
+/**
+ * Destroy a subscription
  */
   ngOnDestroy() {
     if (this.subscriptionToOrg !== undefined) {
       this.subscriptionToOrg.unsubscribe();
     }
   }
-/*
-receive last clink on the map
+/**
+ * Receive last clink on the map
  */
   onMapClick(e: LeafletMouseEvent) {
     if (this.select) {
@@ -185,8 +185,8 @@ receive last clink on the map
       this.markers.push(m);
     }
   }
-  /*
-  Create data of place of organization through API method
+  /**
+   * Create data of place of organization through API method
    */
   onCreate() {
     const newPlace: Place = {

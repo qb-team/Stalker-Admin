@@ -1,0 +1,1692 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>AccessService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/api/access.service.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>API for request the authenticated accesses in an organization or place registered of one or more users</p>
+
+            </p>
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="../injectables/GeneralService.html" target="_self" >GeneralService</a></code>
+            </p>
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAuthenticatedAccessListInOrganization">getAuthenticatedAccessListInOrganization</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAuthenticatedAccessListInOrganization">getAuthenticatedAccessListInOrganization</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAuthenticatedAccessListInOrganization">getAuthenticatedAccessListInOrganization</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAuthenticatedAccessListInOrganization">getAuthenticatedAccessListInOrganization</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAuthenticatedAccessListInPlace">getAuthenticatedAccessListInPlace</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAuthenticatedAccessListInPlace">getAuthenticatedAccessListInPlace</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAuthenticatedAccessListInPlace">getAuthenticatedAccessListInPlace</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAuthenticatedAccessListInPlace">getAuthenticatedAccessListInPlace</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(httpClient: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, basePath: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, configuration: <a href="../classes/Configuration.html">Configuration</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/api/access.service.ts:24</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Create object for http request. In this case, it create object for request the authenticated accesses in an organization or place registered of one or more users</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>httpClient</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>object for http request</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>basePath</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>The URL of the server (and the database) -&gt; IP:port</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>configuration</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/Configuration.html" target="_self" >Configuration</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>object that contain Token firebase and key for firebase</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthenticatedAccessListInOrganization"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getAuthenticatedAccessListInOrganization
+                        </b>
+                        <a href="#getAuthenticatedAccessListInOrganization"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthenticatedAccessListInOrganization(orgAuthServerIds: Array<string>, organizationId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, options?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">src/api/access.service.ts:45</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas).
+Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>orgAuthServerIds</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>organizationId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>ID of an organization.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>flag to report request and response progress.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>metadata for http request</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/OrganizationAccess.html" target="_self" >Observable&lt;Array&lt;OrganizationAccess&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>a observable array of access into organization</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthenticatedAccessListInOrganization"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getAuthenticatedAccessListInOrganization
+                        </b>
+                        <a href="#getAuthenticatedAccessListInOrganization"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthenticatedAccessListInOrganization(orgAuthServerIds: Array<string>, organizationId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, options?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/api/access.service.ts:56</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas).
+Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>orgAuthServerIds</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>organizationId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>ID of an organization.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>flag to report request and response progress.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>metadata for http request</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/OrganizationAccess.html" target="_self" >Observable&lt;HttpResponse&lt;Array&lt;OrganizationAccess&gt;&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>a observable array of access into organization</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthenticatedAccessListInOrganization"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getAuthenticatedAccessListInOrganization
+                        </b>
+                        <a href="#getAuthenticatedAccessListInOrganization"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthenticatedAccessListInOrganization(orgAuthServerIds: Array<string>, organizationId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, options?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="67"
+                            class="link-to-prism">src/api/access.service.ts:67</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas).
+Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>orgAuthServerIds</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>organizationId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>ID of an organization.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>flag to report request and response progress.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>metadata for http request</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/OrganizationAccess.html" target="_self" >Observable&lt;HttpEvent&lt;Array&lt;OrganizationAccess&gt;&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>a observable array of access into organization</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthenticatedAccessListInOrganization"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getAuthenticatedAccessListInOrganization
+                        </b>
+                        <a href="#getAuthenticatedAccessListInOrganization"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthenticatedAccessListInOrganization(orgAuthServerIds: Array<string>, organizationId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, observe: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, reportProgress: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, options?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/api/access.service.ts:78</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas).
+Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>orgAuthServerIds</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        <p>One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>organizationId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        <p>ID of an organization.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>&#x27;body&#x27;</code>
+                                    </td>
+
+                                    <td>
+                                        <p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>false</code>
+                                    </td>
+
+                                    <td>
+                                        <p>flag to report request and response progress.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        <p>metadata for http request</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>a observable array of access into organization</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthenticatedAccessListInPlace"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getAuthenticatedAccessListInPlace
+                        </b>
+                        <a href="#getAuthenticatedAccessListInPlace"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthenticatedAccessListInPlace(orgAuthServerIds: Array<string>, placeId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, options?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="134"
+                            class="link-to-prism">src/api/access.service.ts:134</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas).
+Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>orgAuthServerIds</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>placeId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>ID of a place.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>flag to report request and response progress.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>metadata for http request</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;Array&lt;PlaceAccess&gt;&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>a observable array of access into place of organization</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthenticatedAccessListInPlace"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getAuthenticatedAccessListInPlace
+                        </b>
+                        <a href="#getAuthenticatedAccessListInPlace"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthenticatedAccessListInPlace(orgAuthServerIds: Array<string>, placeId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, options?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="145"
+                            class="link-to-prism">src/api/access.service.ts:145</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas).
+Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>orgAuthServerIds</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>placeId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>ID of a place.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>flag to report request and response progress.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>metadata for http request</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;HttpResponse&lt;Array&lt;PlaceAccess&gt;&gt;&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>a observable array of access into place of organization</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthenticatedAccessListInPlace"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getAuthenticatedAccessListInPlace
+                        </b>
+                        <a href="#getAuthenticatedAccessListInPlace"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthenticatedAccessListInPlace(orgAuthServerIds: Array<string>, placeId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, options?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="156"
+                            class="link-to-prism">src/api/access.service.ts:156</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas).
+Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>orgAuthServerIds</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>placeId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>ID of a place.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>flag to report request and response progress.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>metadata for http request</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;HttpEvent&lt;Array&lt;PlaceAccess&gt;&gt;&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>a observable array of access into place of organization</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthenticatedAccessListInPlace"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getAuthenticatedAccessListInPlace
+                        </b>
+                        <a href="#getAuthenticatedAccessListInPlace"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthenticatedAccessListInPlace(orgAuthServerIds: Array<string>, placeId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, observe: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, reportProgress: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, options?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="167"
+                            class="link-to-prism">src/api/access.service.ts:167</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas).
+Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>orgAuthServerIds</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        <p>One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>placeId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        <p>ID of a place.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>&#x27;body&#x27;</code>
+                                    </td>
+
+                                    <td>
+                                        <p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>false</code>
+                                    </td>
+
+                                    <td>
+                                        <p>flag to report request and response progress.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        <p>metadata for http request</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>a observable array of access into place of organization</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable, Optional } from &#x27;@angular/core&#x27;;
+import {
+  HttpClient, HttpHeaders, HttpParams,
+  HttpResponse, HttpEvent, HttpParameterCodec, HttpErrorResponse
+} from &#x27;@angular/common/http&#x27;;
+import { CustomHttpParameterCodec } from &#x27;../encoder&#x27;;
+import {Observable, throwError} from &#x27;rxjs&#x27;;
+
+import { OrganizationAccess } from &#x27;../model/models&#x27;;
+import { PlaceAccess } from &#x27;../model/models&#x27;;
+
+import { BASE_PATH, COLLECTION_FORMATS } from &#x27;../variables&#x27;;
+import { Configuration } from &#x27;../configuration&#x27;;
+import {catchError} from &#x27;rxjs/operators&#x27;;
+import {GeneralService} from &#x27;./general.service&#x27;;
+
+/**
+ *  API for request the authenticated accesses in an organization or place registered of one or more users
+ */
+
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class AccessService extends GeneralService {
+  /**
+   * Create object for http request. In this case, it create object for request the authenticated accesses in an organization or place registered of one or more users
+   * @param {HttpClient} httpClient object for http request
+   * @param {string} basePath The URL of the server (and the database) -&gt; IP:port
+   * @param {Configuration} configuration object that contain Token firebase and key for firebase
+   */
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+      super(httpClient, basePath, configuration);
+    }
+
+    /**
+     * Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas).
+     * Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.
+     * @param {Array&lt;string&gt;} orgAuthServerIds One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.
+     * @param {number} organizationId ID of an organization.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param {boolean}reportProgress flag to report request and response progress.
+     * @param options metadata for http request
+     * @returns a observable array of access into organization
+     */
+    public getAuthenticatedAccessListInOrganization(orgAuthServerIds: Array&lt;string&gt;, organizationId: number, observe?: &#x27;body&#x27;, reportProgress?: boolean, options?: {httpHeaderAccept?: &#x27;application/json&#x27;}): Observable&lt;Array&lt;OrganizationAccess&gt;&gt;;
+  /**
+   * Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas).
+   * Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.
+   * @param {Array&lt;string&gt;} orgAuthServerIds One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.
+   * @param {number} organizationId ID of an organization.
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param {boolean}reportProgress flag to report request and response progress.
+   * @param options metadata for http request
+   * @returns a observable array of access into organization
+   */
+    public getAuthenticatedAccessListInOrganization(orgAuthServerIds: Array&lt;string&gt;, organizationId: number, observe?: &#x27;response&#x27;, reportProgress?: boolean, options?: {httpHeaderAccept?: &#x27;application/json&#x27;}): Observable&lt;HttpResponse&lt;Array&lt;OrganizationAccess&gt;&gt;&gt;;
+  /**
+   * Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas).
+   * Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.
+   * @param {Array&lt;string&gt;} orgAuthServerIds One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.
+   * @param {number} organizationId ID of an organization.
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param {boolean}reportProgress flag to report request and response progress.
+   * @param options metadata for http request
+   * @returns a observable array of access into organization
+   */
+    public getAuthenticatedAccessListInOrganization(orgAuthServerIds: Array&lt;string&gt;, organizationId: number, observe?: &#x27;events&#x27;, reportProgress?: boolean, options?: {httpHeaderAccept?: &#x27;application/json&#x27;}): Observable&lt;HttpEvent&lt;Array&lt;OrganizationAccess&gt;&gt;&gt;;
+  /**
+   * Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas).
+   * Returns all the authenticated accesses in an organization registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.
+   * @param {Array&lt;string&gt;} orgAuthServerIds One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.
+   * @param {number} organizationId ID of an organization.
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param {boolean}reportProgress flag to report request and response progress.
+   * @param options metadata for http request
+   * @returns a observable array of access into organization
+   */
+    public getAuthenticatedAccessListInOrganization(orgAuthServerIds: Array&lt;string&gt;, organizationId: number, observe: any &#x3D; &#x27;body&#x27;, reportProgress: boolean &#x3D; false, options?: {httpHeaderAccept?: &#x27;application/json&#x27;}): Observable&lt;any&gt; {
+        if (orgAuthServerIds &#x3D;&#x3D;&#x3D; null || orgAuthServerIds &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Required parameter orgAuthServerIds was null or undefined when calling getAuthenticatedAccessListInOrganization.&#x27;);
+        }
+        if (organizationId &#x3D;&#x3D;&#x3D; null || organizationId &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Required parameter organizationId was null or undefined when calling getAuthenticatedAccessListInOrganization.&#x27;);
+        }
+
+        let headers &#x3D; this.defaultHeaders;
+
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken &#x3D; typeof this.configuration.accessToken &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers &#x3D; headers.set(&#x27;Authorization&#x27;, &#x27;Bearer &#x27; + accessToken);
+        }
+        let httpHeaderAcceptSelected: string | undefined &#x3D; options &amp;&amp; options.httpHeaderAccept;
+        if (httpHeaderAcceptSelected &#x3D;&#x3D;&#x3D; undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] &#x3D; [
+                &#x27;application/json&#x27;
+            ];
+            httpHeaderAcceptSelected &#x3D; this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (httpHeaderAcceptSelected !&#x3D;&#x3D; undefined) {
+            headers &#x3D; headers.set(&#x27;Accept&#x27;, httpHeaderAcceptSelected);
+        }
+
+
+        let responseType: &#x27;text&#x27; | &#x27;json&#x27; &#x3D; &#x27;json&#x27;;
+        if (httpHeaderAcceptSelected &amp;&amp; httpHeaderAcceptSelected.startsWith(&#x27;text&#x27;)) {
+            responseType &#x3D; &#x27;text&#x27;;
+        }
+
+        return this.httpClient.get&lt;Array&lt;OrganizationAccess&gt;&gt;(&#x60;${this.configuration.basePath}/access/organization/${encodeURIComponent(String(organizationId))}/authenticated/${encodeURIComponent(String(orgAuthServerIds))}&#x60;,
+            {
+                responseType: responseType as any,
+                withCredentials: this.configuration.withCredentials,
+                headers,
+                observe,
+                reportProgress
+            }
+        ).pipe(catchError((err: HttpErrorResponse) &#x3D;&gt; throwError(err)));
+    }
+
+    /**
+     * Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas).
+     * Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.
+     * @param {Array&lt;string&gt;} orgAuthServerIds One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.
+     * @param {number} placeId ID of a place.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param {boolean} reportProgress flag to report request and response progress.
+     * @param options metadata for http request
+     * @returns a observable array of access into place of organization
+     */
+    public getAuthenticatedAccessListInPlace(orgAuthServerIds: Array&lt;string&gt;, placeId: number, observe?: &#x27;body&#x27;, reportProgress?: boolean, options?: {httpHeaderAccept?: &#x27;application/json&#x27;}): Observable&lt;Array&lt;PlaceAccess&gt;&gt;;
+  /**
+   * Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas).
+   * Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.
+   * @param {Array&lt;string&gt;} orgAuthServerIds One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.
+   * @param {number} placeId ID of a place.
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param {boolean} reportProgress flag to report request and response progress.
+   * @param options metadata for http request
+   * @returns a observable array of access into place of organization
+   */
+    public getAuthenticatedAccessListInPlace(orgAuthServerIds: Array&lt;string&gt;, placeId: number, observe?: &#x27;response&#x27;, reportProgress?: boolean, options?: {httpHeaderAccept?: &#x27;application/json&#x27;}): Observable&lt;HttpResponse&lt;Array&lt;PlaceAccess&gt;&gt;&gt;;
+  /**
+   * Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas).
+   * Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.
+   * @param {Array&lt;string&gt;} orgAuthServerIds One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.
+   * @param {number} placeId ID of a place.
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param {boolean} reportProgress flag to report request and response progress.
+   * @param options metadata for http request
+   * @returns a observable array of access into place of organization
+   */
+    public getAuthenticatedAccessListInPlace(orgAuthServerIds: Array&lt;string&gt;, placeId: number, observe?: &#x27;events&#x27;, reportProgress?: boolean, options?: {httpHeaderAccept?: &#x27;application/json&#x27;}): Observable&lt;HttpEvent&lt;Array&lt;PlaceAccess&gt;&gt;&gt;;
+  /**
+   * Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas).
+   * Returns all the authenticated accesses in a place registered of one or more users (orgAuthServerIds are separated by commas) that are fully registered. Fully registered means that there are both the entrance and the exit timestamp. Both app users and web-app administrators can access this end-point.
+   * @param {Array&lt;string&gt;} orgAuthServerIds One or more orgAuthServerIds. If it is called by the app user, the orgAuthServerIds parameter can only consist in one identifier. Otherwise it can be more than one identifier.
+   * @param {number} placeId ID of a place.
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param {boolean} reportProgress flag to report request and response progress.
+   * @param options metadata for http request
+   * @returns a observable array of access into place of organization
+   */
+    public getAuthenticatedAccessListInPlace(orgAuthServerIds: Array&lt;string&gt;, placeId: number, observe: any &#x3D; &#x27;body&#x27;, reportProgress: boolean &#x3D; false, options?: {httpHeaderAccept?: &#x27;application/json&#x27;}): Observable&lt;any&gt; {
+        if (orgAuthServerIds &#x3D;&#x3D;&#x3D; null || orgAuthServerIds &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Required parameter orgAuthServerIds was null or undefined when calling getAuthenticatedAccessListInPlace.&#x27;);
+        }
+        if (placeId &#x3D;&#x3D;&#x3D; null || placeId &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Required parameter placeId was null or undefined when calling getAuthenticatedAccessListInPlace.&#x27;);
+        }
+
+        let headers &#x3D; this.defaultHeaders;
+
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken &#x3D; typeof this.configuration.accessToken &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers &#x3D; headers.set(&#x27;Authorization&#x27;, &#x27;Bearer &#x27; + accessToken);
+        }
+        let httpHeaderAcceptSelected: string | undefined &#x3D; options &amp;&amp; options.httpHeaderAccept;
+        if (httpHeaderAcceptSelected &#x3D;&#x3D;&#x3D; undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] &#x3D; [
+                &#x27;application/json&#x27;
+            ];
+            httpHeaderAcceptSelected &#x3D; this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (httpHeaderAcceptSelected !&#x3D;&#x3D; undefined) {
+            headers &#x3D; headers.set(&#x27;Accept&#x27;, httpHeaderAcceptSelected);
+        }
+
+
+        let responseType: &#x27;text&#x27; | &#x27;json&#x27; &#x3D; &#x27;json&#x27;;
+        if (httpHeaderAcceptSelected &amp;&amp; httpHeaderAcceptSelected.startsWith(&#x27;text&#x27;)) {
+            responseType &#x3D; &#x27;text&#x27;;
+        }
+
+        return this.httpClient.get&lt;Array&lt;PlaceAccess&gt;&gt;(&#x60;${this.configuration.basePath}/access/place/${encodeURIComponent(String(placeId))}/authenticated/${encodeURIComponent(String(orgAuthServerIds))}&#x60;,
+            {
+                responseType: responseType as any,
+                withCredentials: this.configuration.withCredentials,
+                headers,
+                observe,
+                reportProgress
+            }
+        ).pipe(catchError((err: HttpErrorResponse) &#x3D;&gt; throwError(err)));
+    }
+
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'AccessService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

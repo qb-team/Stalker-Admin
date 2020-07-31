@@ -1,6 +1,6 @@
-/*
-* A side-menu that offers all the functionalities available for the administrator on the current organization
-*/
+/**
+ * A side-menu that offers all the functionalities available for the administrator on the current organization
+ */
 import {Component, OnInit} from '@angular/core';
 import { AdministratorOrganizationDataService } from '../services/AdministratorOrganizationData.service';
 import {Router} from '@angular/router';
@@ -17,9 +17,9 @@ export class MenuFunctionalityComponent implements OnInit {
   private index = 0;
   private permession: Permission[] = []; // contain the permissions of the administrator
   constructor(private ads: AdministratorOrganizationDataService, private apd: AdministratorPermissionDataService, private router: Router ) { }
-  /*
- * Subscribes to the service 'DataService' to retrive the current specific-component to be showed
- */
+  /**
+   * Subscribes to the service 'DataService' to retrive the current specific-component to be showed
+   */
   ngOnInit(): void {
     this.ads.getOrganization.subscribe((org: Organization) => {
       this.router.navigateByUrl('Content-panel/Panel/Homepage');
@@ -31,16 +31,16 @@ export class MenuFunctionalityComponent implements OnInit {
       this.refresch();
     });
   }
-/*
-Select the correct functionality
+/**
+ * Select the correct functionality
  */
   updateContent(click: any) {
     let route = click.target.innerHTML;
     route = route.replace(/ /g, '_');
     this.router.navigateByUrl('/Content-panel/Panel/' + route);
   }
-/*
-Update permissions of the administartor
+/**
+ * Update permissions of the administrator
  */
   refresch() {
     let flag = false;

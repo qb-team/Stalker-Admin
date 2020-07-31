@@ -1,4 +1,4 @@
-/*
+/**
  * Vertical menu in the panel control
  */
 import {AfterContentInit, Component, OnInit} from '@angular/core';
@@ -18,14 +18,14 @@ export class MenubarComponent implements OnInit, AfterContentInit {
   private Organization: Organization; // contain the current organization
   private OrgArr: Organization[]; // contain a list of organization
   constructor(private ads: AdministratorOrganizationDataService, private authenticationService: AuthenticationService, private os: OrganizationService, private router: Router/*, private activatedRoute: ActivatedRoute*/, private ldapS: LdapService ) { }
-  /*
+  /**
    * Initialization and refresh the list of organization
    */
   ngOnInit() {
     this.loadOrganizationList();
   }
-  /*
-  load a list of organization
+  /**
+   * load a list of organization
    */
   loadOrganizationList() {
     this.ads.getAdminOrganizations.subscribe((orgs: Array<Organization>) => {
@@ -37,7 +37,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
     this.ads.getOrganization.next(this.Organization);
   }
 
-  /*
+  /**
    * It updates the name of organization selected
    */
   setOrganization(idx: number) {
@@ -48,7 +48,7 @@ export class MenubarComponent implements OnInit, AfterContentInit {
     this.ads.getOrganization.next(this.Organization);
   }
 
-  /*
+  /**
    * It calls function SignOut of the service
    */
   signOut() {
@@ -57,14 +57,14 @@ export class MenubarComponent implements OnInit, AfterContentInit {
     this.navigateToLogin();
   }
 
-  /*
+  /**
    * It updates value of active_content for show Home page
    */
   homePage() {
     this.router.navigateByUrl('/Content-panel/Panel/Homepage');
   }
-  /*
-  call component Login
+  /**
+   * call component Login
    */
   navigateToLogin() {
     this.router.navigateByUrl('/Login');
