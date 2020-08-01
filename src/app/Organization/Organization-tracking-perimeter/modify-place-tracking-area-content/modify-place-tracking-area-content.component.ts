@@ -14,11 +14,11 @@ import * as L from 'leaflet';
 export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestroy {
 
   private currentOrganization: Organization;
-  /*
+  /**
   * A string to store the coordinates of the organization's perimeter in json format
   */
   private jsonCoordinates: string;
-  /*
+  /**
   * The coordinates of the organization's perimeter
   */
   private subscriptionToOrg: Subscription;
@@ -47,9 +47,9 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
   ngOnInit(): void {
     this.loadPlaceList();
   }
-  /*
-  Load a list of places
- */
+  /**
+   * Load a list of places
+   */
   loadPlaceList() {
     this.ads.getOrganization.subscribe((org: Organization) => {
       this.PlaceArr = [];
@@ -64,14 +64,14 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
       }
     });
   }
-  /*
-  Set the current place
- */
+  /**
+   * Set the current place
+   */
   setPlace(click: any) {
     this.currentPlace = this.PlaceArr[click.target.attributes.id.value];
   }
-  /*
-  Receive the data from the map
+  /**
+   * Receive the data from the map
    */
   receiveMap(map: Map) {
     this.map = map;
@@ -83,23 +83,23 @@ export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestro
       }
     });
   }
-  /*
-  Receive a new zoom on the map
- */
+  /**
+   * Receive a new zoom on the map
+   */
   receiveZoom(zoom: number) {
     this.zoom = zoom;
   }
-  /*
-Destroy a subscription
-*/
+  /**
+   * Destroy a subscription
+   */
   ngOnDestroy() {
     if (this.subscriptionToOrg !== undefined) {
       this.subscriptionToOrg.unsubscribe();
     }
   }
-  /*
- Receive last clink on the map
-*/
+  /**
+   * Receive last clink on the map
+   */
   onMapClick(e: LeafletMouseEvent) {
     if (this.change) {
       this.Arltn.push(e.latlng.lat);
@@ -108,9 +108,9 @@ Destroy a subscription
       this.markers.push(m);
     }
   }
-  /*
-  Update the place tracking perimeter's
-  */
+  /**
+   * Update the place tracking perimeter's
+   */
   onModify() {
     if (this.Arltn.length >= 3) {
       let track: string = '{\n' + '"Organizzazioni": [\n';
@@ -139,8 +139,8 @@ Destroy a subscription
       alert('Errore. inserisci almeno 3 punti.');
     }
   }
-  /*
-  Remove points from the map
+  /**
+   * Remove points from the map
    */
   resetP() {
     for (let i = 0; i < this.Arltn.length; i++) {
@@ -150,8 +150,8 @@ Destroy a subscription
     this.Arlong = [];
     this.markers = [];
   }
-  /*
-  Remove last point from the map
+  /**
+   * Remove last point from the map
    */
   removeLastMarker() {
     this.map.removeLayer(this.markers[this.markers.length - 1]);

@@ -41,8 +41,8 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
       this.currentOrganization = org;
     });
   }
-  /*
-  Receive the data from the map
+  /**
+   * Receive the data from the map
    */
   receiveMap(map: Map) {
     this.map = map;
@@ -54,23 +54,23 @@ export class ModifyOrganizationTrackingAreaContentComponent implements OnInit, O
       }
     });
   }
-  /*
-  Receive a new zoom on the map
- */
+  /**
+   * Receive a new zoom on the map
+   */
   receiveZoom(zoom: number) {
     this.zoom = zoom;
   }
-  /*
-Destroy a subscription
- */
+  /**
+   * Destroy a subscription
+   */
   ngOnDestroy() {
     if (this.subscriptionToOrg !== undefined) {
       this.subscriptionToOrg.unsubscribe();
     }
   }
-  /*
-  Receive last clink on the map
- */
+  /**
+   * Receive last clink on the map
+   */
   onMapClick(e: LeafletMouseEvent) {
     if (this.change) {
       this.Arltn.push(e.latlng.lat);
@@ -79,8 +79,8 @@ Destroy a subscription
       this.markers.push(m);
     }
   }
-  /*
-  Update the organization tracking perimeter's
+  /**
+   * Update the organization tracking perimeter's
    */
   onModify() {
     if (this.Arltn.length >= 3) {
@@ -110,8 +110,8 @@ Destroy a subscription
       alert('Errore inserisci almeno 3 punti');
     }
   }
-  /*
-  Remove points from the map
+  /**
+   * Remove points from the map
    */
   resetP() {
     for (let i = 0; i < this.Arltn.length; i++) {
@@ -121,8 +121,8 @@ Destroy a subscription
     this.Arlong = [];
     this.markers = [];
   }
-  /*
-  Remove last point from the map
+  /**
+   * Remove last point from the map
    */
   removeLastMarker() {
     this.map.removeLayer(this.markers[this.markers.length - 1]);

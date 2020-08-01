@@ -14,13 +14,31 @@ import {Cloudinary} from '@cloudinary/angular-5.x';
 })
 export class OrganizationManagementContentComponent implements OnInit {
   @Input()
-  private responses: Array<any>; // date of cloudinary
+  /**
+   *  date of cloudinary
+   */
+  private responses: Array<any>;
   hasBaseDropZoneOver = false;
-  uploader: FileUploader; // contain the image got to HTML form
-  private flag = false; // for check form load img
-  private flagError = false; // for check that the values are corrects
-  private name: string; // contain name of organization
-  private street: string; // contain street of organization
+  /**
+   * Contain the image got to HTML form
+   */
+  uploader: FileUploader;
+  /**
+   *  For check form load img
+   */
+  private flag = false;
+  /**
+   * For check that the values are corrects
+   */
+  private flagError = false;
+  /**
+   * Contain name of organization
+   */
+  private name: string;
+  /**
+   * Contain street of organization
+   */
+  private street: string;
   private number: string; // contain number of organization
   private postCode: number; // contain postCode of organization
   private city: string; // contain city of organization
@@ -112,8 +130,8 @@ export class OrganizationManagementContentComponent implements OnInit {
 
     };
 
-    /*
-     Update model on completion of uploading a file
+    /**
+     * Update model on completion of uploading a file
      */
     this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) =>
       upsertResponse(
@@ -124,8 +142,8 @@ export class OrganizationManagementContentComponent implements OnInit {
         }
       );
 
-    /*
-     Update model on upload progress event
+    /**
+     * Update model on upload progress event
      */
     this.uploader.onProgressItem = (fileItem: any, progress: any) =>
       upsertResponse(
@@ -141,8 +159,8 @@ export class OrganizationManagementContentComponent implements OnInit {
     this.hasBaseDropZoneOver = e;
   }
 
-  /*
-   Setup form for modify data of organization
+  /**
+   * Setup form for modify data of organization
    */
   private setupModifyForm() {
     this.modifyForm = new FormGroup({
@@ -162,15 +180,15 @@ export class OrganizationManagementContentComponent implements OnInit {
     });
   }
 
-  /*
-   change value of this.change
+  /**
+   * Change value of this.change
    */
   onChange(val: string) {
     this.change = val;
   }
 
-  /*
-   Modify data of organization through API method
+  /**
+   * Modify data of organization through API method
    */
   onModify() {
       const d = new Date();
@@ -288,21 +306,21 @@ export class OrganizationManagementContentComponent implements OnInit {
       this.flag = false;
   }
 
-  /*
-  Check if the input string is valid
+  /**
+   * Check if the input string is valid
    */
   checkStringValidity(str: string) {
     return str !== undefined && str !== null && str.trim().length > 0;
   }
 
-  /*
-   Check if the input number is valid
+  /**
+   * Check if the input number is valid
    */
   checkNumberValidity(x: number) {
     return x !== undefined && x !== null && x > 0;
   }
-  /*
-  Remove data of organization through API method
+  /**
+   * Remove data of organization through API method
    */
   onRemove() {
     const delReq: OrganizationDeletionRequest = {

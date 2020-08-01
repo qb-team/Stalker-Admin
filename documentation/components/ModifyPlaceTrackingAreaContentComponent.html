@@ -1,0 +1,1797 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>ModifyPlaceTrackingAreaContentComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-modify-place-tracking-area-content</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./modify-place-tracking-area-content.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./modify-place-tracking-area-content.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#Arlong">Arlong</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#Arltn">Arltn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#change">change</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#currentOrganization">currentOrganization</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#currentPlace">currentPlace</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#jsonCoordinates">jsonCoordinates</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#map">map</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#markerIcon">markerIcon</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#markers">markers</a>
+                            </li>
+                            <li>
+                                <a href="#PlaceArr">PlaceArr</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscriptionToOrg">subscriptionToOrg</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#zoom">zoom</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#loadPlaceList">loadPlaceList</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onMapClick">onMapClick</a>
+                            </li>
+                            <li>
+                                <a href="#onModify">onModify</a>
+                            </li>
+                            <li>
+                                <a href="#receiveMap">receiveMap</a>
+                            </li>
+                            <li>
+                                <a href="#receiveZoom">receiveZoom</a>
+                            </li>
+                            <li>
+                                <a href="#removeLastMarker">removeLastMarker</a>
+                            </li>
+                            <li>
+                                <a href="#resetP">resetP</a>
+                            </li>
+                            <li>
+                                <a href="#setPlace">setPlace</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#getCurrentOrg">getCurrentOrg</a>
+                                </li>
+                                <li>
+                                    <a href="#Change">Change</a>
+                                </li>
+                                <li>
+                                    <a href="#CurrentPlace">CurrentPlace</a>
+                                </li>
+                                <li>
+                                    <a href="#Markers">Markers</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(ads: <a href="../injectables/AdministratorOrganizationDataService.html">AdministratorOrganizationDataService</a>, plS: <a href="../injectables/PlaceService.html">PlaceService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:42</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>ads</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AdministratorOrganizationDataService.html" target="_self" >AdministratorOrganizationDataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>plS</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PlaceService.html" target="_self" >PlaceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadPlaceList"></a>
+                    <span class="name">
+                        <b>
+                            loadPlaceList
+                        </b>
+                        <a href="#loadPlaceList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadPlaceList()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:53</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Load a list of places</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <b>
+                            ngOnDestroy
+                        </b>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="95"
+                            class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:95</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Destroy a subscription</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:47</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onMapClick"></a>
+                    <span class="name">
+                        <b>
+                            onMapClick
+                        </b>
+                        <a href="#onMapClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onMapClick(e: LeafletMouseEvent)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="103"
+                            class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:103</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Receive last clink on the map</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>e</td>
+                                    <td>
+                                            <code>LeafletMouseEvent</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onModify"></a>
+                    <span class="name">
+                        <b>
+                            onModify
+                        </b>
+                        <a href="#onModify"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onModify()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="114"
+                            class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:114</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Update the place tracking perimeter&#39;s</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="receiveMap"></a>
+                    <span class="name">
+                        <b>
+                            receiveMap
+                        </b>
+                        <a href="#receiveMap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>receiveMap(map: Map)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="76"
+                            class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:76</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Receive the data from the map</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>map</td>
+                                    <td>
+                                            <code>Map</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="receiveZoom"></a>
+                    <span class="name">
+                        <b>
+                            receiveZoom
+                        </b>
+                        <a href="#receiveZoom"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>receiveZoom(zoom: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:89</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Receive a new zoom on the map</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>zoom</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeLastMarker"></a>
+                    <span class="name">
+                        <b>
+                            removeLastMarker
+                        </b>
+                        <a href="#removeLastMarker"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeLastMarker()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="156"
+                            class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:156</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Remove last point from the map</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetP"></a>
+                    <span class="name">
+                        <b>
+                            resetP
+                        </b>
+                        <a href="#resetP"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetP()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="145"
+                            class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:145</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Remove points from the map</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setPlace"></a>
+                    <span class="name">
+                        <b>
+                            setPlace
+                        </b>
+                        <a href="#setPlace"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setPlace(click: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:70</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Set the current place</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>click</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="Arlong"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            Arlong</b>
+                            <a href="#Arlong"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>number[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="Arltn"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            Arltn</b>
+                            <a href="#Arltn"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>number[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="change"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            change</b>
+                            <a href="#change"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentOrganization"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            currentOrganization</b>
+                            <a href="#currentOrganization"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Organization</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:16</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentPlace"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            currentPlace</b>
+                            <a href="#currentPlace"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/Place.html" target="_self" >Place</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="jsonCoordinates"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            jsonCoordinates</b>
+                            <a href="#jsonCoordinates"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>A string to store the coordinates of the organization&#39;s perimeter in json format</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="map"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            map</b>
+                            <a href="#map"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Map</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="markerIcon"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            markerIcon</b>
+                            <a href="#markerIcon"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>icon({
+    iconUrl: &#x27;https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png&#x27;,
+    shadowUrl: &#x27;https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png&#x27;,
+
+    iconSize:    [20, 50], // size of the icon
+    iconAnchor:   [10, 50], // point of the icon which will correspond to marker&#x27;s location
+    shadowAnchor: [15, 40],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+
+  })</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="markers"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            markers</b>
+                            <a href="#markers"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="PlaceArr"></a>
+                        <span class="name">
+                            <b>
+                            PlaceArr</b>
+                            <a href="#PlaceArr"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/Place.html" target="_self" >Array&lt;Place&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="subscriptionToOrg"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            subscriptionToOrg</b>
+                            <a href="#subscriptionToOrg"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Subscription</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The coordinates of the organization&#39;s perimeter</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="zoom"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            zoom</b>
+                            <a href="#zoom"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getCurrentOrg"></a>
+                        <span class="name"><b>getCurrentOrg</b><a href="#getCurrentOrg"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>getCurrentOrg()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="163" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:163</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="Change"></a>
+                        <span class="name"><b>Change</b><a href="#Change"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>Change()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="168" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:168</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>Change(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:172</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="CurrentPlace"></a>
+                        <span class="name"><b>CurrentPlace</b><a href="#CurrentPlace"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>CurrentPlace()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:176</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="Markers"></a>
+                        <span class="name"><b>Markers</b><a href="#Markers"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>Markers()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="180" class="link-to-prism">src/app/Organization/Organization-tracking-perimeter/modify-place-tracking-area-content/modify-place-tracking-area-content.component.ts:180</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnDestroy, OnInit} from &#x27;@angular/core&#x27;;
+import {Organization, OrganizationService, Place, PlaceService} from &#x27;../../../..&#x27;;
+import {AdministratorOrganizationDataService} from &#x27;../../../services/AdministratorOrganizationData.service&#x27;;
+import {HttpErrorResponse} from &#x27;@angular/common/http&#x27;;
+import {Subscription} from &#x27;rxjs&#x27;;
+import {icon, LeafletMouseEvent, Map} from &#x27;leaflet&#x27;;
+import * as L from &#x27;leaflet&#x27;;
+
+@Component({
+  selector: &#x27;app-modify-place-tracking-area-content&#x27;,
+  templateUrl: &#x27;./modify-place-tracking-area-content.component.html&#x27;,
+  styleUrls: [&#x27;./modify-place-tracking-area-content.component.css&#x27;]
+})
+export class ModifyPlaceTrackingAreaContentComponent implements OnInit, OnDestroy {
+
+  private currentOrganization: Organization;
+  /**
+  * A string to store the coordinates of the organization&#x27;s perimeter in json format
+  */
+  private jsonCoordinates: string;
+  /**
+  * The coordinates of the organization&#x27;s perimeter
+  */
+  private subscriptionToOrg: Subscription;
+  private map: Map; // contain th object that represent a interactive map
+  private zoom: number; // contain current zoom
+  private Arltn: number[] &#x3D; []; // contain a list of latitudes
+  private Arlong: number[] &#x3D; []; // contain a list of longitudes
+  private change &#x3D; false; // allow to show the correct form
+  private markers &#x3D; []; // contain a list of markers of the map
+  PlaceArr: Array&lt;Place&gt;; // contain a list of places of organization
+  private currentPlace: Place; // contain current place
+  private markerIcon &#x3D; icon({
+    iconUrl: &#x27;https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png&#x27;,
+    shadowUrl: &#x27;https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png&#x27;,
+
+    iconSize:    [20, 50], // size of the icon
+    iconAnchor:   [10, 50], // point of the icon which will correspond to marker&#x27;s location
+    shadowAnchor: [15, 40],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+
+  });
+
+  constructor( private ads: AdministratorOrganizationDataService, private plS: PlaceService ) {
+  }
+
+  ngOnInit(): void {
+    this.loadPlaceList();
+  }
+  /**
+   * Load a list of places
+   */
+  loadPlaceList() {
+    this.ads.getOrganization.subscribe((org: Organization) &#x3D;&gt; {
+      this.PlaceArr &#x3D; [];
+      this.currentOrganization &#x3D; org;
+      if (org !&#x3D; null) {
+        this.plS.getPlaceListOfOrganization(org.id).subscribe((places: Array&lt;Place&gt;) &#x3D;&gt; {
+          this.PlaceArr &#x3D; places;
+          if (places !&#x3D;&#x3D; undefined &amp;&amp; places !&#x3D;&#x3D; null) {
+             this.currentPlace &#x3D; places[0];
+           }
+        });
+      }
+    });
+  }
+  /**
+   * Set the current place
+   */
+  setPlace(click: any) {
+    this.currentPlace &#x3D; this.PlaceArr[click.target.attributes.id.value];
+  }
+  /**
+   * Receive the data from the map
+   */
+  receiveMap(map: Map) {
+    this.map &#x3D; map;
+    this.subscriptionToOrg &#x3D; this.ads.getOrganization.subscribe((org: Organization) &#x3D;&gt; {
+      if (org !&#x3D;&#x3D; null) {
+        this.jsonCoordinates &#x3D; org.trackingArea;
+        this.map.panTo([JSON.parse(this.jsonCoordinates).Organizzazioni[3].lat, JSON.parse(this.jsonCoordinates).Organizzazioni[3].long]);
+        this.map.zoomIn(9);
+      }
+    });
+  }
+  /**
+   * Receive a new zoom on the map
+   */
+  receiveZoom(zoom: number) {
+    this.zoom &#x3D; zoom;
+  }
+  /**
+   * Destroy a subscription
+   */
+  ngOnDestroy() {
+    if (this.subscriptionToOrg !&#x3D;&#x3D; undefined) {
+      this.subscriptionToOrg.unsubscribe();
+    }
+  }
+  /**
+   * Receive last clink on the map
+   */
+  onMapClick(e: LeafletMouseEvent) {
+    if (this.change) {
+      this.Arltn.push(e.latlng.lat);
+      this.Arlong.push(e.latlng.lng);
+      const m &#x3D; L.marker([e.latlng.lat, e.latlng.lng], {icon: this.markerIcon}).addTo(this.map);
+      this.markers.push(m);
+    }
+  }
+  /**
+   * Update the place tracking perimeter&#x27;s
+   */
+  onModify() {
+    if (this.Arltn.length &gt;&#x3D; 3) {
+      let track: string &#x3D; &#x27;{\n&#x27; + &#x27;&quot;Organizzazioni&quot;: [\n&#x27;;
+      for (let i &#x3D; 0; i + 1 &lt; this.Arltn.length; i++) {
+        track &#x3D; track.concat(&#x27;{\n&#x27; + &#x27;&quot;lat&quot;: &quot;&#x27; + this.Arltn[i] + &#x27;&quot;,\n &quot;long&quot;: &quot;&#x27; + this.Arlong[i] + &#x27;&quot;\n},\n&#x27;);
+      }
+      if (this.Arltn.length &gt;&#x3D; 1) {
+        track &#x3D; track.concat(&#x27;{\n&#x27; + &#x27;&quot;lat&quot;: &quot;&#x27; + this.Arltn[this.Arltn.length - 1] + &#x27;&quot;,\n &quot;long&quot;: &quot;&#x27; + this.Arlong[this.Arltn.length - 1] + &#x27;&quot;\n}\n]\n}&#x27;);
+      }
+      this.resetP();
+      const tmp &#x3D; this.currentPlace;
+      tmp.trackingArea &#x3D; track;
+      this.plS.updatePlace(tmp).subscribe(() &#x3D;&gt; {
+          alert(&#x27;Modifica al perimetro del luogo dell\&#x27;organizzazione effettuata.&#x27;);
+          this.currentPlace.trackingArea &#x3D; track;
+        },
+        (err: HttpErrorResponse) &#x3D;&gt; {
+          if (err.status &#x3D;&#x3D;&#x3D; 400) {
+            alert(&#x27;Errore. I dati inseriti non sono validi, l\&#x27;area di tracciamento inserita non è valida. L\&#x27;area inserita potrebbe fuoriuscire dal perimetro di tracciamento dell\&#x27;organizzazione oppure potrebbe sovrapporsi ad aree di altri luoghi.&#x27;);
+          } else {
+            alert(err.message);
+          }
+        });
+      this.change &#x3D; false;
+    } else {
+      alert(&#x27;Errore. inserisci almeno 3 punti.&#x27;);
+    }
+  }
+  /**
+   * Remove points from the map
+   */
+  resetP() {
+    for (let i &#x3D; 0; i &lt; this.Arltn.length; i++) {
+      this.map.removeLayer(this.markers[i]);
+    }
+    this.Arltn &#x3D; [];
+    this.Arlong &#x3D; [];
+    this.markers &#x3D; [];
+  }
+  /**
+   * Remove last point from the map
+   */
+  removeLastMarker() {
+    this.map.removeLayer(this.markers[this.markers.length - 1]);
+    this.Arltn.pop();
+    this.Arlong.pop();
+    this.markers.pop();
+  }
+
+  get getCurrentOrg(): Organization {
+    return this.currentOrganization;
+
+  }
+
+  get Change(): boolean {
+    return this.change;
+  }
+
+  set Change(value: boolean) {
+    this.change &#x3D; value;
+  }
+
+  get CurrentPlace(): Place {
+    return this.currentPlace;
+  }
+
+  get Markers(): any[] {
+    return this.markers;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!--form [formGroup]&#x3D;&quot;dynamicForm&quot; class&#x3D;&quot;shadow p-4 mb-5 bg-white&quot;&gt;
+  &lt;fieldset&gt;
+    &lt;div class&#x3D;&quot;card m-3&quot;&gt;
+      &lt;div class&#x3D;&quot;card-header &quot;&gt;
+        &lt;h1 class&#x3D;&quot;title&quot; &gt;Modifica del perimetro di tracciamento&lt;/h1&gt;
+        &lt;div class&#x3D;&quot;dropdown&quot; id&#x3D;&quot;lineDiv&quot;&gt;
+          &lt;button class&#x3D;&quot;btn btn-danger dropdown-toggle&quot; type&#x3D;&quot;button&quot; id&#x3D;&quot;dropdownMenuButton&quot; data-toggle&#x3D;&quot;dropdown&quot; aria-haspopup&#x3D;&quot;true&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
+            Luogo
+          &lt;/button&gt;
+          &lt;div class&#x3D;&quot;dropdown-menu&quot; aria-labelledby&#x3D;&quot;dropdownMenuButton&quot;&gt;
+            &lt;a class&#x3D;&quot;dropdown-item&quot;  (click)&#x3D;&quot;setPlace($event)&quot; *ngFor&#x3D;&quot;let o of PlaceArr; index as i&quot; id&#x3D;&quot;{{i}}&quot; &gt;{{o.name}}&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;span *ngIf&#x3D;&quot;CurrentPlace!&#x3D;&#x3D; undefined&quot;&gt; {{CurrentPlace.name}}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;card-body&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;
+            &lt;label for&#x3D;&quot;np&quot;&gt;Numero di punti da inserire&lt;/label&gt;
+            &lt;input id&#x3D;&quot;np&quot; type&#x3D;&quot;text&quot;  class&#x3D;&quot;form-control&quot; #num&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;
+            &lt;br/&gt;
+            &lt;br/&gt;
+            &lt;button id&#x3D;&quot;subnum&quot; (click)&#x3D;&quot;onChangePoints(num.value)&quot; class&#x3D;&quot;btn btn-danger&quot;&gt;Mostra&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div *ngFor&#x3D;&quot;let point of tArray.controls; let i &#x3D; index&quot; class&#x3D;&quot;list-group list-group-flush&quot;&gt;
+        &lt;div class&#x3D;&quot;list-group-item&quot;&gt;
+          &lt;div [formGroup]&#x3D;&quot;point&quot; class&#x3D;&quot;form-row&quot;&gt;
+            &lt;div class&#x3D;&quot;form-group col-6&quot;&gt;
+              &lt;label for&#x3D;&quot;lat&quot;&gt;Latitudine&lt;/label&gt;
+              &lt;input id&#x3D;&quot;lat&quot; type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;lat&quot; class&#x3D;&quot;form-control&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;form-group col-6&quot;&gt;
+              &lt;label for&#x3D;&quot;long&quot;&gt;Longitudine&lt;/label&gt;
+              &lt;input id&#x3D;&quot;long&quot; type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;long&quot; class&#x3D;&quot;form-control&quot; /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;card-footer text-center&quot;&gt;
+        &lt;button class&#x3D;&quot;btn btn-danger mr-1&quot; (click)&#x3D;&quot;onSubmit()&quot; [disabled]&#x3D;&quot;!dynamicForm.valid || !submitted&quot;&gt; Modifica &lt;/button&gt;
+        &lt;button class&#x3D;&quot;btn btn-danger mr-1&quot; type&#x3D;&quot;reset&quot; (click)&#x3D;&quot;onReset()&quot;&gt;Reimposta&lt;/button&gt;
+        &lt;button class&#x3D;&quot;btn btn-danger&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;onClear()&quot;&gt;Pulisci&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+&lt;/form--&gt;
+&lt;h1&gt;Modifica dell&#x27;area di tracciamento di un luogo&lt;/h1&gt;
+&lt;div class&#x3D;&quot;shadow p-4 mb-5 bg-white&quot; *ngIf&#x3D;&quot;this.PlaceArr &#x3D;&#x3D;&#x3D; undefined || this.PlaceArr &#x3D;&#x3D;&#x3D; null || this.PlaceArr.length &lt;&#x3D; 0&quot;&gt;
+  &lt;p&gt;Non ci sono luoghi per l&#x27;organizzazione&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class&#x3D;&quot;shadow p-4 mb-5 bg-white&quot; *ngIf&#x3D;&quot;this.PlaceArr !&#x3D;&#x3D; undefined &amp;&amp; this.PlaceArr !&#x3D;&#x3D; null &amp;&amp; this.PlaceArr.length &gt; 0&quot;&gt;
+  &lt;div class&#x3D;&quot;row&quot;&gt;
+    &lt;div class&#x3D;&quot;col-5&quot;&gt;
+      &lt;p *ngIf&#x3D;&quot;!Change&quot;&gt; Abilita la modifica e seleziona i punti nella mappa per modificare il perimetro di tracciamento &lt;/p&gt;
+      &lt;p *ngIf&#x3D;&quot;Change&quot;&gt; Seleziona i punti nella mappa e clicca il bottone Modifica per modificare il perimetro di tracciamento &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;col-7 text-right&quot;&gt;
+      &lt;button class&#x3D;&quot; btn btn-danger mr-1&quot; *ngIf&#x3D;&quot;!Change&quot; (click)&#x3D;&quot;Change &#x3D; true&quot;&gt; Abilita Modifica &lt;/button&gt;
+      &lt;button class&#x3D;&quot; btn btn-danger mr-1&quot; *ngIf&#x3D;&quot;Change&quot;(click)&#x3D;&quot;Change &#x3D; false&quot;&gt; Disabilita Modifica &lt;/button&gt;
+      &lt;button class&#x3D;&quot; btn btn-danger mr-1&quot; [disabled]&#x3D;&quot;!Change&quot; (click)&#x3D;&quot;onModify()&quot;&gt; Modifica &lt;/button&gt;
+      &lt;button class&#x3D;&quot; btn btn-danger mr-1&quot; *ngIf&#x3D;&quot;Change &amp;&amp; Markers.length &gt; 0&quot; (click)&#x3D;&quot;resetP()&quot;&gt; Annulla punti &lt;/button&gt;
+      &lt;button class&#x3D;&quot; btn btn-danger mr-1&quot; *ngIf&#x3D;&quot;Change &amp;&amp; Markers.length &gt; 0&quot; (click)&#x3D;&quot;removeLastMarker()&quot;&gt; Annulla ultimo punto &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;row&quot;&gt;
+    &lt;div class&#x3D;&quot;dropdown text-center&quot; id&#x3D;&quot;lineDiv&quot;&gt;
+      &lt;button class&#x3D;&quot;btn btn-danger dropdown-toggle&quot; type&#x3D;&quot;button&quot; id&#x3D;&quot;dropdownMenuButton&quot; data-toggle&#x3D;&quot;dropdown&quot; aria-haspopup&#x3D;&quot;true&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
+        Luogo
+      &lt;/button&gt;
+      &lt;div class&#x3D;&quot;dropdown-menu&quot; aria-labelledby&#x3D;&quot;dropdownMenuButton&quot;&gt;
+        &lt;a class&#x3D;&quot;dropdown-item&quot;  (click)&#x3D;&quot;setPlace($event)&quot; *ngFor&#x3D;&quot;let o of PlaceArr; index as i&quot; id&#x3D;&quot;{{i}}&quot; &gt;{{o.name}}&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p id&#x3D;&quot;namp&quot;*ngIf&#x3D;&quot;CurrentPlace!&#x3D;&#x3D; undefined&quot;&gt; {{CurrentPlace.name}}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;container shadow p-4 mb-5 bg-white&quot; *ngIf&#x3D;&quot;this.PlaceArr !&#x3D;&#x3D; undefined &amp;&amp; this.PlaceArr !&#x3D;&#x3D; null &amp;&amp; this.PlaceArr.length &gt; 0&quot;&gt;
+  &lt;app-osm-map-content
+    (map$)&#x3D;&quot;receiveMap($event)&quot;
+    (zoom$)&#x3D;&quot;receiveZoom($event)&quot;
+    (Click$)&#x3D;&quot;onMapClick($event)&quot;
+    id&#x3D;&#x27;modPlace-map&#x27;
+  &gt;&lt;/app-osm-map-content&gt;
+&lt;/div&gt;
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./modify-place-tracking-area-content.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">h1 {
+  font-size: 1.9em;
+}
+label{
+  margin-top: 1em;
+  margin-left: 0.1em;
+}
+
+.title{
+  font-size: 1.8em;
+  display: inline;
+  margin-right: 1em ;
+}
+
+#lineDiv{
+  display: inline;
+  margin-top: 2em;
+  margin-left: 40%;
+}
+
+.container {
+  width:80%;
+  height:40em;
+  top: 20%;
+  left: 10%;
+}
+
+#namp{
+  margin-top: 2.2em;
+  margin-left: 2em;
+}
+
+.btn{
+  margin-bottom: 0.5em;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!--form [formGroup]="dynamicForm" class="shadow p-4 mb-5 bg-white">  <fieldset>    <div class="card m-3">      <div class="card-header ">        <h1 class="title" >Modifica del perimetro di tracciamento</h1>        <div class="dropdown" id="lineDiv">          <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">            Luogo          </button>          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">            <a class="dropdown-item"  (click)="setPlace($event)" *ngFor="let o of PlaceArr; index as i" id="{{i}}" >{{o.name}}</a>          </div>        </div>        <span *ngIf="CurrentPlace!== undefined"> {{CurrentPlace.name}}</span>      </div>      <div class="card-body">        <div class="row">          <div class="col">            <label for="np">Numero di punti da inserire</label>            <input id="np" type="text"  class="form-control" #num>          </div>          <div class="col">            <br/>            <br/>            <button id="subnum" (click)="onChangePoints(num.value)" class="btn btn-danger">Mostra</button>          </div>        </div>      </div>      <div *ngFor="let point of tArray.controls; let i = index" class="list-group list-group-flush">        <div class="list-group-item">          <div [formGroup]="point" class="form-row">            <div class="form-group col-6">              <label for="lat">Latitudine</label>              <input id="lat" type="text" formControlName="lat" class="form-control" />            </div>            <div class="form-group col-6">              <label for="long">Longitudine</label>              <input id="long" type="text" formControlName="long" class="form-control" />            </div>          </div>        </div>      </div>      <div class="card-footer text-center">        <button class="btn btn-danger mr-1" (click)="onSubmit()" [disabled]="!dynamicForm.valid || !submitted"> Modifica </button>        <button class="btn btn-danger mr-1" type="reset" (click)="onReset()">Reimposta</button>        <button class="btn btn-danger" type="button" (click)="onClear()">Pulisci</button>      </div>    </div>  </fieldset></form--><h1>Modifica dell\'area di tracciamento di un luogo</h1><div class="shadow p-4 mb-5 bg-white" *ngIf="this.PlaceArr === undefined || this.PlaceArr === null || this.PlaceArr.length <= 0">  <p>Non ci sono luoghi per l\'organizzazione</p></div><div class="shadow p-4 mb-5 bg-white" *ngIf="this.PlaceArr !== undefined && this.PlaceArr !== null && this.PlaceArr.length > 0">  <div class="row">    <div class="col-5">      <p *ngIf="!Change"> Abilita la modifica e seleziona i punti nella mappa per modificare il perimetro di tracciamento </p>      <p *ngIf="Change"> Seleziona i punti nella mappa e clicca il bottone Modifica per modificare il perimetro di tracciamento </p>    </div>    <div class="col-7 text-right">      <button class=" btn btn-danger mr-1" *ngIf="!Change" (click)="Change = true"> Abilita Modifica </button>      <button class=" btn btn-danger mr-1" *ngIf="Change"(click)="Change = false"> Disabilita Modifica </button>      <button class=" btn btn-danger mr-1" [disabled]="!Change" (click)="onModify()"> Modifica </button>      <button class=" btn btn-danger mr-1" *ngIf="Change && Markers.length > 0" (click)="resetP()"> Annulla punti </button>      <button class=" btn btn-danger mr-1" *ngIf="Change && Markers.length > 0" (click)="removeLastMarker()"> Annulla ultimo punto </button>    </div>  </div>  <div class="row">    <div class="dropdown text-center" id="lineDiv">      <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        Luogo      </button>      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">        <a class="dropdown-item"  (click)="setPlace($event)" *ngFor="let o of PlaceArr; index as i" id="{{i}}" >{{o.name}}</a>      </div>    </div>    <p id="namp"*ngIf="CurrentPlace!== undefined"> {{CurrentPlace.name}}</p>  </div></div><div class="container shadow p-4 mb-5 bg-white" *ngIf="this.PlaceArr !== undefined && this.PlaceArr !== null && this.PlaceArr.length > 0">  <app-osm-map-content    (map$)="receiveMap($event)"    (zoom$)="receiveZoom($event)"    (Click$)="onMapClick($event)"    id=\'modPlace-map\'  ></app-osm-map-content></div></div>'
+    var COMPONENTS = [{'name': 'AdministratorManagementComponent', 'selector': 'app-manage-administrators-content.component.ts'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthenticatedUserAccessesComponent', 'selector': 'app-single-user-authenticated-accesses'},{'name': 'BindAdministratorComponent', 'selector': 'app-bind-administrator'},{'name': 'ContentComponent', 'selector': 'app-content'},{'name': 'ControlPanelComponent', 'selector': 'app-control-panel'},{'name': 'CreateAdministratorComponent', 'selector': 'app-create-administrator'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomePageContentComponent', 'selector': 'app-content-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MenubarComponent', 'selector': 'app-menubar'},{'name': 'MenuFunctionalityComponent', 'selector': 'app-menu-functionality'},{'name': 'ModifyOrganizationTrackingAreaContentComponent', 'selector': 'app-modify-place-tracking-area-content'},{'name': 'ModifyPlaceTrackingAreaContentComponent', 'selector': 'app-modify-place-tracking-area-content'},{'name': 'OrganizationInformationContentComponent', 'selector': 'app-content-track-users-general-information'},{'name': 'OrganizationManagementContentComponent', 'selector': 'app-organization-management-content'},{'name': 'OrganizationPresenceNumberComponent', 'selector': 'app-content-track-users-number'},{'name': 'OsmMapContentComponent', 'selector': 'app-osm-map-content'},{'name': 'PlaceManagementContentComponent', 'selector': 'app-place-management-content'},{'name': 'PlacePresenceNumberComponent', 'selector': 'app-place-presence-number'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'TimeReportComponent', 'selector': 'app-time-report'},{'name': 'ViewOrganizationTrackingAreaContentComponent', 'selector': 'app-content-track-users'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ModifyPlaceTrackingAreaContentComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ModifyPlaceTrackingAreaContentComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

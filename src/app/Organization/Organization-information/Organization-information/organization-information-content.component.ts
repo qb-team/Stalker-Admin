@@ -10,9 +10,9 @@ import {Subscription} from 'rxjs';
 })
 export class OrganizationInformationContentComponent implements OnInit, OnDestroy {
 
-  /*
-  * The organization currently active
-  */
+  /**
+   * The organization currently active
+   */
  private currentOrganization: Organization;
  private subscriptionToOrg: Subscription;
   constructor(private ads: AdministratorOrganizationDataService) { }
@@ -21,14 +21,14 @@ export class OrganizationInformationContentComponent implements OnInit, OnDestro
     this.subscribeToOrganization();
   }
 
-  /*
-  Get current organization
+  /**
+   * Get current organization
    */
   subscribeToOrganization(): void {
     this.subscriptionToOrg = this.ads.getOrganization.subscribe((org: Organization) => { this.currentOrganization = org; });
   }
-  /*
-  Destroy last subscription
+  /**
+   * Destroy last subscription
    */
   ngOnDestroy() {
     if (this.subscriptionToOrg !== undefined) {

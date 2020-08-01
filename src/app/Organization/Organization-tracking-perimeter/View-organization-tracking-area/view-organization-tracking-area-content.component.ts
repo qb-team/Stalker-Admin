@@ -33,8 +33,8 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
 
   constructor( private ads: AdministratorOrganizationDataService, private plS: PlaceService ) {
   }
-  /*
-  Receive the data from the map
+  /**
+   * Receive the data from the map
    */
   receiveMap(map: Map) {
     this.map = map;
@@ -60,15 +60,15 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
       }
     });
   }
-  /*
-  Receive a new zoom on the map
- */
+  /**
+   * Receive a new zoom on the map
+   */
   receiveZoom(zoom: number) {
     this.zoom = zoom;
   }
-  /*
-  Destroy a subscription
-  */
+  /**
+   * Destroy a subscription
+   */
   ngOnDestroy() {
     if (this.subscriptionToOrg !== undefined) {
       this.subscriptionToOrg.unsubscribe();
@@ -78,9 +78,9 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
   ngOnInit(): void {
     this.loadPlaceList();
   }
-  /*
-  Load a list of places
- */
+  /**
+   *Load a list of places
+   */
   loadPlaceList() {
     this.ads.getOrganization.subscribe((org: Organization) => {
       this.PlaceArr = [];
@@ -93,8 +93,8 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
       }
     });
   }
-  /*
-  Load the organization tracking area's or place tracking area's in the map
+  /**
+   * Load the organization tracking area's or place tracking area's in the map
    */
   loadMap(e: string) {
     for (let i = 0; i < JSON.parse(this.jsonCoordinates).Organizzazioni.length; i++) {
@@ -102,16 +102,16 @@ export class ViewOrganizationTrackingAreaContentComponent implements OnInit, OnD
     }
   }
 
-  /*
-  Set the current place
- */
+  /**
+   * Set the current place
+   */
   setPlace(click: any) {
     this.currentPlaceArrIndex = click.target.attributes.id.value;
     this.currentPlace.next(this.PlaceArr[this.currentPlaceArrIndex]);
     this.placeName = this.PlaceArr[this.currentPlaceArrIndex].name;
   }
-  /*
-  set the correct view
+  /**
+   * Set the correct view
    */
   onChange(val: string) {
     this.change = val;
